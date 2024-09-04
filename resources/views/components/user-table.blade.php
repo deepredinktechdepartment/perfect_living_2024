@@ -1,6 +1,10 @@
 <!-- resources/views/components/user-table.blade.php -->
+
+<div class="card shadow-sm rounded">
+    <div class="card-body">
 <div class="table-responsive">
-    <table id="{{ $tableId }}" class="table table-striped table-bordered mt-3 w-100">
+
+    <table id="{{ $tableId }}" class="table table-striped table-bordered bg-white mt-3 w-100">
     <thead>
         <tr>
             <th>S.No.</th>
@@ -52,4 +56,6 @@
         @endforeach
     </tbody>
 </table>
+</div>
+</div>
 </div>

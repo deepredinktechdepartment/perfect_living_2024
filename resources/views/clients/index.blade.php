@@ -3,8 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12">
-        <div class="card m-b-30">
-            <div class="common_tabs">
+        <div class="common_tabs">
                 <!-- Nav Tabs -->
                 <ul class="nav nav-tabs" id="clientTabs" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -33,7 +32,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 @endsection
 
