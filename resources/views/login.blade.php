@@ -14,40 +14,40 @@
                         </div>
                         <!-- Right Side Form -->
                         <div class="col-lg-6 col-md-6 my-auto p-0">
-                            <div class="p-5">
+                            <div class="p-sm-5 py-4 p-3">
                                 <div class="d-flex justify-content-between align-items-center mb-5">
                                     <h2>Sign In</h2>
-                                    <div class="social d-flex align-items-center gap-2">
-                                        <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Futtamblastech" target="_blanc" class="text-white bg-black rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                                    <ul class="social-links">
+                                        <li><a href="#" target="_blank">
                                             <i class="fa-brands fa-twitter"></i>
-                                        </a>
-                                        <a href="https://www.facebook.com/uttamblastech/" target="_blanc" class="text-white bg-black rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                                        </a></li>
+                                        <li><a href="#" target="_blank" class="">
                                             <i class="fa-brands fa-facebook-f"></i>
-                                        </a>
-                                        <a href="https://www.linkedin.com/company/uttam-blastech-pvt-ltd" target="_blanc" class="text-white bg-black rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                                        </a></li>
+                                        <li><a href="#" target="_blank">
                                             <i class="fa-brands fa-linkedin-in"></i>
-                                        </a>
-                                    </div>
+                                        </a></li>
+                                    </ul>
                                 </div>
 
                                 <form id="loginForm" class="form-horizontal mt-2 pt-2 needs-validation" novalidate action="{{ route('auth.verify') }}" method="post">
                                     @csrf
-                                    <div class="mb-1">
-                                        <label for="tb-email">Username</label>
+                                    <div class="mb-3">
+                                        <label for="tb-email" class="mb-1">Username</label>
                                         <input type="text" class="form-control" id="tb-email" placeholder="" required name="username" />
                                     </div>
 
                                     <div class="mb-1">
-                                        <label for="text-password">Password</label>
+                                        <label for="text-password" class="mb-1">Password</label>
                                         <input type="password" class="form-control" id="text-password" placeholder="" required name="password" />
                                     </div>
 
-                                    <div class="d-flex align-items-stretch button-group mt-4 pt-2">
-                                        <button type="submit" class="btn btn-primary btn-block w-100 mb-4">Sign in</button>
+                                    <div class="mt-4 pt-2 mb-3">
+                                        <button type="submit" class="btn btn-login w-100">Sign in</button>
                                     </div>
                                 </form>
 
-                                <div class="justify-content-center mb-4">
+                                <div class="justify-content-center">
                                     <a href="{{ route('forget.password') }}" class="forgot-password-link">Forgot Password?</a>
                                 </div>
                             </div>
