@@ -51,12 +51,7 @@
 
                                 <div class="d-flex justify-content-between align-items-center mb-4">
 
-                                   <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Remember me
-                                        </label>
-                                    </div>
+
                                     <div>
                                         <a href="{{ route('forget.password') }}">Forgot Password?</a>
                                     </div>
