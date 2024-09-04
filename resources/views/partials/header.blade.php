@@ -40,17 +40,7 @@
                               <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                           </li>
                           @endif
-                          @if(Auth::user()->role && Auth::user()->role==1)
-                          <li class="nav-item dropdown {{ Request::routeIs('sources.index', 'source_groups.index') ? 'active' : '' }}">
-                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  UTM
-                              </a>
-                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <li><a class="dropdown-item {{ Request::routeIs('sources.index') ? 'active' : '' }}" href="{{ route('sources.index') }}">Source</a></li>
-                                  <li><a class="dropdown-item {{ Request::routeIs('source_groups.index') ? 'active' : '' }}" href="{{ route('source_groups.index') }}">Source Group</a></li>
-                              </ul>
-                          </li>
-                          @endif
+
 
                           @if(Auth::user()->role && Auth::user()->role==1)
                           <li class="nav-item dropdown {{ Request::routeIs('theme_options.index', 'theme_options.index') ? 'active' : '' }}">

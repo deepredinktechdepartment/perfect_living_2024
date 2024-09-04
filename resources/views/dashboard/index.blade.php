@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Dashboard')
+@section('title', 'CMS Dashboard')
 @section('content')
 
 @php
@@ -15,7 +15,6 @@ $inactiveClientCount = Client::mappedToUser()->where('active', false)->count();
 $activeClients = Client::mappedToUser()->where('active', true)->orderby('client_name')->get();
 $inactiveClients = Client::mappedToUser()->where('active', false)->orderby('client_name')->get();
 
-
 // Get the current month
 $currentMonth = Carbon::now()->month;
 
@@ -29,34 +28,6 @@ Client::all()->each(function ($client) use (&$currentMonthLeadsCount, $currentMo
                                                  ->count();
 });
 
-
-
-
-    // Initialize the performance counters
-    $performingWellCount = 0;
-    $underperformingCount = 0;
-    $meetingExpectationsCount = 0;
-
-    // Retrieve all clients and categorize them based on their performance
-    $clients = Client::where('active', true)->get();
-
-    // Use Laravel's collection methods to categorize clients
-    $clients->each(function ($client) use (&$performingWellCount, &$underperformingCount, &$meetingExpectationsCount) {
-        // Assume you have a method or attribute that returns the monthly count for the client
-        $monthlyCount = $client->monthly_count ?? 0; // Replace 'monthly_count' with actual logic or attribute
-
-        // Get the client's specific monthly target or use 250 as the default target
-        $monthlyTarget = $client->monthly_target ?? 250;
-
-        if ($monthlyCount > $monthlyTarget) {
-            $performingWellCount++;
-        } elseif ($monthlyCount < $monthlyTarget) {
-            $underperformingCount++;
-        } else {
-            $meetingExpectationsCount++;
-        }
-    });
-
 @endphp
 
 <div class="row mb-5">
@@ -65,19 +36,10 @@ Client::all()->each(function ($client) use (&$currentMonthLeadsCount, $currentMo
         <x-card title="Active Projects" :value="$activeClientCount ?? 0" linkUrl="{{ URL::to('clients?active=true') }}" backgroundColor="bg-success" />
     </div>
     <div class="col-sm-3">
-        {{-- Card for Performing Well --}}
-        <x-card title="Performing Well" :value="$performingWellCount" linkUrl="{{ URL::to('clients?performance=well') }}" backgroundColor="bg-primary" />
-    </div>
-    <div class="col-sm-3">
-        {{-- Card for Underperforming --}}
-        <x-card title="Underperforming" :value="$underperformingCount" linkUrl="{{ URL::to('clients?performance=under') }}" backgroundColor="bg-danger" />
-    </div>
-    <div class="col-sm-3">
-        {{-- Card for Meeting Expectations --}}
-        <x-card title="Meeting Expectations" :value="$meetingExpectationsCount" linkUrl="{{ URL::to('clients?performance=meeting') }}" backgroundColor="bg-warning" />
+        {{-- Card for Inactive Projects --}}
+        <x-card title="Inactive Projects" :value="$inactiveClientCount ?? 0" linkUrl="{{ URL::to('clients?active=false') }}" backgroundColor="bg-danger" />
     </div>
 </div>
-
 
 @if(Auth::user()->role == 1)
     <!-- Tabs for users with role 1 -->
@@ -217,10 +179,6 @@ Client::all()->each(function ($client) use (&$currentMonthLeadsCount, $currentMo
     </div>
 @endif
 
-@if(Auth::user()->role && Auth::user()->role == 1)
-    {{-- Login Activity --}}
-    @component('components.login-activity')
-    @endcomponent
-@endif
+
 
 @endsection
