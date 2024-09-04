@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class CityMaster extends Model
 {
     use HasFactory;
+    protected $fillable = ['name']; // Add other fields if necessary
 }
