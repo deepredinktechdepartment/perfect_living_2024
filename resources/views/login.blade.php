@@ -2,44 +2,44 @@
 @section('title', 'Login')
 @section('content')
 
-
-
-
-<section class="login">
+<section class="login d-flex align-items-center min-vh-100">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="card p-0 m-0 border-0 rounded-0 shadow">
                     <div class="row ms-0 me-0">
-                        <div class="col-lg-6 col-md-6 my-auto ms-0 me-0 ps-0 pe-0">
-                            <img src="assets/images/img1.png" alt="img1" class="img-fluid float-left" />
+                        <!-- Left Side Image -->
+                        <div class="col-lg-6 col-md-6 d-none d-md-block p-0">
+                            <img src="https://via.placeholder.com/600x800?text=Real+Estate+Image" alt="Real Estate" class="img-fluid h-100 w-100 object-cover" />
                         </div>
+                        <!-- Right Side Form -->
                         <div class="col-lg-6 col-md-6 my-auto p-0">
                             <div class="p-5">
                                 <div class="d-flex justify-content-between align-items-center mb-5">
-                                    <div>
-                                        <h2>Sign In</h2>
-                                    </div>
+                                    <h2>Sign In</h2>
                                     <div class="social d-flex align-items-center gap-2">
-                                        <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Futtamblastech" target="_blanc"><i class="fa-brands fa-twitter"></i></a>
-                                        <a href="https://www.facebook.com/uttamblastech/" target="_blanc"><i class="fa-brands fa-facebook-f"></i></a>
-                                        <a href="https://www.linkedin.com/company/uttam-blastech-pvt-ltd" target="_blanc"><i class="fa-brands fa-linkedin-in"></i></a>
+                                        <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Futtamblastech" target="_blanc" class="text-white bg-black rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                                            <i class="fa-brands fa-twitter"></i>
+                                        </a>
+                                        <a href="https://www.facebook.com/uttamblastech/" target="_blanc" class="text-white bg-black rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                                            <i class="fa-brands fa-facebook-f"></i>
+                                        </a>
+                                        <a href="https://www.linkedin.com/company/uttam-blastech-pvt-ltd" target="_blanc" class="text-white bg-black rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+                                            <i class="fa-brands fa-linkedin-in"></i>
+                                        </a>
                                     </div>
                                 </div>
-
 
                                 <form id="loginForm" class="form-horizontal mt-2 pt-2 needs-validation" novalidate action="{{ route('auth.verify') }}" method="post">
                                     @csrf
                                     <div class="mb-1">
                                         <label for="tb-email">Username</label>
                                         <input type="text" class="form-control" id="tb-email" placeholder="" required name="username" />
-
                                     </div>
 
                                     <div class="mb-1">
                                         <label for="text-password">Password</label>
                                         <input type="password" class="form-control" id="text-password" placeholder="" required name="password" />
-
                                     </div>
 
                                     <div class="d-flex align-items-stretch button-group mt-4 pt-2">
@@ -47,22 +47,11 @@
                                     </div>
                                 </form>
 
-
-
                                 <div class="d-flex justify-content-between align-items-center mb-4">
-
-
-                                    <div>
-                                        <a href="{{ route('forget.password') }}">Forgot Password?</a>
+                                    <div class="text-center">
+                                        <a href="{{ route('forget.password') }}" class="btn btn-outline-primary px-4 py-2 rounded">Forgot Password?</a>
                                     </div>
-
                                 </div>
-                                <div>
-                                    {{-- <p class="text-center">Not a member? <a href="#">Sign Up</a></p> --}}
-                                </div>
-
-
-
                             </div>
                         </div>
                     </div>

@@ -34,7 +34,7 @@ Route::get('/', [ProjectController::class, 'index'])
 
 
 
-Route::get('/cms', [LoginController::class, 'showLoginForm'])->name('cms.login');
+Route::get('/cms', [LoginController::class, 'showLoginForm'])->name('login');
 
 Route::post('auth/verify', [LoginController::class, 'authenticate'])->name('auth.verify');
 

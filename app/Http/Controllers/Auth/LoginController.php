@@ -138,9 +138,9 @@ class LoginController extends Controller
             Session::flush();
 
             if (isset($request->comesfrom) && $request->comesfrom == "changepassword") {
-                return redirect()->route('cms.login')->with('success', 'Password changed successfully. Please login with new credentials.');
+                return redirect()->route('login')->with('success', 'Password changed successfully. Please login with new credentials.');
             } else {
-                return redirect()->route('cms.login')->with('error', 'You have been successfully logged out!');
+                return redirect()->route('login')->with('error', 'You have been successfully logged out!');
             }
         } catch (Exception $exception) {
             return redirect()->back()->with('error', 'Logout error: ' . $exception->getMessage());
