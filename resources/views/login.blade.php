@@ -47,10 +47,8 @@
                                     </div>
                                 </form>
 
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <div class="text-center">
-                                        <a href="{{ route('forget.password') }}" class="btn btn-outline-primary px-4 py-2 rounded">Forgot Password?</a>
-                                    </div>
+                                <div class="justify-content-center mb-4">
+                                    <a href="{{ route('forget.password') }}" class="forgot-password-link">Forgot Password?</a>
                                 </div>
                             </div>
                         </div>
@@ -62,6 +60,22 @@
 </section>
 
 @endsection
+
+@push('styles')
+<style>
+    .forgot-password-link {
+        color: #007bff; /* Blue color similar to Bootstrap's primary */
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s, text-decoration 0.3s;
+    }
+
+    .forgot-password-link:hover {
+        color: #0056b3; /* Darker blue for hover */
+        text-decoration: underline;
+    }
+</style>
+@endpush
 
 @push('scripts')
 <script>
