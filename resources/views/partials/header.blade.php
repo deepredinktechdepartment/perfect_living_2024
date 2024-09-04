@@ -40,7 +40,17 @@
                               <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                           </li>
                           @endif
+                          @if(Auth::user()->role && Auth::user()->role==1)
+                          <li class="nav-item dropdown {{ Request::routeIs('companies.index') ? 'active' : '' }}">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Masters
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item {{ Request::routeIs('companies.index') ? 'active' : '' }}" href="{{ route('companies.index') }}">Companies</a></li>
 
+                              </ul>
+                          </li>
+                          @endif
 
                           @if(Auth::user()->role && Auth::user()->role==1)
                           <li class="nav-item dropdown {{ Request::routeIs('theme_options.index', 'theme_options.index') ? 'active' : '' }}">

@@ -13,6 +13,13 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\ThemeoptionsController;
 use App\Http\Controllers\ProjectController;
 
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CityMasterController;
+use App\Http\Controllers\AreaMasterController;
+use App\Http\Controllers\AmenityController;
+use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\BadgeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -155,5 +162,16 @@ Route::get('/singleproject/{clientID?}/revenue-tracking', [ClientController::cla
 
 Route::get('/createlead', [LeadController::class, 'showForm'])->name('createLead');
 Route::post('/lead/submit', [LeadController::class, 'submit'])->name('lead.submit');
+
+
+Route::resource('companies', CompanyController::class);
+Route::resource('city-masters', CityMasterController::class);
+Route::resource('area-masters', AreaMasterController::class);
+Route::resource('amenities', AmenityController::class);
+Route::resource('collections', CollectionController::class);
+Route::resource('badges', BadgeController::class);
+
+
+
 
 });
