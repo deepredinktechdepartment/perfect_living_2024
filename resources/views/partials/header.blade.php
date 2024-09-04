@@ -41,13 +41,14 @@
                           </li>
                           @endif
                           @if(Auth::user()->role && Auth::user()->role==1)
-                          <li class="nav-item dropdown {{ Request::routeIs('companies.index','companies.create','city-masters.index','city-masters.create') ? 'active' : '' }}">
+                          <li class="nav-item dropdown {{ Request::routeIs('companies.index','companies.create','city-masters.index','city-masters.create','badges.index','badges.create') ? 'active' : '' }}">
                               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Masters
                               </a>
                               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                   <li><a class="dropdown-item {{ Request::routeIs('companies.index') ? 'active' : '' }}" href="{{ route('companies.index') }}">Companies</a></li>
                                   <li><a class="dropdown-item {{ Request::routeIs('city-masters.index') ? 'active' : '' }}" href="{{ route('city-masters.index') }}">Cities</a></li>
+                                  <li><a class="dropdown-item {{ Request::routeIs('badges.index') ? 'active' : '' }}" href="{{ route('badges.index') }}">Badges</a></li>
 
                               </ul>
                           </li>

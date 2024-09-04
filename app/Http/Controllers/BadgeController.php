@@ -2,63 +2,88 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Badge;
 use Illuminate\Http\Request;
 
 class BadgeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the badges.
      */
     public function index()
     {
-        //
+        $badges = Badge::all();
+        $pageTitle = "Badges List";
+        $addlink = route('badges.create');
+        return view('badges.index', compact('badges', 'pageTitle','addlink'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new badge.
      */
     public function create()
     {
-        //
+        $pageTitle = "Create New Badge";
+        return view('badges.create', compact('pageTitle'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created badge in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:badges,name',
+        ]);
+
+        try {
+            Badge::create($validatedData);
+            return redirect()->route('badges.index')->with('success', 'Badge created successfully.');
+        } catch (\Exception $e) {
+
+            return back()->withErrors(['error' => 'Failed to create badge.']);
+        }
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for editing the specified badge.
      */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $badge = Badge::findOrFail($id);
+        $pageTitle = "Edit Badge";
+        return view('badges.create', compact('badge', 'pageTitle'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified badge in storage.
      */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:badges,name,' . $id,
+        ]);
+
+        try {
+            $badge = Badge::findOrFail($id);
+            $badge->update($validatedData);
+            return redirect()->route('badges.index')->with('success', 'Badge updated successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Failed to update badge.']);
+        }
     }
 
     /**
-     * Update the specified resource in storage.
+     * Remove the specified badge from storage.
      */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        try {
+            $badge = Badge::findOrFail($id);
+            $badge->delete();
+            return redirect()->route('badges.index')->with('success', 'Badge deleted successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Failed to delete badge.']);
+        }
     }
 }
