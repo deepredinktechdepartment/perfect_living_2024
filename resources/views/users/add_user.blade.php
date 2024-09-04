@@ -72,58 +72,6 @@ $selectedClientData = json_decode($users->projects_mapped ?? '[]', true); // Dec
                         </div>
 
                         <div class="row mb-1 mt-1">
-                          <div class="col-md-12">
-                            <div class="mb-1">
-                                <label class="form-label"><u>Map Projects</u></label>
-                                <div class="row" id="clients">
-                                    <div class="col-md-6">
-                                        @if(!empty($ClientData) && $ClientData->count() > 0)
-                                            @foreach($ClientData as $index => $client)
-                                                @if($index % 2 == 0)
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="client_data[]" value="{{ $client->id }}" {{ in_array($client->id, $selectedClientData) ? 'checked' : '' }}>
-                                                        <label class="form-check-label">{{ $client->client_name }}
-                                                            <span class="client-status-dot {{ $client->active ? 'active-dot' : 'inactive-dot' }}"></span>
-
-{{--
-@if($client->active)
-<span class="badge bg-success">Active</span>
-@else
-<span class="badge bg-danger">Inactive</span>
-@endif --}}
-
-                                                        </label>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            <p class="text-danger">No Project data found.</p>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-6">
-                                        @if(!empty($ClientData) && $ClientData->count() > 0)
-                                            @foreach($ClientData as $index => $client)
-                                                @if($index % 2 != 0)
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="client_data[]" value="{{ $client->id }}" {{ in_array($client->id, $selectedClientData) ? 'checked' : '' }}>
-                                                        <label class="form-check-label">{{ $client->client_name }}</label>
-                                                        <span class="client-status-dot {{ $client->active ? 'active-dot' : 'inactive-dot' }}"></span>
-
-                                                           {{-- @if($client->active)
-                    <span class="badge bg-success">Active</span>
-                @else
-                    <span class="badge bg-danger">Inactive</span>
-                @endif --}}
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            <p class="text-danger">No Project data found.</p>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="col-md-12">
                             <div class="mb-1">
