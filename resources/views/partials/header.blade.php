@@ -41,7 +41,7 @@
                           </li>
                           @endif
                           @if(Auth::user()->role && Auth::user()->role==1)
-                          <li class="nav-item dropdown {{ Request::routeIs('companies.index') ? 'active' : '' }}">
+                          <li class="nav-item dropdown {{ Request::routeIs('companies.index','companies.create') ? 'active' : '' }}">
                               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Masters
                               </a>

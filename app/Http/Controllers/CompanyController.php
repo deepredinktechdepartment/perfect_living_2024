@@ -2,6 +2,9 @@
 namespace App\Http\Controllers;
 use App\Models\Company; // Import the Company model
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log; // Import the Log facade
+use Exception;
+
 class CompanyController extends Controller
 {
     /**
@@ -9,8 +12,15 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
-        return view('companies.index', compact('companies'));
+        try {
+            $companies = Company::all();
+            $addlink = route('companies.create');
+            $pageTitle = "Companies List";
+            return view('companies.index', compact('companies', 'addlink', 'pageTitle'));
+        } catch (Exception $e) {
+            Log::error('Error fetching companies list: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while fetching the companies list.');
+        }
     }
 
     /**
@@ -18,7 +28,13 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('companies.create');
+        try {
+            $pageTitle = "Create New Company";
+            return view('companies.create', compact('pageTitle'));
+        } catch (Exception $e) {
+            Log::error('Error displaying company creation form: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while displaying the creation form.');
+        }
     }
 
     /**
@@ -26,16 +42,22 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'website_url' => 'required|url',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|unique:companies,name',
+                'address1' => 'required',
+                'address2' => 'nullable',
+                'phone' => 'required',
+                'website_url' => 'required|url',
+            ]);
 
-        Company::create($request->all());
+            Company::create($validatedData);
 
-        return redirect()->route('companies.index')->with('success', 'Company created successfully.');
+            return redirect()->route('companies.index')->with('success', 'Company created successfully.');
+        } catch (Exception $e) {
+            Log::error('Error creating company: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while creating the company.');
+        }
     }
 
     /**
@@ -43,7 +65,12 @@ class CompanyController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            // You can add specific code to fetch and display the company details if needed
+        } catch (Exception $e) {
+            Log::error('Error displaying company: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while displaying the company details.');
+        }
     }
 
     /**
@@ -51,8 +78,13 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        $company = Company::find($id);
-        return view('companies.edit', compact('company'));
+        try {
+            $company = Company::findOrFail($id);
+            return view('companies.create', compact('company'));
+        } catch (Exception $e) {
+            Log::error('Error displaying company edit form: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while displaying the edit form.');
+        }
     }
 
     /**
@@ -60,17 +92,35 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'website_url' => 'required|url',
-        ]);
+        try {
+            // Validate the request data
+            $validatedData = $request->validate([
+                'name' => [
+                    'required',
+                    // Ensure the name is unique except for the current record
+                    'unique:companies,name,' . $id,
+                ],
+                'address1' => 'required',
+                'address2' => 'nullable',
+                'phone' => 'required',
+                'website_url' => 'required|url',
+            ]);
 
-        $company = Company::find($id);
-        $company->update($request->all());
+            // Find the company by ID or fail
+            $company = Company::findOrFail($id);
 
-        return redirect()->route('companies.index')->with('success', 'Company updated successfully.');
+            // Update the company with validated data
+            $company->update($validatedData);
+
+            // Redirect to the index page with a success message
+            return redirect()->route('companies.index')->with('success', 'Company updated successfully.');
+        } catch (Exception $e) {
+            // Log the error
+            Log::error('Error updating company: ' . $e->getMessage());
+
+            // Redirect back with an error message
+            return redirect()->back()->with('error', 'An error occurred while updating the company.');
+        }
     }
 
     /**
@@ -78,9 +128,14 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        $company = Company::find($id);
-        $company->delete();
+        try {
+            $company = Company::findOrFail($id);
+            $company->delete();
 
-        return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
+            return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
+        } catch (Exception $e) {
+            Log::error('Error deleting company: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while deleting the company.');
+        }
     }
 }
