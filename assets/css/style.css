@@ -1,4 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/* Add your custom styles here */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
 
 /* INDEX */
 
@@ -17,10 +27,11 @@
 
 /* Header CSS BEGiNS */
 
-header{
+header {
     padding: 15px 0px;
 }
-.header-logo{
+
+.header-logo {
     width: 180px;
 }
 
@@ -2422,8 +2433,7 @@ div.dataTables_wrapper div.dataTables_length select {
 }
 
 .lead_adds_sec .lead_adds_side_bar ul li a.active,
-.lead_adds_sec .lead_adds_side_bar ul li a:hover
- {
+.lead_adds_sec .lead_adds_side_bar ul li a:hover {
     background: #50e3c2 !important;
     color: #fff !important;
 }
