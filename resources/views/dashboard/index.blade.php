@@ -18,15 +18,7 @@ $inactiveClients = Client::mappedToUser()->where('active', false)->orderby('clie
 // Get the current month
 $currentMonth = Carbon::now()->month;
 
-// Define the array to store the counts
-$currentMonthLeadsCount = [];
 
-// Retrieve all clients and use the `each` method to populate the array
-Client::all()->each(function ($client) use (&$currentMonthLeadsCount, $currentMonth) {
-    $currentMonthLeadsCount[$client->id] = Lead::where('client_id', $client->id)
-                                                 ->whereMonth('lead_last_update_date', $currentMonth)
-                                                 ->count();
-});
 
 @endphp
 
