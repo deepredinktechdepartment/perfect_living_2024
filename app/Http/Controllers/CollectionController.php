@@ -2,63 +2,87 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Collection;
 use Illuminate\Http\Request;
 
 class CollectionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the collections.
      */
     public function index()
     {
-        //
+        $collections = Collection::all();
+        $pageTitle = "Collections List";
+        $addlink = route('collections.create');
+        return view('collections.index', compact('collections', 'pageTitle','addlink'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new collection.
      */
     public function create()
     {
-        //
+        $pageTitle = "Create New Collection";
+        return view('collections.create', compact('pageTitle'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created collection in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:collections,name',
+        ]);
+
+        try {
+            Collection::create($validatedData);
+            return redirect()->route('collections.index')->with('success', 'Collection created successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Failed to create collection.']);
+        }
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for editing the specified collection.
      */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $collection = Collection::findOrFail($id);
+        $pageTitle = "Edit Collection";
+        return view('collections.create', compact('collection', 'pageTitle'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified collection in storage.
      */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:collections,name,' . $id,
+        ]);
+
+        try {
+            $collection = Collection::findOrFail($id);
+            $collection->update($validatedData);
+            return redirect()->route('collections.index')->with('success', 'Collection updated successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Failed to update collection.']);
+        }
     }
 
     /**
-     * Update the specified resource in storage.
+     * Remove the specified collection from storage.
      */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        try {
+            $collection = Collection::findOrFail($id);
+            $collection->delete();
+            return redirect()->route('collections.index')->with('success', 'Collection deleted successfully.');
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Failed to delete collection.']);
+        }
     }
 }

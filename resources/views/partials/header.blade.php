@@ -49,6 +49,7 @@
                                   <li><a class="dropdown-item {{ Request::routeIs('companies.index') ? 'active' : '' }}" href="{{ route('companies.index') }}">Companies</a></li>
                                   <li><a class="dropdown-item {{ Request::routeIs('city-masters.index') ? 'active' : '' }}" href="{{ route('city-masters.index') }}">Cities</a></li>
                                   <li><a class="dropdown-item {{ Request::routeIs('badges.index') ? 'active' : '' }}" href="{{ route('badges.index') }}">Badges</a></li>
+                                  <li><a class="dropdown-item {{ Request::routeIs('collections.index') ? 'active' : '' }}" href="{{ route('collections.index') }}">Collections</a></li>
 
                               </ul>
                           </li>

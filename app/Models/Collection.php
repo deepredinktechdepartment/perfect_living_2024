@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Collection extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name','background_image','target_link'];
 }
