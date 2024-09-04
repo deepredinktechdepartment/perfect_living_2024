@@ -1,29 +1,29 @@
 @extends('layouts.app')
+
 @section('content')
-<div class="row">
-    <div class="col-5">
-        <div class="card mb-1">
+<div class="row justify-content-left">
+    <div class="col-md-4">
+        <div class="card shadow-sm">
             <div class="card-body">
                 <form id="changePasswordForm" action="{{ route('verifying.password') }}" method="post">
                     @csrf
-                    <div class="mb-2 row">
-                        <label for="password" class="col-sm-5 col-form-label">New Password <span class="text-danger">*</span></label>
-                        <div class="col-sm-7">
-                            <input type="password" class="form-control" name="password" id="password" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
+                    <!-- New Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">New Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter new password" required>
+                        <div class="invalid-feedback"></div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="password_confirmation" class="col-sm-5 col-form-label">Confirm New Password <span class="text-danger">*</span></label>
-                        <div class="col-sm-7">
-                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
+
+                    <!-- Confirm New Password -->
+                    <div class="mb-3">
+                        <label for="password_confirmation" class="form-label">Confirm New Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Confirm new password" required>
+                        <div class="invalid-feedback"></div>
                     </div>
-                    <div class="mb-1 row">
-                        <div class="col-sm-7 offset-sm-5">
-                            <button type="submit" class="btn btn-primary">Change</button>
-                        </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">Change Password</button>
                     </div>
                 </form>
             </div>
@@ -33,7 +33,6 @@
 @endsection
 
 @push('scripts')
-
 <script>
 $(document).ready(function () {
     // Custom validator to prevent spaces in the password
@@ -71,7 +70,7 @@ $(document).ready(function () {
         errorElement: 'div',
         errorPlacement: function (error, element) {
             error.addClass('invalid-feedback');
-            element.closest('.col-sm-7').append(error);
+            element.closest('.mb-3').append(error);
         },
         highlight: function (element, errorClass, validClass) {
             $(element).addClass('is-invalid').removeClass('is-valid');
