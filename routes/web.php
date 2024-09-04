@@ -11,6 +11,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ExternalDataController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\ThemeoptionsController;
+use App\Http\Controllers\ProjectController;
 
 
 /*
@@ -25,7 +26,16 @@ use App\Http\Controllers\ThemeoptionsController;
 */
 
 // Login routes
-Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
+
+Route::get('/', [ProjectController::class, 'index'])
+    ->name('website.home');
+
+
+
+
+
+Route::get('/cms', [LoginController::class, 'showLoginForm'])->name('cms.login');
+
 Route::post('auth/verify', [LoginController::class, 'authenticate'])->name('auth.verify');
 
 // Forgot and reset password routes
