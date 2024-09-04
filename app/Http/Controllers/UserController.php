@@ -151,7 +151,7 @@ public function storeOrUpdate(Request $request)
     public function showForgetPasswordForm()
       {
             try{
-            $pageTitle="Reset Your Password";
+            $pageTitle="Forgot Password";
             return view('users.forget_password', compact('pageTitle'));
             }
             catch (Exception $exception){
