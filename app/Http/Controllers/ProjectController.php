@@ -59,6 +59,7 @@ class ProjectController extends Controller
             'company_id' => 'required|exists:companies,id',
             'site_address' => 'required|string|max:255',
             'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
+            'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
             'latitude' => 'nullable',
             'longitude' => 'nullable',
             'website_url' => 'nullable|url',
@@ -89,6 +90,13 @@ class ProjectController extends Controller
                 $logoPath = $request->file('logo')->store('projects', 'public');
                 $data['logo'] = $logoPath;
             }
+
+
+        // Handle the file upload for 'master_plan_layout'
+        if ($request->hasFile('master_plan_layout')) {
+            $logoPath = $request->file('master_plan_layout')->store('projects', 'public');
+            $data['master_plan_layout'] = $logoPath;
+        }
 
             // Create a new project with the specified columns
             Project::create($data);
@@ -121,6 +129,7 @@ class ProjectController extends Controller
             'company_id' => 'required|exists:companies,id',
             'site_address' => 'required|string|max:255',
             'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
+            'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
             'latitude' => 'nullable',
             'longitude' => 'nullable',
             'website_url' => 'nullable|url',
@@ -157,6 +166,15 @@ class ProjectController extends Controller
 
                 $logoPath = $request->file('logo')->store('projects', 'public');
                 $data['logo'] = $logoPath;
+            }
+            if ($request->hasFile('master_plan_layout')) {
+                // Delete old logo if it exists
+                if ($project->master_plan_layout) {
+                    Storage::disk('public')->delete($project->master_plan_layout);
+                }
+
+                $logoPath = $request->file('master_plan_layout')->store('projects', 'public');
+                $data['master_plan_layout'] = $logoPath;
             }
 
             $project->update($data);

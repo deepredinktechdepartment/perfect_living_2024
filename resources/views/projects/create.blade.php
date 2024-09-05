@@ -95,9 +95,9 @@
                     </div>
 
                     <!-- Latitude and Longitude fields side by side -->
-                    <div class="col-12">
+                    <div class="col-6">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="latitude" class="form-label">Latitude</label>
                                     <input id="latitude" type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" value="{{ old('latitude', $project->latitude ?? '') }}">
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="longitude" class="form-label">Longitude</label>
                                     <input id="longitude" type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" value="{{ old('longitude', $project->longitude ?? '') }}">
@@ -118,6 +118,28 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="master_plan_layout" class="form-label">Master Plan Layout</label>
+                            <input id="master_plan_layout" type="file" class="form-control @error('master_plan_layout') is-invalid @enderror" name="master_plan_layout">
+                            @error('master_plan_layout')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        @if(isset($project->master_plan_layout) && File::exists(env('APP_STORAGE').''.$project->master_plan_layout))
+                            @if(pathinfo($project->master_plan_layout, PATHINFO_EXTENSION) == 'pdf')
+                                <!-- If the file is a PDF, provide a link to download or view it -->
+                                <a href="{{ URL::to(env('APP_STORAGE').''.$project->master_plan_layout) }}" target="_blank" class="btn btn-link btn-sm">View PDF</a>
+                            @else
+                                <!-- If the file is an image, display it -->
+                                <img src="{{ URL::to(env('APP_STORAGE').''.$project->master_plan_layout) }}" alt="{{ $project->name??'' }}" class="card-img-left" style="height: 20px; object-fit: cover;">
+                            @endif
+                        @else
+                        @endif
+                    </div>
+
 
 
                     @php
@@ -253,6 +275,9 @@ $(document).ready(function() {
             logo: {
                 extension: "jpg|jpeg|png|gif"
             },
+            master_plan_layout: {
+                extension: "jpg|jpeg|png|gif|pdf"
+            },
             website_url: {
                 url: true
             },
@@ -315,6 +340,9 @@ $(document).ready(function() {
             },
             logo: {
                 extension: "Please upload a valid image file (jpg, jpeg, png, gif)."
+            },
+            master_plan_layout: {
+                extension: "Please upload a valid image file (jpg, jpeg, png, gif,pdf)."
             },
             website_url: {
                 url: "Please enter a valid URL."
