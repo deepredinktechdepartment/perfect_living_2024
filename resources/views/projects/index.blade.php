@@ -21,7 +21,8 @@
                 @foreach ($projects as $project)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $project->name }}</td>
+                        <td>{{ $project->name??'' }}<br>&nbsp;-{{ $project->project_type??'' }}</td>
+
                         <td>{{ $project->company->name ?? '' }}</td>
                         {{-- <td>
 

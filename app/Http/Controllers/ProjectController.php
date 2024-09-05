@@ -51,6 +51,10 @@ class ProjectController extends Controller
             'company_id' => 'required|exists:companies,id',
             'site_address' => 'required|string|max:255',
             'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
+            'latitude' => 'nullable',
+            'longitude' => 'nullable',
+            'website_url' => 'nullable|url',
+            'project_type' => 'required',
             // Add validation rules for other fields
         ]);
 
@@ -93,6 +97,10 @@ class ProjectController extends Controller
             'company_id' => 'required|exists:companies,id',
             'site_address' => 'required|string|max:255',
             'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
+            'latitude' => 'nullable',
+            'longitude' => 'nullable',
+            'website_url' => 'nullable|url',
+            'project_type' => 'required',
             // Add validation rules for other fields
         ]);
 

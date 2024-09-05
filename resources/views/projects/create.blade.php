@@ -39,8 +39,24 @@
                             @enderror
                         </div>
                     </div>
-
-                    <!-- Add other fields in similar manner -->
+                                     <!-- Type of Project dropdown -->
+                                     <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="project_type" class="form-label">Type of Project</label>
+                                            <select id="project_type" class="form-control @error('project_type') is-invalid @enderror" name="project_type" required>
+                                                <option value="">Select Project Type</option>
+                                                <option value="Standalone Villa" {{ old('project_type', $project->project_type ?? '') == 'Standalone Villa' ? 'selected' : '' }}>Standalone Villa</option>
+                                                <option value="Standalone Apartment" {{ old('project_type', $project->project_type ?? '') == 'Standalone Apartment' ? 'selected' : '' }}>Standalone Apartment</option>
+                                                <option value="Villa Gated Community" {{ old('project_type', $project->project_type ?? '') == 'Villa Gated Community' ? 'selected' : '' }}>Villa Gated Community</option>
+                                                <option value="Apartment Gated Community" {{ old('project_type', $project->project_type ?? '') == 'Apartment Gated Community' ? 'selected' : '' }}>Apartment Gated Community</option>
+                                                <option value="Commercial Space" {{ old('project_type', $project->project_type ?? '') == 'Commercial Space' ? 'selected' : '' }}>Commercial Space</option>
+                                                <option value="Retail Space" {{ old('project_type', $project->project_type ?? '') == 'Retail Space' ? 'selected' : '' }}>Retail Space</option>
+                                            </select>
+                                            @error('project_type')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
 
                     <div class="col-6">
                         <div class="form-group">
@@ -62,12 +78,9 @@
                         </div>
 
                         @if(isset($project->logo) && File::exists(env('APP_STORAGE').''.$project->logo))
-                        <img src="{{ URL::to(env('APP_STORAGE').''.$project->logo) }}" alt="{{ $project->name??'' }}" class="card-img-left" style="height: 80px; object-fit: cover;">
-                    @else
-
-                    @endif
-
-
+                            <img src="{{ URL::to(env('APP_STORAGE').''.$project->logo) }}" alt="{{ $project->name??'' }}" class="card-img-left" style="height: 20px; object-fit: cover;">
+                        @else
+                        @endif
                     </div>
 
                     <div class="col-6">
@@ -80,25 +93,32 @@
                         </div>
                     </div>
 
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="latitude" class="form-label">Latitude</label>
-                            <input id="latitude" type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" value="{{ old('latitude', $project->latitude ?? '') }}">
-                            @error('latitude')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                    <!-- Latitude and Longitude fields side by side -->
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="latitude" class="form-label">Latitude</label>
+                                    <input id="latitude" type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" value="{{ old('latitude', $project->latitude ?? '') }}">
+                                    @error('latitude')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="longitude" class="form-label">Longitude</label>
+                                    <input id="longitude" type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" value="{{ old('longitude', $project->longitude ?? '') }}">
+                                    @error('longitude')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="longitude" class="form-label">Longitude</label>
-                            <input id="longitude" type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" value="{{ old('longitude', $project->longitude ?? '') }}">
-                            @error('longitude')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
+
 
                     <!-- Continue with other fields -->
 
@@ -116,7 +136,6 @@
 </div>
 
 @push('scripts')
-
 <script>
 $(document).ready(function() {
     $("#project-form").validate({
@@ -158,6 +177,9 @@ $(document).ready(function() {
             price_per_sft: {
                 number: true,
                 min: 0
+            },
+            project_type: {
+                required: true
             }
             // Add other rules as needed
         },
@@ -180,6 +202,9 @@ $(document).ready(function() {
             },
             longitude: {
                 number: "Please enter a valid number for longitude."
+            },
+            project_type: {
+                required: "Please select a type of project."
             }
             // Add other messages as needed
         }
