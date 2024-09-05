@@ -32,7 +32,7 @@
 
 
                     @if(isset($badge->icon) && File::exists(env('APP_STORAGE').'icons/'.$badge->icon))
-                    <img src="{{ URL::to(env('APP_STORAGE').'icons/'.$badge->icon) }}" alt="Client Logo" style="width: 50px; height: auto;">
+                    <img src="{{ URL::to(env('APP_STORAGE').'icons/'.$badge->icon) }}" class="mt-2" alt="Client Logo" style="width: 50px; height: auto;">
 
                     @endif
 

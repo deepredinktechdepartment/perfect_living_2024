@@ -31,7 +31,7 @@
                     @enderror
 
                     @if(isset($collection->background_image) && File::exists(storage_path('app/public/' . $collection->background_image)))
-                    <img src="{{ URL::to(env('APP_STORAGE').''.$collection->background_image) }}" class="card-img-left" alt="{{ $collection->name }}" style="height: 80px; object-fit: cover;">
+                    <img src="{{ URL::to(env('APP_STORAGE').''.$collection->background_image) }}" class="card-img-left mt-2" alt="{{ $collection->name }}" style="height: 80px; object-fit: cover;">
                 @else
 
                 @endif
