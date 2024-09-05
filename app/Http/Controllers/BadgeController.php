@@ -34,13 +34,19 @@ class BadgeController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:badges,name',
+            'icon' => 'required|mimes:png,jpg,jpeg|max:1024', // Validate file type and size
         ]);
 
         try {
+            if ($request->hasFile('icon')) {
+                $iconName = time() . '.' . $request->icon->extension();
+                $request->icon->storeAs('icons', $iconName, 'public');
+                $validatedData['icon'] = $iconName;
+            }
+
             Badge::create($validatedData);
             return redirect()->route('badges.index')->with('success', 'Badge created successfully.');
         } catch (\Exception $e) {
-
             return back()->withErrors(['error' => 'Failed to create badge.']);
         }
     }
@@ -62,10 +68,23 @@ class BadgeController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:badges,name,' . $id,
+            'icon' => 'nullable|mimes:png,jpg,jpeg|max:1024', // Validate file type and size
         ]);
 
         try {
             $badge = Badge::findOrFail($id);
+
+            if ($request->hasFile('icon')) {
+                // Delete the old icon if it exists
+                if ($badge->icon && \Storage::disk('public')->exists('icons/' . $badge->icon)) {
+                    \Storage::disk('public')->delete('icons/' . $badge->icon);
+                }
+
+                $iconName = time() . '.' . $request->icon->extension();
+                $request->icon->storeAs('icons', $iconName, 'public');
+                $validatedData['icon'] = $iconName;
+            }
+
             $badge->update($validatedData);
             return redirect()->route('badges.index')->with('success', 'Badge updated successfully.');
         } catch (\Exception $e) {
@@ -80,10 +99,19 @@ class BadgeController extends Controller
     {
         try {
             $badge = Badge::findOrFail($id);
+
+            // Delete the icon file if it exists
+            if ($badge->icon && \Storage::disk('public')->exists('icons/' . $badge->icon)) {
+                \Storage::disk('public')->delete('icons/' . $badge->icon);
+            }
+
+            // Delete the badge record
             $badge->delete();
+
             return redirect()->route('badges.index')->with('success', 'Badge deleted successfully.');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Failed to delete badge.']);
         }
     }
+
 }
