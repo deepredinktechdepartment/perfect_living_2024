@@ -70,6 +70,7 @@ class ProjectController extends Controller
             'no_of_towers' => 'nullable',
             'no_of_units' => 'nullable',
             'price_per_sft' => 'nullable',
+            'about_project' => 'nullable',
 
             // Add validation rules for other fields
         ]);
@@ -118,6 +119,7 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
 
+
         $validator = $request->validate([
             'name' => [
                 'required',
@@ -140,6 +142,7 @@ class ProjectController extends Controller
             'no_of_towers' => 'nullable',
             'no_of_units' => 'nullable',
             'price_per_sft' => 'nullable',
+            'about_project' => 'nullable',
 
             // Add validation rules for other fields
         ]);

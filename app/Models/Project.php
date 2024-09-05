@@ -18,7 +18,7 @@ class Project extends Model
         'latitude',
         'longitude',
         'master_plan_layout',
-        'about',
+        'about_project',
         'elevation_pictures',
         'enquiry_form',
         'map_collections',

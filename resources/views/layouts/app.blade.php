@@ -151,11 +151,18 @@
 <!-- SweetAlert JS -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
 
+<!-- TinyMCE CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.3.0/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+
+
 
     <!-- Custom scripts -->
     <script src="{{ URL::to('assets/js/apexCharts/areaChart.js') }}"></script>
     <script src="{{ URL::to('assets/js/chartjs/doughnut-chart.js') }}"></script>
     <script src="{{ URL::to('assets/js/custom.js') }}"></script>
+    <script src="{{ URL::to('assets/js/editors.js') }}"></script>
 
 
 

@@ -240,6 +240,16 @@
 
 
 
+<div class="col-12">
+    <div class="form-group">
+        <label for="about_project" class="form-label">About the Project</label>
+        <textarea id="about_project" class="form-control @error('about_project') is-invalid @enderror" name="about_project">{{ old('about_project', $project->about_project ?? '') }}</textarea>
+        @error('about_project')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
 
 
                     <!-- Continue with other fields -->
