@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Amenity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class AmenityController extends Controller
 {
@@ -32,16 +34,22 @@ class AmenityController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:amenities,name',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'icon' => 'required|mimes:jpg,jpeg,png|max:1024', // Validate icon file
         ]);
 
-        try {
-            Amenity::create($validatedData);
-            return redirect()->route('amenities.index')->with('success', 'Amenity created successfully.');
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Failed to create amenity.']);
+        $amenity = new Amenity();
+        $amenity->name = $request->name;
+
+        if ($request->hasFile('icon')) {
+            $iconPath = $request->file('icon')->store('amenities', 'public');
+            $amenity->icon = $iconPath;
         }
+
+        $amenity->save();
+
+        return redirect()->route('amenities.index')->with('success', 'Amenity created successfully.');
     }
 
     /**
@@ -59,17 +67,29 @@ class AmenityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:amenities,name,' . $id,
+        $amenity = Amenity::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'icon' => 'nullable|mimes:jpg,jpeg,png|max:1024', // Validate icon file, not required if already exists
         ]);
 
-        try {
-            $amenity = Amenity::findOrFail($id);
-            $amenity->update($validatedData);
-            return redirect()->route('amenities.index')->with('success', 'Amenity updated successfully.');
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Failed to update amenity.']);
+        $amenity->name = $request->name;
+
+        if ($request->hasFile('icon')) {
+            // Delete old icon if it exists
+            if ($amenity->icon && File::exists(storage_path('app/public/' . $amenity->icon))) {
+                File::delete(storage_path('app/public/' . $amenity->icon));
+            }
+
+            // Store new icon
+            $iconPath = $request->file('icon')->store('amenities', 'public');
+            $amenity->icon = $iconPath;
         }
+
+        $amenity->save();
+
+        return redirect()->route('amenities.index')->with('success', 'Amenity updated successfully.');
     }
 
     /**
@@ -77,12 +97,19 @@ class AmenityController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $amenity = Amenity::findOrFail($id);
-            $amenity->delete();
-            return redirect()->route('amenities.index')->with('success', 'Amenity deleted successfully.');
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Failed to delete amenity.']);
+        // Find the amenity by its ID
+        $amenity = Amenity::findOrFail($id);
+
+        // Check if the icon file exists
+        if ($amenity->icon && File::exists(storage_path('app/public/' . $amenity->icon))) {
+            // Delete the icon file
+            File::delete(storage_path('app/public/' . $amenity->icon));
         }
+
+        // Delete the amenity record from the database
+        $amenity->delete();
+
+        // Redirect back to the amenities list with a success message
+        return redirect()->route('amenities.index')->with('success', 'Amenity deleted successfully.');
     }
 }
