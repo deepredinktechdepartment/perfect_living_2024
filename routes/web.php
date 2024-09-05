@@ -12,6 +12,8 @@ use App\Http\Controllers\ExternalDataController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\ThemeoptionsController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UnitConfigurationController;
+use App\Http\Controllers\ProjectAmenityController;
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CityMasterController;
@@ -33,9 +35,6 @@ use App\Http\Controllers\BadgeController;
 */
 
 // Login routes
-
-Route::get('/', [ProjectController::class, 'index'])
-    ->name('website.home');
 
 
 
@@ -170,6 +169,15 @@ Route::resource('area-masters', AreaMasterController::class);
 Route::resource('amenities', AmenityController::class);
 Route::resource('collections', CollectionController::class);
 Route::resource('badges', BadgeController::class);
+
+// Projects
+Route::resource('projects', ProjectController::class);
+
+// Unit Configurations
+Route::resource('unit_configurations', UnitConfigurationController::class);
+
+// Project Amenities
+Route::resource('project_amenities', ProjectAmenityController::class);
 
 
 

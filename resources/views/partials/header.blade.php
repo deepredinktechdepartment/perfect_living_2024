@@ -27,13 +27,11 @@
                           <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                       </li>
 
-                          <li class="nav-item {{ Request::routeIs('clients.index') ? 'active' : '' }}">
-                              <a class="nav-link" href="{{ route('clients.index') }}">Projects</a>
+                          <li class="nav-item {{ Request::routeIs('projects.index','projects.create','projects.edit') ? 'active' : '' }}">
+                              <a class="nav-link" href="{{ route('projects.index') }}">Projects</a>
                           </li>
 
-                          <li class="nav-item {{ Request::routeIs('reports.index') ? 'active' : '' }}">
-                              <a class="nav-link " href="{{ route('reports.index') }}">Reports</a>
-                          </li>
+
 
                           @if(Auth::user()->role && Auth::user()->role==1)
                           <li class="nav-item {{ Request::routeIs('users.index') ? 'active' : '' }}">
