@@ -10,7 +10,7 @@
         </div>
     @else
         @foreach($collections as $collection)
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
                 <div class="card shadow-sm rounded" style="width: 100%; max-width: 250px;">
 
                     @if(isset($collection->background_image) && File::exists(env('APP_STORAGE').''.$collection->background_image))

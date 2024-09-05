@@ -1363,7 +1363,6 @@ label {
 .content-wrapper {
     transition: 0.4s;
     border-top-left-radius: 50px;
-    background-color: #f5f4fa !important;
     min-height: 100vh;
 }
 

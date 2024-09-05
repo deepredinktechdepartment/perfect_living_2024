@@ -57,7 +57,7 @@ body {
     font-family: var(--primary-font);
     /*    line-height: 28px;*/
     overflow-x: hidden;
-    background: #f5f4fa;
+    background: #e8f5e9!important;
     border-top-right-radius: 20px;
     text-align: left;
     /* background: linear-gradient(
