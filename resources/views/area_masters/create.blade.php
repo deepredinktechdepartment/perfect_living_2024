@@ -3,9 +3,9 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-4">
         <div class="bg-white p-4 rounded shadow-sm">
-            <h4 class="mb-4">{{ $pageTitle }}</h4>
+
 
             <form method="POST" action="{{ isset($area) ? route('area-masters.update', $area->id) : route('area-masters.store') }}">
                 @csrf
@@ -14,7 +14,7 @@
                 @endif
 
                 <div class="mb-3">
-                    <label for="name" class="form-label">Area Master Name</label>
+                    <label for="name" class="form-label">Name</label>
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $area->name ?? '') }}" required>
                     @error('name')
                         <div class="invalid-feedback">
