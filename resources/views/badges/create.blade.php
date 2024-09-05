@@ -2,9 +2,8 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-4">
         <div class="bg-white p-4 rounded shadow-sm">
-            <h4 class="mb-4">{{ $pageTitle }}</h4>
 
             <form method="POST" action="{{ isset($badge) ? route('badges.update', $badge->id) : route('badges.store') }}" enctype="multipart/form-data">
                 @csrf
@@ -12,8 +11,8 @@
                     @method('PUT')
                 @endif
 
-                <div class="mb-3">
-                    <label for="name" class="form-label">Badge Name</label>
+                <div class="mb-0">
+                    <label for="name" class="form-label">Name</label>
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $badge->name ?? '') }}" required>
                     @error('name')
                         <div class="invalid-feedback">
@@ -23,7 +22,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="icon" class="form-label">Badge Icon (PNG, JPG)</label>
+                    <label for="icon" class="form-label">Icon (PNG, JPG)</label>
                     <input id="icon" type="file" class="form-control @error('icon') is-invalid @enderror" name="icon" >
                     @error('icon')
                         <div class="invalid-feedback">

@@ -88,6 +88,8 @@ return [
 	'icons' => [
         'edit' => 'fas fa-edit',
         'delete' => 'fas fa-trash',
+        'link' => 'fas fa-link',
+
     ],
 
 ];

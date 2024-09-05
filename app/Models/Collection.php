@@ -9,5 +9,12 @@ class Collection extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','background_image','target_link'];
+  // app/Models/Collection.php
+
+protected $fillable = [
+'name',
+'background_image',
+'target_link',
+];
+
 }

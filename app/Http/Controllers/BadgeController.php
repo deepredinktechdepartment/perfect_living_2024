@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Badge;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BadgeController extends Controller
 {
