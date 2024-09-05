@@ -24,9 +24,9 @@ class Project extends Model
         'map_collections',
         'map_badges',
         'project_type',
-        'acres',
-        'towers',
-        'units',
+        'no_of_acres',
+        'no_of_towers',
+        'no_of_units',
         'price_per_sft',
         'unit_configurations',  // Assuming this is a JSON field or similar
         'amenities',            // Assuming this is a JSON field or similar
@@ -48,4 +48,14 @@ class Project extends Model
         {
             return $this->belongsTo(Company::class);
         }
+        public function collections()
+{
+    return $this->belongsToMany(Collection::class, 'collections');
+}
+
+public function badges()
+{
+    return $this->belongsToMany(Badge::class, 'badges');
+}
+
 }

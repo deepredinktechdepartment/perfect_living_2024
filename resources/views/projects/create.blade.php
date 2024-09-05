@@ -39,24 +39,25 @@
                             @enderror
                         </div>
                     </div>
-                                     <!-- Type of Project dropdown -->
-                                     <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="project_type" class="form-label">Type of Project</label>
-                                            <select id="project_type" class="form-control @error('project_type') is-invalid @enderror" name="project_type" required>
-                                                <option value="">Select Project Type</option>
-                                                <option value="Standalone Villa" {{ old('project_type', $project->project_type ?? '') == 'Standalone Villa' ? 'selected' : '' }}>Standalone Villa</option>
-                                                <option value="Standalone Apartment" {{ old('project_type', $project->project_type ?? '') == 'Standalone Apartment' ? 'selected' : '' }}>Standalone Apartment</option>
-                                                <option value="Villa Gated Community" {{ old('project_type', $project->project_type ?? '') == 'Villa Gated Community' ? 'selected' : '' }}>Villa Gated Community</option>
-                                                <option value="Apartment Gated Community" {{ old('project_type', $project->project_type ?? '') == 'Apartment Gated Community' ? 'selected' : '' }}>Apartment Gated Community</option>
-                                                <option value="Commercial Space" {{ old('project_type', $project->project_type ?? '') == 'Commercial Space' ? 'selected' : '' }}>Commercial Space</option>
-                                                <option value="Retail Space" {{ old('project_type', $project->project_type ?? '') == 'Retail Space' ? 'selected' : '' }}>Retail Space</option>
-                                            </select>
-                                            @error('project_type')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
+
+                    <!-- Type of Project dropdown -->
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="project_type" class="form-label">Type of Project</label>
+                            <select id="project_type" class="form-control @error('project_type') is-invalid @enderror" name="project_type" required>
+                                <option value="">Select Project Type</option>
+                                <option value="Standalone Villa" {{ old('project_type', $project->project_type ?? '') == 'Standalone Villa' ? 'selected' : '' }}>Standalone Villa</option>
+                                <option value="Standalone Apartment" {{ old('project_type', $project->project_type ?? '') == 'Standalone Apartment' ? 'selected' : '' }}>Standalone Apartment</option>
+                                <option value="Villa Gated Community" {{ old('project_type', $project->project_type ?? '') == 'Villa Gated Community' ? 'selected' : '' }}>Villa Gated Community</option>
+                                <option value="Apartment Gated Community" {{ old('project_type', $project->project_type ?? '') == 'Apartment Gated Community' ? 'selected' : '' }}>Apartment Gated Community</option>
+                                <option value="Commercial Space" {{ old('project_type', $project->project_type ?? '') == 'Commercial Space' ? 'selected' : '' }}>Commercial Space</option>
+                                <option value="Retail Space" {{ old('project_type', $project->project_type ?? '') == 'Retail Space' ? 'selected' : '' }}>Retail Space</option>
+                            </select>
+                            @error('project_type')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
 
                     <div class="col-6">
                         <div class="form-group">
@@ -117,6 +118,105 @@
                             </div>
                         </div>
                     </div>
+
+
+                    @php
+    // Decode map_collections and map_badges if they exist and are valid JSON, otherwise default to empty array
+    $projectCollections = isset($project->map_collections) && is_string($project->map_collections) ? json_decode($project->map_collections, true) : [];
+    $projectBadges = isset($project->map_badges) && is_string($project->map_badges) ? json_decode($project->map_badges, true) : [];
+@endphp
+
+<!-- Collections checkboxes -->
+<div class="col-6">
+    <div class="form-group">
+        <label class="form-label">Collections</label>
+        <div class="form-check">
+            @foreach($collections as $collection)
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="collection_{{ $collection->id }}" name="map_collections[]" value="{{ $collection->id }}" {{ in_array($collection->id, old('map_collections', $projectCollections)) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="collection_{{ $collection->id }}">
+                        {{ $collection->name??'' }}
+                    </label>
+                </div>
+            @endforeach
+        </div>
+        @error('collections')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
+<!-- Badges checkboxes -->
+<div class="col-6">
+    <div class="form-group">
+        <label class="form-label">Badges</label>
+        <div class="form-check">
+            @foreach($badges as $badge)
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="badge_{{ $badge->id }}" name="map_badges[]" value="{{ $badge->id }}" {{ in_array($badge->id, old('map_badges', $projectBadges)) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="badge_{{ $badge->id }}">
+                        {{ $badge->name }}
+                    </label>
+                </div>
+            @endforeach
+        </div>
+        @error('badges')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
+
+
+<div class="row">
+    <!-- Other existing form fields -->
+
+    <!-- No of Acres -->
+    <div class="col-6">
+        <div class="form-group">
+            <label for="no_of_acres" class="form-label">No of Acres</label>
+            <input id="no_of_acres" type="number" step="0.01" class="form-control @error('no_of_acres') is-invalid @enderror" name="no_of_acres" value="{{ old('no_of_acres', $project->no_of_acres ?? '') }}" required>
+            @error('no_of_acres')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
+
+    <!-- No of Towers -->
+    <div class="col-6">
+        <div class="form-group">
+            <label for="no_of_towers" class="form-label">No of Towers</label>
+            <input id="no_of_towers" type="number" class="form-control @error('no_of_towers') is-invalid @enderror" name="no_of_towers" value="{{ old('no_of_towers', $project->no_of_towers ?? '') }}" required>
+            @error('no_of_towers')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
+
+    <!-- No of Units -->
+    <div class="col-6">
+        <div class="form-group">
+            <label for="no_of_units" class="form-label">No of Units</label>
+            <input id="no_of_units" type="number" class="form-control @error('no_of_units') is-invalid @enderror" name="no_of_units" value="{{ old('no_of_units', $project->no_of_units ?? '') }}" required>
+            @error('no_of_units')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
+
+    <!-- Price per sft -->
+    <div class="col-6">
+        <div class="form-group">
+            <label for="price_per_sft" class="form-label">Price per sft</label>
+            <input id="price_per_sft" type="number" step="0.01" class="form-control @error('price_per_sft') is-invalid @enderror" name="price_per_sft" value="{{ old('price_per_sft', $project->price_per_sft ?? '') }}" required>
+            @error('price_per_sft')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
+</div>
+
+
 
 
 
@@ -180,7 +280,29 @@ $(document).ready(function() {
             },
             project_type: {
                 required: true
-            }
+            },
+            collections: {
+                required: false
+            },
+            badges: {
+                required: false
+            },
+            no_of_acres: {
+        required: false,
+
+    },
+    no_of_towers: {
+        required: false,
+
+    },
+    no_of_units: {
+        required: false,
+
+    },
+    price_per_sft: {
+        required: false,
+
+    }
             // Add other rules as needed
         },
         messages: {
@@ -205,6 +327,12 @@ $(document).ready(function() {
             },
             project_type: {
                 required: "Please select a type of project."
+            },
+            collections: {
+                required: "Please select at least one collection."
+            },
+            badges: {
+                required: "Please select at least one badge."
             }
             // Add other messages as needed
         }
