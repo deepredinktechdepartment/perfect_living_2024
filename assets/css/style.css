@@ -989,7 +989,9 @@ label {
 .text-green {
     color: green !important;
 }
-
+.page-item .page-link{
+    font-size: 14px;
+}
 .page-item.active .page-link {
     color: #fff !important;
 }
