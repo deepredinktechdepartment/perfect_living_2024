@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Company;
 use App\Models\Collection;
 use App\Models\Badge;
+use App\Models\Amenity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -19,6 +20,7 @@ class ProjectController extends Controller
     protected $companies;
     protected $collections;
     protected $badges;
+    protected $aminities;
 
     public function __construct()
     {
@@ -26,10 +28,12 @@ class ProjectController extends Controller
             $this->companies = Company::all();
             $this->collections = Collection::all();
             $this->badges = Badge::all();
+            $this->aminities = Amenity::all();
         } catch (Exception $e) {
             $this->companies = collect(); // Fallback to an empty collection
             $this->collections = collect(); // Fallback to an empty collection
             $this->badges = collect(); // Fallback to an empty collection
+            $this->aminities = collect(); // Fallback to an empty collection
         }
     }
 
@@ -50,7 +54,7 @@ class ProjectController extends Controller
     {
 
         $pageTitle = 'Create Project'; // Set the page title
-        return view('projects.create', ['pageTitle'=>$pageTitle,'companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges]);
+        return view('projects.create', ['pageTitle'=>$pageTitle,'companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges,'amenities' => $this->aminities]);
     }
 
     public function store(Request $request)
@@ -67,6 +71,7 @@ class ProjectController extends Controller
             'project_type' => 'required',
             'map_collections' => 'nullable',
             'map_badges' => 'nullable',
+            'amenities' => 'nullable',
             'no_of_acres' => 'nullable',
             'no_of_towers' => 'nullable',
             'no_of_units' => 'nullable',
@@ -82,6 +87,10 @@ class ProjectController extends Controller
             // If 'map_badges' is not present or is empty, set it to null
     if (!$request->has('map_collections') || empty($request->input('map_collections'))) {
         $validator['map_collections'] = null;
+    }
+            // If 'map_badges' is not present or is empty, set it to null
+    if (!$request->has('amenities') || empty($request->input('amenities'))) {
+        $validator['amenities'] = null;
     }
 
         try {
@@ -115,7 +124,7 @@ class ProjectController extends Controller
     public function edit(Project $project): View
     {
         $pageTitle = 'Edit Project'; // Set the page title
-        return view('projects.create', ['pageTitle'=>$pageTitle,'project' => $project, 'companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges]);
+        return view('projects.create', ['pageTitle'=>$pageTitle,'project' => $project, 'companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges,'amenities' => $this->aminities]);
     }
 
     public function update(Request $request, Project $project)
@@ -140,6 +149,7 @@ class ProjectController extends Controller
             'project_type' => 'required',
             'map_collections' => 'nullable',
             'map_badges' => 'nullable',
+            'amenities' => 'nullable',
             'no_of_acres' => 'nullable',
             'no_of_towers' => 'nullable',
             'no_of_units' => 'nullable',
@@ -156,6 +166,10 @@ class ProjectController extends Controller
             // If 'map_badges' is not present or is empty, set it to null
     if (!$request->has('map_collections') || empty($request->input('map_collections'))) {
         $validator['map_collections'] = null;
+    }
+            // If 'map_badges' is not present or is empty, set it to null
+    if (!$request->has('amenities') || empty($request->input('amenities'))) {
+        $validator['amenities'] = null;
     }
 
 
