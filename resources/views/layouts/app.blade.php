@@ -51,7 +51,7 @@
     <div class="main-wrapper">
         <!-- Navbar Start -->
         @auth
-            <div class="header-container fixed-top">
+            <div class="header-container" id="main-header">
                 @include('partials.header')
             </div>
         @endauth
@@ -68,7 +68,7 @@
         <!-- Sidebar End -->
 
         @auth
-        <section class="mt-5 pt-5">
+        <section class="pt-5">
             <div class="container">
                 <div class="content-wrapper">
                     <div class="row">
