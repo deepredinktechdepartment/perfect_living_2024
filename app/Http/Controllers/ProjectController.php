@@ -49,7 +49,8 @@ class ProjectController extends Controller
     public function create(): View
     {
 
-        return view('projects.create', ['companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges]);
+        $pageTitle = 'Create Project'; // Set the page title
+        return view('projects.create', ['pageTitle'=>$pageTitle,'companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges]);
     }
 
     public function store(Request $request)
@@ -113,7 +114,8 @@ class ProjectController extends Controller
 
     public function edit(Project $project): View
     {
-        return view('projects.create', ['project' => $project, 'companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges]);
+        $pageTitle = 'Edit Project'; // Set the page title
+        return view('projects.create', ['pageTitle'=>$pageTitle,'project' => $project, 'companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges]);
     }
 
     public function update(Request $request, Project $project)

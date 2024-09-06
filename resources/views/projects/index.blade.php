@@ -2,8 +2,6 @@
 @section('title', 'Projects List')
 @section('content')
 
-
-
         <div class="card shadow-sm rounded">
             <div class="card-body">
         <div class="table-responsive">
