@@ -89,35 +89,40 @@ class ElevationPictureController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project, ElevationPicture $picture)
     {
 
-
-        // Validate the request with file rules
+        // Validate the request
         $request->validate([
             'project_id' => 'required|integer',
-            'title' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
             'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // 2MB
         ]);
 
         try {
-            // Retrieve the picture by its ID
-            $picture = ElevationPicture::findOrFail($id);
 
-            // Handle file upload
-            $filePath = $picture->file_path; // Preserve existing file path
-            if ($request->hasFile('file')) {
+
+
+
+            // Check if the existing file path exists and if a new file is uploaded
+            if ($picture->file_path && $request->hasFile('file')) {
+                // Handle file upload
+
                 // Delete old file
-                if ($filePath && Storage::disk('public')->exists($filePath)) {
-                    Storage::disk('public')->delete($filePath);
+                if (Storage::disk('public')->exists($picture->file_path)) {
+                    Storage::disk('public')->delete($picture->file_path);
                 }
-                // Store new file
+
+                // Store the new file and update the file path
                 $filePath = $request->file('file')->store('elevation_pictures', 'public');
+            } else {
+                // If no new file is uploaded, keep the existing file path
+                $filePath = $picture->file_path;
             }
 
             // Update the elevation picture
             $picture->update([
-                'title' => $request->title??'',
+                'title' => $request->title ?? '',
                 'file_path' => $filePath
             ]);
 
@@ -129,6 +134,7 @@ class ElevationPictureController extends Controller
             return redirect()->back()->with('error', 'An error occurred while updating the elevation picture.');
         }
     }
+
 
     public function destroy(Request $request, Project $project, ElevationPicture $picture)
     {

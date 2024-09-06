@@ -186,7 +186,7 @@ Route::delete('/projects/{project}/elevation_pictures/edit/{picture}', [Elevatio
 Route::get('elevation_pictures/{project}/{picture}/edit', [ElevationPictureController::class, 'edit'])->name('elevation_pictures.edit');
 
 // Handle the form submission to update an elevation picture (PUT request)
-Route::put('elevation_pictures/{project}/{elevation_picture}', [ElevationPictureController::class, 'update'])->name('elevation_pictures.update');
+Route::put('elevation_pictures/{project}/{picture}', [ElevationPictureController::class, 'update'])->name('elevation_pictures.update');
 
 // Project Amenities
 Route::resource('project_amenities', ProjectAmenityController::class);
