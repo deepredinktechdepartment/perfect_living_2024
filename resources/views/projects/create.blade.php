@@ -188,6 +188,31 @@
     </div>
 </div>
 
+@php
+// Decode amenities if they exist and are valid JSON, otherwise default to empty array
+$projectAmenities = isset($project->amenities) && is_string($project->amenities) ? json_decode($project->amenities, true) : [];
+@endphp
+
+<!-- Amenities checkboxes -->
+<div class="col-6">
+<div class="form-group">
+    <label class="form-label">Amenities</label>
+    <div class="form-check">
+        @foreach($amenities as $amenity)
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="amenity_{{ $amenity->id }}" name="amenities[]" value="{{ $amenity->id }}" {{ in_array($amenity->id, old('amenities', $projectAmenities)) ? 'checked' : '' }}>
+                <label class="form-check-label" for="amenity_{{ $amenity->id }}">
+                    {{ $amenity->name }}
+                </label>
+            </div>
+        @endforeach
+    </div>
+    @error('amenities')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+</div>
+
 
 
 <div class="row">
