@@ -15,7 +15,7 @@
             @else
             <div class="card shadow-sm rounded">
                 <div class="card-body">
-                <div class="table-responsive">
+
                     <table class="table table-bordered mt-3 bg-white">
                         <thead class="table-dark">
                             <tr>
@@ -59,7 +59,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+
                 </div>
                 </div>
             @endif

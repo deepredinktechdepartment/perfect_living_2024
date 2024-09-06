@@ -12,7 +12,7 @@
 
         <div class="card shadow-sm rounded">
             <div class="card-body">
-                <div class="table-responsive">
+
                     <table class="table table-bordered mt-3 bg-white" id="projects">
                         <thead class="table-dark">
                             <tr>
@@ -39,7 +39,7 @@
                                         @endif
                                     </td> --}}
                                     <td>
-                                        <a href="{{ route('projects.edit', $project->id) }}" class="no-button">
+                                        <a href="{{ route('projects.edit', $project->id) }}" class="no-button" title="Edit" alt="Edit">
                                             <i class="{{ config('constants.icons.edit') }}"></i>
                                         </a>
                                         <form action="{{ route('projects.destroy', $project->id) }}" method="POST" class="delete-form" style="display:inline;">
@@ -52,12 +52,18 @@
                                         <a href="{{ route('unit_configurations.index', ['projectID' => $project->id]) }}" class="no-button" title="Units Config" alt="Units Config">
                                             <i class="{{ config('constants.icons.unit_configuration') }}"></i>
                                         </a>
+
+                                        <a href="{{ route('elevation_pictures.index', ['projectID' => $project->id]) }}" class="no-button" title="Elevation Pictures" alt="Elevation Pictures">
+                                            <i class="{{ config('constants.icons.multiple_imges') }}"></i>
+                                        </a>
+
+
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+
             </div>
         </div>
     @endif

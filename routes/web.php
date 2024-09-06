@@ -21,6 +21,7 @@ use App\Http\Controllers\AreaMasterController;
 use App\Http\Controllers\AmenityController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\BadgeController;
+use App\Http\Controllers\ElevationPictureController;
 
 
 /*
@@ -177,6 +178,8 @@ Route::resource('projects', ProjectController::class);
 Route::resource('unit_configurations', UnitConfigurationController::class);
 Route::delete('/projects/{project}/units/{unit}', [UnitConfigurationController::class, 'destroy'])->name('unit_configurations.destroy');
 
+Route::resource('elevation_pictures', ElevationPictureController::class);
+Route::delete('/projectspictures/{project}/units/{unit}', [ElevationPictureController::class, 'destroy'])->name('elevation_pictures.destroy');
 
 // Project Amenities
 Route::resource('project_amenities', ProjectAmenityController::class);

@@ -49,14 +49,19 @@ class Project extends Model
             return $this->belongsTo(Company::class);
         }
         public function collections()
-{
-    return $this->belongsToMany(Collection::class, 'collections');
-}
+        {
+        return $this->belongsToMany(Collection::class, 'collections');
+        }
 
-public function badges()
-{
-    return $this->belongsToMany(Badge::class, 'badges');
-}
+        public function badges()
+        {
+        return $this->belongsToMany(Badge::class, 'badges');
+        }
+
+        public function elevationPictures()
+        {
+        return $this->hasMany(ElevationPicture::class);
+        }
 
 
 
