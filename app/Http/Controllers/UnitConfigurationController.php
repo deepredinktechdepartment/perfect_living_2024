@@ -89,7 +89,7 @@ class UnitConfigurationController extends Controller
         try {
             return view('projects.units.edit', compact('project', 'unit'));
         } catch (\Exception $e) {
-            dd($e->getmessage());
+
             Log::error('Error displaying unit edit form for project ID ' . $project->id . ' and unit ID ' . $unit->id . ': ' . $e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while opening the unit edit form.');
         }

@@ -56,7 +56,7 @@ class ElevationPictureController extends Controller
         // Validate the request with file rules
         $request->validate([
             'project_id' => 'required|integer',
-            'title' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
             'file' => 'required|image|mimes:jpeg,png,jpg|max:2048', // 2MB
         ]);
 
@@ -67,7 +67,7 @@ class ElevationPictureController extends Controller
             // Create the elevation picture
             ElevationPicture::create([
                 'project_id' => $request->project_id,
-                'title' => $request->title,
+                'title' => $request->title??'',
                 'file_path' => $filePath
             ]);
 
@@ -79,24 +79,20 @@ class ElevationPictureController extends Controller
         }
     }
 
-    public function edit(Request $request, $id)
+    public function edit(Project $project, ElevationPicture $picture)
     {
         try {
-            // Retrieve the picture by its ID from the request
-            $picture = ElevationPicture::findOrFail($id);
-
-            // Retrieve the project by its ID from the request
-            $project = Project::findOrFail($request->projectID);
-
-            return view('projects.elevation_pictures.edit', compact('picture', 'project'));
+            return view('projects.elevation_pictures.create', compact('picture', 'project'));
         } catch (\Exception $e) {
-            Log::error('Error displaying elevation picture edit form for picture ID ' . $id . ': ' . $e->getMessage());
+
             return redirect()->back()->with('error', 'An error occurred while opening the elevation picture edit form.');
         }
     }
 
     public function update(Request $request, $id)
     {
+
+        dd();
         // Validate the request with file rules
         $request->validate([
             'project_id' => 'required|integer',
@@ -133,11 +129,13 @@ class ElevationPictureController extends Controller
         }
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, Project $project, ElevationPicture $picture)
     {
         try {
-            // Retrieve the picture by its ID
-            $picture = ElevationPicture::findOrFail($id);
+            // Ensure the picture belongs to the specified project
+            if ($picture->project_id != $project->id) {
+                return redirect()->back()->with('error', 'The specified picture does not belong to the specified project.');
+            }
 
             // Delete file if it exists
             if ($picture->file_path && Storage::disk('public')->exists($picture->file_path)) {
@@ -147,11 +145,12 @@ class ElevationPictureController extends Controller
             // Delete the picture
             $picture->delete();
 
-            return redirect()->route('elevation_pictures.index', ['projectID' => $request->projectID])
+            return redirect()->route('elevation_pictures.index', ['projectID' => $project->id])
                              ->with('success', 'Elevation Picture deleted successfully.');
         } catch (\Exception $e) {
-            Log::error('Error deleting elevation picture ID ' . $id . ': ' . $e->getMessage());
+            Log::error('Error deleting elevation picture ID ' . $picture->id . ' for project ID ' . $project->id . ': ' . $e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while deleting the elevation picture.');
         }
     }
+
 }
