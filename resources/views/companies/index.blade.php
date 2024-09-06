@@ -11,7 +11,7 @@
 
         <div class="card shadow-sm rounded">
             <div class="card-body">
-        <div class="table-responsive">
+
                     <table class="table table-bordered mt-3 bg-white" id="companies">
                         <thead>
                             <tr>
@@ -47,7 +47,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+             
                 </div>
                 </div>
         @endif

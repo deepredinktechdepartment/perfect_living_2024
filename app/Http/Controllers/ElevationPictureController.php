@@ -92,7 +92,7 @@ class ElevationPictureController extends Controller
     public function update(Request $request, $id)
     {
 
-        dd();
+
         // Validate the request with file rules
         $request->validate([
             'project_id' => 'required|integer',
@@ -117,13 +117,14 @@ class ElevationPictureController extends Controller
 
             // Update the elevation picture
             $picture->update([
-                'title' => $request->title,
+                'title' => $request->title??'',
                 'file_path' => $filePath
             ]);
 
             return redirect()->route('elevation_pictures.index', ['projectID' => $picture->project_id])
                              ->with('success', 'Elevation Picture updated successfully.');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             Log::error('Error updating elevation picture ID ' . $id . ': ' . $e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while updating the elevation picture.');
         }
