@@ -57,24 +57,21 @@ body {
     font-family: var(--primary-font);
     /*    line-height: 28px;*/
     overflow-x: hidden;
-    background: #e0d9d9 !important;
+    background: #f2f2f2 !important;
     border-top-right-radius: 20px;
     text-align: left;
-    /* background: linear-gradient(
-            -10deg,
-            rgba(255, 255, 255, 0.5),
-            rgba(255, 255, 255, 0.9),
-            rgba(255, 255, 255, 0.9)
-        ),
-        url("../images/main_bg.png") no-repeat center center !important;
-    background-size: cover;
-    background-position: center; */
     position: relative;
-    min-height: 100vh;
+    /* min-height: 100vh; */
+    height: 100%;
     width: 100%;
-    /* background: linear-gradient(45deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("../images/main_bg.png") no-repeat center center; */
+    display: flex;
+    flex-direction: column; 
 }
-
+#main-content{
+    flex-grow: 1;
+    min-height: calc(100vh - 150px);
+    overflow: auto;
+}
 img {
     vertical-align: middle;
     /* height: auto; */

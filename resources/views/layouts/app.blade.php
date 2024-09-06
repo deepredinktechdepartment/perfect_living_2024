@@ -48,7 +48,6 @@
 </head>
 
 <body>
-    <div class="main-wrapper">
         <!-- Navbar Start -->
         @auth
             <div class="header-container" id="main-header">
@@ -68,7 +67,7 @@
         <!-- Sidebar End -->
 
         @auth
-        <section class="pt-5">
+        <section class="pt-5 pb-5" id="main-content">
             <div class="container">
                 <div class="content-wrapper">
                     <div class="row">
@@ -109,7 +108,7 @@
         @auth
         @include('partials.footer')
         @endauth
-    </div>
+    
 
     @auth
         <!-- Go to Top Button -->

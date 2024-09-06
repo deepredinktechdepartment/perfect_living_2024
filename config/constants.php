@@ -13,7 +13,7 @@ return [
 	'Backpageicon' => "<i class='font-12 fa-solid fa-backward-step'></i>",
 	'NoImage' => "<i class='fa-solid fa-image fa-xl'></i>",
 	'info-circle' => "<i class='fa-solid fa-circle-info'></i>",
-	'add-icon' => "<i class='fa-solid fa-circle-plus fa-xl' style='color: #000; font-size:2rem;'></i>",
+	'add-icon' => "<i class='fa-solid fa-circle-plus fa-xl text-dark' style='font-size:2rem;'></i>",
 	'setting-icon' => "<i class='fa-solid fa-gear fa-xl' style='color: #cd7b0a; font-size:2rem;'></i>",
 	'LGPDFICON' => "<i class='font-24 fa-solid fa-file-pdf'></i>",
 	'fa-circle-exclamation' => "<i class='fa-solid fa-circle-exclamation'></i>",

@@ -28,7 +28,7 @@
 /* Header CSS BEGiNS */
 
 header {
-    padding: 15px 0px;
+    padding: 8px 0px;
 }
 
 .header-logo {
@@ -1363,7 +1363,7 @@ label {
 .content-wrapper {
     transition: 0.4s;
     border-top-left-radius: 50px;
-    min-height: 60vh;
+    /* min-height: 100vh; */
 }
 
 .content-wrapper.hide {
@@ -2090,7 +2090,7 @@ div.dataTables_wrapper div.dataTables_length select {
 }
 
 .dropdown-toggle::after {
-    border-top: 0.3em solid #808080 !important;
+    border-top: 0.3em solid #ffffff !important;
 }
 
 .dropdown-item.active,

@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-  <h1 class="text-black">
+  <h1 class="text-dark">
      {{  $pageTitle??''}}
   </h1>
 
