@@ -16,7 +16,7 @@ $theme_options_data = Themeoptions::withoutGlobalScope(new ActiveOrgaization)->g
                     <div class="row ms-0 me-0">
                         <!-- Left Side Image -->
                         <div class="col-lg-6 col-md-6 d-none d-md-block p-0">
-                            <img src="https://via.placeholder.com/600x800?text=Banner+Image" alt="Banner Image" class="img-fluid h-100 w-100 object-cover" />
+                            <img src="https://i.imgur.com/C4BC7k1.png" alt="Banner Image" class="img-fluid h-100 w-100 object-cover" />
                         </div>
                         <!-- Right Side Form -->
                         <div class="col-lg-6 col-md-6 my-auto p-0">
