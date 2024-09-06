@@ -47,7 +47,8 @@
     <link rel="stylesheet" href="{{ URL::to('assets/css/style.css') }}">
 </head>
 
-<body>
+
+<body class="{{ Auth::check() ? 'authenticated' : 'guest' }}">
         <!-- Navbar Start -->
         @auth
             <div class="header-container" id="main-header">
@@ -108,7 +109,7 @@
         @auth
         @include('partials.footer')
         @endauth
-    
+
 
     @auth
         <!-- Go to Top Button -->
