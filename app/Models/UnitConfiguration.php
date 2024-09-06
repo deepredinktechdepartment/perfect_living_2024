@@ -23,4 +23,5 @@ class UnitConfiguration extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
 }

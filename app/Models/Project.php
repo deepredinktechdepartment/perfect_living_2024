@@ -58,4 +58,6 @@ public function badges()
     return $this->belongsToMany(Badge::class, 'badges');
 }
 
+
+
 }

@@ -175,6 +175,8 @@ Route::resource('projects', ProjectController::class);
 
 // Unit Configurations
 Route::resource('unit_configurations', UnitConfigurationController::class);
+Route::delete('/projects/{project}/units/{unit}', [UnitConfigurationController::class, 'destroy'])->name('unit_configurations.destroy');
+
 
 // Project Amenities
 Route::resource('project_amenities', ProjectAmenityController::class);

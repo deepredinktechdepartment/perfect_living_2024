@@ -89,6 +89,7 @@ return [
         'edit' => 'fas fa-edit',
         'delete' => 'fas fa-trash',
         'link' => 'fas fa-link',
+		'unit_configuration'=>'far fa-building'
 
     ],
 
