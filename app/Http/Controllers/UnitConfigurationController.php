@@ -27,8 +27,7 @@ class UnitConfigurationController extends Controller
             // Return the view with the project, units, and addlink variables
             return view('projects.units.index', compact('project', 'units', 'addlink', 'pageTitle'));
         } catch (\Exception $e) {
-            // Log the error and redirect back with an error message
-            Log::error('Error fetching units for project ID ' . $request->projectID . ': ' . $e->getMessage());
+
             return redirect()->back()->with('error', 'An error occurred while fetching the unit configurations.');
         }
     }
@@ -42,8 +41,7 @@ class UnitConfigurationController extends Controller
             $pageTitle = "Add Units for " . $project->name ?? ''; // Set the page title
             return view('projects.units.create', compact('project', 'pageTitle'));
         } catch (\Exception $e) {
-            // Log the error and redirect back with an error message
-            Log::error('Error displaying unit creation form for project ID ' . $request->projectID . ': ' . $e->getMessage());
+
             return redirect()->back()->with('error', 'An error occurred while opening the unit creation form.');
         }
     }
@@ -79,18 +77,20 @@ class UnitConfigurationController extends Controller
 
             return redirect()->route('unit_configurations.index',  ["projectID"=>$project->id])->with('success', 'Unit created successfully.');
         } catch (\Exception $e) {
-            Log::error('Error creating unit for project ID ' . $project->id . ': ' . $e->getMessage());
+
             return redirect()->back()->with('error', 'An error occurred while creating the unit.');
         }
     }
 
     public function edit(Project $project, Unit $unit)
+
     {
         try {
-            return view('projects.units.edit', compact('project', 'unit'));
+            $pageTitle = "Edit Units for " . $project->name ?? ''; // Set the page title
+            return view('projects.units.create', compact('project', 'unit','pageTitle'));
         } catch (\Exception $e) {
 
-            Log::error('Error displaying unit edit form for project ID ' . $project->id . ' and unit ID ' . $unit->id . ': ' . $e->getMessage());
+
             return redirect()->back()->with('error', 'An error occurred while opening the unit edit form.');
         }
     }
@@ -108,6 +108,7 @@ class UnitConfigurationController extends Controller
             'floor_plan' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:1024', // 1MB
         ]);
 
+
         try {
             // Handle file upload
             $filePath = $unit->floor_plan; // Preserve existing file path
@@ -121,15 +122,18 @@ class UnitConfigurationController extends Controller
                 $filePath = $file->store('unit-configurations', 'public');
             }
 
+
             // Update the unit configuration
             $unit->update(array_merge(
                 $request->except('floor_plan'),
                 ['floor_plan' => $filePath]
             ));
 
-            return redirect()->route('unit_configurations.index', $project->id)->with('success', 'Unit updated successfully.');
+
+
+            return redirect()->route('unit_configurations.index', ['projectID' => $project->id])->with('success', 'Unit updated successfully.');
         } catch (\Exception $e) {
-            Log::error('Error updating unit ID ' . $unit->id . ' for project ID ' . $project->id . ': ' . $e->getMessage());
+
             return redirect()->back()->with('error', 'An error occurred while updating the unit.');
         }
     }
@@ -151,7 +155,7 @@ class UnitConfigurationController extends Controller
 
             return redirect()->back()->with('success', 'Unit deleted successfully.');
         } catch (\Exception $e) {
-            Log::error('Error deleting unit ID ' . $unit->id . ' for project ID ' . $project->id . ': ' . $e->getMessage());
+
             return redirect()->back()->with('error', 'An error occurred while deleting the unit.');
         }
     }

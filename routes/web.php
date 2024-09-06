@@ -178,6 +178,16 @@ Route::resource('projects', ProjectController::class);
 Route::resource('unit_configurations', UnitConfigurationController::class);
 Route::delete('/projects/{project}/units/{unit}', [UnitConfigurationController::class, 'destroy'])->name('unit_configurations.destroy');
 
+
+// Show the form to edit an existing elevation picture (GET request)
+Route::get('unit_configurations/{project}/{unit}/edit', [UnitConfigurationController::class, 'edit'])->name('unit_configurations.edit');
+
+// Handle the form submission to update an elevation picture (PUT request)
+Route::put('unit_configurations/{project}/{unit}', [UnitConfigurationController::class, 'update'])->name('unit_configurations.update');
+
+
+
+
 Route::resource('elevation_pictures', ElevationPictureController::class);
 
 Route::delete('/projects/{project}/elevation_pictures/edit/{picture}', [ElevationPictureController::class, 'destroy'])->name('elevation_pictures.destroy');
