@@ -58,68 +58,62 @@ class ProjectController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validator = $request->validate([
-            'name' => 'required|string|max:255|unique:projects,name',
-            'company_id' => 'required|exists:companies,id',
-            'site_address' => 'required|string|max:255',
-            'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
-            'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
-            'latitude' => 'nullable',
-            'longitude' => 'nullable',
-            'website_url' => 'nullable|url',
-            'project_type' => 'required',
-            'map_collections' => 'nullable',
-            'map_badges' => 'nullable',
-            'amenities' => 'nullable',
-            'no_of_acres' => 'nullable',
-            'no_of_towers' => 'nullable',
-            'no_of_units' => 'nullable',
-            'price_per_sft' => 'nullable',
-            'about_project' => 'nullable',
+{
+    $validator = $request->validate([
+        'name' => 'required|string|max:255|unique:projects,name',
+        'company_id' => 'required|exists:companies,id',
+        'site_address' => 'required|string|max:255',
+        'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
+        'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
+        'latitude' => 'nullable',
+        'longitude' => 'nullable',
+        'website_url' => 'nullable|url',
+        'project_type' => 'required',
+        'map_collections' => 'nullable|array', // Expecting an array
+        'map_badges' => 'nullable|array',     // Expecting an array
+        'amenities' => 'nullable|array',      // Expecting an array
+        'no_of_acres' => 'nullable',
+        'no_of_towers' => 'nullable',
+        'no_of_units' => 'nullable',
+        'price_per_sft' => 'nullable',
+        'about_project' => 'nullable',
 
-            // Add validation rules for other fields
-        ]);
-                    // If 'map_badges' is not present or is empty, set it to null
-    if (!$request->has('map_badges') || empty($request->input('map_badges'))) {
-        $validator['map_badges'] = null;
-    }
-            // If 'map_badges' is not present or is empty, set it to null
-    if (!$request->has('map_collections') || empty($request->input('map_collections'))) {
-        $validator['map_collections'] = null;
-    }
-            // If 'map_badges' is not present or is empty, set it to null
-    if (!$request->has('amenities') || empty($request->input('amenities'))) {
-        $validator['amenities'] = null;
-    }
+        // Add validation rules for other fields
+    ]);
 
-        try {
-            $data = $validator;
+    try {
+        $data = $validator;
 
-            // Handle the file upload for 'logo'
-            if ($request->hasFile('logo')) {
-                $logoPath = $request->file('logo')->store('projects', 'public');
-                $data['logo'] = $logoPath;
-            }
-
+        // Handle the file upload for 'logo'
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('projects', 'public');
+            $data['logo'] = $logoPath;
+        }
 
         // Handle the file upload for 'master_plan_layout'
         if ($request->hasFile('master_plan_layout')) {
-            $logoPath = $request->file('master_plan_layout')->store('projects', 'public');
-            $data['master_plan_layout'] = $logoPath;
+            $masterPlanPath = $request->file('master_plan_layout')->store('projects', 'public');
+            $data['master_plan_layout'] = $masterPlanPath;
         }
 
-            // Create a new project with the specified columns
-            Project::create($data);
+        // Convert checkbox values to JSON format
+        $data['map_collections'] = $request->has('map_collections') ? json_encode($request->input('map_collections')) : null;
+        $data['map_badges'] = $request->has('map_badges') ? json_encode($request->input('map_badges')) : null;
+        $data['amenities'] = $request->has('amenities') ? json_encode($request->input('amenities')) : null;
 
-            // Return a view with a success message
-            return redirect()->route('projects.index')->with('success', 'Project created successfully.');
-        } catch (Exception $e) {
+        // Create a new project with the specified columns
+        Project::create($data);
 
+        // Return a view with a success message
+        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
+    } catch (Exception $e) {
+        // Log the error message if needed
+        // Log::error('Failed to create project: ' . $e->getMessage());
 
-            return redirect()->route('projects.index')->with('error', 'Failed to create project.');
-        }
+        return redirect()->route('projects.index')->with('error', 'Failed to create project.');
     }
+}
+
 
     public function edit(Project $project): View
     {
@@ -128,80 +122,83 @@ class ProjectController extends Controller
     }
 
     public function update(Request $request, Project $project)
-    {
+{
+    // Validate the request
+    $validator = $request->validate([
+        'name' => [
+            'required',
+            'string',
+            'max:255',
+            // Ensure name is unique except for the current project
+            Rule::unique('projects', 'name')->ignore($project->id),
+        ],
+        'company_id' => 'required|exists:companies,id',
+        'site_address' => 'required|string|max:255',
+        'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
+        'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
+        'latitude' => 'nullable',
+        'longitude' => 'nullable',
+        'website_url' => 'nullable|url',
+        'project_type' => 'required',
+        'map_collections' => 'nullable|array', // Expecting an array
+        'map_badges' => 'nullable|array',     // Expecting an array
+        'amenities' => 'nullable|array',      // Expecting an array
+        'no_of_acres' => 'nullable',
+        'no_of_towers' => 'nullable',
+        'no_of_units' => 'nullable',
+        'price_per_sft' => 'nullable',
+        'about_project' => 'nullable',
 
+        // Add validation rules for other fields
+    ]);
 
-        $validator = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                // Ensure name is unique except for the current project
-                Rule::unique('projects', 'name')->ignore($project->id),
-            ],
-            'company_id' => 'required|exists:companies,id',
-            'site_address' => 'required|string|max:255',
-            'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
-            'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
-            'latitude' => 'nullable',
-            'longitude' => 'nullable',
-            'website_url' => 'nullable|url',
-            'project_type' => 'required',
-            'map_collections' => 'nullable',
-            'map_badges' => 'nullable',
-            'amenities' => 'nullable',
-            'no_of_acres' => 'nullable',
-            'no_of_towers' => 'nullable',
-            'no_of_units' => 'nullable',
-            'price_per_sft' => 'nullable',
-            'about_project' => 'nullable',
+    try {
+        // Prepare data for update
+        $data = $validator;
 
-            // Add validation rules for other fields
-        ]);
+        // Convert checkbox values to JSON format if present, otherwise set to null
+        $data['map_collections'] = $request->has('map_collections') ? json_encode($request->input('map_collections')) : null;
+        $data['map_badges'] = $request->has('map_badges') ? json_encode($request->input('map_badges')) : null;
+        $data['amenities'] = $request->has('amenities') ? json_encode($request->input('amenities')) : null;
 
-            // If 'map_badges' is not present or is empty, set it to null
-    if (!$request->has('map_badges') || empty($request->input('map_badges'))) {
-        $validator['map_badges'] = null;
-    }
-            // If 'map_badges' is not present or is empty, set it to null
-    if (!$request->has('map_collections') || empty($request->input('map_collections'))) {
-        $validator['map_collections'] = null;
-    }
-            // If 'map_badges' is not present or is empty, set it to null
-    if (!$request->has('amenities') || empty($request->input('amenities'))) {
-        $validator['amenities'] = null;
-    }
-
-
-
-        try {
-            $data = $validator;
-
-            if ($request->hasFile('logo')) {
-                // Delete old logo if it exists
-                if ($project->logo) {
-                    Storage::disk('public')->delete($project->logo);
-                }
-
-                $logoPath = $request->file('logo')->store('projects', 'public');
-                $data['logo'] = $logoPath;
-            }
-            if ($request->hasFile('master_plan_layout')) {
-                // Delete old logo if it exists
-                if ($project->master_plan_layout) {
-                    Storage::disk('public')->delete($project->master_plan_layout);
-                }
-
-                $logoPath = $request->file('master_plan_layout')->store('projects', 'public');
-                $data['master_plan_layout'] = $logoPath;
+        // Handle the file upload for 'logo'
+        if ($request->hasFile('logo')) {
+            // Delete old logo if it exists
+            if ($project->logo) {
+                Storage::disk('public')->delete($project->logo);
             }
 
-            $project->update($data);
-            return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
-        } catch (Exception $e) {
-            return redirect()->route('projects.index')->with('error', 'Failed to update project.');
+            // Store the new logo
+            $logoPath = $request->file('logo')->store('projects', 'public');
+            $data['logo'] = $logoPath;
         }
+
+        // Handle the file upload for 'master_plan_layout'
+        if ($request->hasFile('master_plan_layout')) {
+            // Delete old master plan layout if it exists
+            if ($project->master_plan_layout) {
+                Storage::disk('public')->delete($project->master_plan_layout);
+            }
+
+            // Store the new master plan layout
+            $masterPlanPath = $request->file('master_plan_layout')->store('projects', 'public');
+            $data['master_plan_layout'] = $masterPlanPath;
+        }
+
+        // Update the project with the validated data
+        $project->update($data);
+
+        // Redirect with success message
+        return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
+    } catch (Exception $e) {
+        // Optionally log the error message
+        // Log::error('Failed to update project: ' . $e->getMessage());
+
+        // Redirect with error message
+        return redirect()->route('projects.index')->with('error', 'Failed to update project.');
     }
+}
+
 
     public function destroy(Project $project)
     {

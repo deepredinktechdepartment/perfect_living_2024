@@ -23,6 +23,7 @@ class Project extends Model
         'enquiry_form',
         'map_collections',
         'map_badges',
+        'amenities',
         'project_type',
         'no_of_acres',
         'no_of_towers',
