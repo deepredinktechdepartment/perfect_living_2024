@@ -21,6 +21,14 @@ class Themeoptions extends Model
         'footer_logo',
         'favicon',
         'copyright',
+        'facebook_url',
+        'twitter_url',
+        'linkedin_url',
+        'instagram_url',
+        'pinterest_url',
+        'youtube_url',
+        'whatsapp_url',
+        'short_aboutus',
 
     ];
 
