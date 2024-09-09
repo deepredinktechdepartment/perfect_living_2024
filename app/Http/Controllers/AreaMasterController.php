@@ -113,4 +113,12 @@ class AreaMasterController extends Controller
             return back()->withErrors(['error' => 'Failed to delete area master.']);
         }
     }
+    
+    public function getAreasByCity(Request $request)
+    {
+        $cityId = $request->input('city_id');
+        $areas = AreaMaster::where('city_id', $cityId)->get();
+
+        return response()->json(['areas' => $areas]);
+    }
 }

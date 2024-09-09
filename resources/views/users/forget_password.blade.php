@@ -21,19 +21,9 @@ $theme_options_data = Themeoptions::withoutGlobalScope(new ActiveOrgaization)->g
                         <!-- Right Side Form -->
                         <div class="col-lg-6 col-md-6 my-auto p-0">
                             <div class="p-5">
-                                <div class="d-flex justify-content-between align-items-center mb-5">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
                                     <h2>{{ $pageTitle ?? 'Reset Your Password' }}</h2>
-                                    <div class="social d-flex align-items-center gap-2">
-                                        <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Futtamblastech" target="_blanc" class="text-white bg-black rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
-                                            <i class="fa-brands fa-twitter"></i>
-                                        </a>
-                                        <a href="https://www.facebook.com/uttamblastech/" target="_blanc" class="text-white bg-black rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
-                                            <i class="fa-brands fa-facebook-f"></i>
-                                        </a>
-                                        <a href="https://www.linkedin.com/company/uttam-blastech-pvt-ltd" target="_blanc" class="text-white bg-black rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
-                                            <i class="fa-brands fa-linkedin-in"></i>
-                                        </a>
-                                    </div>
+                         
                                 </div>
 
                                 <form method="POST" action="{{ route('forget.password.post') }}">
@@ -50,13 +40,13 @@ $theme_options_data = Themeoptions::withoutGlobalScope(new ActiveOrgaization)->g
                                         @enderror
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary btn-block">
+                                    <button type="submit" class="btn btn-login w-100">
                                         {{ __('Send') }}
                                     </button>
                                 </form>
 
                                 <div class="justify-content-center mb-4 mt-4">
-                                    <a href="{{ route('login') }}" class="forgot-password-link">Sign In</a>
+                                    <a href="{{ route('login') }}" class="forgot-password-link"><u>Sign In</u></a>
                                 </div>
                             </div>
                         </div>

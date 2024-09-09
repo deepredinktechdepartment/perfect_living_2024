@@ -205,3 +205,8 @@ Route::resource('project_amenities', ProjectAmenityController::class);
 
 
 });
+
+
+//Websites URL
+Route::get('comapny/project/{slug?}', [ProjectController::class, 'comapnySingleProject'])->name('comapny.singleProject');
+Route::get('/areas/by-city', [AreaMasterController::class, 'getAreasByCity'])->name('areas.byCity');

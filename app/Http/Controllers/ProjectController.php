@@ -7,13 +7,15 @@ use App\Models\Company;
 use App\Models\Collection;
 use App\Models\Badge;
 use App\Models\Amenity;
+use App\Models\CityMaster;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Exception;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProjectController extends Controller
 {
@@ -21,6 +23,7 @@ class ProjectController extends Controller
     protected $collections;
     protected $badges;
     protected $aminities;
+    protected $cities;
 
     public function __construct()
     {
@@ -29,11 +32,13 @@ class ProjectController extends Controller
             $this->collections = Collection::all();
             $this->badges = Badge::all();
             $this->aminities = Amenity::all();
+            $this->cities = CityMaster::all();
         } catch (Exception $e) {
             $this->companies = collect(); // Fallback to an empty collection
             $this->collections = collect(); // Fallback to an empty collection
             $this->badges = collect(); // Fallback to an empty collection
             $this->aminities = collect(); // Fallback to an empty collection
+            $this->cities = collect(); // Fallback to an empty collection
         }
     }
 
@@ -54,7 +59,7 @@ class ProjectController extends Controller
     {
 
         $pageTitle = 'Create Project'; // Set the page title
-        return view('projects.create', ['pageTitle'=>$pageTitle,'companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges,'amenities' => $this->aminities]);
+        return view('projects.create', ['pageTitle'=>$pageTitle,'companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges,'amenities' => $this->aminities,'cities' => $this->cities]);
     }
 
     public function store(Request $request)
@@ -77,6 +82,8 @@ class ProjectController extends Controller
         'no_of_units' => 'nullable',
         'price_per_sft' => 'nullable',
         'about_project' => 'nullable',
+        'city_id' => 'required',
+        'area_id' => 'required',
 
         // Add validation rules for other fields
     ]);
@@ -100,6 +107,9 @@ class ProjectController extends Controller
         $data['map_collections'] = $request->has('map_collections') ? json_encode($request->input('map_collections')) : null;
         $data['map_badges'] = $request->has('map_badges') ? json_encode($request->input('map_badges')) : null;
         $data['amenities'] = $request->has('amenities') ? json_encode($request->input('amenities')) : null;
+        $data['slug'] = Str::slug($request->name)??null;
+        $data['city'] = $request->city_id??0;
+        $data['area'] = $request->area_id??0;
 
         // Create a new project with the specified columns
         Project::create($data);
@@ -118,7 +128,7 @@ class ProjectController extends Controller
     public function edit(Project $project): View
     {
         $pageTitle = 'Edit Project'; // Set the page title
-        return view('projects.create', ['pageTitle'=>$pageTitle,'project' => $project, 'companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges,'amenities' => $this->aminities]);
+        return view('projects.create', ['pageTitle'=>$pageTitle,'project' => $project, 'companies' => $this->companies,'collections' => $this->collections,'badges' => $this->badges,'amenities' => $this->aminities,'cities' => $this->cities]);
     }
 
     public function update(Request $request, Project $project)
@@ -148,6 +158,8 @@ class ProjectController extends Controller
         'no_of_units' => 'nullable',
         'price_per_sft' => 'nullable',
         'about_project' => 'nullable',
+        'city_id' => 'required',
+        'area_id' => 'required',
 
         // Add validation rules for other fields
     ]);
@@ -160,6 +172,8 @@ class ProjectController extends Controller
         $data['map_collections'] = $request->has('map_collections') ? json_encode($request->input('map_collections')) : null;
         $data['map_badges'] = $request->has('map_badges') ? json_encode($request->input('map_badges')) : null;
         $data['amenities'] = $request->has('amenities') ? json_encode($request->input('amenities')) : null;
+        $data['city'] = $request->city_id??0;
+        $data['area'] = $request->area_id??0;
 
         // Handle the file upload for 'logo'
         if ($request->hasFile('logo')) {
@@ -223,4 +237,73 @@ class ProjectController extends Controller
             return redirect()->route('projects.index')->with('error', 'Failed to delete project.');
         }
     }
+    
+    
+public function comapnySingleProject(Request $request, $slug)
+{
+    try {
+        
+        
+  
+        // Attempt to retrieve the project by slug
+        $project = Project::with('company', 'citites', 'areas','elevationPictures','unitConfigurations')->where('slug', $slug)->firstOrFail();
+        
+   $groupedConfigurations = [];
+
+if ($project && $project->unitConfigurations->isNotEmpty()) {
+// Group the unit configurations by 'beds'
+$groupedConfigurations = $project->unitConfigurations->groupBy('beds');
+// Sort the grouped configurations by the bed count in ascending order
+$groupedConfigurations = $groupedConfigurations->sortKeys();
+}
+
+
+      
+
+
+        // Set the page title dynamically if needed
+        $pageTitle = $project->name ?? 'Project';
+        
+        // Decode JSON fields, handling potential errors and defaulting to empty arrays if invalid or not set
+    $mapCollections = $this->decodeJsonIfExists($project->map_collections);
+    $mapBadges = $this->decodeJsonIfExists($project->map_badges);
+
+    // Fetch actual badge data based on the decoded JSON IDs
+    $badges = Badge::whereIn('id', $mapBadges)->get();
+    
+    
+     // Fetch actual collection data based on IDs in $mapCollections
+    $highlightImages = Collection::whereIn('id', $mapCollections)->get();
+
+        return view('frontend.projects.show', compact('project', 'pageTitle','highlightImages','badges','groupedConfigurations'));
+
+    } catch (ModelNotFoundException $e) {
+        // Optionally, return a custom 404 page or redirect with an error message
+        return redirect()->back()->with('error', 'Project not found.');
+    } catch (\Exception $e) {
+     
+        // Optionally, return a generic error page or message
+        return redirect()->back()->with('error', 'An unexpected error occurred. Please try again later.');
+    }
+}
+private function decodeJsonIfExists($jsonString)
+{
+    if ($jsonString && $this->isValidJson($jsonString)) {
+        return json_decode($jsonString, true);
+    }
+
+    return [];
+}
+
+/**
+ * Check if a given string is valid JSON.
+ *
+ * @param  string  $string
+ * @return bool
+ */
+private function isValidJson($string)
+{
+    json_decode($string);
+    return json_last_error() === JSON_ERROR_NONE;
+}
 }

@@ -61,9 +61,41 @@
 
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="site_address" class="form-label">Site Address</label>
+                            <label for="site_address" class="form-label">Site Address (Google Map)</label>
                             <input id="site_address" type="text" class="form-control @error('site_address') is-invalid @enderror" name="site_address" value="{{ old('site_address', $project->site_address ?? '') }}">
                             @error('site_address')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    
+                    <!-- City dropdown -->
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="city_id" class="form-label">City</label>
+                            <select id="city_id" class="form-control @error('city_id') is-invalid @enderror" name="city_id" required>
+                                <option value="">Select City</option>
+                                @foreach($cities as $city)
+                                    <option value="{{ $city->id }}" {{ (old('city_id', $project->city ?? '') == $city->id) ? 'selected' : '' }}>
+                                        {{ $city->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('city_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <!-- Area dropdown -->
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="area_id" class="form-label">Area</label>
+                            <select id="area_id" class="form-control @error('area_id') is-invalid @enderror" name="area_id" required>
+                                <option value="">Select Area</option>
+                                <!-- Areas will be loaded dynamically via AJAX -->
+                            </select>
+                            @error('area_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -322,6 +354,12 @@ $(document).ready(function() {
             longitude: {
                 number: true
             },
+            city_id: {
+                required: true,
+            },
+            area_id: {
+                required: true,
+            },
             acres: {
                 number: true,
                 min: 0
@@ -401,6 +439,47 @@ $(document).ready(function() {
         }
     });
 });
+
+
+$(document).ready(function() {
+    // Function to load areas based on the selected city
+    function loadAreas(cityId) {
+        $.ajax({
+            url: '{{ route('areas.byCity') }}',
+            type: 'GET',
+            data: { city_id: cityId },
+            success: function(data) {
+                $('#area_id').empty();
+                $('#area_id').append('<option value="">Select Area</option>');
+                $.each(data.areas, function(index, area) {
+                    $('#area_id').append('<option value="' + area.id + '">' + area.name + '</option>');
+                });
+
+                // Prefill area if it exists
+                @if(isset($project->area))
+                    $('#area_id').val({{ $project->area }}).change();
+                @endif
+            }
+        });
+    }
+
+    // When city dropdown changes
+    $('#city_id').change(function() {
+        var cityId = $(this).val();
+        if (cityId) {
+            loadAreas(cityId);
+        } else {
+            $('#area_id').empty();
+            $('#area_id').append('<option value="">Select Area</option>');
+        }
+    });
+
+    // Initialize area dropdown based on the selected city
+    @if(isset($project->city))
+        loadAreas({{ $project->city }});
+    @endif
+});
+
 </script>
 @endpush
 @endsection

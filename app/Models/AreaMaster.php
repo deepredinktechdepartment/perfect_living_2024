@@ -17,4 +17,12 @@ class AreaMaster extends Model
     {
         return $this->belongsTo(CityMaster::class);
     }
+
+
+
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
