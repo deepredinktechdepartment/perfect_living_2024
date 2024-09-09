@@ -1,3 +1,77 @@
+
+<section class="footer-before-sec">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="footer-col">
+          <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
+          <ul class="footer-links-list">
+            <li><a href="">Lorem Ipsum is</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+            <li><a href="">Lorem Ipsum</a></li>
+            <li><a href="">Lorem Ipsum isissf35dg</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+            <li><a href="">Lorem Ipsum is</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+            <li><a href="">Lorem Ipsum</a></li>
+            <li><a href="">Lorem Ipsum is</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="footer-col">
+          <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
+          <ul class="footer-links-list">
+            <li><a href="">Lorem Ipsum is</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+            <li><a href="">Lorem Ipsum</a></li>
+            <li><a href="">Lorem Ipsum isissf35dg</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+            <li><a href="">Lorem Ipsum is</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+            <li><a href="">Lorem Ipsum</a></li>
+            <li><a href="">Lorem Ipsum is</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="footer-col">
+          <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
+          <ul class="footer-links-list">
+            <li><a href="">Lorem Ipsum is</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+            <li><a href="">Lorem Ipsum</a></li>
+            <li><a href="">Lorem Ipsum isissf35dg</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+            <li><a href="">Lorem Ipsum is</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+            <li><a href="">Lorem Ipsum</a></li>
+            <li><a href="">Lorem Ipsum is</a></li>
+            <li><a href="">Lorem Ipsum isissf</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="footer-logo mt-sm-0 mt-3">
+          <img src="{{URL::to('assets/website/img/logo.png')}}" alt="The Perfect Living" class="img-fluid mb-sm-4 mb-2">
+          <p class="text-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+        </div>
+        <div class="social-links mt-4 pt-2">
+          <ul>
+            <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer class="pb-2">
   <div class="container">
     <div class="row">
@@ -6,8 +80,8 @@
       </div>
       <div class="col-sm-9">
         <ul class="inline-links">
-          <li><a href="#" class="text-white">Terms of Use</a></li>
-          <li><a href="#" class="text-white">Advertise with us</a></li>
+          <li><a href="{{ URL('terms-of-use') }}" class="text-white">Terms of Use</a></li>
+          <li><a href="{{ URL('advertise-with-us') }}" class="text-white">Advertise with us</a></li>
         </ul>
       </div>
     </div>

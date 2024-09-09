@@ -24,7 +24,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-3 col-8">
-        <a href="{{ url('/') }}"><img src="{{ URL::to('assets/website/img/logo.png') }}" alt="The Perfect Living" class="img-fluid"></a>
+        <a href="#"><img src="{{ URL::to('assets/website/img/logo.png') }}" alt="The Perfect Living" class="img-fluid"></a>
       </div>
       <div class="col-sm-9 col-4">
       </div>

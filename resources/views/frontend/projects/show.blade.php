@@ -11,7 +11,7 @@
         @if(isset($project->company) && !empty($project->company->name))
             <h5>By <span class="text-decoration-underline">{{ $project->company->name }}</span></h5>
         @endif
-       
+
 
           @if(isset($project->areas) && !empty($project->areas->name))
           <h6>{{$project->areas->name??''}} - {{$project->citites->name??''}}</h6>
@@ -34,10 +34,10 @@
             </ul>
           </div>
         </div>
-        
+
       </div>
-     
-      
+
+
       <div class="col-sm-8 order-sm-0 order-1">
     <div class="project-overview-images-wrapper mb-sm-0 mb-3">
         @if(isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty())
@@ -72,23 +72,23 @@
 
   </div>
 
-  
-  
+
+
   <!-- resources/views/your-view.blade.php -->
 
 
 <div class="row mt-4 align-items-center">
     @if($badges->isNotEmpty())
         @foreach($badges as $badge)
-            <x-feature-item 
-                :imageSrc="URL::to(env('APP_STORAGE').'icons/'.$badge->icon)" 
-                :altText="$badge->name??''" 
-                :title="$badge->name??''" 
-                :imageWidth="'40'" 
+            <x-feature-item
+                :imageSrc="URL::to(env('APP_STORAGE').'icons/'.$badge->icon)"
+                :altText="$badge->name??''"
+                :title="$badge->name??''"
+                :imageWidth="'40'"
             />
         @endforeach
     @else
-    
+
     @endif
 </div>
 
@@ -143,10 +143,10 @@
                     <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $tabId }}" role="tabpanel" aria-labelledby="{{ $tabId }}-tab">
                         <div class="floorplans-slider row mt-4">
                             @foreach($configurations as $configuration)
-                                <x-floor-plan-item 
-                                    :image_path="URL::to(env('APP_STORAGE') . '/' . $configuration['floor_plan'])" 
-                                    :description="$withoutformattedKey . ' BHK ' . $configuration['facing']" 
-                                    :size="$configuration['unit_size']" 
+                                <x-floor-plan-item
+                                    :image_path="URL::to(env('APP_STORAGE') . '/' . $configuration['floor_plan'])"
+                                    :description="$withoutformattedKey . ' BHK ' . $configuration['facing']"
+                                    :size="$configuration['unit_size']"
                                 />
                             @endforeach
                         </div>
@@ -169,7 +169,7 @@
       <div class="col-sm-8 pe-sm-5 border-end">
         <div class="mb-sm-0 mb-5">
           <h2 class="mb-sm-5 mb-3">About {{$project->name??''}}</h2>
-     
+
      {!!$project->about_project??''!!}
         </div>
       </div>
@@ -189,103 +189,31 @@
         </div>
       </div>
     </div>
-    
-    
+
+
     <!-- resources/views/your-view.blade.php -->
 
 <div class="highlights-images-slider row mt-4">
     @if($highlightImages->isNotEmpty())
         @foreach($highlightImages as $image)
-            <x-projectcollections 
-                :imageSrc="URL::to(env('APP_STORAGE').''.$image->background_image)" 
-                :altText="$image->name" 
-                :description="$image->name" 
-                :link="$image->target_link" 
+            <x-projectcollections
+                :imageSrc="URL::to(env('APP_STORAGE').''.$image->background_image)"
+                :altText="$image->name"
+                :description="$image->name"
+                :link="$image->target_link"
             />
         @endforeach
     @else
-      
+
     @endif
 </div>
 
 
 
-    
-    
+
+
   </div>
 </section>
 
-<section class="footer-before-sec">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="footer-col">
-          <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
-          <ul class="footer-links-list">
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum isissf35dg</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="footer-col">
-          <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
-          <ul class="footer-links-list">
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum isissf35dg</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="footer-col">
-          <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
-          <ul class="footer-links-list">
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum isissf35dg</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="footer-logo mt-sm-0 mt-3">
-          <img src="{{URL::to('assets/website/img/logo.png')}}" alt="The Perfect Living" class="img-fluid mb-sm-4 mb-2">
-          <p class="text-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-        </div>
-        <div class="social-links mt-4 pt-2">
-          <ul>
-            <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-   
+
 @endsection

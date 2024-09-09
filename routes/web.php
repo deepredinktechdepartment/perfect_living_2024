@@ -22,6 +22,7 @@ use App\Http\Controllers\AmenityController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\ElevationPictureController;
+use App\Http\Controllers\PagesController;
 
 
 /*
@@ -210,3 +211,10 @@ Route::resource('project_amenities', ProjectAmenityController::class);
 //Websites URL
 Route::get('comapny/project/{slug?}', [ProjectController::class, 'comapnySingleProject'])->name('comapny.singleProject');
 Route::get('/areas/by-city', [AreaMasterController::class, 'getAreasByCity'])->name('areas.byCity');
+
+// routes/web.php
+
+
+
+Route::get('/terms-of-use', [PagesController::class, 'termsOfUse'])->name('terms-of-use');
+Route::get('/advertise-with-us', [PagesController::class, 'advertiseWithUs'])->name('advertise-with-us');
