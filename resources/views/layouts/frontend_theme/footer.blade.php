@@ -56,15 +56,16 @@
       <div class="col-sm-3">
         <div class="footer-logo mt-sm-0 mt-3">
           <img src="{{URL::to('assets/website/img/logo.png')}}" alt="The Perfect Living" class="img-fluid mb-sm-4 mb-2">
-          <p class="text-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+          <p class="text-white">{{ $short_aboutus??'' }}</p>
         </div>
         <div class="social-links mt-4 pt-2">
           <ul>
-            <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
+
+            <li><a href="{{ $linkedin_url??'#' }}"><i class="fa-brands fa-linkedin-in"></i></a></li>
+            <li><a href="{{ $facebook_url??'#' }}"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="{{ $twitter_url??'#' }}"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="{{ $instagram_url??'#' }}"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="{{ $whatsapp_url??'#' }}"><i class="fa-brands fa-whatsapp"></i></a></li>
           </ul>
         </div>
       </div>
@@ -76,7 +77,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
-        <p class="text-white">Perfect Living, 2024</p>
+        <p class="text-white">{{  $copyright??''  }}</p>
       </div>
       <div class="col-sm-9">
         <ul class="inline-links">
