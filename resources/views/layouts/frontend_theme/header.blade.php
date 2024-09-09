@@ -24,7 +24,7 @@
   
   <header class="py-3 px-sm-0 px-2" id="main-header">
     <div class="container">
-      <div class="row">
+      <div class="row align-items-lg-center">
         <div class="col-sm-3 col-5">
         <a href="{{ url('/') }}"><img src="{{ URL::to('assets/website/img/logo.png') }}" alt="The Perfect Living" class="img-fluid"></a>
         </div>
@@ -41,6 +41,9 @@
             <!-- Menu items collapse on mobile -->
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav m-auto">
+              <li class="nav-item">
+                  <a class="nav-link text-white" href="#"><i class="fa-solid fa-house"></i></a>
+                </li>
                 <!-- Mega Menu -->
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-white" href="#" id="megaMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
