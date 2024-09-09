@@ -37,6 +37,14 @@ class ThemeoptionsController extends Controller
                 'header_logo' => 'required|mimes:png,jpg,jpeg,svg,html',
                 'favicon' => 'sometimes|nullable|mimes:png,jpg,jpeg,svg,html',
                 'footer_logo' => 'sometimes|nullable|mimes:png,jpg,jpeg,svg,html',
+                'facebook_url' => 'nullable|url',
+                'twitter_url' => 'nullable|url',
+                'linkedin_url' => 'nullable|url',
+                'instagram_url' => 'nullable|url',
+                'pinterest_url' => 'nullable|url',
+                'youtube_url' => 'nullable|url',
+                'whatsapp_url' => 'nullable|url',
+                'short_aboutus' => 'nullable|string|max:255',
             ]);
 
             $header_filename = $this->handleFileUpload($request, 'header_logo');
@@ -49,6 +57,14 @@ class ThemeoptionsController extends Controller
                 'footer_logo' => $footer_filename,
                 'copyright' => $request->input('copyright', ''),
                 'org_id' => auth()->user()->org_id ?? 0,
+                'facebook_url' => $request->input('facebook_url') ?? null,
+                'twitter_url' => $request->input('twitter_url') ?? null,
+                'linkedin_url' => $request->input('linkedin_url') ?? null,
+                'instagram_url' => $request->input('instagram_url') ?? null,
+                'pinterest_url' => $request->input('pinterest_url') ?? null,
+                'youtube_url' => $request->input('youtube_url') ?? null,
+                'whatsapp_url' => $request->input('whatsapp_url') ?? null,
+                'short_aboutus' => $request->input('short_aboutus') ?? null
             ]);
 
             return redirect('theme_options')->with('success', "Success! Details are added successfully");
@@ -85,6 +101,14 @@ class ThemeoptionsController extends Controller
                 'header_logo' => 'mimes:png,jpg,jpeg',
                 'favicon' => 'sometimes|nullable|mimes:png,jpg,jpeg',
                 'footer_logo' => 'sometimes|nullable|mimes:png,jpg,jpeg',
+                'facebook_url' => 'nullable|url',
+                'twitter_url' => 'nullable|url',
+                'linkedin_url' => 'nullable|url',
+                'instagram_url' => 'nullable|url',
+                'pinterest_url' => 'nullable|url',
+                'youtube_url' => 'nullable|url',
+                'whatsapp_url' => 'nullable|url',
+                'short_aboutus' => 'nullable|string|max:255'
             ]);
 
             // Check if ID is encrypted
@@ -109,6 +133,14 @@ class ThemeoptionsController extends Controller
                 'favicon' => $favicon_filename ?? null,
                 'footer_logo' => $footer_filename ?? null,
                 'copyright' => $request->input('copyright', '') ?? null,
+                'facebook_url' => $request->input('facebook_url') ?? null,
+                'twitter_url' => $request->input('twitter_url') ?? null,
+                'linkedin_url' => $request->input('linkedin_url') ?? null,
+                'instagram_url' => $request->input('instagram_url') ?? null,
+                'pinterest_url' => $request->input('pinterest_url') ?? null,
+                'youtube_url' => $request->input('youtube_url') ?? null,
+                'whatsapp_url' => $request->input('whatsapp_url') ?? null,
+                'short_aboutus' => $request->input('short_aboutus') ?? null,
             ]);
 
             return redirect('theme_options')->with('success', "Success! Details are updated successfully");
