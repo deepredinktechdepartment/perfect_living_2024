@@ -12,7 +12,7 @@
             <h2>Menu Shortcode</h2>
 
             <div class="example-message">
-                <p>To show a menu, use the following code:</p>
+                <p>To show a menu, use the following code: (to use double curly braces with the @menu directive)</p>
                 <p><strong>&lt;!-- &#64;menu('header') --&gt;</strong></p>
                 <p><strong>&lt;!-- &#64;menu('footer') --&gt;</strong></p>
                 <p><strong>&lt;!-- &#64;menu('sidebar') --&gt;</strong></p>
