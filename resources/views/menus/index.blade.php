@@ -10,16 +10,16 @@
 
 
             <h2>Menu Shortcode</h2>
-            <p>The <code>&#123;&#123; &#64;menu('position') &#125;&#125;</code> directive allows you to display menus based on their position.</p>
+            <p>The <code> &#64;menu('position','ul class','li class','a class','single link (true/false)') &#125;&#125;</code> directive allows you to display menus based on their position.</p>
 
             <h3>Usage</h3>
             <p>To use the menu shortcode, include it in your Blade templates as follows:</p>
 
             <pre><code>
     &lt;!-- Example of using the menu shortcode --&gt;
-    &lt;!-- &#123;&#123; &#64;menu('header') &#125;&#125; --&gt;
-    &lt;!-- &#123;&#123; &#64;menu('footer') &#125;&#125; --&gt;
-    &lt;!-- &#123;&#123; &#64;menu('sidebar') &#125;&#125; --&gt;
+    &lt;!--  &#64;menu('header') &#125;&#125; --&gt;
+    &lt;!--  &#64;menu('footer') &#125;&#125; --&gt;
+    &lt;!--  &#64;menu('sidebar') &#125;&#125; --&gt;
             </code></pre>
 
 
