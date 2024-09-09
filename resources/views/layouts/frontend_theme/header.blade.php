@@ -26,7 +26,15 @@
     <div class="container">
       <div class="row align-items-lg-center">
         <div class="col-sm-3 col-5">
-        <a href="{{ url('/') }}"><img src="{{ URL::to('assets/website/img/logo.png') }}" alt="The Perfect Living" class="img-fluid"></a>
+        <a href="{{ url('/') }}">
+
+          @if(isset($header_logo) && File::exists($header_logo))
+          <img src=" {{ URL::to(asset($header_logo)) }}" class="img-fluid" alt="{{ env('APP_NAME') }}">
+      @else
+
+      @endif
+
+         </a>
         </div>
         <div class="col-sm-9 col-7">
           <nav class="navbar navbar-expand-lg navbar-light p-0 justify-content-lg-start justify-content-end">

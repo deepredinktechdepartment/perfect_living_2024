@@ -55,7 +55,10 @@
       </div>
       <div class="col-sm-3">
         <div class="footer-logo mt-sm-0 mt-3">
-          <img src="{{URL::to('assets/website/img/logo.png')}}" alt="The Perfect Living" class="img-fluid mb-sm-4 mb-2">
+
+          @if(isset($footer_logo) && File::exists($footer_logo))
+          <img src=" {{ URL::to(asset($footer_logo)) }}" class="img-fluid mb-sm-4 mb-2" alt="{{ env('APP_NAME') }}">
+      @endif
           <p class="text-white">{{ $short_aboutus??'' }}</p>
         </div>
         <div class="social-links mt-4 pt-2">
