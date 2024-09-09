@@ -62,6 +62,7 @@
                                   Setting
                               </a>
                               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item {{ Request::routeIs('menus.index') ? 'active' : '' }}" href="{{ route('menus.index') }}">Menus</a></li>
                                   <li><a class="dropdown-item {{ Request::routeIs('theme_options.index') ? 'active' : '' }}" href="{{ route('theme_options.index') }}">Theme Options</a></li>
 
                               </ul>

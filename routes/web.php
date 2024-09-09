@@ -23,6 +23,7 @@ use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\ElevationPictureController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\MenuController;
 
 
 /*
@@ -202,7 +203,10 @@ Route::put('elevation_pictures/{project}/{picture}', [ElevationPictureController
 // Project Amenities
 Route::resource('project_amenities', ProjectAmenityController::class);
 
-
+Route::resource('menus', MenuController::class)->except(['show']);
+Route::get('menus/{id}/edit', [MenuController::class, 'create'])->name('menus.edit');
+Route::post('menus', [MenuController::class, 'store'])->name('menus.store');
+Route::put('menus/{id}', [MenuController::class, 'update'])->name('menus.update');
 
 
 });

@@ -22,18 +22,7 @@
       <div class="col-sm-3">
         <div class="footer-col">
           <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
-          <ul class="footer-links-list">
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum isissf35dg</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-          </ul>
+            @menu('Top Locations in Hyderabad')
         </div>
       </div>
       <div class="col-sm-3">
