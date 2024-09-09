@@ -19,5 +19,6 @@
 <script src="{{ URL::to('assets/website/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
 <script src="{{ URL::to('assets/website/js/slick.min.js') }}"></script>
 <script src="{{ URL::to('assets/website/js/projects.js') }}"></script>
+<script src="{{ URL::to('assets/website/js/common.js') }}"></script>
 </body>
 </html>
