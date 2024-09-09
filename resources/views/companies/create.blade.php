@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row justify-content-left">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="card">
 
 
@@ -63,11 +63,21 @@
                         @enderror
                     </div>
 
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="about_builder" class="form-label">About The Builder</label>
+                            <textarea id="about_builder" class="form-control @error('about_builder') is-invalid @enderror" name="about_builder">{{ old('about_builder', $company->about_builder ?? '') }}</textarea>
+                            @error('about_builder')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
                     <div class="mt-4">
                         <button type="submit" class="btn btn-primary">
                             {{ isset($company) ? 'Update Company' : 'Create Company' }}
                         </button>
-                        <a href="{{ route('companies.index') }}" class="btn btn-gray">Cancel</a>
+
                     </div>
                 </form>
             </div>

@@ -30,7 +30,7 @@
           <div>
             <ul class="inline-links justify-content-sm-center">
               <li><a href="" class="text-black">12 Reviews</a></li>
-              <li><a href="" class="text-black">Write a review</a></li>
+              <li><a href="{{ route('review.create') }}" class="text-black">Write a review</a></li>
             </ul>
           </div>
         </div>
@@ -176,16 +176,8 @@
       <div class="col-sm-4 ps-sm-4">
         <div>
           <h2 class="mb-sm-5 mb-3">About The Builder</h2>
-          <ul class="custom-list">
-            <li>Founded: 1995</li>
-            <li>Completed 25 projects</li>
-          </ul>
-          <p class="mb-1"><b>Highlights</b></p>
-          <ul class="custom-list">
-            <li>Built first mixed use commercial property of Hyderabad</li>
-            <li>Built the first LEED Platinum certified residential proprety in Hyderabad</li>
-          </ul>
-          <p>Own this property? <a href="">Tell us the facts!in</a></p>
+
+          {!! $project->company->about_builder??'' !!}
         </div>
       </div>
     </div>

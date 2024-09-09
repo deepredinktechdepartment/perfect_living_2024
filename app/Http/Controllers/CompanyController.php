@@ -47,6 +47,7 @@ class CompanyController extends Controller
                 'name' => 'required|unique:companies,name',
                 'address1' => 'required',
                 'address2' => 'nullable',
+                'about_builder' => 'nullable',
                 'phone' => 'required',
                 'website_url' => 'required|url',
             ]);
@@ -102,6 +103,7 @@ class CompanyController extends Controller
                 ],
                 'address1' => 'required',
                 'address2' => 'nullable',
+                'about_builder' => 'nullable',
                 'phone' => 'required',
                 'website_url' => 'required|url',
             ]);

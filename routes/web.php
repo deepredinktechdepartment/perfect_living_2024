@@ -24,6 +24,7 @@ use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\ElevationPictureController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ReviewController;
 
 
 /*
@@ -208,7 +209,10 @@ Route::get('menus/{id}/edit', [MenuController::class, 'create'])->name('menus.ed
 Route::post('menus', [MenuController::class, 'store'])->name('menus.store');
 Route::put('menus/{id}', [MenuController::class, 'update'])->name('menus.update');
 
-
+Route::get('/admin/reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
+Route::patch('/admin/reviews/{review}/approve', [ReviewController::class, 'approve'])->name('admin.reviews.approve');
+Route::post('/reviews/toggle-approval/{id?}', [ReviewController::class, 'toggleApproval'])->name('reviews.toggleApproval');
+Route::delete('/reviews/{id}', [ReviewApprovalController::class, 'destroy'])->name('reviews.delete');
 });
 
 
@@ -225,3 +229,5 @@ Route::get('/advertise-with-us', [PagesController::class, 'advertiseWithUs'])->n
 Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');
 Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact-us');
 Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::get('/review/form', [ReviewController::class, 'create'])->name('review.create');
