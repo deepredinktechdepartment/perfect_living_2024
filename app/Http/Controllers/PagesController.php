@@ -19,4 +19,9 @@ class PagesController extends Controller
         $pageTitle='Advertise with Us';
         return view('frontend.pages.under_construction',compact('pageTitle'));
     }
+    public function homepage()
+    {
+        $pageTitle='Home page';
+        return view('frontend.pages.under_construction',compact('pageTitle'));
+    }
 }
