@@ -106,8 +106,12 @@ section{
 .slick-arrow.slick-prev {
 	left: -50px
 }
-
-@media(max-width: 425px){
+@media(max-width: 1024px){
+	.slick-arrow.slick-prev {
+	  left: -10px
+	}
+}
+@media(max-width: 768px){
 	.slick-arrow.slick-prev {
 	left: 0
 	}
@@ -125,8 +129,12 @@ section{
 .slick-arrow.slick-next {
 	right: -50px
 }
-
-@media(max-width: 425px){
+@media(max-width: 1024px){
+	.slick-arrow.slick-next {
+	  right: -5px
+	}
+}
+@media(max-width: 768px){
 .slick-arrow.slick-next {
 	right: 0
 	}
@@ -251,7 +259,7 @@ header{
     border-top-left-radius: 0px;
   }
 }
-@media(max-width: 575px){
+@media(max-width: 768px){
   .navbar .nav-link{
     text-align: right;
     padding: 5px 0px !important;
@@ -314,7 +322,6 @@ footer p{
   border-radius: 50px;
   cursor: pointer;
   transition: .3s all ease-in-out;
-
 }
 .social-links ul li:hover a{
   background: #ddd;
@@ -343,7 +350,21 @@ footer p{
   width: 1px;
   background: #fff;
 }
-
+@media(max-width: 1024px){
+  .social-links ul{
+    gap: 5px;
+  }
+  .social-links ul li a{
+    font-size: 15px;
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .social-links ul {
+      gap: 2px;
+  }
+}
 @media(max-width: 480px){
   .footer-before-sec{
     padding: 40px 10px 20px 10px;

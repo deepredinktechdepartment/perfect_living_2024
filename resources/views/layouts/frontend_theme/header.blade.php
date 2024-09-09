@@ -29,7 +29,7 @@
         <a href="{{ url('/') }}"><img src="{{ URL::to('assets/website/img/logo.png') }}" alt="The Perfect Living" class="img-fluid"></a>
         </div>
         <div class="col-sm-9 col-7">
-          <nav class="navbar navbar-expand-lg navbar-light p-0 justify-content-sm-start justify-content-end">
+          <nav class="navbar navbar-expand-lg navbar-light p-0 justify-content-lg-start justify-content-end">
             <!-- Toggle button for small screens -->
             <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon">
