@@ -55,13 +55,13 @@
                 <!-- Mega Menu -->
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-white" href="#" id="megaMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Mega Menu
+                    Projects
                   </a>
                   <div class="dropdown-menu mega-menu p-sm-4 p-3" aria-labelledby="megaMenu">
                     <div class="container p-0">
                       <div class="row">
                         <div class="col-lg-3 col-sm-6">
-                          <h5>Category 1</h5>
+                          <h5>Hyderabad</h5>
                           <ul class="list-unstyled">
                             <li><a class="dropdown-item" href="#">Subcategory 1</a></li>
                             <li><a class="dropdown-item" href="#">Subcategory 2</a></li>
@@ -69,7 +69,7 @@
                           </ul>
                         </div>
                         <div class="col-lg-3 col-sm-6">
-                          <h5>Category 2</h5>
+                          <h5>Bengaluru</h5>
                           <ul class="list-unstyled">
                             <li><a class="dropdown-item" href="#">Subcategory 1</a></li>
                             <li><a class="dropdown-item" href="#">Subcategory 2</a></li>
@@ -77,7 +77,7 @@
                           </ul>
                         </div>
                         <div class="col-lg-3 col-sm-6">
-                          <h5>Category 3</h5>
+                          <h5>Chennai</h5>
                           <ul class="list-unstyled">
                             <li><a class="dropdown-item" href="#">Subcategory 1</a></li>
                             <li><a class="dropdown-item" href="#">Subcategory 2</a></li>
@@ -85,7 +85,7 @@
                           </ul>
                         </div>
                         <div class="col-lg-3 col-sm-6">
-                          <h5>Category 4</h5>
+                          <h5>Vizag</h5>
                           <ul class="list-unstyled">
                             <li><a class="dropdown-item" href="#">Subcategory 1</a></li>
                             <li><a class="dropdown-item" href="#">Subcategory 2</a></li>
@@ -98,13 +98,10 @@
                 </li>
                 <!-- Additional Links -->
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="#">Link 1</a>
+                  <a class="nav-link text-white" href="#">About Us</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="#">Link 2</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="#">Link 3</a>
+                  <a class="nav-link text-white" href="#">Contact Us</a>
                 </li>
               </ul>
             </div>
