@@ -218,3 +218,4 @@ Route::get('/areas/by-city', [AreaMasterController::class, 'getAreasByCity'])->n
 
 Route::get('/terms-of-use', [PagesController::class, 'termsOfUse'])->name('terms-of-use');
 Route::get('/advertise-with-us', [PagesController::class, 'advertiseWithUs'])->name('advertise-with-us');
+Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
