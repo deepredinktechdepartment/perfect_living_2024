@@ -21,7 +21,7 @@
 
 <body>
 
-  
+
   <header class="py-3 px-sm-0 px-2" id="main-header">
     <div class="container">
       <div class="row align-items-lg-center">
@@ -37,12 +37,12 @@
                 <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23FFFFFF' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e" alt="Menu">
               </span>
             </button>
-  
+
             <!-- Menu items collapse on mobile -->
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav m-auto">
               <li class="nav-item">
-                  <a class="nav-link text-white" href="#"><i class="fa-solid fa-house"></i></a>
+                  <a class="nav-link text-white" href="{{ URL('') }}"><i class="fa-solid fa-house"></i></a>
                 </li>
                 <!-- Mega Menu -->
                 <li class="nav-item dropdown">
