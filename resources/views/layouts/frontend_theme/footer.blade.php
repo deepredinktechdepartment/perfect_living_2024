@@ -2,44 +2,23 @@
 <section class="footer-before-sec">
   <div class="container">
     <div class="row">
+
       <div class="col-sm-3">
         <div class="footer-col">
           <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
-          <ul class="footer-links-list">
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum isissf35dg</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-          </ul>
+
+
+<!-- To display a full list -->
+@menu('Top Locations in Hyderabad', 'footer-links-list', 'menu-item', 'menu-link', 'false')
         </div>
       </div>
       <div class="col-sm-3">
         <div class="footer-col">
-          <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
-            @menu('Top Locations in Hyderabad')
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="footer-col">
-          <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
-          <ul class="footer-links-list">
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum isissf35dg</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-            <li><a href="">Lorem Ipsum</a></li>
-            <li><a href="">Lorem Ipsum is</a></li>
-            <li><a href="">Lorem Ipsum isissf</a></li>
-          </ul>
+          <p class="list-heading text-white mt-3">Top Locations in Bengaluru</p>
+
+<!-- To display a full list -->
+@menu('Top Locations in Bengaluru', 'footer-links-list', 'menu-item', 'menu-link', 'false')
+
         </div>
       </div>
       <div class="col-sm-3">

@@ -6,19 +6,25 @@
         <h1 class="my-4">Menus</h1>
 
 
-        <div class="container">
+
 
 
             <h2>Menu Shortcode</h2>
+            <p>The <code>&#123;&#123; &#64;menu('position') &#125;&#125;</code> directive allows you to display menus based on their position.</p>
 
-            <div class="example-message">
-                <p>To show a menu, use the following code: (to use double curly braces with the @menu directive)</p>
-                <p><strong>&lt;!-- &#64;menu('header') --&gt;</strong></p>
-                <p><strong>&lt;!-- &#64;menu('footer') --&gt;</strong></p>
-                <p><strong>&lt;!-- &#64;menu('sidebar') --&gt;</strong></p>
-            </div>
+            <h3>Usage</h3>
+            <p>To use the menu shortcode, include it in your Blade templates as follows:</p>
 
-        </div>
+            <pre><code>
+    &lt;!-- Example of using the menu shortcode --&gt;
+    &lt;!-- &#123;&#123; &#64;menu('header') &#125;&#125; --&gt;
+    &lt;!-- &#123;&#123; &#64;menu('footer') &#125;&#125; --&gt;
+    &lt;!-- &#123;&#123; &#64;menu('sidebar') &#125;&#125; --&gt;
+            </code></pre>
+
+
+
+
 
         @if ($menus->isEmpty())
         <div class="alert alert-info">

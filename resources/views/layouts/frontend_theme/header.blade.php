@@ -61,47 +61,33 @@
                     <div class="container p-0">
                       <div class="row">
                         <div class="col-lg-3 col-sm-6">
-                          <h5>Hyderabad</h5>
-                          <ul class="list-unstyled">
-                            <li><a class="dropdown-item" href="#">Subcategory 1</a></li>
-                            <li><a class="dropdown-item" href="#">Subcategory 2</a></li>
-                            <li><a class="dropdown-item" href="#">Subcategory 3</a></li>
-                          </ul>
+<h5>Hyderabad</h5>
+<!-- To display a full list -->
+@menu('Top Locations in Hyderabad', 'list-unstyled', false, 'dropdown-item', 'false')
+</div>
+<div class="col-lg-3 col-sm-6">
+<h5>Bengaluru</h5>
+
+
+  <!-- To display a full list -->
+@menu('Top Locations in Bengaluru', 'list-unstyled', false, 'dropdown-item', 'false')
+
+
+
                         </div>
-                        <div class="col-lg-3 col-sm-6">
-                          <h5>Bengaluru</h5>
-                          <ul class="list-unstyled">
-                            <li><a class="dropdown-item" href="#">Subcategory 1</a></li>
-                            <li><a class="dropdown-item" href="#">Subcategory 2</a></li>
-                            <li><a class="dropdown-item" href="#">Subcategory 3</a></li>
-                          </ul>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                          <h5>Chennai</h5>
-                          <ul class="list-unstyled">
-                            <li><a class="dropdown-item" href="#">Subcategory 1</a></li>
-                            <li><a class="dropdown-item" href="#">Subcategory 2</a></li>
-                            <li><a class="dropdown-item" href="#">Subcategory 3</a></li>
-                          </ul>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                          <h5>Vizag</h5>
-                          <ul class="list-unstyled">
-                            <li><a class="dropdown-item" href="#">Subcategory 1</a></li>
-                            <li><a class="dropdown-item" href="#">Subcategory 2</a></li>
-                            <li><a class="dropdown-item" href="#">Subcategory 3</a></li>
-                          </ul>
-                        </div>
+
                       </div>
                     </div>
                   </div>
                 </li>
                 <!-- Additional Links -->
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="#">About Us</a>
+               <!-- Example with some empty values -->
+@menu('About us', "", "", 'nav-link text-white', 'true')
+
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="#">Contact Us</a>
+                  @menu('Contact Us', "", "", 'nav-link text-white','true')
                 </li>
               </ul>
             </div>

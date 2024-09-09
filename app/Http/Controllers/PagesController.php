@@ -24,4 +24,14 @@ class PagesController extends Controller
         $pageTitle='Home page';
         return view('frontend.pages.under_construction',compact('pageTitle'));
     }
+    public function aboutUs()
+    {
+        $pageTitle='About Us';
+        return view('frontend.pages.under_construction',compact('pageTitle'));
+    }
+    public function contactUs()
+    {
+        $pageTitle='Contact Us';
+        return view('frontend.pages.under_construction',compact('pageTitle'));
+    }
 }
