@@ -5,7 +5,7 @@
 @section('mainContent')
 <section class="reviews-section">
     <div class="container">
-        <h2 class="text-left mb-4">Reviews for this Project</h2>
+        <h1 class="text-left mb-4">Reviews for this Project</h1>
 
         <!-- Approved Reviews -->
         @if($approvedReviews->count())
