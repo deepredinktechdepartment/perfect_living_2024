@@ -1,3 +1,9 @@
+// Fancy Box Js
+Fancybox.bind('[data-fancybox="floorplan_images"]', {
+    // Your custom options for a specific gallery
+
+});
+
 // slick slidesr Js
 
 $('.highlights-images-slider').slick({
