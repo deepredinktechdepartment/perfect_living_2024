@@ -6,14 +6,14 @@
         <div class="row">
             <div class="col-sm-6 order-sm-0 order-2">
                 <h1 class="card-title">{{ $pageTitle ?? '' }}</h1>
-                <div class="card shadow">
+                <div class="card shadow mt-4">
                     <div class="card-body">
 
                         <form id="reviewForm" action="{{ route('reviews.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="star_rating" class="form-label">Star Rating</label>
-                                <select name="star_rating" id="star_rating" class="form-select" required>
+                                <select name="star_rating" id="star_rating" class="form-select" >
                                     <option value="">Select Rating</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -77,18 +77,6 @@ $(document).ready(function() {
             $(element).addClass("is-valid").removeClass("is-invalid");
         }
     });
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    @if (session('success'))
-        toastr.success('{{ session('success') }}');
-    @endif
-
-    @if (session('error'))
-        toastr.error('{{ session('error') }}');
-    @endif
 });
 </script>
 @endpush

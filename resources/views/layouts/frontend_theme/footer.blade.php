@@ -59,15 +59,3 @@
     </div>
   </div>
 </footer>
-
-<!-- Scripts -->
- <script src="{{ URL::to('assets/website/js/jquery.min.js')}}"></script>
-<script src="{{ URL::to('assets/website/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
-<script src="{{ URL::to('assets/website/js/slick.min.js') }}"></script>
-<script src="{{ URL::to('assets/website/js/projects.js') }}"></script>
-<script src="{{ URL::to('assets/website/js/common.js') }}"></script>
-<!-- Toastr JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-</body>
-</html>

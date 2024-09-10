@@ -265,7 +265,7 @@ $groupedConfigurations = $groupedConfigurations->sortKeys();
         // Set the page title dynamically if needed
         $pageTitle = $project->name ?? 'Project';
 
-        $reviews = Review::with('project')->where('project_id', $project->id??0)->get();
+        $reviews = Review::with('project')->where('approval_status',1)->where('project_id', $project->id??0)->get();
 
 
 

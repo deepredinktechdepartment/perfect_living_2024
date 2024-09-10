@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Exception;
 use Illuminate\Support\Facades\Crypt;
-
+use App\Models\Project;
 
 class ReviewController extends Controller
 {
@@ -26,25 +26,28 @@ public function create(Request $request)
             try {
                 // Attempt to decrypt the provided projectId
                 $decryptedProjectId = Crypt::decryptString($request->projectId);
-                
-                
+
+
                 // Check if the decrypted projectId is valid
                 if ($this->isProjectIdValid($decryptedProjectId)) {
                     $projectId = $decryptedProjectId;
                 }
             } catch (Exception $e) {
                 // Log the decryption failure
-               
+
             }
         }
 
         // Return the view for the form with the projectId
-        $pageTitle="Review";
+        $project = Project::find($projectId);
+        $projectName=$project->name??'';
+
+        $pageTitle="Review for ".$projectName;
         return view('frontend.reviews.form', compact('projectId','pageTitle'));
 
     } catch (Exception $e) {
         // Log unexpected errors
-       
+
 
         // Return an error message to the user
         return redirect()->back()->with('error', 'An unexpected error occurred while trying to load the form.');
@@ -89,7 +92,7 @@ protected function isProjectIdValid($projectId)
     {
         try {
             $reviews = Review::with('project')->get(); // Get all reviews, adjust query if necessary
-           
+
             $pageTitle = "Reviews";
             return view('reviews.index', compact('reviews', 'pageTitle'));
         } catch (Exception $e) {

@@ -1,30 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>The Perfect Living</title>
-  <link rel="icon" href="{{ URL::to('favicon.jpg') }}" type="image/x-icon">
-
-  <!-- Bootstrap CSS -->
-  <link href="{{ URL::to('assets/website/css/bootstrap.min.css') }}" rel="stylesheet" crossorigin="anonymous">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <!-- Slick Scrolling -->
-  <link rel="stylesheet" type="text/css" href="{{ URL::to('assets/website/css/slick.css') }}"/>
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="{{ URL::to('assets/website/css/style.css') }}">
-  <!-- Toastr CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-</head>
-
-<body>
-
-
   <header class="py-3 px-sm-0 px-2" id="main-header">
     <div class="container">
       <div class="row align-items-lg-center">
