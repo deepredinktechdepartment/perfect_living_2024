@@ -36,6 +36,15 @@
                 @endfor
                 {{-- <p>Average Rating: {{ $roundedRating }} / 5</p> --}}
             </div>
+@else
+
+<div class="star-rating text-sm-center text-start">
+    @for ($i = 5; $i >= 1; $i--)
+        <span class="star {{ $roundedRating >= $i ? 'filled' : '' }}" data-value="{{ $i }}">&#9733;</span>
+    @endfor
+    {{-- <p>Average Rating: {{ $roundedRating }} / 5</p> --}}
+</div>
+
             @endif
         <div>
             <ul class="inline-links justify-content-sm-center">
