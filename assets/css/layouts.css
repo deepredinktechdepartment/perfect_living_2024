@@ -1,12 +1,18 @@
 .header-container {
-    background: #000;
+    background: #063240;
     border-bottom: 1px solid #ddd;
     transition: .3s all ease-in-out;
     /* box-shadow: -1px 4px 20px 1px #f1f1f185; */
 }
-.fixed-top{
+
+.bg-peacockblue {
+    background-color: #063240;
+}
+
+.fixed-top {
     transition: .3s all ease-in-out;
 }
+
 header.header {
     /* display: flex; */
     justify-content: space-between;
