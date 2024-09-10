@@ -12,7 +12,7 @@
             <div class="approved-reviews row">
 
                 @foreach($approvedReviews as $review)
-                <div class="col-sm-3 mb-3">
+                <div class="col-sm-4 mb-3">
                     <div class="review-card card p-4 pb-2">
                         <div class="review-rating mb-2">
                             @for($i = 1; $i <= 5; $i++)
