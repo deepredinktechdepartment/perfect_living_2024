@@ -16,6 +16,7 @@ use Exception;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\Review;
 
 class ProjectController extends Controller
 {
@@ -237,17 +238,17 @@ class ProjectController extends Controller
             return redirect()->route('projects.index')->with('error', 'Failed to delete project.');
         }
     }
-    
-    
+
+
 public function comapnySingleProject(Request $request, $slug)
 {
     try {
-        
-        
-  
+
+
+
         // Attempt to retrieve the project by slug
         $project = Project::with('company', 'citites', 'areas','elevationPictures','unitConfigurations')->where('slug', $slug)->firstOrFail();
-        
+
    $groupedConfigurations = [];
 
 if ($project && $project->unitConfigurations->isNotEmpty()) {
@@ -258,30 +259,34 @@ $groupedConfigurations = $groupedConfigurations->sortKeys();
 }
 
 
-      
+
 
 
         // Set the page title dynamically if needed
         $pageTitle = $project->name ?? 'Project';
-        
+
+        $reviews = Review::with('project')->where('project_id', $project->id??0)->get();
+
+
+
         // Decode JSON fields, handling potential errors and defaulting to empty arrays if invalid or not set
     $mapCollections = $this->decodeJsonIfExists($project->map_collections);
     $mapBadges = $this->decodeJsonIfExists($project->map_badges);
 
     // Fetch actual badge data based on the decoded JSON IDs
     $badges = Badge::whereIn('id', $mapBadges)->get();
-    
-    
+
+
      // Fetch actual collection data based on IDs in $mapCollections
     $highlightImages = Collection::whereIn('id', $mapCollections)->get();
 
-        return view('frontend.projects.show', compact('project', 'pageTitle','highlightImages','badges','groupedConfigurations'));
+        return view('frontend.projects.show', compact('project', 'pageTitle','highlightImages','badges','groupedConfigurations','reviews'));
 
     } catch (ModelNotFoundException $e) {
         // Optionally, return a custom 404 page or redirect with an error message
         return redirect()->back()->with('error', 'Project not found.');
     } catch (\Exception $e) {
-     
+
         // Optionally, return a generic error page or message
         return redirect()->back()->with('error', 'An unexpected error occurred. Please try again later.');
     }

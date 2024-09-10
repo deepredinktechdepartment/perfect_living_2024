@@ -8,13 +8,55 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Exception;
+use Illuminate\Support\Facades\Crypt;
+
 
 class ReviewController extends Controller
 {
-    public function create()
-    {
-        return view('frontend.reviews.form');
+
+
+public function create(Request $request)
+{
+    try {
+        // Default projectId is 0
+        $projectId = 0;
+
+        // Check if projectId is provided in the request
+        if ($request->has('projectId')) {
+            try {
+                // Attempt to decrypt the provided projectId
+                $decryptedProjectId = Crypt::decryptString($request->projectId);
+                
+                
+                // Check if the decrypted projectId is valid
+                if ($this->isProjectIdValid($decryptedProjectId)) {
+                    $projectId = $decryptedProjectId;
+                }
+            } catch (Exception $e) {
+                // Log the decryption failure
+               
+            }
+        }
+
+        // Return the view for the form with the projectId
+        $pageTitle="Review";
+        return view('frontend.reviews.form', compact('projectId','pageTitle'));
+
+    } catch (Exception $e) {
+        // Log unexpected errors
+       
+
+        // Return an error message to the user
+        return redirect()->back()->with('error', 'An unexpected error occurred while trying to load the form.');
     }
+}
+
+protected function isProjectIdValid($projectId)
+{
+    // Assuming you have a method to check the validity of the projectId
+    // You can replace this with actual validation logic
+    return is_numeric($projectId) && $projectId > 0;
+}
 
     public function store(Request $request)
     {
@@ -25,15 +67,15 @@ class ReviewController extends Controller
             ]);
 
             Review::create([
-                'user_id' => Auth::id(),
-                'product_id' => $request->product_id ?? 1,
-                'star_rating' => $request->star_rating ?? 1,
+                'user_id' => Auth::id()??0,
+                'project_id' => $request->project_id ?? 0,
+                'star_rating' => $request->star_rating ?? 0,
                 'review' => $request->review ?? '',
                 'reviewed_on' => now(),
                 'ip_address' => $request->ip(),
             ]);
 
-            return redirect()->back()->with('success', 'Your review has been submitted and is pending approval.');
+            return redirect()->back()->with('success', 'Your review has been submitted.');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (QueryException $e) {
@@ -46,7 +88,8 @@ class ReviewController extends Controller
     public function index()
     {
         try {
-            $reviews = Review::get(); // Get all reviews, adjust query if necessary
+            $reviews = Review::with('project')->get(); // Get all reviews, adjust query if necessary
+           
             $pageTitle = "Reviews";
             return view('reviews.index', compact('reviews', 'pageTitle'));
         } catch (Exception $e) {
@@ -73,30 +116,55 @@ class ReviewController extends Controller
         }
     }
 
-    public function toggleApproval(Request $request, $id)
-    {
-        try {
-            $review = Review::findOrFail($id);
+   public function toggleApproval(Request $request, $id)
+{
+    try {
+        // Find the review by ID
+        $review = Review::findOrFail($id);
 
-            if ($request->has('approve')) {
-                $review->approval_status = true;
-                $message = 'Review approved successfully!';
-            } else {
-                $review->approval_status = false;
-                $message = 'Review disapproved successfully!';
-            }
-
-            $review->save();
-
-            return redirect()->back()->with('success', $message);
-        } catch (ModelNotFoundException $e) {
-            return redirect()->back()->with('error', 'Review not found.');
-        } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'There was an error updating the review.');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'An unexpected error occurred.');
+        // Update the approval status based on the request
+        if ($request->has('approve') && $request->approve == 1) {
+            $review->approval_status = 1;
+            $message = 'Review approved successfully!';
+        } else {
+            $review->approval_status = 0;
+            $message = 'Review disapproved successfully!';
         }
+
+        // Update who approved the review and when
+        $review->approved_by = Auth::id();
+        $review->approved_on = now();
+        $review->save();
+
+        // Return a JSON response with success message
+        return response()->json([
+            'success' => true,
+            'message' => $message
+        ]);
+
+    } catch (ModelNotFoundException $e) {
+        // Return a JSON response if the review is not found
+        return response()->json([
+            'success' => false,
+            'message' => 'Review not found.'
+        ], 404);
+
+    } catch (QueryException $e) {
+        // Return a JSON response if there is a query error
+        return response()->json([
+            'success' => false,
+            'message' => 'There was an error updating the review.'
+        ], 500);
+
+    } catch (Exception $e) {
+        // Return a JSON response for any other exceptions
+        return response()->json([
+            'success' => false,
+            'message' => 'An unexpected error occurred.'
+        ], 500);
     }
+}
+
 
     public function destroy($id)
     {
@@ -104,7 +172,7 @@ class ReviewController extends Controller
             $review = Review::findOrFail($id);
             $review->delete();
 
-            return redirect()->route('reviews.index')->with('success', 'Review deleted successfully!');
+            return redirect()->route('admin.reviews.index')->with('success', 'Review deleted successfully!');
         } catch (ModelNotFoundException $e) {
             return redirect()->route('reviews.index')->with('error', 'Review not found.');
         } catch (QueryException $e) {

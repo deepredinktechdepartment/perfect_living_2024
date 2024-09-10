@@ -1,20 +1,94 @@
-<form action="{{ route('reviews.store') }}" method="POST">
-    @csrf
-    <div class="form-group">
-        <label for="star_rating">Star Rating</label>
-        <select name="star_rating" id="star_rating" class="form-control">
-            <option value="1">1 Star</option>
-            <option value="2">2 Stars</option>
-            <option value="3">3 Stars</option>
-            <option value="4">4 Stars</option>
-            <option value="5">5 Stars</option>
-        </select>
-    </div>
+<!-- Example view file -->
+@extends('layouts.frontend_theme.main')
+@section('mainContent')
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 order-sm-0 order-2">
+                <h1 class="card-title">{{ $pageTitle ?? '' }}</h1>
+                <div class="card shadow">
+                    <div class="card-body">
 
-    <div class="form-group">
-        <label for="review">Review</label>
-        <textarea name="review" id="review" class="form-control" rows="5"></textarea>
-    </div>
+                        <form id="reviewForm" action="{{ route('reviews.store') }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="star_rating" class="form-label">Star Rating</label>
+                                <select name="star_rating" id="star_rating" class="form-select" required>
+                                    <option value="">Select Rating</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
 
-    <button type="submit" class="btn btn-primary">Submit Review</button>
-</form>
+                            <div class="mb-3">
+                                <label for="review" class="form-label">Review</label>
+                                <textarea name="review" id="review" class="form-control" rows="5" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                            <input type="hidden" name="project_id" value="{{$projectId ?? 0}}" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    $("#reviewForm").validate({
+        rules: {
+            star_rating: {
+                required: true,
+            },
+            review: {
+                required: true,
+                minlength: 10,
+                maxlength: 500
+            }
+        },
+        messages: {
+            star_rating: {
+                required: "Please select a star rating.",
+            },
+            review: {
+                required: "Please enter your review.",
+                minlength: "Your review must be at least 10 characters long.",
+                maxlength: "Your review must be less than 500 characters long."
+            }
+        },
+        errorClass: "is-invalid",
+        validClass: "is-valid",
+        errorElement: "div",
+        errorPlacement: function(error, element) {
+            error.addClass("invalid-feedback");
+            error.insertAfter(element);
+        },
+        highlight: function(element) {
+            $(element).addClass("is-invalid").removeClass("is-valid");
+        },
+        unhighlight: function(element) {
+            $(element).addClass("is-valid").removeClass("is-invalid");
+        }
+    });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    @if (session('success'))
+        toastr.success('{{ session('success') }}');
+    @endif
+
+    @if (session('error'))
+        toastr.error('{{ session('error') }}');
+    @endif
+});
+</script>
+@endpush

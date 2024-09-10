@@ -17,6 +17,9 @@
   <link rel="stylesheet" type="text/css" href="{{ URL::to('assets/website/css/slick.css') }}"/>
   <!-- Custom Styles -->
   <link rel="stylesheet" href="{{ URL::to('assets/website/css/style.css') }}">
+  <!-- Toastr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 
 <body>

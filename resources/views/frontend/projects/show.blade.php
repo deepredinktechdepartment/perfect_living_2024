@@ -27,12 +27,25 @@
             <span class="star" data-value="2">&#9733;</span>
             <span class="star" data-value="1">&#9733;</span>
         </div>
-          <div>
+        <div>
             <ul class="inline-links justify-content-sm-center">
-              <li><a href="" class="text-black">12 Reviews</a></li>
-              <li><a href="{{ route('review.create') }}" class="text-black">Write a review</a></li>
+                @if($reviews->count() > 0)
+                    <li>
+                        <a href="" class="text-black">
+                            {{ $reviews->count() }} {{ $reviews->count() === 1 ? 'Review' : 'Reviews' }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('review.create', ['projectId' => Crypt::encryptString($project->id)]) }}" class="text-black">Write a review</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('review.create', ['projectId' => Crypt::encryptString($project->id)]) }}" class="text-black">Write a review</a>
+                    </li>
+                @endif
             </ul>
-          </div>
+        </div>
+
         </div>
 
       </div>

@@ -11,7 +11,7 @@ class Review extends Model
 
     protected $fillable = [
         'user_id',
-        'product_id',
+        'project_id',
         'star_rating',
         'review',
         'reviewed_on',
@@ -27,9 +27,9 @@ class Review extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function product()
+    public function project()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Project::class);
     }
 
     public function approver()

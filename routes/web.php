@@ -212,7 +212,7 @@ Route::put('menus/{id}', [MenuController::class, 'update'])->name('menus.update'
 Route::get('/admin/reviews', [ReviewController::class, 'index'])->name('admin.reviews.index');
 Route::patch('/admin/reviews/{review}/approve', [ReviewController::class, 'approve'])->name('admin.reviews.approve');
 Route::post('/reviews/toggle-approval/{id?}', [ReviewController::class, 'toggleApproval'])->name('reviews.toggleApproval');
-Route::delete('/reviews/{id}', [ReviewApprovalController::class, 'destroy'])->name('reviews.delete');
+Route::delete('/reviews/{id}', [ReviewController::class, 'destroy'])->name('reviews.delete');
 });
 
 
