@@ -20,13 +20,23 @@
       </div>
       <div class="col-sm-4 order-sm-0 order-3">
         <div class="rating-display-wrapper text-sm-center">
-          <div class="star-rating text-sm-center text-start">
+          {{-- <div class="star-rating text-sm-center text-start">
             <span class="star" data-value="5">&#9733;</span>
             <span class="star" data-value="4">&#9733;</span>
             <span class="star" data-value="3">&#9733;</span>
             <span class="star" data-value="2">&#9733;</span>
             <span class="star" data-value="1">&#9733;</span>
-        </div>
+        </div> --}}
+
+        @if($reviews->count() > 0)
+              <!-- Display average rating -->
+              <div class="star-rating text-sm-center text-start">
+                @for ($i = 5; $i >= 1; $i--)
+                    <span class="star {{ $roundedRating >= $i ? 'filled' : '' }}" data-value="{{ $i }}">&#9733;</span>
+                @endfor
+                {{-- <p>Average Rating: {{ $roundedRating }} / 5</p> --}}
+            </div>
+            @endif
         <div>
             <ul class="inline-links justify-content-sm-center">
                 @if($reviews->count() > 0)

@@ -203,7 +203,6 @@ protected function isProjectIdValid($projectId)
         $approvedReviews = Review::where('project_id', $projectId)
                                  ->where('approval_status', true)
                                  ->orderBy('created_at', 'desc')
-                                 ->take(10)
                                  ->get();
 
 
@@ -215,7 +214,7 @@ protected function isProjectIdValid($projectId)
 
     } catch (Exception $e) {
         // Log the exception
-dd($e->getmessage());
+
 
         // Optionally, redirect to an error page or display an error message
 

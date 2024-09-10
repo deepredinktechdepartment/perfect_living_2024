@@ -267,7 +267,11 @@ $groupedConfigurations = $groupedConfigurations->sortKeys();
 
         $reviews = Review::with('project')->where('approval_status',1)->where('project_id', $project->id??0)->get();
 
+        // Calculate average rating
+        $averageRating = $reviews->avg('star_rating');
 
+        // Round the average rating to 1 decimal place
+        $roundedRating = round($averageRating);
 
         // Decode JSON fields, handling potential errors and defaulting to empty arrays if invalid or not set
     $mapCollections = $this->decodeJsonIfExists($project->map_collections);
@@ -280,7 +284,7 @@ $groupedConfigurations = $groupedConfigurations->sortKeys();
      // Fetch actual collection data based on IDs in $mapCollections
     $highlightImages = Collection::whereIn('id', $mapCollections)->get();
 
-        return view('frontend.projects.show', compact('project', 'pageTitle','highlightImages','badges','groupedConfigurations','reviews'));
+        return view('frontend.projects.show', compact('project', 'pageTitle','highlightImages','badges','groupedConfigurations','reviews','roundedRating'));
 
     } catch (ModelNotFoundException $e) {
         // Optionally, return a custom 404 page or redirect with an error message
@@ -312,43 +316,4 @@ private function isValidJson($string)
     return json_last_error() === JSON_ERROR_NONE;
 }
 
-public function showReviews(Request $request)
-{
-    try {
-        // Attempt to decrypt the provided projectId from the request
-        $decryptedProjectId = Crypt::decryptString($request->projectId);
-
-        // Check if the decrypted projectId is valid
-        if ($this->isProjectIdValid($decryptedProjectId)) {
-            $projectId = $decryptedProjectId;
-        } else {
-            throw new Exception('Invalid project ID.');
-        }
-
-        // Fetch approved reviews
-        $approvedReviews = Review::where('project_id', $projectId)
-                                 ->where('approval_status', true)
-                                 ->orderBy('created_at', 'desc')
-                                 ->take(10)
-                                 ->get();
-
-        // Fetch pending reviews
-        $pendingReviews = Review::where('project_id', $projectId)
-                                ->where('approval_status', false)
-                                ->orderBy('created_at', 'desc')
-                                ->take(10)
-                                ->get();
-
-        // Return the view with the reviews
-        return view('frontend.reviews.index', compact('approvedReviews', 'pendingReviews'));
-
-    } catch (Exception $e) {
-        // Log the exception
-
-
-        // Optionally, redirect to an error page or display an error message
-
-        return redirect()->back()->with('error', 'Unable to fetch reviews at the moment.');
-    }
-}
 }
