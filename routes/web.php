@@ -217,7 +217,7 @@ Route::delete('/reviews/{id}', [ReviewController::class, 'destroy'])->name('revi
 
 
 //Websites URL
-Route::get('comapny/project/{slug?}', [ProjectController::class, 'comapnySingleProject'])->name('comapny.singleProject');
+Route::get('company/project/{slug?}', [ProjectController::class, 'companySingleProject'])->name('company.singleProject');
 Route::get('/areas/by-city', [AreaMasterController::class, 'getAreasByCity'])->name('areas.byCity');
 
 // routes/web.php

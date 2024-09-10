@@ -240,7 +240,7 @@ class ProjectController extends Controller
     }
 
 
-public function comapnySingleProject(Request $request, $slug)
+public function companySingleProject(Request $request, $slug)
 {
     try {
 
