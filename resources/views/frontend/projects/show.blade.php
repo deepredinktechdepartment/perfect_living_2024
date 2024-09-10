@@ -31,7 +31,7 @@
             <ul class="inline-links justify-content-sm-center">
                 @if($reviews->count() > 0)
                     <li>
-                        <a href="" class="text-black">
+                        <a href="{{ route('reviews.show', ['projectId' => Crypt::encryptString($project->id)]) }}" class="text-black">
                             {{ $reviews->count() }} {{ $reviews->count() === 1 ? 'Review' : 'Reviews' }}
                         </a>
                     </li>

@@ -231,3 +231,4 @@ Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact-
 Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::get('/review/form', [ReviewController::class, 'create'])->name('review.create');
+Route::get('/showReviews/{projectId}', [ReviewController::class, 'showReviews'])->name('reviews.show');

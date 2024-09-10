@@ -184,4 +184,43 @@ protected function isProjectIdValid($projectId)
             return redirect()->route('reviews.index')->with('error', 'An unexpected error occurred.');
         }
     }
+
+
+    public function showReviews(Request $request)
+{
+    try {
+        // Attempt to decrypt the provided projectId from the request
+        $decryptedProjectId = Crypt::decryptString($request->projectId);
+
+        // Check if the decrypted projectId is valid
+        if ($this->isProjectIdValid($decryptedProjectId)) {
+            $projectId = $decryptedProjectId;
+        } else {
+            throw new Exception('Invalid project ID.');
+        }
+
+        // Fetch approved reviews
+        $approvedReviews = Review::where('project_id', $projectId)
+                                 ->where('approval_status', true)
+                                 ->orderBy('created_at', 'desc')
+                                 ->take(10)
+                                 ->get();
+
+
+
+
+
+        // Return the view with the reviews
+        return view('frontend.reviews.index', compact('approvedReviews'));
+
+    } catch (Exception $e) {
+        // Log the exception
+dd($e->getmessage());
+
+        // Optionally, redirect to an error page or display an error message
+
+        return redirect()->back()->with('error', 'Unable to fetch reviews at the moment.');
+    }
+}
+
 }
