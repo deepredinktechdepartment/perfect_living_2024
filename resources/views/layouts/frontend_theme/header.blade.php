@@ -25,7 +25,7 @@
 
             <!-- Menu items collapse on mobile -->
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav m-auto">
+              <ul class="navbar-nav ms-auto">
               <li class="nav-item">
                   <a class="nav-link text-white" href="{{ URL('') }}"><i class="fa-solid fa-house"></i></a>
                 </li>
@@ -37,22 +37,16 @@
                   <div class="dropdown-menu mega-menu p-sm-4 p-3" aria-labelledby="megaMenu">
                     <div class="container p-0">
                       <div class="row">
-                        <div class="col-lg-3 col-sm-6">
-<h5>Hyderabad</h5>
-<!-- To display a full list -->
-@menu('Top Locations in Hyderabad', 'list-unstyled', false, 'dropdown-item', 'false')
-</div>
-<div class="col-lg-3 col-sm-6">
-<h5>Bengaluru</h5>
-
-
-  <!-- To display a full list -->
-@menu('Top Locations in Bengaluru', 'list-unstyled', false, 'dropdown-item', 'false')
-
-
-
+                        <div class="col-sm-6 mb-4">
+                          <h5>Hyderabad</h5>
+                          <!-- To display a full list -->
+                          @menu('Top Locations in Hyderabad', 'list-unstyled', false, 'dropdown-item', 'false')
+                          </div>
+                          <div class="col-sm-6 mb-4">
+                          <h5>Bengaluru</h5>
+                            <!-- To display a full list -->
+                          @menu('Top Locations in Bengaluru', 'list-unstyled', false, 'dropdown-item', 'false')
                         </div>
-
                       </div>
                     </div>
                   </div>

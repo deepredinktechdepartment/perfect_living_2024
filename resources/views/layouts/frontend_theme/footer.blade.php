@@ -2,25 +2,27 @@
 <section class="footer-before-sec">
   <div class="container">
     <div class="row">
-
-      <div class="col-sm-3">
-        <div class="footer-col">
-          <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
-
-
-<!-- To display a full list -->
-@menu('Top Locations in Hyderabad', 'footer-links-list', 'menu-item', 'menu-link', 'false')
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="footer-col">
+              <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
+              <!-- To display a full list -->
+              @menu('Top Locations in Hyderabad', 'footer-links-list', 'menu-item', 'menu-link', 'false')
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="footer-col">
+              <p class="list-heading text-white mt-3">Top Locations in Bengaluru</p>
+              <!-- To display a full list -->
+              @menu('Top Locations in Bengaluru', 'footer-links-list', 'menu-item', 'menu-link', 'false')
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-sm-3">
-        <div class="footer-col">
-          <p class="list-heading text-white mt-3">Top Locations in Bengaluru</p>
 
-<!-- To display a full list -->
-@menu('Top Locations in Bengaluru', 'footer-links-list', 'menu-item', 'menu-link', 'false')
-
-        </div>
-      </div>
+      
+      
       <div class="col-sm-3">
         <div class="footer-logo mt-sm-0 mt-3">
 
