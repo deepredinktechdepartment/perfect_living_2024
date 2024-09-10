@@ -1,5 +1,6 @@
 <!-- Example view file -->
 @extends('layouts.frontend_theme.main')
+
 @section('mainContent')
 <section>
     <div class="container">
@@ -13,7 +14,7 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="star_rating" class="form-label">Star Rating</label>
-                                <select name="star_rating" id="star_rating" class="form-select" >
+                                <select name="star_rating" id="star_rating" class="form-select">
                                     <option value="">Select Rating</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
