@@ -18,6 +18,8 @@
                                 <i class="fa{{ $i <= $review->star_rating ? 's' : 'r' }} fa-star"></i>
                             @endfor
                         </div>
+
+
                         <p class="review-text">{{ $review->review }}</p>
                         <p class="review-date">{{ $review->created_at->format('M d, Y') }}</p>
                     </div>
