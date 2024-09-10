@@ -20,7 +20,7 @@ h1 {
     font-optical-sizing: auto;
     font-weight: medium;
     font-style: normal;
-    color: #000;
+    color: #063240;
     font-size: 36px;
 }
 h2{
@@ -41,7 +41,7 @@ h5 {
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;
-    color: #000;
+    color: #063240;
 }
 
 h5 {
@@ -53,19 +53,21 @@ h6 {
     font-optical-sizing: auto;
     font-weight: medium;
     font-style: normal;
-    color: #000;
+    color: #063240;
     font-size: 18px;
 }
 
 a {
-    color: #000;
+    color: #063240;
 }
 
 a:hover,
 a:focus {
-    color: #000;
+    color: #063240;
 }
-
+.text-blue{
+  color: #063240;
+}
 .text-black {
     color: #000;
 }
@@ -254,7 +256,7 @@ section {
 /* Header CSS Starts */
 
 header {
-    background: #000;
+    background: #063240;
 }
 
 .navbar .nav-link {
@@ -326,12 +328,12 @@ header {
 /* Footer Css Starts */
 
 .footer-before-sec {
-    background: #000;
+    background: #063240;
     padding: 30px 0px;
 }
 
 footer {
-    background: #000;
+    background: #063240;
 }
 
 footer p {
