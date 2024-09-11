@@ -79,7 +79,7 @@
             @endphp
 
             @if(File::exists($filePath))
-                <img src="{{ URL::to($filePath) }}" alt="" class="img-fluid">
+                <img src="{{ URL::to($filePath) }}" alt="" class="img-fluid h-100">
             @else
                 <!-- Show empty if file does not exist -->
                 <div class="img-placeholder"></div>
