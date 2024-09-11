@@ -6,7 +6,7 @@
     <div class="floorplans-images-wrapper">
         <div class="floorplans-image">
         <img src="{{ $image_path }}" alt="{{ $description }}" class="img-fluid">
-        <p class="mb-0 zoom-text">Click to Zoom</p>  
+        <p class="mb-0 zoom-text">Click to Zoom &nbsp; <i class="fa-solid fa-magnifying-glass-plus"></i></p>  
     </div>
         <div class="floorplans-info-text">
         <h6 class="mb-0">{{ $description }}</h6>
