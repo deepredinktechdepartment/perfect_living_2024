@@ -17,6 +17,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Review;
+use Illuminate\Support\Facades\URL; // Add this line
 
 class ProjectController extends Controller
 {
@@ -334,6 +335,28 @@ public function toggleApproval(Request $request, Project $project)
             'message' => 'Failed to update approval status. Please try again later.'
         ], 500);
     }
+}
+
+// app/Http/Controllers/ProjectController.php
+
+public function filter(Request $request)
+{
+
+    $companyId = $request->input('company_id');
+
+    $projects = Project::with('company')
+        ->when($companyId, function($query, $companyId) {
+            return $query->where('company_id', $companyId);
+        })
+        ->get();
+
+    $projects->map(function($project) {
+        $project->company_name = $project->company->name ?? '';
+        $project->preview_url = URL::to('company/project/'.$project->slug);
+        return $project;
+    });
+
+    return response()->json(['projects' => $projects]);
 }
 
 

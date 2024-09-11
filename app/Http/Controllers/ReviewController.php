@@ -88,17 +88,32 @@ protected function isProjectIdValid($projectId)
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $reviews = Review::with('project')->get(); // Get all reviews, adjust query if necessary
+            // Get the list of projects for the dropdown
+            $projects = Project::orderBy('name', 'asc')->get();
 
-            $pageTitle = "Reviews";
-            return view('reviews.index', compact('reviews', 'pageTitle'));
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred while fetching reviews.');
+            // Get the reviews, filter by project if a project_id is selected
+            $reviews = Review::with('project')
+                             ->when($request->project_id, function ($query) use ($request) {
+                                 return $query->where('project_id', $request->project_id);
+                             })
+                             ->orderBy('created_at', 'desc')
+                             ->get();
+
+            // Return the view with the data
+            return view('reviews.index', compact('reviews', 'projects'));
+
+        } catch (\Exception $e) {
+            // Log the error for debugging purposes
+
+
+            // Optionally, you can redirect to a specific error page or back with an error message
+            return redirect()->back()->with('error', 'There was an error fetching the reviews. Please try again later.');
         }
     }
+
 
     public function approve(Review $review)
     {

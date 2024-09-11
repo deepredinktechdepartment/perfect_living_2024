@@ -1,16 +1,46 @@
+<!-- resources/views/projects/index.blade.php -->
 @extends('layouts.app')
 
 @section('title', 'Projects List')
 
+@php
+    use App\Models\Company;
+    $companies = Company::orderBy('name', 'asc')->get();
+@endphp
+
 @section('content')
     @if($projects->isEmpty())
-    <div class="alert alert-info">
-        No projects found. <a href="{{ route('projects.create') }}"><u>Create New Project</u></a>
-    </div>
+        <div class="alert alert-info">
+            No projects found. <a href="{{ route('projects.create') }}"><u>Create New Project</u></a>
+        </div>
     @else
+ <!-- Filter Column -->
+ <div class="col-md-12 mb-3">
+    <div class="card shadow-sm rounded m-0 p-1" >
+
+        <div class="card-body bg-light" id="filterCard">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="companyFilter" class="form-label">Filter by Company:</label>
+                    <select id="companyFilter" class="form-select">
+                        <option value="">All Companies</option>
+                        @foreach($companies as $company)
+                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-1 d-flex align-items-end">
+                    <button id="filterBtn" class="btn btn-primary w-100">Go</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Projects Table -->
         <div class="card shadow-sm rounded">
             <div class="card-body">
-                <table class="table table-bordered mt-3 bg-white" id="projects">
+                <table class="table table-bordered mt-3 bg-white" id="projectsTable">
                     <thead class="table-dark">
                         <tr>
                             <th>S.No.</th>
@@ -18,14 +48,14 @@
                             <th>Company</th>
                             <th>Preview</th>
                             @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
-                            <th>Approval Status</th>
+                                <th>Approval Status</th>
                             @endif
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($projects as $project)
-                            <tr id="row-{{ $loop->iteration }}">
+                            <tr data-company-id="{{ $project->company_id }}">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $project->name ?? '' }}<br>&nbsp;-{{ $project->project_type ?? '' }}</td>
                                 <td>{{ $project->company->name ?? '' }}</td>
@@ -39,14 +69,14 @@
                                     <span class="copy-message" id="message-{{ $loop->iteration }}">Copied!</span>
                                 </td>
                                 @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
-                                <td>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input toggle-approval" type="checkbox" id="toggle-{{ $project->id }}" {{ $project->is_approved ? 'checked' : '' }} data-id="{{ $project->id }}">
-                                        <label class="form-check-label" for="toggle-{{ $project->id }}">
-                                            {{ $project->is_approved ? 'Approved' : 'Disapproved' }}
-                                        </label>
-                                    </div>
-                                </td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input toggle-approval" type="checkbox" id="toggle-{{ $project->id }}" {{ $project->is_approved ? 'checked' : '' }} data-id="{{ $project->id }}">
+                                            <label class="form-check-label" for="toggle-{{ $project->id }}">
+                                                {{ $project->is_approved ? 'Approved' : 'Disapproved' }}
+                                            </label>
+                                        </div>
+                                    </td>
                                 @endif
                                 <td>
                                     <a href="{{ route('projects.edit', $project->id) }}" class="no-button" title="Edit">
@@ -75,34 +105,62 @@
     @endif
 @endsection
 
-
-
 @push('scripts')
-
 <script>
-    function copyToClipboard(text, rowIndex) {
-        navigator.clipboard.writeText(text).then(function() {
-            document.querySelectorAll('.copy-message').forEach(message => {
-                message.style.display = 'none';
-            });
-            var messageElement = document.querySelector(`#message-${rowIndex}`);
-            if (messageElement) {
-                messageElement.style.display = 'inline';
-                setTimeout(function() {
-                    messageElement.style.display = 'none';
-                }, 2000);
-            }
-        }).catch(function(err) {
-            console.error('Failed to copy text: ', err);
-        });
-    }
+    $(document).ready(function() {
+        // Initialize DataTable
+        var table = $('#projectsTable').DataTable();
 
-    // Toggle Approval Status
-    document.querySelectorAll('.toggle-approval').forEach(function(toggle) {
-        toggle.addEventListener('change', function() {
-            var projectId = this.getAttribute('data-id');
-            var isApproved = this.checked ? 1 : 0;
-            var label = this.nextElementSibling;
+        // Filter by Company and Go button
+        $('#filterBtn').on('click', function() {
+            var companyId = $('#companyFilter').val();
+            $.ajax({
+                url: '{{ route('projects.get.filter') }}',
+                method: 'GET',
+                data: { company_id: companyId },
+                success: function(data) {
+                    // Clear the table
+                    table.clear().draw();
+
+                    // Add new data
+                    data.projects.forEach(function(project, index) {
+                        table.row.add([
+                            index + 1,
+                            project.name + '<br>&nbsp;-' + project.project_type,
+                            project.company_name,
+                            '<a href="' + project.preview_url + '" class="no-button" target="_blank" title="Preview Project"><i class="fas fa-link"></i></a>' +
+                            '<button onclick="copyToClipboard(\'' + project.preview_url + '\', ' + (index + 1) + ')" class="no-button" title="Copy Link"><i class="fas fa-copy"></i></button>' +
+                            '<span class="copy-message" id="message-' + (index + 1) + '">Copied!</span>',
+                            project.is_approved ? '<div class="form-check form-switch"><input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" checked data-id="' + project.id + '"><label class="form-check-label" for="toggle-' + project.id + '">Approved</label></div>' :
+                            '<div class="form-check form-switch"><input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" data-id="' + project.id + '"><label class="form-check-label" for="toggle-' + project.id + '">Disapproved</label></div>',
+                            '<a href="{{ url('/projects') }}/' + project.id + '/edit" class="no-button" title="Edit"><i class="{{ config('constants.icons.edit') }}"></i></a>' +
+                            '<form action="{{ url('/projects') }}/' + project.id + '" method="POST" class="delete-form" style="display:inline;">@csrf @method('DELETE')<button type="submit" class="no-button" title="Delete"><i class="{{ config('constants.icons.delete') }}"></i></button></form>' +
+                            '<a href="{{ url('/unit_configurations') }}/?projectID=' + project.id + '" class="no-button" title="Units Config"><i class="{{ config('constants.icons.unit_configuration') }}"></i></a>' +
+                            '<a href="{{ url('/elevation_pictures') }}/?projectID=' + project.id + '" class="no-button" title="Elevation Pictures"><i class="{{ config('constants.icons.multiple_imges') }}"></i></a>'
+                        ]).draw();
+                    });
+                }
+            });
+        });
+
+        // Copy to Clipboard Function
+        function copyToClipboard(text, rowIndex) {
+            navigator.clipboard.writeText(text).then(function() {
+                $('.copy-message').hide();
+                var messageElement = $(`#message-${rowIndex}`);
+                if (messageElement.length) {
+                    messageElement.show().delay(2000).fadeOut();
+                }
+            }).catch(function(err) {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+
+        // Toggle Approval Status
+        $(document).on('change', '.toggle-approval', function() {
+            var projectId = $(this).data('id');
+            var isApproved = $(this).is(':checked') ? 1 : 0;
+            var label = $(this).next('label');
 
             // Send AJAX request to update approval status
             fetch(`{{ URL::to('/projects') }}/${projectId}/toggle-approval`, {
@@ -111,16 +169,12 @@
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                body: JSON.stringify({
-                    is_approved: isApproved
-                })
+                body: JSON.stringify({ is_approved: isApproved })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Show toast notification
                     toastr.success('Approval status updated successfully.');
-                    // Reload the page after a short delay to ensure toast message is visible
                     setTimeout(function() {
                         window.location.reload();
                     }, 1000);
@@ -131,7 +185,7 @@
             })
             .catch(error => {
                 console.error('Error:', error);
-                toastr.error('An error occurred while updating approval status.');
+                toastr.error('An error occurred while updating the approval status.');
             });
         });
     });

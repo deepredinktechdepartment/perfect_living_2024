@@ -11,6 +11,28 @@
             </div>
         @endif
 
+        <!-- Filter Section -->
+        <div class="card shadow-sm rounded mb-3 m-0 p-1">
+            <div class="card-body bg-light" id="filterCard">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="projectFilter" class="form-label">Filter by Project:</label>
+                        <select id="projectFilter" class="form-select">
+                            <option value="">All Projects</option>
+                            @foreach($projects as $project)
+                                <option value="{{ $project->id }}" {{ request()->get('project_id') == $project->id ? 'selected' : '' }}>
+                                    {{ $project->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-1 d-flex align-items-end">
+                        <button id="filterBtn" class="btn btn-primary w-100">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Display table of reviews -->
         <div class="card shadow-sm rounded">
             <div class="card-body">
@@ -86,10 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Store the success message in session storage
                     sessionStorage.setItem('approvalMessage', data.message);
-
-                    // Reload the page
                     location.reload();
                 } else {
                     toastr.error('Error updating approval status.');
@@ -98,16 +117,22 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+    // Filter logic
+    const filterBtn = document.getElementById('filterBtn');
+    const projectFilter = document.getElementById('projectFilter');
+
+    filterBtn.addEventListener('click', function() {
+        const selectedProject = projectFilter.value;
+        const queryString = selectedProject ? `?project_id=${selectedProject}` : '';
+        window.location.href = "{{ url('admin/reviews') }}" + queryString;
+    });
+
     // Display toaster message if available
     const approvalMessage = sessionStorage.getItem('approvalMessage');
     if (approvalMessage) {
         toastr.success(approvalMessage);
-
-        // Clear the message from session storage
         sessionStorage.removeItem('approvalMessage');
     }
 });
-
-
 </script>
 @endpush

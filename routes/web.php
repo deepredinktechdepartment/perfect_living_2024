@@ -177,6 +177,9 @@ Route::resource('badges', BadgeController::class);
 // Projects
 Route::resource('projects', ProjectController::class);
 Route::post('/projects/{project}/toggle-approval', [ProjectController::class, 'toggleApproval'])->name('projects.toggleApproval');
+// routes/web.php
+
+Route::get('get/projects/filter', [ProjectController::class, 'filter'])->name('projects.get.filter');
 
 
 // Unit Configurations
