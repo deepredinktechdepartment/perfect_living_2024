@@ -8,6 +8,8 @@
 
   <div class="filter_icons">
       <ul class="list-unstyled d-flex gap-3 align-items-center">
+
+        @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 4]))
           @if(isset($settinglink) && !empty($settinglink))
           <li>
               <a href="{{ $settinglink }}">
@@ -32,6 +34,11 @@
               </a>
           </li>
           @endif
+
+          @endif
       </ul>
+
+
+
   </div>
 </div>
