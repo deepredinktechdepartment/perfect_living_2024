@@ -2,7 +2,7 @@
 @props(['image_path' => '#', 'description' => '', 'size' => ''])
 
 <div class="floorplans-item col-sm-4 p-2">
-<a href="{{ $image_path }}" data-fancybox="floorplan_images" data-caption="{{ $description }} {{ $size }} Sq.ft">
+<a href="{{ $image_path }}" data-fancybox="floorplan_images" data-caption="{{ $description }} {{ $size }} Sq.ft" class="text-decoration-none">
     <div class="floorplans-images-wrapper">
         <div class="floorplans-image">
         <img src="{{ $image_path }}" alt="{{ $description }}" class="img-fluid">
