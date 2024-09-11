@@ -453,12 +453,12 @@ footer p {
 .project-overview-images-wrapper img,
 .highlights-images-wrapper img {
     transition: .3s all ease-in-out;
+    object-fit: cover;
+    height: 200px;
 }
 
 .project-overview-images-wrapper:hover img,
 .highlights-images-wrapper:hover img {
-    object-fit: cover;
-    height: 200px;
     transform: scale(1.1);
     transition: .3s all ease-in-out;
 }
@@ -469,13 +469,23 @@ footer p {
     border-radius: 15px;
 }
 
-.highlights-images-text {
+.highlights-images-text{
     position: absolute;
     top: 0;
     bottom: 0;
-    padding: 20px 30px;
-}
-
+    padding: 30px 30px;
+    width: 100%;
+  }
+  .highlights-images-text .hover-text{
+    opacity: 0;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 100%;
+  }
+  .highlights-images-text:hover .hover-text{
+    opacity: 1;
+  }
 .customised-tabs .nav.nav-tabs {
     border: 0;
     gap: 15px;
