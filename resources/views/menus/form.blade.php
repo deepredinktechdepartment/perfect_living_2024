@@ -33,6 +33,9 @@
                             <div class="form-group">
                                 <label for="url">URL</label>
                                 <input type="url" name="url" id="url" class="form-control" value="{{ old('url', $menu->url) }}" required>
+                                <small class="form-text text-muted">
+                                    Go to list of page <a href="{{ URL::to('projects') }}" target="_blank">click here</a>
+                                </small>
                             </div>
 
                             @php

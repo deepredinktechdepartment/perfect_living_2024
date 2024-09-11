@@ -2517,3 +2517,9 @@ form a {
     background: transparent;
     color: #000;
 }
+    .copy-message {
+        display: none;
+        color: green;
+        font-size: 0.875rem;
+        margin-left: 10px;
+    }
