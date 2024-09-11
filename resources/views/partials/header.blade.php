@@ -39,14 +39,15 @@
                           </li>
                           @endif
 
-                          @if(Auth::user()->role && Auth::user()->role==1)
+                          @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
+
                           <li class="nav-item {{ Request::routeIs('admin.reviews.index') ? 'active' : '' }}">
                               <a class="nav-link" href="{{ route('admin.reviews.index') }}">Reviews</a>
                           </li>
                           @endif
 
 
-                          @if(Auth::user()->role && Auth::user()->role==1)
+                          @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
                           <li class="nav-item dropdown {{ Request::routeIs('companies.index','companies.create','city-masters.index','city-masters.create','badges.index','badges.create','collections.index','collections.create','amenities.index','amenities.create','area-masters.index','area-masters.create') ? 'active' : '' }}">
                               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Masters
