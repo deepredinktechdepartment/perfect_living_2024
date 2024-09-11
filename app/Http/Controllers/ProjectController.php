@@ -315,5 +315,26 @@ private function isValidJson($string)
     json_decode($string);
     return json_last_error() === JSON_ERROR_NONE;
 }
+public function toggleApproval(Request $request, Project $project)
+{
+    try {
+        // Update the project's approval status
+        $project->is_approved = $request->input('is_approved');
+        $project->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Approval status updated successfully.'
+        ]);
+    } catch (\Exception $e) {
+        // Log the exception and return a failed response
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to update approval status. Please try again later.'
+        ], 500);
+    }
+}
+
 
 }

@@ -16,7 +16,10 @@
                             <th>S.No.</th>
                             <th>Name</th>
                             <th>Company</th>
-                            <th>Preview</th> <!-- New Column -->
+                            <th>Preview</th>
+                            @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
+                            <th>Approval Status</th>
+                            @endif
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -27,17 +30,24 @@
                                 <td>{{ $project->name ?? '' }}<br>&nbsp;-{{ $project->project_type ?? '' }}</td>
                                 <td>{{ $project->company->name ?? '' }}</td>
                                 <td>
-                                    <!-- Preview Link -->
                                     <a href="{{ URL::to('company/project/'.$project->slug) }}" class="no-button" target="_blank" title="Preview Project">
                                         <i class="fas fa-link"></i>
                                     </a>
-                                    <!-- Copy Link Button -->
                                     <button onclick="copyToClipboard('{{ URL::to('company/project/'.$project->slug) }}', {{ $loop->iteration }})" class="no-button" title="Copy Link">
                                         <i class="fas fa-copy"></i>
                                     </button>
-                                    <!-- Copy Message -->
                                     <span class="copy-message" id="message-{{ $loop->iteration }}">Copied!</span>
                                 </td>
+                                @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
+                                <td>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input toggle-approval" type="checkbox" id="toggle-{{ $project->id }}" {{ $project->is_approved ? 'checked' : '' }} data-id="{{ $project->id }}">
+                                        <label class="form-check-label" for="toggle-{{ $project->id }}">
+                                            {{ $project->is_approved ? 'Approved' : 'Disapproved' }}
+                                        </label>
+                                    </div>
+                                </td>
+                                @endif
                                 <td>
                                     <a href="{{ route('projects.edit', $project->id) }}" class="no-button" title="Edit">
                                         <i class="{{ config('constants.icons.edit') }}"></i>
@@ -65,16 +75,16 @@
     @endif
 @endsection
 
+
+
 @push('scripts')
+
 <script>
     function copyToClipboard(text, rowIndex) {
         navigator.clipboard.writeText(text).then(function() {
-            // Hide all messages first
             document.querySelectorAll('.copy-message').forEach(message => {
                 message.style.display = 'none';
             });
-
-            // Show the specific message for the row that was clicked
             var messageElement = document.querySelector(`#message-${rowIndex}`);
             if (messageElement) {
                 messageElement.style.display = 'inline';
@@ -86,7 +96,44 @@
             console.error('Failed to copy text: ', err);
         });
     }
+
+    // Toggle Approval Status
+    document.querySelectorAll('.toggle-approval').forEach(function(toggle) {
+        toggle.addEventListener('change', function() {
+            var projectId = this.getAttribute('data-id');
+            var isApproved = this.checked ? 1 : 0;
+            var label = this.nextElementSibling;
+
+            // Send AJAX request to update approval status
+            fetch(`{{ URL::to('/projects') }}/${projectId}/toggle-approval`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    is_approved: isApproved
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show toast notification
+                    toastr.success('Approval status updated successfully.');
+                    // Reload the page after a short delay to ensure toast message is visible
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    console.error('Failed to update approval status');
+                    toastr.error('Failed to update approval status.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                toastr.error('An error occurred while updating approval status.');
+            });
+        });
+    });
 </script>
 @endpush
-
-
