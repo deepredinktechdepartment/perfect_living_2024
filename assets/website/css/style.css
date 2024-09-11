@@ -457,12 +457,16 @@ footer p {
 
 .project-overview-images-wrapper:hover img,
 .highlights-images-wrapper:hover img {
+    object-fit: cover;
+    height: 200px;
     transform: scale(1.1);
     transition: .3s all ease-in-out;
 }
 
 .highlights-images-wrapper {
     position: relative;
+    height: 200px;
+    border-radius: 15px;
 }
 
 .highlights-images-text {
