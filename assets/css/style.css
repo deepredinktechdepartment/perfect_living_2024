@@ -1637,7 +1637,7 @@ img {
 }
 
 .table>thead {
-    background-color: #192a38 !important;
+    background-color: #063240 !important;
     padding: 8px !important;
     border-bottom: 1px solid #ccc !important;
     color: #fff !important;
@@ -2525,4 +2525,12 @@ form a {
     color: green;
     font-size: 0.875rem;
     margin-left: 10px;
+}
+
+.bg-persian-green {
+    background-color: #20ACC9;
+}
+
+.bg-halite-blue {
+    background-color: #063240;
 }

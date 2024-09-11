@@ -13,8 +13,8 @@
 <form id="crudTable" action="{{route('verifying.password.manual')}}" method="post">
 						@csrf
 						 <div class="border-top pt-2">
-				
-								<div class="row">	
+
+								<div class="row">
 							<div class="col-sm-8">
 								<div class="form-group">
 								<div class="row">
@@ -28,7 +28,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">	
+						<div class="row">
 							<div class="col-sm-8">
 								<div class="form-group">
 								<div class="row">
@@ -42,7 +42,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">	
+						<div class="row">
 							<div class="col-sm-8">
 								<div class="form-group">
 								<div class="row">
@@ -53,22 +53,22 @@
 									<input type="password" class="form-control form-control-sm" name="password_confirmation" id="password" value="" required />
 									<br>
 
-									<button type="submit" class="btn btn-primary btn-sm">Change</button>
-									
-								
+									<button type="submit" class="btn bg-persian-green btn-sm">Change</button>
+
+
 									</div>
 								</div>
 								</div>
 
-								 
+
 							</div>
 						</div>
 
-						
+
 					</div>
-					
-					<input type="hidden" name="UserID" value="{{$userdata->id??0}}" > 
-					
+
+					<input type="hidden" name="UserID" value="{{$userdata->id??0}}" >
+
 					</form>
 				</div>
 			</div>
@@ -92,5 +92,5 @@ new_password:{
 		}
   }
 });
- </script> 
+ </script>
  @endpush

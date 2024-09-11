@@ -17,7 +17,7 @@
                 <div class="card-body">
 
                     <table class="table table-bordered mt-3 bg-white">
-                        <thead class="table-dark">
+                        <thead class="company">
                             <tr>
                                 <th>S.No.</th>
                                 <th>Beds</th>

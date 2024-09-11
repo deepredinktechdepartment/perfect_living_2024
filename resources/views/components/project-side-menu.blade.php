@@ -1,5 +1,5 @@
 <div class="lead_adds_side_bar py-4">
-   {{-- <small> <a href="{{ URL::to('clients') }}" class="btn btn-primary text-white">Back to projects</a></small> --}}
+   {{-- <small> <a href="{{ URL::to('clients') }}" class="btn bg-persian-green text-white">Back to projects</a></small> --}}
 
 
     <ul class="setting_menu">

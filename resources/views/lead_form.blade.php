@@ -114,7 +114,7 @@
                 </div>
                 <input type="hidden" name="UDF" id="udfField">
                 <div class="col-md-12 mb-3">
-                    <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="submitButton" class="btn bg-persian-green">Submit</button>
                 </div>
             </div>
         </form>

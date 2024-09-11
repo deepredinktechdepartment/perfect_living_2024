@@ -23,7 +23,7 @@
 
                     <!-- Submit Button -->
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary btn-lg">Change Password</button>
+                        <button type="submit" class="btn bg-persian-green btn-lg">Change Password</button>
                     </div>
                 </form>
             </div>

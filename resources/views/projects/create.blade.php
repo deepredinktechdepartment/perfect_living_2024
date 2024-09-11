@@ -68,7 +68,7 @@
                             @enderror
                         </div>
                     </div>
-                    
+
                     <!-- City dropdown -->
                     <div class="col-6">
                         <div class="form-group">
@@ -313,7 +313,7 @@ $projectAmenities = isset($project->amenities) && is_string($project->amenities)
 
                     <div class="col-12">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn bg-persian-green">
                                 {{ isset($project) ? 'Update Project' : 'Save Project' }}
                             </button>
                         </div>

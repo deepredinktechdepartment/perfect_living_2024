@@ -96,7 +96,7 @@
 
                         <!-- Submit Button -->
                         <div class="mt-4">
-                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                            <button type="submit" class="btn bg-persian-green mt-3">Submit</button>
                         </div>
                     </form>
                 </div>

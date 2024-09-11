@@ -12,11 +12,11 @@
         @endif
 
         <!-- Filter Section -->
-        <div class="card shadow-sm rounded mb-3 m-0 p-1">
-            <div class="card-body bg-light" id="filterCard">
+        <div class="card shadow-sm rounded mb-3 m-0 p-0">
+            <div class="card-body bg-persian-green" id="filterCard">
                 <div class="row">
                     <div class="col-md-3">
-                        <label for="projectFilter" class="form-label">Filter by Project:</label>
+                        <label for="projectFilter" class="form-label text-white">Filter by Project:</label>
                         <select id="projectFilter" class="form-select">
                             <option value="">All Projects</option>
                             @foreach($projects as $project)
@@ -27,7 +27,7 @@
                         </select>
                     </div>
                     <div class="col-md-1 d-flex align-items-end">
-                        <button id="filterBtn" class="btn btn-primary w-100">Go</button>
+                        <button id="filterBtn" class="btn bg-halite-blue w-100">Go</button>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
         <div class="card shadow-sm rounded">
             <div class="card-body">
                 <table class="table table-bordered mt-3 bg-white" id="reviews">
-                    <thead class="table-dark">
+                    <thead class="company">
                         <tr>
                             <th>S.No.</th>
                             <th>Project</th>

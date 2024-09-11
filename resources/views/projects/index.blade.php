@@ -16,12 +16,12 @@
     @else
  <!-- Filter Column -->
  <div class="col-md-12 mb-3">
-    <div class="card shadow-sm rounded m-0 p-1" >
+    <div class="card shadow-sm rounded m-0 p-0" >
 
-        <div class="card-body bg-light" id="filterCard">
+        <div class="card-body bg-persian-green" id="filterCard">
             <div class="row">
                 <div class="col-md-3">
-                    <label for="companyFilter" class="form-label">Filter by Company:</label>
+                    <label for="companyFilter" class="form-label text-white">Filter by Company:</label>
                     <select id="companyFilter" class="form-select">
                         <option value="">All Companies</option>
                         @foreach($companies as $company)
@@ -30,7 +30,7 @@
                     </select>
                 </div>
                 <div class="col-md-1 d-flex align-items-end">
-                    <button id="filterBtn" class="btn btn-primary w-100">Go</button>
+                    <button id="filterBtn" class="btn bg-halite-blue w-100">Go</button>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="card shadow-sm rounded">
             <div class="card-body">
                 <table class="table table-bordered mt-3 bg-white" id="projectsTable">
-                    <thead class="table-dark">
+                    <thead class="company">
                         <tr>
                             <th>S.No.</th>
                             <th>Name</th>

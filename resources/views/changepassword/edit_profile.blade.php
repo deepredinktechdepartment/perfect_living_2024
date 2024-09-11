@@ -32,7 +32,7 @@
           </div>
 
 
-      <button type="submit" class="btn btn-primary btn-sm">Save</button>
+      <button type="submit" class="btn bg-persian-green btn-sm">Save</button>
       <a href="{{url('admin/users')}}" class="btn btn-default btn-sm">Back</a>
 
         </div>

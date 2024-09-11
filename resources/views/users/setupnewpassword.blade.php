@@ -43,7 +43,7 @@
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">
+                    <button type="submit" class="btn bg-persian-green btn-block">
                         @if($user->active)
                             {{ __('Update Password') }}
                         @else

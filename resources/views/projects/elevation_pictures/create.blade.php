@@ -31,7 +31,7 @@
                     @endif
                 </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">
+                    <button type="submit" class="btn bg-persian-green mt-3">
                         {{ isset($picture) ? 'Update' : 'Save' }}
                     </button>
                 </form>

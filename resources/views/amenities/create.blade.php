@@ -34,7 +34,7 @@
                     @endif
                 </div>
 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn bg-persian-green">
                     {{ isset($amenity) ? 'Update' : 'Create' }}
                 </button>
             </form>

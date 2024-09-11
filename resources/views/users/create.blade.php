@@ -75,7 +75,7 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn bg-persian-green">Save</button>
     </form>
 </div>
 @endsection

@@ -87,7 +87,7 @@
                                     </select>
                                 </div>
                                 <div class="mt-4">
-                                    <button type="submit" class="btn btn-primary btn-sm mt-1">Search</button>
+                                    <button type="submit" class="btn bg-persian-green btn-sm mt-1">Search</button>
 
                                     <a href="#" id="export-btn" class="btn btn-success btn-sm mt-1 text-white">Export</a>
                                 </div>
