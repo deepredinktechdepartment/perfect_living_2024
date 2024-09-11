@@ -491,12 +491,48 @@ footer p {
     background: #E5D3D3;
 }
 
-.floorplans-images-wrapper img {
+.floorplans-images-wrapper .floorplans-image {
     padding: 10px 0px;
     border-top: 2px solid #ddd;
     border-bottom: 2px solid #ddd;
     margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
 }
+.zoom-text{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    z-index: 999;
+    opacity: 0;
+  }
+  .floorplans-images-wrapper:hover .zoom-text{
+    opacity: 1;
+  }
+  .floorplans-images-wrapper:hover .floorplans-image:before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgb(0 0 0 / 70%);
+    z-index: 99;
+  }
+  .floorplans-images-wrapper img{
+    transition: .3s all ease-in-out;
+  }
+  .floorplans-images-wrapper:hover img{
+    transform: scale(1.1);
+    transition: .3s all ease-in-out;
+  }
 
 .floorplans-info-text {
     padding: 0px 30px;
