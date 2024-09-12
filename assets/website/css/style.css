@@ -625,4 +625,30 @@ footer p {
 
 .bg-custom-btn {
     background-color: #111b21;
+    color: #fff;
+    border: 1px solid #111b21 !important;
+    border-radius: 0;
 }
+.bg-custom-btn:hover{
+    background-color: #fff;
+    color: #111b21;
+}
+.form-control{
+    border-width: 2px;
+    border-radius: 0;
+    padding: 0.75rem .75rem;
+  }
+.intl-tel-input {
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+  .intl-tel-input .selected-flag {
+    height: 49px !important;
+    background-color: #ddd !important;
+    border-radius: 0px;
+  }
+  label.error {
+    color: red;
+    margin-top: 10px;
+  }

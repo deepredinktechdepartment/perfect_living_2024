@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-sm-6 order-sm-0 order-2">
                 <h1 class="card-title">{{ $pageTitle ?? 'Contact Us' }}</h1>
-                <div class="card shadow mt-4">
+                <div class="card shadow mt-4 p-3">
                     <div class="card-body">
                         <!-- Display success or error messages using Toastr -->
                         @if (session('success'))
@@ -25,28 +25,32 @@
                         <!-- Contact Form -->
                         <form id="contactForm" action="{{ route('contact.store') }}" method="POST">
                             @csrf
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" id="name" class="form-control" required>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="email">Email</label>
                                 <input type="email" name="email" id="email" class="form-control" required>
                             </div>
 
                             <!-- New Phone Field -->
-                            <div class="form-group">
+                            <div class="intl-tel-input">
+                            <div class="form-group mb-3">
                                 <label for="phone">Phone</label>
+                                <input type="hidden" id="phone_with_country_code_one" name="phone_with_country_code"/>
+                                <input type="hidden" id="country_code_one" name="country_code"/>
                                 <input type="text" name="phone" id="phone" class="form-control" required>
                             </div>
+                            </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="message">Message</label>
                                 <textarea name="message" id="message" class="form-control" rows="5" required></textarea>
                             </div>
 
-                            <button type="submit" class="btn bg-custom-btn text-white mt-2">Send Message</button>
+                            <button type="submit" class="btn bg-custom-btn mt-2">Send Message</button>
                         </form>
                     </div>
                 </div>
