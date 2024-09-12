@@ -21,7 +21,7 @@
         <div class="card-body bg-persian-green" id="filterCard">
             <div class="row">
                 <div class="col-md-3">
-                    <label for="companyFilter" class="form-label text-dark">Filter by Company:</label>
+                    <label for="companyFilter" class="form-label text-white">Filter by Company:</label>
                     <select id="companyFilter" class="form-select">
                         <option value="">All Companies</option>
                         @foreach($companies as $company)
