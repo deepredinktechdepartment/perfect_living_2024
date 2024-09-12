@@ -45,6 +45,8 @@
     <link rel="stylesheet" href="{{ URL::to('assets/css/responsive.css') }}" />
      <link rel="stylesheet" href="{{ URL::to('assets/css/sass.css') }}">
     <link rel="stylesheet" href="{{ URL::to('assets/css/style.css') }}">
+
+    @stack('styles')
 </head>
 
 
