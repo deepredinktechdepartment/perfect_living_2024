@@ -118,7 +118,7 @@
 
                     </div>
                 </div>
-                <button type="submit" class="btn bg-persian-green mt-2">{{ isset($client) ? 'Update Client' : 'Create Client' }}</button>
+                <button type="submit" class="btn bg-custom-btn mt-2">{{ isset($client) ? 'Update Client' : 'Create Client' }}</button>
             </form>
         </div>
     </div>

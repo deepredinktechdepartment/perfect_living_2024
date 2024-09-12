@@ -2534,3 +2534,11 @@ form a {
 .bg-halite-blue {
     background-color: #063240;
 }
+
+.bg-custom-gray {
+    background-color: #54656f;
+}
+
+.bg-custom-btn {
+    background-color: #111b21;
+}

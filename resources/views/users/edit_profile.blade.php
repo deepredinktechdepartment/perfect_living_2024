@@ -50,7 +50,7 @@
 
                     <!-- Submit Button -->
                     <div class="d-grid">
-                        <button type="submit" class="btn bg-persian-green btn-lg">Save</button>
+                        <button type="submit" class="btn bg-custom-btn btn-lg">Save</button>
                     </div>
                 </form>
             </div>

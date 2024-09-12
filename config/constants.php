@@ -37,7 +37,7 @@ return [
 	'api_token' => '89616bad112871a8f7d8e1753a14948dc186f513840923e59012e1f0d8822976',
 	'pickon' => '123',
 	'card_body_container' => 'card',
-	'custom_btn_primary' => 'btn bg-persian-green rounded-3',
+	'custom_btn_primary' => 'btn bg-custom-btn rounded-3',
 	'optional_input' => 'optional',
 	'optional_input_brackets' => '(optional)',
 	'pick_one' => '--Pick one--',

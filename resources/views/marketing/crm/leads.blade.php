@@ -97,7 +97,7 @@
                         </select>
                     </div>
                     <input type="hidden" class="form-control" id="LeadID" name="LeadID">
-                    <button type="submit" class="btn bg-persian-green saveRemark" id="loading-message">Save</button>
+                    <button type="submit" class="btn bg-custom-btn saveRemark" id="loading-message">Save</button>
                 </form>
             </div>
             <div class="modal-footer">

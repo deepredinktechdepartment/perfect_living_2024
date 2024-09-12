@@ -21,8 +21,8 @@
         </div>
       </div>
 
-      
-      
+
+
       <div class="col-sm-3">
         <div class="footer-logo mt-sm-0 mt-3">
 
@@ -34,11 +34,11 @@
         <div class="social-links mt-4 pt-2">
           <ul>
 
-            <li><a href="{{ $linkedin_url??'#' }}"><i class="fa-brands fa-linkedin-in"></i></a></li>
-            <li><a href="{{ $facebook_url??'#' }}"><i class="fa-brands fa-facebook-f"></i></a></li>
-            <li><a href="{{ $twitter_url??'#' }}"><i class="fa-brands fa-twitter"></i></a></li>
-            <li><a href="{{ $instagram_url??'#' }}"><i class="fa-brands fa-instagram"></i></a></li>
-            <li><a href="{{ $whatsapp_url??'#' }}"><i class="fa-brands fa-whatsapp"></i></a></li>
+            <li><a href="{{ $linkedin_url??'#' }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+            <li><a href="{{ $facebook_url??'#' }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="{{ $twitter_url??'#' }}" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="{{ $instagram_url??'#' }}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="{{ $whatsapp_url??'#' }}" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
           </ul>
         </div>
       </div>

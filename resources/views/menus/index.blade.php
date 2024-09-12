@@ -28,7 +28,7 @@
 
         @if ($menus->isEmpty())
         <div class="alert alert-info">
-                No menus found. <a href="{{ route('menus.create') }}" class="btn bg-persian-green">Create a New Menu</a>
+                No menus found. <a href="{{ route('menus.create') }}" class="btn bg-custom-btn">Create a New Menu</a>
             </div>
         @else
             <div class="row mt-4">

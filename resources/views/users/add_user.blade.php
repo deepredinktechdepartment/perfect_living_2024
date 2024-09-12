@@ -72,7 +72,7 @@
 
                         <div class="col-md-12">
                             <div class="mb-1">
-                                <button type="submit" class="btn bg-persian-green">{{ isset($users->id) ? 'Update' : 'Save' }}</button>
+                                <button type="submit" class="btn bg-custom-btn">{{ isset($users->id) ? 'Update' : 'Save' }}</button>
                             </div>
                         </div>
                     </div>

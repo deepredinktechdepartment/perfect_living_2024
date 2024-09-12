@@ -23,7 +23,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn bg-persian-green">
+                <button type="submit" class="btn bg-custom-btn">
                     {{ isset($city) ? 'Update' : 'Create' }}
                 </button>
             </form>

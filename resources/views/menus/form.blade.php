@@ -88,14 +88,14 @@
                                     <label for="new-position">New Position</label>
                                     <input type="text" name="new_position" id="new-position" class="form-control">
                                 </div>
-                                <button type="button" id="save-new-position" class="btn bg-persian-green mt-2">Save Position</button>
+                                <button type="button" id="save-new-position" class="btn bg-custom-btn mt-2">Save Position</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn bg-persian-green mt-3">{{ isset($menu->id) ? 'Update' : 'Create' }}</button>
+            <button type="submit" class="btn bg-custom-btn mt-3">{{ isset($menu->id) ? 'Update' : 'Create' }}</button>
         </form>
     </div>
 

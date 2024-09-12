@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <button type="submit" class="btn bg-persian-green">
+                        <button type="submit" class="btn bg-custom-btn">
                             {{ isset($company) ? 'Update Company' : 'Create Company' }}
                         </button>
 

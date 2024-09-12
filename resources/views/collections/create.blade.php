@@ -48,7 +48,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn bg-persian-green">
+                <button type="submit" class="btn bg-custom-btn">
                     {{ isset($collection) ? 'Update' : 'Create' }}
                 </button>
             </form>

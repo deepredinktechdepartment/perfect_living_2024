@@ -65,7 +65,7 @@
                     @endif
                 </div>
 
-                <button type="submit" class="btn bg-persian-green">{{ isset($unit) ? 'Update Unit' : 'Save Unit' }}</button>
+                <button type="submit" class="btn bg-custom-btn">{{ isset($unit) ? 'Update Unit' : 'Save Unit' }}</button>
             </form>
         </div>
     </div>

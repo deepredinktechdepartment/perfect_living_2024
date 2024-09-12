@@ -40,7 +40,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn bg-persian-green">
+                <button type="submit" class="btn bg-custom-btn">
                     {{ isset($area) ? 'Update' : 'Create' }}
                 </button>
             </form>

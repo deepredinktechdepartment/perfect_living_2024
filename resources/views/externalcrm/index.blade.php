@@ -160,7 +160,7 @@ if ($setting) {
                                     @php $index++; @endphp
                                 @endforeach
                             </div>
-                            <button type="button" id="add_schema_field" class="btn bg-persian-green mt-3">Add More Fields</button>
+                            <button type="button" id="add_schema_field" class="btn bg-custom-btn mt-3">Add More Fields</button>
                         </div>
                     </div>
                 </form>

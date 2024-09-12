@@ -13,7 +13,7 @@
 
         <!-- Filter Section -->
         <div class="card shadow-sm rounded mb-3 m-0 p-0">
-            <div class="card-body bg-persian-green" id="filterCard">
+            <div class="card-body bg-custom-gray" id="filterCard">
                 <div class="row">
                     <div class="col-md-3">
                         <label for="projectFilter" class="form-label text-white">Filter by Project:</label>
@@ -27,7 +27,7 @@
                         </select>
                     </div>
                     <div class="col-md-1 d-flex align-items-end">
-                        <button id="filterBtn" class="btn bg-halite-blue w-100">Go</button>
+                        <button id="filterBtn" class="btn bg-custom-btn w-100">Go</button>
                     </div>
                 </div>
             </div>

@@ -313,7 +313,7 @@ $projectAmenities = isset($project->amenities) && is_string($project->amenities)
 
                     <div class="col-12">
                         <div class="form-group">
-                            <button type="submit" class="btn bg-persian-green">
+                            <button type="submit" class="btn bg-custom-btn">
                                 {{ isset($project) ? 'Update Project' : 'Save Project' }}
                             </button>
                         </div>

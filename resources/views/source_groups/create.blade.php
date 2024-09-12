@@ -24,7 +24,7 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn bg-persian-green">Save</button>
+        <button type="submit" class="btn bg-custom-btn">Save</button>
     </form>
 </div>
 </div>
