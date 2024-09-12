@@ -16,7 +16,7 @@
             <div class="card-body bg-persian-green" id="filterCard">
                 <div class="row">
                     <div class="col-md-3">
-                        <label for="projectFilter" class="form-label text-white">Filter by Project:</label>
+                        <label for="projectFilter" class="form-label text-dark">Filter by Project:</label>
                         <select id="projectFilter" class="form-select">
                             <option value="">All Projects</option>
                             @foreach($projects as $project)
@@ -55,7 +55,7 @@
                         @foreach($reviews as $review)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $review->project->name ?? 'N/A' }}</td> <!-- Assuming you have a relation named 'project' -->
+                            <td>{{ $review->project->name ?? 'N/A' }}</td>
                             <td>{{ $review->star_rating }}</td>
                             <td>{{ $review->review }}</td>
                             <td>{{ $review->created_at->format('d-m-Y') }}</td>
@@ -88,74 +88,60 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const toggleApprovalUrl = @json(route('reviews.toggleApproval'));
-
-    document.querySelectorAll('.approval-toggle').forEach(function(toggle) {
-        toggle.addEventListener('change', function() {
-            let id = this.getAttribute('data-id');
-            let approved = this.checked ? 1 : 0;
-
-            fetch(`${toggleApprovalUrl}/${id}`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ approve: approved }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    sessionStorage.setItem('approvalMessage', data.message);
-                    location.reload();
-                } else {
-                    toastr.error('Error updating approval status.');
-                }
-            });
-        });
-    });
-
-    // AJAX Filter logic
     const filterBtn = document.getElementById('filterBtn');
     const projectFilter = document.getElementById('projectFilter');
 
-    filterBtn.addEventListener('click', function() {
-        const selectedProject = projectFilter.value;
+    function initializeApprovalToggles() {
+        document.querySelectorAll('.approval-toggle').forEach(function(toggle) {
+            toggle.addEventListener('change', function() {
+                let id = this.getAttribute('data-id');
+                let approved = this.checked ? 1 : 0;
 
-        // AJAX request to get filtered reviews
-        fetch("{{ route('reviews.filter') }}?project_id=" + selectedProject, {
-            method: 'GET',
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Update the table with filtered data
-                updateReviewTable(data.reviews);
-            } else {
-                toastr.error('Error fetching reviews.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            toastr.error('Something went wrong.');
+                fetch(`${toggleApprovalUrl}/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ approve: approved }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        toastr.success(data.message);
+                        // Update the approval status in the table without refreshing
+                        updateApprovalStatus(id, approved);
+                    } else {
+                        toastr.error('Error updating approval status.');
+                    }
+                });
+            });
         });
-    });
+    }
+
+    function updateApprovalStatus(id, approved) {
+        const toggle = document.querySelector(`.approval-toggle[data-id="${id}"]`);
+        if (toggle) {
+            toggle.checked = approved;
+            toggle.nextElementSibling.textContent = approved ? 'Approved' : 'Disapproved';
+        }
+    }
 
     function updateReviewTable(reviews) {
         const tbody = document.querySelector('#reviews tbody');
-        tbody.innerHTML = ''; // Clear current table body
+        tbody.innerHTML = '';
 
         if (reviews.length === 0) {
             tbody.innerHTML = '<tr><td colspan="8">No reviews found.</td></tr>';
             return;
         }
 
-        // Loop through reviews and add rows to the table
         reviews.forEach((review, index) => {
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -176,6 +162,8 @@ document.addEventListener("DOMContentLoaded", function() {
             `;
             tbody.appendChild(row);
         });
+
+        initializeApprovalToggles();
     }
 
     function renderApprovalColumn(review) {
@@ -193,12 +181,38 @@ document.addEventListener("DOMContentLoaded", function() {
         @endif
     }
 
+    filterBtn.addEventListener('click', function() {
+        const selectedProject = projectFilter.value;
+
+        fetch("{{ route('reviews.filter') }}?project_id=" + selectedProject, {
+            method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                updateReviewTable(data.reviews);
+            } else {
+                toastr.error('Error fetching reviews.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            toastr.error('Something went wrong.');
+        });
+    });
+
     // Display toaster message if available
     const approvalMessage = sessionStorage.getItem('approvalMessage');
     if (approvalMessage) {
         toastr.success(approvalMessage);
         sessionStorage.removeItem('approvalMessage');
     }
+
+    // Initialize approval toggles on page load
+    initializeApprovalToggles();
 });
 </script>
 @endpush
