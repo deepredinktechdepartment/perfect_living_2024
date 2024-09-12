@@ -236,5 +236,22 @@ protected function isProjectIdValid($projectId)
         return redirect()->back()->with('error', 'Unable to fetch reviews at the moment.');
     }
 }
+public function filterReviews(Request $request)
+{
+    $project_id = $request->get('project_id');
+
+    // Apply filter logic
+    $reviews = Review::when($project_id, function ($query, $project_id) {
+        return $query->where('project_id', $project_id);
+    })
+    ->with('project') // Assuming you have a 'project' relationship
+    ->get();
+
+    return response()->json([
+        'success' => true,
+        'reviews' => $reviews
+    ]);
+}
+
 
 }

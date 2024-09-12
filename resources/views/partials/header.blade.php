@@ -49,6 +49,21 @@
 
 
                           @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
+                          <li class="nav-item dropdown {{ Request::routeIs('admin.contacts.index') ? 'active' : '' }}">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Leads
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                  <li><a class="dropdown-item {{ Request::routeIs('admin.contacts.index') ? 'active' : '' }}" href="{{ route('admin.contacts.index') }}">Contacts</a></li>
+
+                              </ul>
+                          </li>
+                          @endif
+
+
+
+                          @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
                           <li class="nav-item dropdown {{ Request::routeIs('companies.index','companies.create','city-masters.index','city-masters.create','badges.index','badges.create','collections.index','collections.create','amenities.index','amenities.create','area-masters.index','area-masters.create') ? 'active' : '' }}">
                               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Masters

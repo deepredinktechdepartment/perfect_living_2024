@@ -29,7 +29,7 @@
 
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <x-card
-                title="Approved Reviews"
+                title="Reviews"
                 number="{{ $reviewCount }}"
                 bgColor="bg-primary"
                 link="{{ url('admin/reviews') }}"

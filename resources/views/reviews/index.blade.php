@@ -117,15 +117,81 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Filter logic
+    // AJAX Filter logic
     const filterBtn = document.getElementById('filterBtn');
     const projectFilter = document.getElementById('projectFilter');
 
     filterBtn.addEventListener('click', function() {
         const selectedProject = projectFilter.value;
-        const queryString = selectedProject ? `?project_id=${selectedProject}` : '';
-        window.location.href = "{{ url('admin/reviews') }}" + queryString;
+
+        // AJAX request to get filtered reviews
+        fetch("{{ route('reviews.filter') }}?project_id=" + selectedProject, {
+            method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update the table with filtered data
+                updateReviewTable(data.reviews);
+            } else {
+                toastr.error('Error fetching reviews.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            toastr.error('Something went wrong.');
+        });
     });
+
+    function updateReviewTable(reviews) {
+        const tbody = document.querySelector('#reviews tbody');
+        tbody.innerHTML = ''; // Clear current table body
+
+        if (reviews.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8">No reviews found.</td></tr>';
+            return;
+        }
+
+        // Loop through reviews and add rows to the table
+        reviews.forEach((review, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${review.project ? review.project.name : 'N/A'}</td>
+                <td>${review.star_rating}</td>
+                <td>${review.review}</td>
+                <td>${new Date(review.created_at).toLocaleDateString()}</td>
+                <td>${review.ip_address}</td>
+                ${renderApprovalColumn(review)}
+                <td>
+                    <form action="{{ route('reviews.delete', '') }}/${review.id}" method="POST" class="delete-form" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="no-button"><i class="{{ config('constants.icons.delete') }}"></i></button>
+                    </form>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    function renderApprovalColumn(review) {
+        @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
+            return `
+                <td>
+                    <div class="form-check form-switch">
+                        <input type="checkbox" class="form-check-input approval-toggle" id="approvalSwitch${review.id}" data-id="${review.id}" ${review.approval_status ? 'checked' : ''}>
+                        <label class="form-check-label" for="approvalSwitch${review.id}">${review.approval_status ? 'Approved' : 'Disapproved'}</label>
+                    </div>
+                </td>
+            `;
+        @else
+            return '';
+        @endif
+    }
 
     // Display toaster message if available
     const approvalMessage = sessionStorage.getItem('approvalMessage');

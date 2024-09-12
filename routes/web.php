@@ -25,7 +25,7 @@ use App\Http\Controllers\ElevationPictureController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ReviewController;
-
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -218,6 +218,14 @@ Route::get('/admin/reviews', [ReviewController::class, 'index'])->name('admin.re
 Route::patch('/admin/reviews/{review}/approve', [ReviewController::class, 'approve'])->name('admin.reviews.approve');
 Route::post('/reviews/toggle-approval/{id?}', [ReviewController::class, 'toggleApproval'])->name('reviews.toggleApproval');
 Route::delete('/reviews/{id}', [ReviewController::class, 'destroy'])->name('reviews.delete');
+Route::get('/reviews/filter', [ReviewController::class, 'filterReviews'])->name('reviews.filter');
+
+
+    Route::get('admin/contacts', [ContactController::class, 'adminIndex'])->name('admin.contacts.index');
+    Route::get('admin/contacts/{id}', [ContactController::class, 'show'])->name('admin.contacts.show');
+    Route::delete('admin/contacts/{id}', [ContactController::class, 'destroy'])->name('admin.contacts.destroy');
+
+
 });
 
 
@@ -232,8 +240,13 @@ Route::get('/areas/by-city', [AreaMasterController::class, 'getAreasByCity'])->n
 Route::get('/terms-of-use', [PagesController::class, 'termsOfUse'])->name('terms-of-use');
 Route::get('/advertise-with-us', [PagesController::class, 'advertiseWithUs'])->name('advertise-with-us');
 Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');
-Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact-us');
+
 Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::get('/review/form', [ReviewController::class, 'create'])->name('review.create');
 Route::get('/showReviews/{projectId}', [ReviewController::class, 'showReviews'])->name('reviews.show');
+
+
+
+Route::get('contact-us', [ContactController::class, 'index'])->name('contact.index');
+Route::post('contact-us', [ContactController::class, 'store'])->name('contact.store');
