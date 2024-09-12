@@ -29,7 +29,7 @@
                                 <textarea name="review" id="review" class="form-control" rows="5" required></textarea>
                             </div>
 
-                            <button type="submit" class="btn bg-primary text-white">Submit Review</button>
+                            <button type="submit" class="btn bg-custom-btn text-white">Submit Review</button>
                             <input type="hidden" name="project_id" value="{{$projectId ?? 0}}" />
                         </form>
                     </div>

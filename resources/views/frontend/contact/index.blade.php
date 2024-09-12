@@ -46,7 +46,7 @@
                                 <textarea name="message" id="message" class="form-control" rows="5" required></textarea>
                             </div>
 
-                            <button type="submit" class="btn bg-primary text-white mt-2">Send Message</button>
+                            <button type="submit" class="btn bg-custom-btn text-white mt-2">Send Message</button>
                         </form>
                     </div>
                 </div>
