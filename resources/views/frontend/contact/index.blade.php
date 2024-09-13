@@ -35,14 +35,12 @@
                                 <input type="email" name="email" id="email" class="form-control" required>
                             </div>
 
-                            <!-- New Phone Field -->
-                            <div class="intl-tel-input">
+                            <!-- Phone Field with intl-tel-input -->
                             <div class="form-group mb-3">
                                 <label for="phone">Phone</label>
                                 <input type="hidden" id="phone_with_country_code_one" name="phone_with_country_code"/>
                                 <input type="hidden" id="country_code_one" name="country_code"/>
-                                <input type="text" name="phone" id="phone" class="form-control" required>
-                            </div>
+                                <input type="tel" name="phone" id="phone" class="form-control" required>
                             </div>
 
                             <div class="form-group mb-3">
@@ -61,8 +59,26 @@
 @endsection
 
 @push('scripts')
+
 <script>
 $(document).ready(function() {
+    // Initialize intl-tel-input
+    var input = document.querySelector("#phone");
+    var iti = window.intlTelInput(input, {
+        initialCountry:"in",
+        autoHideDialCode: true,
+        separateDialCode: true,
+        autoPlaceholder:"polite",
+        formatOnDisplay:true,
+        dropdownContainer: document.body,  
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+    });
+
+    // Custom phone validation method using intl-tel-input
+    $.validator.addMethod("validPhone", function(value, element) {
+        return iti.isValidNumber(); // Use intl-tel-input validation
+    }, "Please enter a valid phone number.");
+
     // Form validation rules
     $("#contactForm").validate({
         rules: {
@@ -77,9 +93,7 @@ $(document).ready(function() {
             },
             phone: {
                 required: true,
-                digits: true,
-                minlength: 10,
-                maxlength: 15
+                validPhone: true // Custom validation for phone number
             },
             message: {
                 required: true,
@@ -99,14 +113,11 @@ $(document).ready(function() {
             },
             phone: {
                 required: "Please enter your phone number.",
-                digits: "Please enter a valid phone number.",
-                minlength: "Phone number must be at least 10 digits long.",
-                maxlength: "Phone number cannot be more than 15 digits."
             },
             message: {
                 required: "Please enter your message.",
                 minlength: "Your message must be at least 10 characters long.",
-                maxlength: "Your message cannot exceed 500 characters."
+                maxlength: "Your message cannot exceed 250 characters."
             }
         },
         errorClass: "is-invalid",
@@ -121,8 +132,22 @@ $(document).ready(function() {
         },
         unhighlight: function(element) {
             $(element).addClass("is-valid").removeClass("is-invalid");
+        },
+        submitHandler: function(form) {
+            // On successful validation, set the hidden fields with phone data
+            var fullNumber = iti.getNumber(); // Get full number with country code
+            var countryCode = iti.getSelectedCountryData().dialCode; // Get the country code
+
+            // Set hidden fields
+            $('#phone_with_country_code_one').val(fullNumber);
+            $('#country_code_one').val(countryCode);
+
+            // Submit the form after setting hidden values
+            form.submit();
         }
     });
 });
 </script>
+
+
 @endpush

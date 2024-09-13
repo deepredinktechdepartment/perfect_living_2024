@@ -25,14 +25,14 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $contact->name }}</td>
-                                <td>{{ $contact->phone }}</td>
+                                <td>+{{$contact->country_code}} {{ $contact->phone }}</td>
                                 <td>{{ $contact->email }}</td>
                                 <td>
                                     <!-- Info icon for viewing message -->
                                     <a href="#" class="text-info" data-bs-toggle="modal" data-bs-target="#messageModal"
                                        data-name="{{ $contact->name }}"
                                        data-email="{{ $contact->email }}"
-                                       data-phone="{{ $contact->phone }}"
+                                       data-phone="+{{$contact->country_code}} {{ $contact->phone }}"
                                        data-message="{{ $contact->message }}">
                                         <i class="{{ config('constants.icons.info') }}"></i>
                                     </a>

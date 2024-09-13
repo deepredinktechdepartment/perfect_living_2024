@@ -19,6 +19,9 @@
      <link rel="stylesheet" type="text/css" href="{{ URL::to('assets/website/css/slick.css') }}"/>
      <!-- Custom Styles -->
      <link rel="stylesheet" href="{{ URL::to('assets/website/css/style.css') }}">
+     <!-- Include the intl-tel-input CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+
 
     @stack('styles') <!-- Stack for additional styles -->
 </head>
@@ -45,10 +48,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/10.0.2/css/intlTelInput.css" rel="stylesheet"/>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/additional-methods.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/10.0.2/js/intlTelInput.min.js"></script>
+    <!-- Include the intl-tel-input JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/10.0.2/js/utils.js"></script>
     <!-- Local Scripts -->
     <script src="{{ URL::to('assets/website/js/slick.min.js') }}"></script>
@@ -82,23 +86,7 @@
       });
     </script>
 
-<script>
-    $("#phone").intlTelInput(
-    {
-  
-  
-      utilsScript: "{{URL::to('/js/utils.js')}}",
-      initialCountry:"in",
-      autoHideDialCode: true,
-      separateDialCode: true,
-      autoPlaceholder:"polite",
-      formatOnDisplay:true,
-      dropdownContainer: document.body,
-  
-  
-      }
-      );
-  </script>
+
 
     @stack('scripts') <!-- Stack for additional scripts -->
 

@@ -22,11 +22,14 @@ class ContactController extends Controller
     // Store form data
     public function store(Request $request)
     {
+
+   
         // Validate the request
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'phone' => 'required',
+            'country_code' => 'required',
             'message' => 'required|string',
         ]);
 
