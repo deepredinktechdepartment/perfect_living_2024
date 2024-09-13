@@ -74,10 +74,16 @@ $(document).ready(function() {
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
-    // Custom phone validation method using intl-tel-input
+ // Custom phone validation method to include Jio numbers starting with '6' and ensure 10 digits
     $.validator.addMethod("validPhone", function(value, element) {
-        return iti.isValidNumber(); // Use intl-tel-input validation
-    }, "Please enter a valid phone number.");
+        var fullNumber = iti.getNumber(); // Get full phone number
+        var isValid = iti.isValidNumber(); // Check using intl-tel-input validation
+
+        // Check if the number starts with '6', is 10 digits long, and belongs to India
+        var isJioNumber = fullNumber.startsWith('+91') && fullNumber[3] == '6' && fullNumber.length == 13; // +91 6XXXXXXXXX (13 chars with country code)
+        
+        return isValid || isJioNumber; // Pass validation if it's valid or a Jio number with 10 digits
+    }, "Please enter a valid phone number starting with 6 and 10 digits long.");
 
     // Form validation rules
     $("#contactForm").validate({
