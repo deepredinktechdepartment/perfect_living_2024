@@ -37,10 +37,10 @@
 
                             <!-- Phone Field with intl-tel-input -->
                             <div class="form-group mb-3">
-                                <label for="phone">Phone</label>
+                                <label for="phone" class="d-block">Phone</label>
                                 <input type="hidden" id="phone_with_country_code_one" name="phone_with_country_code"/>
                                 <input type="hidden" id="country_code_one" name="country_code"/>
-                                <input type="tel" name="phone" id="phone" class="form-control" required>
+                                <input type="tel" name="phone" id="phone" class="form-control d-block w-100" required>
                             </div>
 
                             <div class="form-group mb-3">
