@@ -5,11 +5,32 @@ Fancybox.bind('[data-fancybox="banner_gallery"]', {
 
 Fancybox.bind('[data-fancybox="floorplan_images"]', {
     // Your custom options for a specific gallery
-
 });
 
 // slick slidesr Js
 
+
+$('.three_slider').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 4000,
+    pauseOnHover: true,
+    dots: false,
+    fade: false,
+    arrows: true,
+    infinite: true,
+    responsive: [{
+        breakpoint: 480,
+        settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+            fade: false,
+            arrows: true,
+        }
+    }]
+});
 
 $('.featured-properties-slider').slick({
     slidesToShow: 2,
@@ -24,7 +45,7 @@ $('.featured-properties-slider').slick({
     responsive: [{
         breakpoint: 480,
         settings: {
-            slidesToShow: 2,
+            slidesToShow: 1,
             slidesToScroll: 1,
             dots: true,
             fade: false,
@@ -33,10 +54,11 @@ $('.featured-properties-slider').slick({
     }]
 });
 
+
 $('.highlights-images-slider').slick({
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 4000,
     pauseOnHover: true,
     dots: false,
@@ -59,7 +81,7 @@ $(document).ready(function(){
 $('.floorplans-slider').slick({
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 4000,
     pauseOnHover: true,
     dots: false,

@@ -204,7 +204,7 @@
           </ul>
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-tab1" role="tabpanel" aria-labelledby="pills-tab1-tab">
-              <div class="row">
+              <div class="row three_slider">
                 <div class="col-sm-4">
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
@@ -435,6 +435,61 @@
             </div>
           </div>
       </div>
+    </section>
+
+    <section class="sub_menu_footer">
+        <div class="container"> 
+            <div class="row">
+                <div class="col-lg-3 border-end">
+                    <ul class="list-unstyled text-center">
+                        <li>
+                            <h6>Budget</h6>
+                        </li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                    </ul>     
+                </div>
+                <div class="col-lg-3 border-end">
+                    <ul class="list-unstyled text-center">
+                        <li>
+                            <h6>Top Locations</h6>
+                        </li>
+                        <li><a href="#"> Apartments in Whitefield</a></li>
+                        <li><a href="#"> Apartments in Yelahanka</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                    </ul>     
+                </div>
+                <div class="col-lg-3 border-end">
+                    <ul class="list-unstyled text-center">
+                        <li>
+                            <h6>Top builders</h6>
+                        </li>
+                        <li><a href="#"> Brigade Group</a></li>
+                        <li><a href="#"> Prestige Group</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                    </ul>     
+                </div>
+                <div class="col-lg-3">
+                    <ul class="list-unstyled text-center">
+                        <li>
+                            <h6>Apartments in Bangalore</h6>
+                        </li>
+                        <li><a href="#">1 BHK Apartments in Bangalore</a></li>
+                        <li><a href="#">2 BHK Apartments in Bangalore</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                        <li><a href="#"> 20 L to 40 L</a></li>
+                    </ul>     
+                </div>
+            </div>
+        </div>
     </section>
 </div>
 

@@ -25,7 +25,30 @@
 
             <!-- Menu items collapse on mobile -->
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
               <ul class="navbar-nav ms-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Apartments in Hyderabad
+                </a>
+                <ul class="dropdown-menu mega-menu p-sm-4 p-3" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">2 BHK Apartments in Hyderabad</a></li>
+                  <li><a class="dropdown-item" href="#">3 BHK Apartments in Hyderabad</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Top Locations
+                </a>
+                <ul class="dropdown-menu mega-menu p-sm-4 p-3" aria-labelledby="navbarDropdown">
+                  <li><h6>Apartments in  Financial District</h6></li>
+                  <li><a class="dropdown-item" href="#">Apartments in Kokapet</a></li>
+                  <li><a class="dropdown-item" href="#">Apartments in Gachibowli</a></li>
+                  <li><a class="dropdown-item" href="#">Apartments in Kondapur</a></li>
+                  <li><a class="dropdown-item" href="#">Apartments in Kukatpally</a></li>
+                </ul>
+              </li>
+             
               <li class="nav-item">
                   <a class="nav-link text-white" href="{{ URL('') }}"><i class="fa-solid fa-house"></i></a>
                 </li>
