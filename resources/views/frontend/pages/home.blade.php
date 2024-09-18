@@ -42,7 +42,7 @@
                         <div class="row">
                             <div class="col-sm-5 pe-sm-0">
                                 <div class="project-image-wrapper h-100">
-                                    <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                                 </div>
                             </div>
                             <div class="col-sm-7">
@@ -63,7 +63,7 @@
                         <div class="row">
                             <div class="col-sm-5 pe-sm-0">
                                 <div class="project-image-wrapper h-100">
-                                    <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                                 </div>
                             </div>
                             <div class="col-sm-7">
@@ -82,7 +82,7 @@
                         <div class="row">
                             <div class="col-sm-5 pe-sm-0">
                                 <div class="project-image-wrapper h-100">
-                                    <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                                 </div>
                             </div>
                             <div class="col-sm-7">
@@ -103,7 +103,7 @@
                         <div class="row">
                             <div class="col-sm-5 pe-sm-0">
                                 <div class="project-image-wrapper h-100">
-                                    <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                                 </div>
                             </div>
                             <div class="col-sm-7">
@@ -122,7 +122,7 @@
                         <div class="row">
                             <div class="col-sm-5 pe-sm-0">
                                 <div class="project-image-wrapper h-100">
-                                    <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                                 </div>
                             </div>
                             <div class="col-sm-7">
@@ -143,7 +143,7 @@
                         <div class="row">
                             <div class="col-sm-5 pe-sm-0">
                                 <div class="project-image-wrapper h-100">
-                                    <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                                 </div>
                             </div>
                             <div class="col-sm-7">
@@ -162,7 +162,7 @@
                         <div class="row">
                             <div class="col-sm-5 pe-sm-0">
                                 <div class="project-image-wrapper h-100">
-                                    <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                                 </div>
                             </div>
                             <div class="col-sm-7">
@@ -209,7 +209,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -224,7 +224,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -239,7 +239,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -254,7 +254,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -273,7 +273,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -288,7 +288,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -303,7 +303,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -322,7 +322,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -337,7 +337,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -356,7 +356,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -371,7 +371,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -386,7 +386,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -401,7 +401,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
@@ -420,7 +420,7 @@
                     <div class="project-card-wrapper">
                         <a href="#" class="text-decoration-none">
                         <div class="project-image-wrapper h-100">
-                            <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                            <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                         </div>
                         <div class="project-details-wrapper h-100 p-3">
                             <h5 class="mb-0">Assetz Marq 2</h5>
