@@ -1,4 +1,6 @@
 
+
+
   <header id="main-header">
     <div class="container">
       <div class="row align-items-lg-center">
@@ -42,11 +44,7 @@
                           <!-- To display a full list -->
                           @menu('Top Locations in Hyderabad', 'list-unstyled', false, 'dropdown-item', 'false')
                           </div>
-                          <div class="col-sm-6 mb-4">
-                          <h5>Bengaluru</h5>
-                            <!-- To display a full list -->
-                          @menu('Top Locations in Bengaluru', 'list-unstyled', false, 'dropdown-item', 'false')
-                        </div>
+
                       </div>
                     </div>
                   </div>
