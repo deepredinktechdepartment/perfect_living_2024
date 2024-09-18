@@ -70,26 +70,36 @@
       </div>
 
 
-      <div class="col-sm-8 order-sm-0 order-1">
-    <div class="project-overview-images-wrapper mb-sm-0 mb-3">
-        @if(isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty())
-            @php
-                // Get the latest elevation picture
-                $filePath = env('APP_STORAGE').$project->elevationPictures[0]->file_path;
-            @endphp
-
-            @if(File::exists($filePath))
-                <img src="{{ URL::to($filePath) }}" alt="" class="img-fluid h-100">
-            @else
-                <!-- Show empty if file does not exist -->
-                <div class="img-placeholder"></div>
-            @endif
-        @else
-            <!-- Show empty if there are no elevation pictures -->
-            <div class="img-placeholder"></div>
-        @endif
-    </div>
-</div>
+      
+    
+    <div class="col-sm-8 order-sm-0 order-1">
+        <div class="row">
+          <div class="col-sm-9 col-12 pe-sm-1 mb-sm-0 mb-2">
+            <a href="https://perfectliving.in/app/storage/app/public/elevation_pictures/KuiuSQvtH0KMWinPROGBEWIlJOlNoz9PIBQtgbCw.jpg" data-fancybox="banner_gallery" data-caption="Botanika">
+              <div class="project-overview-images-wrapper h-100">
+                  <img src="https://perfectliving.in/app/storage/app/public/elevation_pictures/KuiuSQvtH0KMWinPROGBEWIlJOlNoz9PIBQtgbCw.jpg" alt="Image 1" class="img-fluid h-100">
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-3 col-12 ps-sm-1 d-sm-block d-none">
+            <a href="https://perfectliving.in/app/storage/app/public/elevation_pictures/KuiuSQvtH0KMWinPROGBEWIlJOlNoz9PIBQtgbCw.jpg" data-fancybox="banner_gallery" data-caption="Botanika">
+              <div class="project-overview-images-wrapper mb-2">
+                  <img src="https://perfectliving.in/app/storage/app/public/elevation_pictures/KuiuSQvtH0KMWinPROGBEWIlJOlNoz9PIBQtgbCw.jpg" alt="Image 2" class="img-fluid h-100">
+              </div>
+            </a>
+              <a href="https://perfectliving.in/app/storage/app/public/elevation_pictures/KuiuSQvtH0KMWinPROGBEWIlJOlNoz9PIBQtgbCw.jpg" data-fancybox="banner_gallery" data-caption="Botanika">
+              <div class="project-overview-images-wrapper mb-2">
+                  <img src="https://perfectliving.in/app/storage/app/public/elevation_pictures/KuiuSQvtH0KMWinPROGBEWIlJOlNoz9PIBQtgbCw.jpg" alt="Image 3" class="img-fluid h-100">
+              </div>
+            </a>
+              <a href="https://perfectliving.in/app/storage/app/public/elevation_pictures/KuiuSQvtH0KMWinPROGBEWIlJOlNoz9PIBQtgbCw.jpg" data-fancybox="banner_gallery" data-caption="Botanika">
+              <div class="project-overview-images-wrapper">
+                  <img src="https://perfectliving.in/app/storage/app/public/elevation_pictures/KuiuSQvtH0KMWinPROGBEWIlJOlNoz9PIBQtgbCw.jpg" alt="Image 4" class="img-fluid h-100">
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
 
 
 
@@ -130,7 +140,7 @@
 </section>
 
 @if($groupedConfigurations && count($groupedConfigurations) > 0)
-<section class="pt-0">
+<section class="bg-yellow">
     <div class="container">
         <h2 class="mb-4">Floor plans</h2>
         <div class="customised-tabs">
@@ -195,7 +205,7 @@
 
 
 
-<section class="pt-4">
+<section>
   <div class="container">
     <div class="row">
       <div class="col-sm-8 pe-sm-5 border-end">

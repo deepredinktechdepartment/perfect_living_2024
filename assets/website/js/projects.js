@@ -1,4 +1,8 @@
 // Fancy Box Js
+Fancybox.bind('[data-fancybox="banner_gallery"]', {
+    // Your custom options for a specific gallery
+});
+
 Fancybox.bind('[data-fancybox="floorplan_images"]', {
     // Your custom options for a specific gallery
 

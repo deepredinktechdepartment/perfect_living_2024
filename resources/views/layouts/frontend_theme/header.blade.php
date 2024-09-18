@@ -1,19 +1,19 @@
 
-  <header class="py-3 px-sm-0 px-2" id="main-header">
+  <header id="main-header">
     <div class="container">
       <div class="row align-items-lg-center">
-        <div class="col-sm-3 col-5">
+        <div class="col-sm-3 col-6 px-sm-3 p-0">
         <a href="{{ url('/') }}">
 
           @if(isset($header_logo) && File::exists($header_logo))
-          <img src=" {{ URL::to(asset($header_logo)) }}" class="img-fluid" alt="{{ env('APP_NAME') }}">
+          <img src=" {{ URL::to(asset($header_logo)) }}" class="img-fluid header-logo" alt="{{ env('APP_NAME') }}">
       @else
 
       @endif
 
          </a>
         </div>
-        <div class="col-sm-9 col-7">
+        <div class="col-sm-9 col-6">
           <nav class="navbar navbar-expand-lg navbar-light p-0 justify-content-lg-start justify-content-end">
             <!-- Toggle button for small screens -->
             <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
