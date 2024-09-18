@@ -52,14 +52,14 @@
                   </div>
                 </li>
                 <!-- Additional Links -->
-                <li class="nav-item">
-               <!-- Example with some empty values -->
+                {{-- <li class="nav-item">
+
 @menu('About us', "", "", 'nav-link text-white', 'true')
 
-                </li>
-                <li class="nav-item">
+                </li> --}}
+                {{-- <li class="nav-item">
                   @menu('Contact Us', "", "", 'nav-link text-white','true')
-                </li>
+                </li> --}}
               </ul>
             </div>
           </nav>
