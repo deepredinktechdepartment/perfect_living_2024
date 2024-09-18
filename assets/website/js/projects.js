@@ -10,6 +10,29 @@ Fancybox.bind('[data-fancybox="floorplan_images"]', {
 
 // slick slidesr Js
 
+
+$('.featured-properties-slider').slick({
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    autoplay: false,
+    autoplaySpeed: 4000,
+    pauseOnHover: true,
+    dots: false,
+    fade: false,
+    arrows: true,
+    infinite: true,
+    responsive: [{
+        breakpoint: 480,
+        settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            dots: true,
+            fade: false,
+            arrows: true,
+        }
+    }]
+});
+
 $('.highlights-images-slider').slick({
     slidesToShow: 3,
     slidesToScroll: 1,
