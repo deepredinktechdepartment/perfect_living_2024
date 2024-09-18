@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <section>   
+    <section>
         <div class="container">
             <h2 class="mb-4 text-center">Top Featured Properties</h2>
             <div class="featured-properties-slider">
@@ -23,7 +23,7 @@
                         <div class="row">
                             <div class="col-sm-5 pe-sm-0">
                                 <div class="project-image-wrapper h-100">
-                                    <img src="./img/project.jpg" alt="Project Title" class="img-fluid project-image h-100">
+                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
                                 </div>
                             </div>
                             <div class="col-sm-7">
@@ -438,6 +438,6 @@
     </section>
 </div>
 
-     
+
 
 @endsection
