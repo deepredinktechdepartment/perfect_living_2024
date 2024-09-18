@@ -41,8 +41,12 @@
                 Apartments in Hyderabad
                 </a>
                 <ul class="dropdown-menu mega-menu p-sm-4 p-3" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">2 BHK Apartments in Hyderabad</a></li>
-                  <li><a class="dropdown-item" href="#">3 BHK Apartments in Hyderabad</a></li>
+                  {{-- <li><a class="dropdown-item" href="#">2 BHK Apartments in Hyderabad</a></li>
+                  <li><a class="dropdown-item" href="#">3 BHK Apartments in Hyderabad</a></li> --}}
+
+                  @menu('Apartments in Hyderabad', 'list-unstyled', false, 'dropdown-item', 'false')
+
+
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -51,10 +55,11 @@
                 </a>
                 <ul class="dropdown-menu mega-menu p-sm-4 p-3" aria-labelledby="navbarDropdown">
                   <li><h6>Apartments in  Financial District</h6></li>
-                  <li><a class="dropdown-item" href="#">Apartments in Kokapet</a></li>
-                  <li><a class="dropdown-item" href="#">Apartments in Gachibowli</a></li>
-                  <li><a class="dropdown-item" href="#">Apartments in Kondapur</a></li>
-                  <li><a class="dropdown-item" href="#">Apartments in Kukatpally</a></li>
+
+
+                  @menu('Apartments in Financial District', 'list-unstyled', false, 'dropdown-item', 'false')
+
+
                 </ul>
               </li>
 

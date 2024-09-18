@@ -15,171 +15,49 @@
 
     <section>
         <div class="container">
-            <h2 class="mb-4 text-center">Top Featured Properties</h2>
-            <div class="featured-properties-slider">
-              <div>
-                <div class="project-card-wrapper m-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="row">
-                            <div class="col-sm-5 pe-sm-0">
-                                <div class="project-image-wrapper h-100">
-                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="project-details-wrapper h-100 p-3">
-                                    <h5 class="mb-0">Assetz Marq 1</h5>
-                                    <p> Kannamangala, Bangalore</p>
-                                    <p>3 BHK Apartment <br> 1366 - 1600 sqft</p>
-                                    <p class="mb-0"> <span class="price-info">₹90.0 L*</span> <small>Onwards</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+            @if ($projects->count() > 0)
+                <h2 class="mb-4 text-center">Top Featured Properties</h2>
+                <div class="featured-properties-slider">
+                    @foreach ($projects as $project)
+                        @php
+                            // Default placeholder image URL
+                            $defaultImageUrl = 'https://via.placeholder.com/150';
+
+                            // Check if elevationPictures is set and contains at least one image
+                            $imageUrl = $defaultImageUrl; // Default image
+
+                            if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
+                                $firstImagePath = $project->elevationPictures->first()->file_path;
+
+                                $fullImagePath = URL::to(env('APP_STORAGE').$firstImagePath);
+
+
+
+                            }
+                        @endphp
+
+                        <x-project-card
+                            :name="$project->name"
+                            :address="$project->name . ',' . $project->company->name"
+                            :details="$project->project_type . ' , ' . $project->no_of_units . ' units'"
+                            :price="'₹' . number_format($project->price_per_sft) . ' per sqft'"
+                            :image="$fullImagePath??'#'"
+                            :url="URL::to('company/project/'.$project->slug)"
+                        />
+                    @endforeach
                 </div>
-                <div class="project-card-wrapper m-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="row">
-                            <div class="col-sm-5 pe-sm-0">
-                                <div class="project-image-wrapper h-100">
-                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="project-details-wrapper h-100 p-3">
-                                    <h5 class="mb-0">Assetz Marq 2</h5>
-                                    <p> Kannamangala, Bangalore</p>
-                                    <p>3 BHK Apartment <br> 1366 - 1600 sqft</p>
-                                    <p class="mb-0"> <span class="price-info">₹90.0 L*</span> <small>Onwards</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-              </div>
-              <div>
-                <div class="project-card-wrapper m-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="row">
-                            <div class="col-sm-5 pe-sm-0">
-                                <div class="project-image-wrapper h-100">
-                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="project-details-wrapper h-100 p-3">
-                                    <h5 class="mb-0">Assetz Marq 3</h5>
-                                    <p> Kannamangala, Bangalore</p>
-                                    <p>3 BHK Apartment <br> 1366 - 1600 sqft</p>
-                                    <p class="mb-0"> <span class="price-info">₹90.0 L*</span> <small>Onwards</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="project-card-wrapper m-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="row">
-                            <div class="col-sm-5 pe-sm-0">
-                                <div class="project-image-wrapper h-100">
-                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="project-details-wrapper h-100 p-3">
-                                    <h5 class="mb-0">Assetz Marq 4</h5>
-                                    <p> Kannamangala, Bangalore</p>
-                                    <p>3 BHK Apartment <br> 1366 - 1600 sqft</p>
-                                    <p class="mb-0"> <span class="price-info">₹90.0 L*</span> <small>Onwards</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-              </div>
-              <div>
-                <div class="project-card-wrapper m-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="row">
-                            <div class="col-sm-5 pe-sm-0">
-                                <div class="project-image-wrapper h-100">
-                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="project-details-wrapper h-100 p-3">
-                                    <h5 class="mb-0">Assetz Marq 1</h5>
-                                    <p> Kannamangala, Bangalore</p>
-                                    <p>3 BHK Apartment <br> 1366 - 1600 sqft</p>
-                                    <p class="mb-0"> <span class="price-info">₹90.0 L*</span> <small>Onwards</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="project-card-wrapper m-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="row">
-                            <div class="col-sm-5 pe-sm-0">
-                                <div class="project-image-wrapper h-100">
-                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="project-details-wrapper h-100 p-3">
-                                    <h5 class="mb-0">Assetz Marq 2</h5>
-                                    <p> Kannamangala, Bangalore</p>
-                                    <p>3 BHK Apartment <br> 1366 - 1600 sqft</p>
-                                    <p class="mb-0"> <span class="price-info">₹90.0 L*</span> <small>Onwards</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-              </div>
-              <div>
-                <div class="project-card-wrapper m-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="row">
-                            <div class="col-sm-5 pe-sm-0">
-                                <div class="project-image-wrapper h-100">
-                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="project-details-wrapper h-100 p-3">
-                                    <h5 class="mb-0">Assetz Marq 3</h5>
-                                    <p> Kannamangala, Bangalore</p>
-                                    <p>3 BHK Apartment <br> 1366 - 1600 sqft</p>
-                                    <p class="mb-0"> <span class="price-info">₹90.0 L*</span> <small>Onwards</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="project-card-wrapper m-lg-3">
-                    <a href="#" class="text-decoration-none">
-                        <div class="row">
-                            <div class="col-sm-5 pe-sm-0">
-                                <div class="project-image-wrapper h-100">
-                                    <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="Project Title" class="img-fluid project-image h-100">
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="project-details-wrapper h-100 p-3">
-                                    <h5 class="mb-0">Assetz Marq 4</h5>
-                                    <p> Kannamangala, Bangalore</p>
-                                    <p>3 BHK Apartment <br> 1366 - 1600 sqft</p>
-                                    <p class="mb-0"> <span class="price-info">₹90.0 L*</span> <small>Onwards</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-              </div>
-            </div>
+            @else
+                <p class="text-center">No featured properties available at the moment.</p>
+            @endif
         </div>
     </section>
+
+
+
+
+
+
+
 
     <section class="home_tab_sec">
       <div class="container">
@@ -438,7 +316,7 @@
     </section>
 
     <section class="sub_menu_footer">
-        <div class="container"> 
+        <div class="container">
             <div class="row">
                 <div class="col-lg-3 border-end">
                     <ul class="list-unstyled text-center">
@@ -450,7 +328,7 @@
                         <li><a href="#"> 20 L to 40 L</a></li>
                         <li><a href="#"> 20 L to 40 L</a></li>
                         <li><a href="#"> 20 L to 40 L</a></li>
-                    </ul>     
+                    </ul>
                 </div>
                 <div class="col-lg-3 border-end">
                     <ul class="list-unstyled text-center">
@@ -462,7 +340,7 @@
                         <li><a href="#"> 20 L to 40 L</a></li>
                         <li><a href="#"> 20 L to 40 L</a></li>
                         <li><a href="#"> 20 L to 40 L</a></li>
-                    </ul>     
+                    </ul>
                 </div>
                 <div class="col-lg-3 border-end">
                     <ul class="list-unstyled text-center">
@@ -474,7 +352,7 @@
                         <li><a href="#"> 20 L to 40 L</a></li>
                         <li><a href="#"> 20 L to 40 L</a></li>
                         <li><a href="#"> 20 L to 40 L</a></li>
-                    </ul>     
+                    </ul>
                 </div>
                 <div class="col-lg-3">
                     <ul class="list-unstyled text-center">
@@ -486,7 +364,7 @@
                         <li><a href="#"> 20 L to 40 L</a></li>
                         <li><a href="#"> 20 L to 40 L</a></li>
                         <li><a href="#"> 20 L to 40 L</a></li>
-                    </ul>     
+                    </ul>
                 </div>
             </div>
         </div>

@@ -12,6 +12,7 @@ class Project extends Model
     protected $fillable = [
         'name',
         'slug',
+        'is_featured',
         'company_id',  // Assuming company is a foreign key
         'site_address',
         'city',
@@ -48,7 +49,7 @@ class Project extends Model
         return $this->hasMany(ProjectAmenity::class);
     }
         // Define the relationship with the Company model
-      
+
         public function collections()
         {
         return $this->belongsToMany(Collection::class, 'collections');
@@ -68,7 +69,7 @@ class Project extends Model
         {
             return $this->belongsTo(Company::class);
         }
-        
+
    public function citites()
     {
         return $this->belongsTo(CityMaster::class, 'city');
@@ -78,4 +79,8 @@ class Project extends Model
     {
         return $this->belongsTo(AreaMaster::class, 'area');
     }
+    public function scopeIsFeatured($query, $featured = true)
+{
+    return $query->where('is_featured', $featured);
+}
 }

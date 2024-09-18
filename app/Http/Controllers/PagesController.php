@@ -5,6 +5,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Project;
+use App\Models\Company;
 
 class PagesController extends Controller
 {
@@ -22,7 +24,10 @@ class PagesController extends Controller
     public function homepage()
     {
         $pageTitle='Home page';
-        return view('frontend.pages.home',compact('pageTitle'));
+
+        $projects = Project::with('company')->isFeatured(true)->get(); // Fetch all projects with company data
+
+        return view('frontend.pages.home',compact('pageTitle','projects'));
     }
     public function aboutUs()
     {

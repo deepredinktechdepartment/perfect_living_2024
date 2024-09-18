@@ -48,8 +48,9 @@
                             <th>Company</th>
                             <th>Preview</th>
                             @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
-                                <th>Approval Status</th>
-                            @endif
+                            <th>Approval Status</th>
+                            <th>Featured Status</th>
+                        @endif
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -68,6 +69,7 @@
                                     </button>
                                     <span class="copy-message" id="message-{{ $loop->iteration }}">Copied!</span>
                                 </td>
+
                                 @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
                                     <td>
                                         <div class="form-check form-switch">
@@ -77,6 +79,16 @@
                                             </label>
                                         </div>
                                     </td>
+                                @endif
+                                @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
+                                <td>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input toggle-featured" type="checkbox" id="featured-{{ $project->id }}" {{ $project->is_featured ? 'checked' : '' }} data-id="{{ $project->id }}">
+                                        <label class="form-check-label" for="featured-{{ $project->id }}">
+                                            {{ $project->is_featured ? 'Featured' : 'Not Featured' }}
+                                        </label>
+                                    </div>
+                                </td>
                                 @endif
                                 <td>
                                     <a href="{{ route('projects.edit', $project->id) }}" class="no-button" title="Edit">
@@ -133,6 +145,8 @@
                             '<span class="copy-message" id="message-' + (index + 1) + '">Copied!</span>',
                             project.is_approved ? '<div class="form-check form-switch"><input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" checked data-id="' + project.id + '"><label class="form-check-label" for="toggle-' + project.id + '">Approved</label></div>' :
                             '<div class="form-check form-switch"><input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" data-id="' + project.id + '"><label class="form-check-label" for="toggle-' + project.id + '">Disapproved</label></div>',
+                            project.is_featured ? '<div class="form-check form-switch"><input class="form-check-input toggle-featured" type="checkbox" id="featured-' + project.id + '" checked data-id="' + project.id + '"><label class="form-check-label" for="featured-' + project.id + '">Featured</label></div>' :
+                            '<div class="form-check form-switch"><input class="form-check-input toggle-featured" type="checkbox" id="featured-' + project.id + '" data-id="' + project.id + '"><label class="form-check-label" for="featured-' + project.id + '">Not Featured</label></div>',
                             '<a href="{{ url('/projects') }}/' + project.id + '/edit" class="no-button" title="Edit"><i class="{{ config('constants.icons.edit') }}"></i></a>' +
                             '<form action="{{ url('/projects') }}/' + project.id + '" method="POST" class="delete-form" style="display:inline;">@csrf @method('DELETE')<button type="submit" class="no-button" title="Delete"><i class="{{ config('constants.icons.delete') }}"></i></button></form>' +
                             '<a href="{{ url('/unit_configurations') }}/?projectID=' + project.id + '" class="no-button" title="Units Config"><i class="{{ config('constants.icons.unit_configuration') }}"></i></a>' +
@@ -144,17 +158,13 @@
         });
 
         // Copy to Clipboard Function
-        function copyToClipboard(text, rowIndex) {
-            navigator.clipboard.writeText(text).then(function() {
-                $('.copy-message').hide();
-                var messageElement = $(`#message-${rowIndex}`);
-                if (messageElement.length) {
-                    messageElement.show().delay(2000).fadeOut();
-                }
-            }).catch(function(err) {
-                console.error('Failed to copy text: ', err);
-            });
-        }
+        function copyToClipboard(url, row) {
+        navigator.clipboard.writeText(url).then(function() {
+            $('#message-' + row).fadeIn().delay(1000).fadeOut();
+        }, function(err) {
+            console.error('Failed to copy: ', err);
+        });
+    }
 
         // Toggle Approval Status
         $(document).on('change', '.toggle-approval', function() {
@@ -188,6 +198,52 @@
                 toastr.error('An error occurred while updating the approval status.');
             });
         });
+
+
+
+        // Handle toggle featured status
+        $(document).on('change', '.toggle-featured', function() {
+            var checkbox = $(this);
+            var isChecked = checkbox.is(':checked');
+            var projectId = checkbox.data('id');
+
+            $.ajax({
+                url: '{{ route('projects.update.featured.status') }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: projectId,
+                    status: isChecked ? 1 : 0
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Optionally display a success message or handle any UI updates
+
+
+                    toastr.success('Featured status updated successfully.');
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1000);
+
+
+                        console.log('Featured status updated successfully.');
+                    } else {
+                        // Handle failure (e.g., show an error message)
+                        console.error('Failed to update featured status.');
+                        toastr.error('Failed to update featured status.');
+                        checkbox.prop('checked', !isChecked); // Revert the checkbox state
+                    }
+                },
+                error: function(xhr) {
+                    // Handle any errors
+                    console.error('Error occurred while updating featured status:', xhr);
+                    checkbox.prop('checked', !isChecked); // Revert the checkbox state
+                }
+            });
+        });
+
+
+
     });
 </script>
 @endpush

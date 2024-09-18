@@ -358,6 +358,19 @@ public function filter(Request $request)
 
     return response()->json(['projects' => $projects]);
 }
+public function updateFeaturedStatus(Request $request)
+{
+
+    $project = Project::find($request->input('id'));
+
+    if ($project) {
+        $project->is_featured = $request->input('status');
+        $project->save();
+        return response()->json(['success' => true]);
+    }
+
+    return response()->json(['success' => false], 404);
+}
 
 
 }

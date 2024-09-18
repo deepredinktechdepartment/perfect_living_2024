@@ -179,7 +179,7 @@ Route::resource('badges', BadgeController::class);
 Route::resource('projects', ProjectController::class);
 Route::post('/projects/{project}/toggle-approval', [ProjectController::class, 'toggleApproval'])->name('projects.toggleApproval');
 // routes/web.php
-
+Route::post('/projects/update-featured-status', [ProjectController::class, 'updateFeaturedStatus'])->name('projects.update.featured.status');
 Route::get('get/projects/filter', [ProjectController::class, 'filter'])->name('projects.get.filter');
 
 
