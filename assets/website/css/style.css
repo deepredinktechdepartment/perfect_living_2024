@@ -651,6 +651,24 @@ footer p {
     border-radius: 0;
     padding: 0.75rem 0.75rem;
 }
+.filter_bg .form-select {
+    border-width: 2px;
+    padding: 0.25rem 0.55rem;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    box-shadow: none !important;
+    font-size: 14px;
+}
+.filter_bg .form-select:focus{
+    border: 1px solid #ddd !important;
+}
+.filter_bg .form-select option:checked{
+    background-color: #ddd;
+    color: #000;
+}
 .iti {
     display: block;
     position: relative;
@@ -801,4 +819,16 @@ label.error {
 }
 .border-end {
     border-right: 1px solid #707070 !important;
+}
+
+.filter_bg {
+    background-color: #f8f9fa;
+}
+.bg-grey {
+    background-color: #e4e4e4;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
 }
