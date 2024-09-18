@@ -29,6 +29,13 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
               <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="{{ URL('') }}">Home</a>
+                </li>
+
+
+
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Apartments in Hyderabad
