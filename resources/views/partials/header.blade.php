@@ -39,6 +39,11 @@
                               <a class="nav-link" href="{{ route('projects.index') }}">Projects</a>
                           </li>
                           @endif
+                          @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
+                          <li class="nav-item {{ Request::routeIs('customcollections.index','customcollections.create','customcollections.edit') ? 'active' : '' }}">
+                              <a class="nav-link" href="{{ route('customcollections.index') }}">Collections</a>
+                          </li>
+                          @endif
 
 
 
