@@ -50,8 +50,8 @@
                   <li><a class="dropdown-item" href="#">Apartments in Kukatpally</a></li>
                 </ul>
               </li>
-             
-              <li class="nav-item">
+
+              {{-- <li class="nav-item">
                   <a class="nav-link text-white" href="{{ URL('') }}"><i class="fa-solid fa-house"></i></a>
                 </li>
                 <!-- Mega Menu -->
@@ -71,7 +71,7 @@
                       </div>
                     </div>
                   </div>
-                </li>
+                </li> --}}
                 <!-- Additional Links -->
                 {{-- <li class="nav-item">
 
