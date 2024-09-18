@@ -34,4 +34,9 @@ class PagesController extends Controller
         $pageTitle='Contact Us';
         return view('frontend.pages.under_construction',compact('pageTitle'));
     }
+    public function fitlersprojects()
+    {
+        $pageTitle='fitlersprojects';
+        return view('frontend.pages.fitlersprojects',compact('pageTitle'));
+    }
 }

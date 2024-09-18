@@ -244,6 +244,11 @@ Route::get('/advertise-with-us', [PagesController::class, 'advertiseWithUs'])->n
 Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');
 
 Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
+
+Route::get('/fitlersprojects/{param?}', [PagesController::class, 'fitlersprojects'])->name('homepage');
+
+
+
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::get('/review/form', [ReviewController::class, 'create'])->name('review.create');
 Route::get('/showReviews/{projectId}', [ReviewController::class, 'showReviews'])->name('reviews.show');
