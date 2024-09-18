@@ -22,7 +22,7 @@ class PagesController extends Controller
     public function homepage()
     {
         $pageTitle='Home page';
-        return view('frontend.pages.under_construction',compact('pageTitle'));
+        return view('frontend.pages.home',compact('pageTitle'));
     }
     public function aboutUs()
     {
