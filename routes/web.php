@@ -20,6 +20,7 @@ use App\Http\Controllers\CityMasterController;
 use App\Http\Controllers\AreaMasterController;
 use App\Http\Controllers\AmenityController;
 use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\CustomCollectionController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\ElevationPictureController;
 use App\Http\Controllers\PagesController;
@@ -225,6 +226,7 @@ Route::get('/reviews/filter', [ReviewController::class, 'filterReviews'])->name(
     Route::get('admin/contacts/{id}', [ContactController::class, 'show'])->name('admin.contacts.show');
     Route::delete('admin/contacts/{id}', [ContactController::class, 'destroy'])->name('admin.contacts.destroy');
 
+    Route::resource('customcollections', CustomCollectionController::class);
 
 });
 

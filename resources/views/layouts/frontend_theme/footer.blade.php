@@ -11,15 +11,16 @@
               @menu('Top Locations in Hyderabad', 'footer-links-list', 'menu-item', 'menu-link', 'false')
             </div>
           </div>
-          <div class="col-sm-4">
+          {{-- <div class="col-sm-4">
             <div class="footer-col">
               <p class="list-heading text-white mt-3">Top Locations in Bengaluru</p>
               <!-- To display a full list -->
               @menu('Top Locations in Bengaluru', 'footer-links-list', 'menu-item', 'menu-link', 'false')
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
+
 
 
 
