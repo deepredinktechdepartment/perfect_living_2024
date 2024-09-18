@@ -71,7 +71,7 @@
 
 
 
-                          @if(Auth::check() && in_array(Auth::user()->role, [1]))
+                          @if(Auth::check() && in_array(Auth::user()->role, [1,2]))
                           <li class="nav-item dropdown {{ Request::routeIs('city-masters.index','city-masters.create','badges.index','badges.create','collections.index','collections.create','amenities.index','amenities.create','area-masters.index','area-masters.create') ? 'active' : '' }}">
                               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Masters
