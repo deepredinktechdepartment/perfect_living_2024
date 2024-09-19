@@ -7,7 +7,10 @@
       <div class="col-lg-6 col-md-8 col-12 position-relative">
         <div class="container">
             <form>
-                <input type="text" class="form-control" id="searchInput" placeholder="Search Locality / Builder or Project" onkeyup="filterDropdown()">
+                <div class="d-flex">
+                    <input class="form-control me-2" type="search" id="searchInput" placeholder="Search Locality / Builder or Project" aria-label="Search" onkeyup="filterDropdown()">
+                    <button class="btn btn_black" type="submit">Search</button>
+                </div>
 
                 <!-- Dropdown for Categories and Subcategories -->
                 <ul class="dropdown-menu w-50" id="categoryDropdown" style="display:none;">
