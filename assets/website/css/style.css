@@ -78,7 +78,9 @@ section {
     }
 }
 
+
 /* Common CSS ENDS */
+
 
 /*slider css : BEGIN*/
 
@@ -123,11 +125,13 @@ section {
     }
 }
 
+
 /* @media (max-width: 1024px) {
   .slick-arrow.slick-prev {
     left: -10px;
   }
 } */
+
 
 /* @media (max-width: 768px) {
   .slick-arrow.slick-prev {
@@ -147,13 +151,16 @@ section {
 .featured-properties-slider .slick-arrow.slick-next {
     right: -1.8%;
 }
+
 .featured-properties-slider .slick-arrow.slick-prev {
     left: -1.8%;
 }
+
 .three_slider .slick-arrow.slick-next {
     top: -105%;
     right: 1%;
 }
+
 .three_slider .slick-arrow.slick-prev {
     top: -105%;
     right: 5%;
@@ -172,7 +179,6 @@ section {
         top: -110%;
         right: 0.5%;
     }
-
     .slick-slide {
         margin: 0.5rem;
     }
@@ -187,7 +193,6 @@ section {
         top: -110%;
         right: 12%;
     }
-
     .three_slider .slick-slide {
         margin: 0.5rem;
     }
@@ -272,7 +277,9 @@ section {
     margin-left: inherit;
 }
 
+
 /*slider css : END*/
+
 
 /* Header CSS Starts */
 
@@ -280,9 +287,11 @@ header {
     background: #000000;
     padding: 10px;
 }
+
 .header-logo {
     width: 215px;
 }
+
 .navbar .nav-link {
     color: #fff;
     padding: 5px 10px !important;
@@ -347,7 +356,9 @@ header {
     }
 }
 
+
 /* Header CSS Ends */
+
 
 /* Footer Css Starts */
 
@@ -461,7 +472,9 @@ footer p {
     }
 }
 
+
 /* Footer CSS Ends */
+
 
 /* Projects CSS Starts */
 
@@ -599,12 +612,12 @@ footer p {
 }
 
 .star:hover,
-.star:hover ~ .star {
+.star:hover~.star {
     color: #ffcc00;
 }
 
 .star.selected,
-.star.selected ~ .star {
+.star.selected~.star {
     color: #ffcc00;
 }
 
@@ -644,15 +657,18 @@ footer p {
     border: 1px solid #111b21 !important;
     border-radius: 0;
 }
+
 .bg-custom-btn:hover {
     background-color: #fff;
     color: #111b21;
 }
+
 .form-control {
     border-width: 2px;
     border-radius: 0;
     padding: 0.75rem 0.75rem;
 }
+
 .filter_bg .form-select {
     border-width: 2px;
     padding: 0.25rem 0.55rem;
@@ -664,23 +680,28 @@ footer p {
     box-shadow: none !important;
     font-size: 14px;
 }
+
 .filter_bg .form-select:focus {
     border: 1px solid #ddd !important;
 }
+
 .filter_bg .form-select option:checked {
     background-color: #ddd;
     color: #000;
 }
+
 .iti {
     display: block;
     position: relative;
     width: 100%;
 }
+
 .iti__flag-container .iti__selected-flag {
     height: 49px !important;
     background-color: #ddd !important;
     border-radius: 0px;
 }
+
 label.error {
     color: red;
     margin-top: 10px;
@@ -691,12 +712,14 @@ label.error {
     border-radius: 6px;
     margin-bottom: 25px;
 }
+
 .project-image-wrapper {
     object-fit: cover;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     overflow: hidden;
 }
+
 .card_one .project-image-wrapper img {
     transform: scale(1);
     transition: 0.3s all ease-in-out;
@@ -708,6 +731,7 @@ label.error {
     height: 150px;
     object-fit: cover;
 }
+
 .card_two .project-image-wrapper img {
     transform: scale(1);
     transition: 0.3s all ease-in-out;
@@ -716,9 +740,11 @@ label.error {
     -ms-transition: 0.3s all ease-in-out;
     -o-transition: 0.3s all ease-in-out;
     width: 100%;
-    height: 250px;
+    height: 150px;
     object-fit: cover;
 }
+
+
 /* .project-image-wrapper img {
     transform: scale(1);
     transition: 0.3s all ease-in-out;
@@ -730,6 +756,7 @@ label.error {
     height: 250px;
     object-fit: cover;
 } */
+
 .project-card-wrapper:hover .project-image-wrapper img {
     transform: scale(1.1);
     transition: 0.3s all ease-in-out;
@@ -738,9 +765,11 @@ label.error {
     -ms-transition: 0.3s all ease-in-out;
     -o-transition: 0.3s all ease-in-out;
 }
+
 .project-details-wrapper p {
     font-size: 14px;
 }
+
 .project-details-wrapper .price-info {
     text-align: left;
     color: #ffa73d;
@@ -750,11 +779,11 @@ label.error {
     text-transform: capitalize;
 }
 
+
 /* Home page Main Banner CSS Start */
+
 .main_bg {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)),
-        url("../img/perfect-living-hyderabad-banner.jpg") no-repeat center
-            center;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)), url("../img/perfect-living-hyderabad-banner.jpg") no-repeat center center;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -780,6 +809,8 @@ label.error {
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
 }
+
+
 /* Home page Main Banner CSS End */
 
 .home_tab_sec .nav-pills {
@@ -787,14 +818,16 @@ label.error {
 }
 
 .home_tab_sec .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show>.nav-link {
     background-color: #000 !important;
     color: #fff !important;
 }
+
 .home_tab_sec .nav-pills .nav-link:hover {
     background: #000;
     color: #fff !important;
 }
+
 .home_tab_sec .nav-pills .nav-link {
     background: #ececec;
     color: #000 !important;
@@ -805,6 +838,7 @@ label.error {
     -o-border-radius: 0px !important;
     padding: 15px 40px;
 }
+
 
 /* .home_tab_sec .nav-pills .nav-link:hover{
   background-color: #000;
@@ -818,7 +852,9 @@ label.error {
     }
 }
 
+
 /* sub_menu_footer */
+
 .sub_menu_footer {
     background-color: #444444;
 }
@@ -827,6 +863,7 @@ label.error {
     color: #f5f5f5;
     margin-bottom: 1rem;
 }
+
 .sub_menu_footer ul li {
     margin-bottom: 0;
 }
@@ -845,6 +882,7 @@ label.error {
 .sub_menu_footer ul li a:hover {
     color: #fff;
 }
+
 .border-end {
     border-right: 1px solid #707070 !important;
 }
@@ -852,6 +890,7 @@ label.error {
 .filter_bg {
     background-color: #f8f9fa;
 }
+
 .bg-grey {
     background-color: #e4e4e4;
     border-radius: 0px;
@@ -881,7 +920,7 @@ label.error {
     text-decoration: underline;
 }
 
-.btn_black{
+.btn_black {
     background-color: #000;
     border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -895,7 +934,8 @@ label.error {
     -ms-transition: 0.4s all;
     -o-transition: 0.4s all;
 }
-.btn_black:hover{
+
+.btn_black:hover {
     background-color: #fff;
     color: #000;
 }
