@@ -7,7 +7,28 @@
       <div class="col-lg-6 col-md-8 col-12">
         <div class="container">
             <form>
-              <input type="text" class="form-control" placeholder="Search Locality / Builder or Project" />
+              <!-- <input type="text" class="form-control" placeholder="Search Locality / Builder or Project" /> -->
+              <label for="categorySelect" class="form-label">Category and Subcategory</label>
+                <select class="form-select" id="categorySelect" aria-label="Category and Subcategory select">
+                <option selected>Choose Category</option>
+                <!-- Category 1 with Subcategories -->
+                <optgroup label="Category 1">
+                    <option value="1.1">Subcategory 1.1</option>
+                    <option value="1.2">Subcategory 1.2</option>
+                    <option value="1.3">Subcategory 1.3</option>
+                </optgroup>
+                <!-- Category 2 with Subcategories -->
+                <optgroup label="Category 2">
+                    <option value="2.1">Subcategory 2.1</option>
+                    <option value="2.2">Subcategory 2.2</option>
+                </optgroup>
+                <!-- Category 3 with Subcategories -->
+                <optgroup label="Category 3">
+                    <option value="3.1">Subcategory 3.1</option>
+                    <option value="3.2">Subcategory 3.2</option>
+                    <option value="3.3">Subcategory 3.3</option>
+                </optgroup>
+                </select>
             </form>
         </div>
       </div>
