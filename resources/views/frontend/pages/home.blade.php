@@ -8,7 +8,7 @@
         <div class="container">
             <form>
             <input type="text" class="form-control" id="searchInput" placeholder="Search Locality / Builder or Project" onkeyup="filterDropdown()">
-  
+
                 <!-- Dropdown for Categories and Subcategories -->
                 <ul class="dropdown-menu w-50" id="categoryDropdown" style="display:none;">
                     <!-- Category 1 with Subcategories -->
@@ -75,62 +75,60 @@
     // Group projects by project_type
     $groupedProjects = $projects->groupBy('project_type');
 @endphp
-
 <section class="home_tab_sec">
-    <div class="container">
+  <div class="container">
       <h2 class="mb-4 text-center">EXPLORE PERFECT LIVING TOP PICKS</h2>
 
-      <ul class="nav nav-pills mb-3 d-flex gap-2 justify-content-lg-between border-bottom mb-5" id="pills-tab" role="tablist">
-        @foreach($groupedProjects as $type => $projects)
-          <li class="nav-item" role="presentation">
-            <button class="nav-link {{ $loop->first ? 'active' : '' }}" id="pills-tab{{ $loop->index + 1 }}-tab" data-bs-toggle="pill" data-bs-target="#pills-tab{{ $loop->index + 1 }}" type="button" role="tab" aria-controls="pills-tab{{ $loop->index + 1 }}" aria-selected="{{ $loop->first ? 'true' : 'false' }}">{{ $type }}</button>
-          </li>
-        @endforeach
+      <!-- Nav Pills for Tabs -->
+      <ul class="nav nav-pills mb-3 border-bottom mb-5 flex-nowrap" id="pills-tab" role="tablist">
+          @foreach($groupedProjects as $type => $projects)
+              <li class="nav-item" role="presentation">
+                  <button class="nav-link {{ $loop->first ? 'active' : '' }}" id="pills-tab{{ $loop->index + 1 }}-tab" data-bs-toggle="pill" data-bs-target="#pills-tab{{ $loop->index + 1 }}" type="button" role="tab" aria-controls="pills-tab{{ $loop->index + 1 }}" aria-selected="{{ $loop->first ? 'true' : 'false' }}">{{ $type }}</button>
+              </li>
+          @endforeach
       </ul>
 
+      <!-- Tab Content -->
       <div class="tab-content" id="pills-tabContent">
-        @foreach($groupedProjects as $type => $projects)
-          <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="pills-tab{{ $loop->index + 1 }}" role="tabpanel" aria-labelledby="pills-tab{{ $loop->index + 1 }}-tab">
-            <div class="row">
-              @foreach($projects as $project)
+          @foreach($groupedProjects as $type => $projects)
+              <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="pills-tab{{ $loop->index + 1 }}" role="tabpanel" aria-labelledby="pills-tab{{ $loop->index + 1 }}-tab">
+                  <div class="row">
+                      @foreach($projects as $project)
+                          @php
+                              // Default placeholder image URL
+                              $defaultImageUrl = 'https://via.placeholder.com/150';
+                              // Check if elevationPictures is set and contains at least one image
+                              $imageUrl = $defaultImageUrl; // Default image
 
+                              if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
+                                  $firstImagePath = $project->elevationPictures->first()->file_path;
+                                  $fullImagePath = URL::to(env('APP_STORAGE').$firstImagePath);
+                              }
+                          @endphp
 
-
-@php
-// Default placeholder image URL
-$defaultImageUrl = 'https://via.placeholder.com/150';
-// Check if elevationPictures is set and contains at least one image
-$imageUrl = $defaultImageUrl; // Default image
-
-if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
-$firstImagePath = $project->elevationPictures->first()->file_path;
-$fullImagePath = URL::to(env('APP_STORAGE').$firstImagePath);
-}
-@endphp
-
-
-              <div class="col-sm-4">
-                  <div class="project-card-wrapper">
-                    <a href="{{ URL::to('company/project/'.$project->slug) }}" class="text-decoration-none">
-                      <div class="project-image-wrapper h-100">
-                        <img src="{{ $fullImagePath??'#' }}" alt="{{ $project->name }}" class="img-fluid project-image h-100">
-                      </div>
-                      <div class="project-details-wrapper h-100 p-3">
-                        <h5 class="mb-0">{{ $project->name }}</h5>
-                        <p>{{ $project->areas->name??'' }}</p>
-                        <p>{{ $project->project_type }} <br> {{ $project->no_of_units }} units</p>
-                        <p class="mb-0"> <span class="price-info">₹{{ $project->price_per_sft }} per sqft</span> <small>Onwards</small></p>
-                      </div>
-                    </a>
+                          <div class="col-sm-4">
+                              <div class="project-card-wrapper">
+                                  <a href="{{ URL::to('company/project/'.$project->slug) }}" class="text-decoration-none">
+                                      <div class="project-image-wrapper h-100">
+                                          <img src="{{ $fullImagePath ?? $defaultImageUrl }}" alt="{{ $project->name }}" class="img-fluid project-image h-100">
+                                      </div>
+                                      <div class="project-details-wrapper h-100 p-3">
+                                          <h5 class="mb-0">{{ $project->name }}</h5>
+                                          <p>{{ $project->areas->name ?? '' }}</p>
+                                          <p>{{ $project->project_type }} <br> {{ $project->no_of_units }} units</p>
+                                          <p class="mb-0"> <span class="price-info">₹{{ $project->price_per_sft }} per sqft</span> <small>Onwards</small></p>
+                                      </div>
+                                  </a>
+                              </div>
+                          </div>
+                      @endforeach
                   </div>
-                </div>
-              @endforeach
-            </div>
-          </div>
-        @endforeach
+              </div>
+          @endforeach
       </div>
-    </div>
-  </section>
+  </div>
+</section>
+
 
 
 
