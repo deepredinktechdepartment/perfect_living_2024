@@ -420,6 +420,7 @@ footer p {
 
 .inline-links li {
     position: relative;
+    font-size: 12px;
 }
 
 .inline-links li:not(:last-child)::before {

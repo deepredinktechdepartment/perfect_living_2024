@@ -108,9 +108,9 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-3">
-      <div class="footer-logo mt-sm-0 mt-3">
+      <div class="footer-logo">
           @if(isset($footer_logo) && File::exists($footer_logo))
-          <img src=" {{ URL::to(asset($footer_logo)) }}" class="img-fluid mb-sm-4 mb-2" alt="{{ env('APP_NAME') }}">
+          <img src=" {{ URL::to(asset($footer_logo)) }}" width="230px" class="img-fluid mb-sm-2 mb-1" alt="{{ env('APP_NAME') }}">
           @endif
       </div>
       <div class="social-links">
@@ -127,7 +127,7 @@
         <p class="text-white">Perfect Living is a trusted platform that lists carefully curated top properties in Hyderabad. We focus on providing detailed, reliable project information to help you make informed decisions. Our commitment is to transparency and quality, ensuring you find the right property with confidence.</p>
       </div>
       <div class="col-lg-3">
-        <ul class="inline-links">
+        <ul class="inline-links d-flex justify-content-center">
           <li><a href="{{ URL('terms-of-use') }}" class="text-white">Terms of Use</a></li>
           <li><a href="{{ URL('advertise-with-us') }}" class="text-white">Advertise with us</a></li>
         </ul>
