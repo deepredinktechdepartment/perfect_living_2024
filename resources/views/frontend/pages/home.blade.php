@@ -75,15 +75,16 @@
     // Group projects by project_type
     $groupedProjects = $projects->groupBy('project_type');
 @endphp
+
 <section class="home_tab_sec">
   <div class="container">
       <h2 class="mb-4 text-center">EXPLORE PERFECT LIVING TOP PICKS</h2>
 
-      <!-- Nav Pills for Tabs -->
-      <ul class="nav nav-pills mb-3 border-bottom mb-5 flex-nowrap" id="pills-tab" role="tablist">
+      <!-- Nav Pills for Tabs with margin between items -->
+      <ul class="nav nav-pills mb-3 border-bottom mb-5 flex-nowrap overflow-auto" id="pills-tab" role="tablist">
           @foreach($groupedProjects as $type => $projects)
               <li class="nav-item" role="presentation">
-                  <button class="nav-link {{ $loop->first ? 'active' : '' }}" id="pills-tab{{ $loop->index + 1 }}-tab" data-bs-toggle="pill" data-bs-target="#pills-tab{{ $loop->index + 1 }}" type="button" role="tab" aria-controls="pills-tab{{ $loop->index + 1 }}" aria-selected="{{ $loop->first ? 'true' : 'false' }}">{{ $type }}</button>
+                  <button class="nav-link {{ $loop->first ? 'active' : '' }} me-2" id="pills-tab{{ $loop->index + 1 }}-tab" data-bs-toggle="pill" data-bs-target="#pills-tab{{ $loop->index + 1 }}" type="button" role="tab" aria-controls="pills-tab{{ $loop->index + 1 }}" aria-selected="{{ $loop->first ? 'true' : 'false' }}">{{ $type }}</button>
               </li>
           @endforeach
       </ul>
@@ -128,6 +129,7 @@
       </div>
   </div>
 </section>
+
 
 
 
