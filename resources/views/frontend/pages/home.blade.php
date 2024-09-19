@@ -78,6 +78,50 @@
 
 
 
+    @php
+    // Group projects by project_type
+    $groupedProjects = $projects->groupBy('project_type');
+@endphp
+
+<section class="home_tab_sec">
+    <div class="container">
+      <h2 class="mb-4 text-center">EXPLORE PERFECT LIVING TOP PICKS</h2>
+
+      <ul class="nav nav-pills mb-3 d-flex gap-2 justify-content-lg-between border-bottom mb-5" id="pills-tab" role="tablist">
+        @foreach($groupedProjects as $type => $projects)
+          <li class="nav-item" role="presentation">
+            <button class="nav-link {{ $loop->first ? 'active' : '' }}" id="pills-tab{{ $loop->index + 1 }}-tab" data-bs-toggle="pill" data-bs-target="#pills-tab{{ $loop->index + 1 }}" type="button" role="tab" aria-controls="pills-tab{{ $loop->index + 1 }}" aria-selected="{{ $loop->first ? 'true' : 'false' }}">{{ $type }}</button>
+          </li>
+        @endforeach
+      </ul>
+
+      <div class="tab-content" id="pills-tabContent">
+        @foreach($groupedProjects as $type => $projects)
+          <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="pills-tab{{ $loop->index + 1 }}" role="tabpanel" aria-labelledby="pills-tab{{ $loop->index + 1 }}-tab">
+            <div class="row">
+              @foreach($projects as $project)
+                <div class="col-sm-4">
+                  <div class="project-card-wrapper">
+                    <a href="{{ URL::to('company/project/'.$project->slug) }}" class="text-decoration-none">
+                      <div class="project-image-wrapper h-100">
+                        <img src="{{ URL::to('assets/website/img/project.jpg') }}" alt="{{ $project->name }}" class="img-fluid project-image h-100">
+                      </div>
+                      <div class="project-details-wrapper h-100 p-3">
+                        <h5 class="mb-0">{{ $project->name }}</h5>
+                        {{-- <p>{{ $project->site_address }}</p> --}}
+                        <p>{{ $project->project_type }} <br> {{ $project->no_of_units }} units</p>
+                        <p class="mb-0"> <span class="price-info">₹{{ $project->price_per_sft }} per sqft</span> <small>Onwards</small></p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+        @endforeach
+      </div>
+    </div>
+  </section>
 
 
     <section class="home_tab_sec">
