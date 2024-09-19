@@ -44,81 +44,83 @@ class PagesController extends Controller
     }
 
     public function filtersprojects(Request $request)
-{
-    $pageTitle = 'Filters Projects';
+    {
+        $pageTitle = 'Filters Projects';
 
-    // Retrieve input parameters
-    $beds = $request->input('beds', []);
-    $types = $request->input('types', []);
-    $priceRange = $request->input('budgets', []);
-    $areaNames = $request->input('areas', []);
-    $projectName = $request->input('name', ''); // Filter for project name
-    // Retrieve the search query from the input
-    $searchQuery = $request->query('search', ''); // Get the search input (default to empty)
+        // Retrieve input parameters as comma-separated strings
+        $beds = $request->input('beds', ''); // Comma-separated string for beds
+        $types = $request->input('types', ''); // Comma-separated string for types
+        $priceRange = $request->input('budgets', []); // Get price range as an array (unchanged)
+        $areaNames = $request->input('areas', ''); // Comma-separated string for areas
+        $projectName = $request->input('name', ''); // Get project name for filtering
+        $searchQuery = $request->query('search', ''); // Get the search input (default to empty)
 
-    // Start building the query
-    $query = Project::with('company', 'citites', 'areas', 'elevationPictures', 'unitConfigurations')
-                    ->isApproved(true);
+        // Start building the query
+        $query = Project::with('company', 'citites', 'areas', 'elevationPictures', 'unitConfigurations')
+                        ->isApproved(true);
 
-    // Apply filters dynamically based on provided input parameters
-
-    // Filter by project name
-    if (!empty($projectName)) {
-        $query->where('name', 'LIKE', "%$projectName%");
-    }
-
-    // Filter by beds
-    if (is_array($beds) && !empty($beds)) {
-        $query->whereHas('unitConfigurations', function ($q) use ($beds) {
-            $q->whereIn('beds', $beds);
-        });
-    }
-
-    // Filter by project type
-    if (is_array($types) && !empty($types)) {
-        $query->whereIn('project_type', $types);
-    }
-
-    // Filter by price range
-    if (is_array($priceRange) && count($priceRange) === 2) {
-        $minPrice = $priceRange[0];
-        $maxPrice = $priceRange[1];
-        $query->whereBetween('price_per_sft', [$minPrice, $maxPrice]);
-    }
-
-    // Filter by area names using a combined WHERE condition (case-insensitive)
-    if (is_array($areaNames) && !empty($areaNames)) {
-        $likeConditions = [];
-        foreach ($areaNames as $name) {
-            $likeConditions[] = 'LOWER(name) LIKE ?';
+        // Filter by project name if provided
+        if (!empty($projectName)) {
+            $query->where('name', 'LIKE', "%$projectName%");
         }
-        $query->whereHas('areas', function ($q) use ($areaNames, $likeConditions) {
-            $q->whereRaw(implode(' OR ', $likeConditions), array_map(fn($name) => '%' . strtolower($name) . '%', $areaNames));
-        });
-    }
-      // Filter by project name, area name, or unit type based on search query
-      if (!empty($searchQuery)) {
-        $query->where(function ($q) use ($searchQuery) {
-            $q->where('name', 'LIKE', "%$searchQuery%") // Search by project name
-              ->orWhereHas('areas', function ($q) use ($searchQuery) { // Search by area name
-                  $q->where('name', 'LIKE', "%$searchQuery%");
-              })
-              ->orWhereHas('unitConfigurations', function ($q) use ($searchQuery) { // Search by unit configurations
-                  $q->where('beds', 'LIKE', "%$searchQuery%");
-              });
-        });
+
+        // Filter by beds if provided (comma-separated string)
+        if (!empty($beds)) {
+            $bedsArray = explode(',', $beds); // Convert the comma-separated string into an array
+            $query->whereHas('unitConfigurations', function ($q) use ($bedsArray) {
+                $q->whereIn('beds', $bedsArray);
+            });
+        }
+
+        // Filter by project types if provided (comma-separated string)
+        if (!empty($types)) {
+            $typesArray = explode(',', $types); // Convert the comma-separated string into an array
+            $query->whereIn('project_type', $typesArray);
+        }
+
+        // Filter by price range if provided
+        if (is_array($priceRange) && count($priceRange) === 2) {
+            $minPrice = $priceRange[0];
+            $maxPrice = $priceRange[1];
+            $query->whereBetween('price_per_sft', [$minPrice, $maxPrice]);
+        }
+
+        // Filter by area names (comma-separated string)
+        if (!empty($areaNames)) {
+            $areaNamesArray = explode(',', $areaNames); // Convert the comma-separated string into an array
+            $query->whereHas('areas', function ($q) use ($areaNamesArray) {
+                $q->where(function ($subQuery) use ($areaNamesArray) {
+                    foreach ($areaNamesArray as $name) {
+                        $subQuery->orWhere('name', 'LIKE', '%' . trim($name) . '%');
+                    }
+                });
+            });
+        }
+
+        // Filter by search query (name, area, or unit configurations)
+        if (!empty($searchQuery)) {
+            $query->where(function ($q) use ($searchQuery) {
+                $q->where('name', 'LIKE', "%$searchQuery%") // Search by project name
+                  ->orWhereHas('areas', function ($q) use ($searchQuery) { // Search by area name
+                      $q->where('name', 'LIKE', "%$searchQuery%");
+                  })
+                  ->orWhereHas('unitConfigurations', function ($q) use ($searchQuery) { // Search by unit configurations
+                      $q->where('beds', 'LIKE', "%$searchQuery%");
+                  });
+            });
+        }
+
+        // Execute the query and get results
+        $projects = $query->get();
+
+        // If all filters are empty, return an empty collection
+        if (empty($beds) && empty($types) && empty($priceRange) && empty($areaNames) && empty($projectName) && empty($searchQuery)) {
+            $projects = collect(); // Return an empty collection if no filters are applied
+        }
+
+        // Return the view with filtered projects
+        return view('frontend.pages.filtersprojects', compact('pageTitle', 'projects'));
     }
 
-    // Execute the query and get results
-    $projects = $query->get();
-
-    // Check if all filters are empty
-    if (empty($beds) && empty($types) && empty($priceRange) && empty($areaNames) && empty($projectName) && empty($searchQuery)) {
-        $projects = collect(); // Return an empty collection if no filters are applied
-    }
-
-    // Return the view with filtered projects
-    return view('frontend.pages.filtersprojects', compact('pageTitle', 'projects'));
-}
 
 }
