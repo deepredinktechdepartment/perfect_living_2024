@@ -662,10 +662,10 @@ footer p {
     box-shadow: none !important;
     font-size: 14px;
 }
-.filter_bg .form-select:focus{
+.filter_bg .form-select:focus {
     border: 1px solid #ddd !important;
 }
-.filter_bg .form-select option:checked{
+.filter_bg .form-select option:checked {
     background-color: #ddd;
     color: #000;
 }
@@ -726,7 +726,8 @@ label.error {
 /* Home page Main Banner CSS Start */
 .main_bg {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)),
-        url("../img/perfect-living-hyderabad-banner.jpg") no-repeat center center;
+        url("../img/perfect-living-hyderabad-banner.jpg") no-repeat center
+            center;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -831,4 +832,24 @@ label.error {
     -moz-border-radius: 0px;
     -ms-border-radius: 0px;
     -o-border-radius: 0px;
+}
+
+.main_bg .dropdown-menu{
+    height: 200px;
+    overflow-y: scroll;
+    min-height: 100%;
+}
+
+.main_bg .dropdown-menu h5 {
+    padding: 0 0.5rem;
+}
+
+.main_bg .dropdown-item {
+    padding: 0.25rem 0.5rem;
+    font-size: 14px;
+    white-space: break-spaces;
+}
+
+.main_bg .dropdown-item:hover {
+    text-decoration: underline;
 }
