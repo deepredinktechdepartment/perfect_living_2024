@@ -47,7 +47,7 @@
                             <th>Name</th>
                             <th>Company</th>
                             <th>Preview</th>
-                            @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
+                            @if(Auth::check() && in_array(Auth::user()->role, [1, 2,4]))
                             <th>Approval Status</th>
                             <th>Featured Status</th>
                         @endif
@@ -70,7 +70,7 @@
                                     <span class="copy-message" id="message-{{ $loop->iteration }}">Copied!</span>
                                 </td>
 
-                                @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
+                                @if(Auth::check() && in_array(Auth::user()->role, [1, 2,4]))
                                     <td>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input toggle-approval" type="checkbox" id="toggle-{{ $project->id }}" {{ $project->is_approved ? 'checked' : '' }} data-id="{{ $project->id }}">
@@ -80,7 +80,7 @@
                                         </div>
                                     </td>
                                 @endif
-                                @if(Auth::check() && in_array(Auth::user()->role, [1, 2]))
+                                @if(Auth::check() && in_array(Auth::user()->role, [1, 2,4]))
                                 <td>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input toggle-featured" type="checkbox" id="featured-{{ $project->id }}" {{ $project->is_featured ? 'checked' : '' }} data-id="{{ $project->id }}">
