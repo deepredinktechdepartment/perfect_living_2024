@@ -81,7 +81,7 @@
 
                     <x-project-card-view2
                         :name="$project->name"
-                        :address="$project->name . ', ' . $project->company->name"
+                        :address="$project->areas->name"
                         :details="$project->project_type . ' , ' . $project->no_of_units . ' units'"
                         :price="'₹' . number_format($project->price_per_sft) . ' per sqft'"
                         :image="$imageUrl"

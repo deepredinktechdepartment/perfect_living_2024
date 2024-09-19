@@ -42,6 +42,7 @@ class PagesController extends Controller
         $pageTitle='Contact Us';
         return view('frontend.pages.under_construction',compact('pageTitle'));
     }
+
     public function filtersprojects(Request $request)
     {
         $pageTitle = 'Filters Projects';
@@ -49,7 +50,8 @@ class PagesController extends Controller
         // Retrieve input parameters
         $beds = $request->input('beds', []);
         $types = $request->input('types', []); // Example for additional filters like property type
-        $priceRange = $request->input('priceRange', []); // Example for price range
+        $priceRange = $request->input('budgets', []); // Example for price range
+        $areaNames = $request->input('areas', []); // New filter for area names
 
         // Start building the query
         $query = Project::with('company', 'citites', 'areas', 'elevationPictures', 'unitConfigurations')
@@ -66,7 +68,7 @@ class PagesController extends Controller
 
         // Filter by project type
         if (is_array($types) && !empty($types)) {
-            $query->whereIn('project_type', $types);
+            //$query->whereIn('project_type', $types);
         }
 
         // Filter by price range
@@ -76,14 +78,25 @@ class PagesController extends Controller
             $query->whereBetween('price_per_sft', [$minPrice, $maxPrice]);
         }
 
+        // Filter by area names using LIKE (case-insensitive)
+        if (is_array($areaNames) && !empty($areaNames)) {
+            $query->whereHas('areas', function ($q) use ($areaNames) {
+                foreach ($areaNames as $name) {
+                    $q->orWhereRaw('LOWER(name) LIKE ?', ['%' . strtolower($name) . '%']);
+                }
+            });
+        }
+
         // Execute the query and get results
         $projects = $query->get();
 
         // Debug the projects data (optional)
-        // dd($projects);
+
 
         // Return the view with filtered projects
         return view('frontend.pages.filtersprojects', compact('pageTitle', 'projects'));
     }
+
+
 
 }
