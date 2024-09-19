@@ -30,7 +30,7 @@
     <section>
         <div class="container">
 
-                <h2 class="mb-4 text-center">Top Featured Properties</h2>
+                <h2 class="mb-4 text-center">Featured Gated Communities in Hyderabad</h2>
                 <div class="featured-properties-slider">
                     @foreach ($projects as $project)
                         @php
@@ -78,7 +78,7 @@
 
 <section class="home_tab_sec">
   <div class="container">
-      <h2 class="mb-4 text-center">EXPLORE PERFECT LIVING TOP PICKS</h2>
+      <h2 class="mb-4 text-center">Explore Perfect Living Top Picks</h2>
 
       <!-- Nav Pills for Tabs with margin between items -->
       <ul class="nav nav-pills mb-3 border-bottom mb-5 flex-nowrap overflow-auto" id="pills-tab" role="tablist">

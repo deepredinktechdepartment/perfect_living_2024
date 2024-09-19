@@ -48,7 +48,7 @@
 
 
 
-<section class="footer-before-sec">
+<!-- <section class="footer-before-sec">
   <div class="container">
     <div class="row">
       <div class="col-sm-9">
@@ -86,15 +86,47 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
-<footer class="pb-2">
+<!-- <footer class="pb-2">
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
         <p class="text-white">{{  $copyright??''  }}</p>
       </div>
       <div class="col-sm-9">
+        <ul class="inline-links">
+          <li><a href="{{ URL('terms-of-use') }}" class="text-white">Terms of Use</a></li>
+          <li><a href="{{ URL('advertise-with-us') }}" class="text-white">Advertise with us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer> -->
+
+<footer class="py-3">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-3">
+      <div class="footer-logo mt-sm-0 mt-3">
+          @if(isset($footer_logo) && File::exists($footer_logo))
+          <img src=" {{ URL::to(asset($footer_logo)) }}" class="img-fluid mb-sm-4 mb-2" alt="{{ env('APP_NAME') }}">
+          @endif
+      </div>
+      <div class="social-links">
+          <ul>
+            <li><a href="{{ $linkedin_url??'#' }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+            <li><a href="{{ $facebook_url??'#' }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="{{ $twitter_url??'#' }}" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="{{ $instagram_url??'#' }}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="{{ $whatsapp_url??'#' }}" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <p class="text-white">Perfect Living is a trusted platform that lists carefully curated top properties in Hyderabad. We focus on providing detailed, reliable project information to help you make informed decisions. Our commitment is to transparency and quality, ensuring you find the right property with confidence.</p>
+      </div>
+      <div class="col-lg-3">
         <ul class="inline-links">
           <li><a href="{{ URL('terms-of-use') }}" class="text-white">Terms of Use</a></li>
           <li><a href="{{ URL('advertise-with-us') }}" class="text-white">Advertise with us</a></li>
