@@ -1,4 +1,53 @@
 
+<section class="sub_menu_footer">
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-3 border-end">
+          <ul class="list-unstyled text-center">
+              <li>
+                  <h6>Apartments in Hyderabad</h6>
+              </li>
+
+
+              @menu('Apartments in Hyderabad', 'list-unstyled', false, 'dropdown-item', 'false')
+
+
+          </ul>
+      </div>
+
+
+          <div class="col-lg-3 border-end">
+              <ul class="list-unstyled text-center">
+                  <li>
+                      <h6>Find Apartments by Budget</h6>
+                  </li>
+                  @menu('Find Apartments by Budget', 'list-unstyled', false, 'dropdown-item', 'false')
+              </ul>
+          </div>
+          <div class="col-lg-3 border-end">
+              <ul class="list-unstyled text-center">
+                  <li>
+                      <h6>Top Locations in Hyderabad</h6>
+                  </li>
+
+                  @menu('Top Locations in Hyderabad', 'list-unstyled', false, 'dropdown-item', 'false')
+              </ul>
+          </div>
+          <div class="col-lg-3 border-end">
+              <ul class="list-unstyled text-center">
+                  <li>
+                      <h6>Top builders</h6>
+                  </li>
+                  @menu('Top builders', 'list-unstyled', false, 'dropdown-item', 'false')
+              </ul>
+          </div>
+
+      </div>
+  </div>
+</section>
+
+
+
 <section class="footer-before-sec">
   <div class="container">
     <div class="row">
@@ -6,18 +55,10 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="footer-col">
-              <p class="list-heading text-white mt-3">Top Locations in Hyderabad</p>
-              <!-- To display a full list -->
-              @menu('Top Locations in Hyderabad', 'footer-links-list', 'menu-item', 'menu-link', 'false')
+
             </div>
           </div>
-          {{-- <div class="col-sm-4">
-            <div class="footer-col">
-              <p class="list-heading text-white mt-3">Top Locations in Bengaluru</p>
-              <!-- To display a full list -->
-              @menu('Top Locations in Bengaluru', 'footer-links-list', 'menu-item', 'menu-link', 'false')
-            </div>
-          </div> --}}
+
         </div>
       </div>
 
