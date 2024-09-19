@@ -42,7 +42,6 @@ class PagesController extends Controller
         $pageTitle='Contact Us';
         return view('frontend.pages.under_construction',compact('pageTitle'));
     }
-
     public function filtersprojects(Request $request)
     {
         $pageTitle = 'Filters Projects';
@@ -50,9 +49,10 @@ class PagesController extends Controller
         // Retrieve input parameters as comma-separated strings
         $beds = $request->input('beds', ''); // Comma-separated string for beds
         $types = $request->input('types', ''); // Comma-separated string for types
-        $priceRange = $request->input('budgets', []); // Get price range as an array (unchanged)
+        $priceRange = $request->input('budgets', ''); // Comma-separated string for budgets
         $areaNames = $request->input('areas', ''); // Comma-separated string for areas
         $projectName = $request->input('name', ''); // Get project name for filtering
+        $builders = $request->input('builders', ''); // Comma-separated string for builders
         $searchQuery = $request->query('search', ''); // Get the search input (default to empty)
 
         // Start building the query
@@ -78,11 +78,14 @@ class PagesController extends Controller
             $query->whereIn('project_type', $typesArray);
         }
 
-        // Filter by price range if provided
-        if (is_array($priceRange) && count($priceRange) === 2) {
-            $minPrice = $priceRange[0];
-            $maxPrice = $priceRange[1];
-            $query->whereBetween('price_per_sft', [$minPrice, $maxPrice]);
+        // Filter by price range if provided (comma-separated string)
+        if (!empty($priceRange)) {
+            $priceRangeArray = explode(',', $priceRange); // Convert the comma-separated string into an array
+            if (count($priceRangeArray) === 2) {
+                $minPrice = $priceRangeArray[0];
+                $maxPrice = $priceRangeArray[1];
+                $query->whereBetween('price_per_sft', [$minPrice, $maxPrice]);
+            }
         }
 
         // Filter by area names (comma-separated string)
@@ -94,6 +97,14 @@ class PagesController extends Controller
                         $subQuery->orWhere('name', 'LIKE', '%' . trim($name) . '%');
                     }
                 });
+            });
+        }
+
+        // Filter by builders using the company relation
+        if (!empty($builders)) {
+            $buildersArray = explode(',', $builders); // Convert the comma-separated string into an array
+            $query->whereHas('company', function ($q) use ($buildersArray) {
+                $q->whereIn('slug', $buildersArray); // Assuming 'name' column in the 'company' table
             });
         }
 
@@ -114,13 +125,14 @@ class PagesController extends Controller
         $projects = $query->get();
 
         // If all filters are empty, return an empty collection
-        if (empty($beds) && empty($types) && empty($priceRange) && empty($areaNames) && empty($projectName) && empty($searchQuery)) {
+        if (empty($beds) && empty($types) && empty($priceRange) && empty($areaNames) && empty($projectName) && empty($searchQuery) && empty($builders)) {
             $projects = collect(); // Return an empty collection if no filters are applied
         }
 
         // Return the view with filtered projects
         return view('frontend.pages.filtersprojects', compact('pageTitle', 'projects'));
     }
+
 
 
 }
