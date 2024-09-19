@@ -880,3 +880,22 @@ label.error {
 .main_bg .dropdown-item:hover {
     text-decoration: underline;
 }
+
+.btn_black{
+    background-color: #000;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    color: #fff;
+    transition: 0.4s all;
+    -webkit-transition: 0.4s all;
+    -moz-transition: 0.4s all;
+    -ms-transition: 0.4s all;
+    -o-transition: 0.4s all;
+}
+.btn_black:hover{
+    background-color: #fff;
+    color: #000;
+}
