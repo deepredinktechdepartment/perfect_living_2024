@@ -4,31 +4,24 @@
 @section('mainContent')
 <div>
     <div class="main_bg">
-      <div class="col-lg-6 col-md-8 col-12">
+      <div class="col-lg-6 col-md-8 col-12 position-relative">
         <div class="container">
             <form>
-              <!-- <input type="text" class="form-control" placeholder="Search Locality / Builder or Project" /> -->
-              <label for="categorySelect" class="form-label">Category and Subcategory</label>
-                <select class="form-select" id="categorySelect" aria-label="Category and Subcategory select">
-                <option selected>Choose Category</option>
-                <!-- Category 1 with Subcategories -->
-                <optgroup label="Category 1">
-                    <option value="1.1">Subcategory 1.1</option>
-                    <option value="1.2">Subcategory 1.2</option>
-                    <option value="1.3">Subcategory 1.3</option>
-                </optgroup>
-                <!-- Category 2 with Subcategories -->
-                <optgroup label="Category 2">
-                    <option value="2.1">Subcategory 2.1</option>
-                    <option value="2.2">Subcategory 2.2</option>
-                </optgroup>
-                <!-- Category 3 with Subcategories -->
-                <optgroup label="Category 3">
-                    <option value="3.1">Subcategory 3.1</option>
-                    <option value="3.2">Subcategory 3.2</option>
-                    <option value="3.3">Subcategory 3.3</option>
-                </optgroup>
-                </select>
+            <input type="text" class="form-control" id="searchInput" placeholder="Search Locality / Builder or Project" onkeyup="filterDropdown()">
+  
+                <!-- Dropdown for Categories and Subcategories -->
+                <ul class="dropdown-menu w-50" id="categoryDropdown" style="display:none;">
+                    <!-- Category 1 with Subcategories -->
+                    <li class="dropdown-header">Fruits</li>
+                    <li><a class="dropdown-item" href="#" data-category="Category 1" data-value="1.1">Apple</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="Category 1" data-value="1.2">Mango</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="Category 1" data-value="1.3">Banana</a></li>
+
+                    <!-- Category 2 with Subcategories -->
+                    <li class="dropdown-header">Movies</li>
+                    <li><a class="dropdown-item" href="#" data-category="Category 2" data-value="2.1">Leo</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="Category 2" data-value="2.2">Spiderman</a></li>
+                </ul>
             </form>
         </div>
       </div>
