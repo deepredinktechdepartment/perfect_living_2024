@@ -829,7 +829,7 @@ label.error {
 }
 
 .home_tab_sec .nav-pills .nav-link {
-    background: #9c9c9c;
+    background: #cdcdcd;
     color: #000 !important;
     border-radius: 0px !important;
     -webkit-border-radius: 0px !important;
@@ -884,7 +884,7 @@ label.error {
 }
 
 .border-end {
-    border-right: 1px solid #9c9c9c !important;
+    border-right: 1px solid #cdcdcd !important;
 }
 
 .filter_bg {
