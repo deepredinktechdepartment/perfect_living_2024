@@ -14,7 +14,7 @@
         <div class="col-lg-3">
             <select class="form-select" name="budgets" aria-label="Budget">
                 <option value="" selected>Budget</option>
-                <option value="0-1.5" {{ request()->query('budgets') == '0-1.5' ? 'selected' : '' }}>Under 1.5 Cr</option>
+                <option value="1-1.5" {{ request()->query('budgets') == '1-1.5' ? 'selected' : '' }}>Under 1.5 Cr</option>
                 <option value="1.5-2" {{ request()->query('budgets') == '1.5-2' ? 'selected' : '' }}>1.5 Cr &amp; 2 Cr</option>
                 <option value="2-2.5" {{ request()->query('budgets') == '2-2.5' ? 'selected' : '' }}>2 Cr & 2.5 Cr</option>
                 <option value="2.5-4" {{ request()->query('budgets') == '2.5-4' ? 'selected' : '' }}>2.5 Cr & 4 Cr</option>

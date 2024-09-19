@@ -79,15 +79,25 @@ class PagesController extends Controller
             $query->whereIn('project_type', $typesArray);
         }
 
-        // Filter by price range if provided (comma-separated string)
-        if (!empty($priceRange)) {
-            $priceRangeArray = explode(',', $priceRange); // Convert the comma-separated string into an array
-            if (count($priceRangeArray) === 2) {
-                $minPrice = $priceRangeArray[0];
-                $maxPrice = $priceRangeArray[1];
-                $query->whereBetween('price_per_sft', [$minPrice, $maxPrice]);
-            }
-        }
+// Filter by price range if provided (comma-separated string)
+if (!empty($priceRange)) {
+    $priceRangeArray = explode(',', $priceRange); // Convert the comma-separated string into an array
+    if (count($priceRangeArray) === 2) {
+        $minPrice = $priceRangeArray[0];
+        $maxPrice = $priceRangeArray[1];
+
+        // Adjust query to filter based on price_range_start and price_range_end
+        $query->where(function ($q) use ($minPrice, $maxPrice) {
+            $q->whereBetween('price_range_start', [$minPrice, $maxPrice])
+              ->orWhereBetween('price_range_end', [$minPrice, $maxPrice])
+              ->orWhere(function ($q) use ($minPrice, $maxPrice) {
+                  $q->where('price_range_start', '<=', $minPrice)
+                    ->where('price_range_end', '>=', $maxPrice);
+              });
+        });
+    }
+}
+
 
         // Filter by area names (comma-separated string)
         if (!empty($areaNames)) {
