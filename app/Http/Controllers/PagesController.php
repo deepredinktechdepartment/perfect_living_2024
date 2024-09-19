@@ -28,6 +28,7 @@ class PagesController extends Controller
         $projects = Project::with('company')
         ->isFeatured(true)
         ->isApproved(true)
+        ->orderBy('updated_at', 'desc')
         ->get(); // Fetch all projects with company data
 
         return view('frontend.pages.home',compact('pageTitle','projects'));
@@ -48,7 +49,7 @@ class PagesController extends Controller
 
         // Retrieve input parameters as comma-separated strings
         $beds = $request->input('beds', ''); // Comma-separated string for beds
-        $types = $request->input('types', ''); // Comma-separated string for types
+        $types = $request->input('property_type', ''); // Comma-separated string for types
         $priceRange = $request->input('budgets', ''); // Comma-separated string for budgets
         $areaNames = $request->input('areas', ''); // Comma-separated string for areas
         $projectName = $request->input('name', ''); // Get project name for filtering
@@ -108,21 +109,27 @@ class PagesController extends Controller
             });
         }
 
-        // Filter by search query (name, area, or unit configurations)
-        if (!empty($searchQuery)) {
-            $query->where(function ($q) use ($searchQuery) {
-                $q->where('name', 'LIKE', "%$searchQuery%") // Search by project name
-                  ->orWhereHas('areas', function ($q) use ($searchQuery) { // Search by area name
-                      $q->where('name', 'LIKE', "%$searchQuery%");
-                  })
-                  ->orWhereHas('unitConfigurations', function ($q) use ($searchQuery) { // Search by unit configurations
-                      $q->where('beds', 'LIKE', "%$searchQuery%");
-                  });
-            });
-        }
+   // Filter by search query (name, area, unit configurations, or company name)
+   if (!empty($searchQuery)) {
+    $query->where(function ($q) use ($searchQuery) {
+        $q->where('name', 'LIKE', "%$searchQuery%") // Search by project name
+          ->orWhereHas('areas', function ($q) use ($searchQuery) { // Search by area name
+              $q->where('name', 'LIKE', "%$searchQuery%");
+          })
+          ->orWhereHas('unitConfigurations', function ($q) use ($searchQuery) { // Search by unit configurations
+              $q->where('beds', 'LIKE', "%$searchQuery%");
+          })
+          ->orWhereRaw('LOWER(project_type) LIKE ?', ["%$searchQuery%"]) // Search by project type
+          ->orWhereHas('company', function ($q) use ($searchQuery) { // Search by company name
+              $q->where('name', 'LIKE', "%$searchQuery%");
+          });
+    });
+}
+
+
 
         // Execute the query and get results
-        $projects = $query->get();
+        $projects = $query->orderBy('updated_at', 'desc')->get();
 
         // If all filters are empty, return an empty collection
         if (empty($beds) && empty($types) && empty($priceRange) && empty($areaNames) && empty($projectName) && empty($searchQuery) && empty($builders)) {

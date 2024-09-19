@@ -33,7 +33,7 @@
                   @menu('Top Locations in Hyderabad', 'list-unstyled', false, 'dropdown-item', 'false')
               </ul>
           </div>
-          <div class="col-lg-3 border-end">
+          <div class="col-lg-3">
               <ul class="list-unstyled text-center">
                   <li>
                       <h6>Top builders</h6>

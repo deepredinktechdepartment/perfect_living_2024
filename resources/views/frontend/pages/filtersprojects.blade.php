@@ -8,54 +8,19 @@
             <div class="d-flex align-items-center justify-content-between">
 
                 @if ($projects->count() > 0)
-                <p class="mb-0 px-0 mx-0">({{ $projects->count()??0}} Properties Available)</p>
+                <p class="mb-0 px-0 mx-0">
+                    ({{ $projects->count() ?? 0 }} {{ $projects->count() == 1 ? 'Property' : 'Properties' }} Available)
+                </p>
+
                 @else
                 @endif
-                <a href="#" class="text-danger text-decoration-none clear_all">Clear all</a>
+                <a href="{{ URL::to('filters') }}" class="text-danger text-decoration-none clear_all">Clear all</a>
             </div>
         </div>
-        <div class="row py-2 mb-3 bg-grey align-items-center">
-            <div class="col-lg-2">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Select Type</option>
-                    <option value="1">New</option>
-                    <option value="2">Resale</option>
-                </select>
-            </div>
-            <div class="col-lg-3">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Budget</option>
-                    <option value="1">₹1.00 Cr* - ₹2.00 Cr*</option>
-                    <option value="2">₹3.00 Cr* - ₹4.00 Cr*</option>
-                </select>
-            </div>
-            <div class="col-lg-2">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>BHK</option>
-                    <option value="1">1 BHK</option>
-                    <option value="2">2 BHK</option>
-                </select>
-            </div>
-            <div class="col-lg-2">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Property Status</option>
-                    <option value="Ongoing">Ongoing</option>
-                    <option value="Upcoming">Upcoming</option>
-                    <option value="Completed">Completed</option>
-                </select>
-            </div>
-            <div class="col-lg-2">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Property Type</option>
-                    <option value="Apartment">Apartment</option>
-                    <option value="Villa">Villa</option>
-                    <option value="Plot">Plot</option>
-                </select>
-            </div>
-            <div class="col-lg-1">
-                <a href="#" class="btn btn_black search_btn pe-2">Search</a>
-            </div>
-        </div>
+
+
+        @include('components.project-filters')
+
 
         @if ($projects->count() > 0)
             <div class="row">
@@ -76,7 +41,7 @@
                     <x-project-card-view2
                         :name="$project->name"
                         :address="$project->areas->name"
-                        :details="$project->project_type . ' , ' . $project->no_of_units . ' units'"
+                        :details="$project->project_type . ' ,' . $project->unitConfigurations->first()->beds . ' BHK'"
                         :price="'₹' . number_format($project->price_per_sft) . ' per sqft'"
                         :image="$imageUrl"
                         :url="URL::to('company/project/'.$project->slug)"
