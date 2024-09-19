@@ -245,7 +245,7 @@ Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');
 
 Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 
-Route::get('/fitlersprojects/{param?}', [PagesController::class, 'fitlersprojects'])->name('homepage');
+Route::get('/filters/{param?}', [PagesController::class, 'filtersprojects'])->name('homepage');
 
 
 

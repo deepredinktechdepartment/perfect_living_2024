@@ -12,10 +12,10 @@
         </div>
       </div>
     </div>
-
+    @if ($projects->count() > 0)
     <section>
         <div class="container">
-            @if ($projects->count() > 0)
+
                 <h2 class="mb-4 text-center">Top Featured Properties</h2>
                 <div class="featured-properties-slider">
                     @foreach ($projects as $project)
@@ -46,13 +46,13 @@
                         />
                     @endforeach
                 </div>
-            @else
-                <p class="text-center">No featured properties available at the moment.</p>
-            @endif
+
         </div>
     </section>
 
+    @else
 
+    @endif
 
 
 

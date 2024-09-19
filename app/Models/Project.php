@@ -79,8 +79,18 @@ class Project extends Model
     {
         return $this->belongsTo(AreaMaster::class, 'area');
     }
-    public function scopeIsFeatured($query, $featured = true)
-{
-    return $query->where('is_featured', $featured);
-}
+
+
+   // Scope for 'is_featured'
+   public function scopeIsFeatured($query, $value = true)
+   {
+       return $query->where('is_featured', $value);
+   }
+
+   // Scope for 'is_approved'
+   public function scopeIsApproved($query, $value = true)
+   {
+       return $query->where('is_approved', $value);
+   }
+
 }
