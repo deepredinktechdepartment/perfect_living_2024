@@ -4,6 +4,7 @@ use App\Models\Company; // Import the Company model
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; // Import the Log facade
 use Exception;
+use Illuminate\Support\Str;
 
 class CompanyController extends Controller
 {
@@ -52,7 +53,11 @@ class CompanyController extends Controller
                 'website_url' => 'required|url',
             ]);
 
-            Company::create($validatedData);
+           // Add slug field
+           $validatedData['slug'] = Str::slug($request->name) ?? null;
+
+           // Create the company with the validated data and slug
+           Company::create($validatedData);
 
             return redirect()->route('companies.index')->with('success', 'Company created successfully.');
         } catch (Exception $e) {
@@ -112,6 +117,10 @@ class CompanyController extends Controller
             $company = Company::findOrFail($id);
 
             // Update the company with validated data
+
+        //           // Add the slug field
+        // $validatedData['slug'] = Str::slug($request->name) ?? null;
+
             $company->update($validatedData);
 
             // Redirect to the index page with a success message
