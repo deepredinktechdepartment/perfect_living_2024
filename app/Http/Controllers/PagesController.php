@@ -53,6 +53,8 @@ class PagesController extends Controller
     $priceRange = $request->input('budgets', []);
     $areaNames = $request->input('areas', []);
     $projectName = $request->input('name', ''); // Filter for project name
+    // Retrieve the search query from the input
+    $searchQuery = $request->query('search', ''); // Get the search input (default to empty)
 
     // Start building the query
     $query = Project::with('company', 'citites', 'areas', 'elevationPictures', 'unitConfigurations')
@@ -94,12 +96,24 @@ class PagesController extends Controller
             $q->whereRaw(implode(' OR ', $likeConditions), array_map(fn($name) => '%' . strtolower($name) . '%', $areaNames));
         });
     }
+      // Filter by project name, area name, or unit type based on search query
+      if (!empty($searchQuery)) {
+        $query->where(function ($q) use ($searchQuery) {
+            $q->where('name', 'LIKE', "%$searchQuery%") // Search by project name
+              ->orWhereHas('areas', function ($q) use ($searchQuery) { // Search by area name
+                  $q->where('name', 'LIKE', "%$searchQuery%");
+              })
+              ->orWhereHas('unitConfigurations', function ($q) use ($searchQuery) { // Search by unit configurations
+                  $q->where('beds', 'LIKE', "%$searchQuery%");
+              });
+        });
+    }
 
     // Execute the query and get results
     $projects = $query->get();
 
     // Check if all filters are empty
-    if (empty($beds) && empty($types) && empty($priceRange) && empty($areaNames) && empty($projectName)) {
+    if (empty($beds) && empty($types) && empty($priceRange) && empty($areaNames) && empty($projectName) && empty($searchQuery)) {
         $projects = collect(); // Return an empty collection if no filters are applied
     }
 
