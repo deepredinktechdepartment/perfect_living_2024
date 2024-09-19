@@ -9,7 +9,7 @@
         <div class="mb-sm-3">
         <h1>{{ $project->name ?? '' }}</h1>
         @if(isset($project->company) && !empty($project->company->name))
-            <h5>By <span class="text-decoration-underline">{{ $project->company->name }}</span></h5>
+            <h5>By <span class="text-decoration-underline"><a href="{{ URL::to('filters?builders='.$project->company->slug) }}">{{ $project->company->name }}</a></span></h5>
         @endif
 
 
