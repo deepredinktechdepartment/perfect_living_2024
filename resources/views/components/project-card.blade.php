@@ -12,11 +12,11 @@
             <div class="row">
                 <div class="col-sm-5 pe-sm-0">
                     <div class="project-image-wrapper ">
-    
-    
+
+
             <img src="{{ $image }}" alt="{{ $name }}" class="img-fluid project-image ">
-    
-    
+
+
                     </div>
                 </div>
                 <div class="col-sm-7">
@@ -33,3 +33,6 @@
         </a>
     </div>
 </div>
+
+
+

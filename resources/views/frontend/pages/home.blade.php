@@ -2,22 +2,40 @@
 <!-- Example view file -->
 @extends('layouts.frontend_theme.main')
 @section('mainContent')
-
 <div>
+
+
     <div class="main_bg">
       <div class="col-lg-6 col-md-8 col-12 position-relative">
         <div class="container">
-          <form action="{{ route('homepage') }}" method="GET">
-            <div class="d-flex">
-              <!-- Search Input -->
-              <input class="form-control me-2" type="search" id="searchInput" name="search" placeholder="Search Locality / Builder or Project" aria-label="Search" value="{{ request()->query('search') }}">
-              <button class="btn btn_black" type="submit">Search</button>
-            </div>
-          </form>
+            <form action="{{ route('homepage') }}" method="GET">
+                <div class="d-flex">
+
+                    <input class="form-control me-2" type="search" id="searchInput" name="search" placeholder="Search Locality / Builder or Project" aria-label="Search" value="{{ request()->query('search') }}">
+                    {{-- <input class="form-control me-2" type="search" id="searchInput" placeholder="Search Locality / Builder or Project" aria-label="Search" onkeyup="filterDropdown()"> --}}
+                    <button class="btn btn_black" type="submit">Search</button>
+                </div>
+
+                <!-- Dropdown for Categories and Subcategories -->
+                <ul class="dropdown-menu w-50" id="categoryDropdown" style="display:none;">
+                    <!-- Category 1 with Subcategories -->
+                    <li class="dropdown-header">Fruits</li>
+                    <li><a class="dropdown-item" href="#" data-category="Category 1" data-value="1.1">Apple</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="Category 1" data-value="1.2">Mango</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="Category 1" data-value="1.3">Banana</a></li>
+
+                    <!-- Category 2 with Subcategories -->
+                    <li class="dropdown-header">Movies</li>
+                    <li><a class="dropdown-item" href="#" data-category="Category 2" data-value="2.1">Leo</a></li>
+                    <li><a class="dropdown-item" href="#" data-category="Category 2" data-value="2.2">Spiderman</a></li>
+                </ul>
+            </form>
+
+
+
         </div>
       </div>
     </div>
-  </div>
 
 
 
