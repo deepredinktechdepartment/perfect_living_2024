@@ -3,21 +3,15 @@
 
 @section('mainContent')
 <section>
-    <div class="container filter_bg">
-        <div class="row py-2 bg-dark-grey align-items-center">
-            <div class="d-flex justify-content-between align-items-center">
+    <div class="container">
+        <div class="row py-2 align-items-center">
+            <div class="d-flex align-items-center justify-content-between">
 
                 @if ($projects->count() > 0)
                 <p class="mb-0">({{ $projects->count()??0}} Properties Available)</p>
                 @else
                 @endif
-                <div class="col-lg-2">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Relevance</option>
-                        <option value="1">Price(Inc)</option>
-                        <option value="2">Price(Dec)</option>
-                    </select>
-                </div>
+                <a href="#" class="text-danger text-decoration-none clear_all">Clear all</a>
             </div>
         </div>
         <div class="row py-2 mb-3 bg-grey align-items-center">
@@ -59,7 +53,7 @@
                 </select>
             </div>
             <div class="col-lg-1">
-                <a href="#" class="text-danger text-decoration-none">Clear all</a>
+                <a href="#" class="btn btn_black search_btn pe-2">Search</a>
             </div>
         </div>
 
