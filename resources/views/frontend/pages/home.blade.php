@@ -108,18 +108,20 @@
                           @endphp
 
                           <div class="col-sm-4">
-                              <div class="project-card-wrapper">
-                                  <a href="{{ URL::to('company/project/'.$project->slug) }}" class="text-decoration-none">
-                                      <div class="project-image-wrapper">
-                                          <img src="{{ $fullImagePath ?? $defaultImageUrl }}" alt="{{ $project->name }}" class="img-fluid project-image">
-                                      </div>
-                                      <div class="project-details-wrapper p-3">
-                                          <h5 class="mb-0">{{ $project->name }}</h5>
-                                          <p>{{ $project->areas->name ?? '' }}</p>
-                                          <p>{{ $project->project_type }} <br> {{ $project->no_of_units }} units</p>
-                                          <p class="mb-0"> <span class="price-info">₹{{ $project->price_per_sft }} per sqft</span> <small>Onwards</small></p>
-                                      </div>
-                                  </a>
+                              <div class="card_two">
+                                <div class="project-card-wrapper">
+                                    <a href="{{ URL::to('company/project/'.$project->slug) }}" class="text-decoration-none">
+                                        <div class="project-image-wrapper">
+                                            <img src="{{ $fullImagePath ?? $defaultImageUrl }}" alt="{{ $project->name }}" class="img-fluid project-image">
+                                        </div>
+                                        <div class="project-details-wrapper p-3">
+                                            <h5 class="mb-0">{{ $project->name }}</h5>
+                                            <p>{{ $project->areas->name ?? '' }}</p>
+                                            <p>{{ $project->project_type }} <br> {{ $project->no_of_units }} units</p>
+                                            <p class="mb-0"> <span class="price-info">₹{{ $project->price_per_sft }} per sqft</span> <small>Onwards</small></p>
+                                        </div>
+                                    </a>
+                                </div>
                               </div>
                           </div>
                       @endforeach
