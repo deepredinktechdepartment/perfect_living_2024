@@ -8,7 +8,7 @@
             <div class="d-flex align-items-center justify-content-between">
 
                 @if ($projects->count() > 0)
-                <p class="mb-0">({{ $projects->count()??0}} Properties Available)</p>
+                <p class="mb-0 px-0 mx-0">({{ $projects->count()??0}} Properties Available)</p>
                 @else
                 @endif
                 <a href="#" class="text-danger text-decoration-none clear_all">Clear all</a>

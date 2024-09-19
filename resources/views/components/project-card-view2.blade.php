@@ -1,4 +1,4 @@
-<div class="col-sm-3 ps-lg-0">
+<div class="col-sm-3">
     <div class="card_two">
         <div class="project-card-wrapper">
             <a href="{{ $url }}" class="text-decoration-none">
