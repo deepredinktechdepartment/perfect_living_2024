@@ -828,7 +828,7 @@ label.error {
     margin-bottom: 1rem;
 }
 .sub_menu_footer ul li {
-    margin-bottom: 0.6rem;
+    margin-bottom: 0;
 }
 
 .sub_menu_footer ul li a {
