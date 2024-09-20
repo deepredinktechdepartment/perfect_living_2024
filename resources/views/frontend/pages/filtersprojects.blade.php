@@ -4,11 +4,11 @@
 @section('mainContent')
 <section>
     <div class="container">
-        <div class="row py-2 align-items-center">
-            <div class="d-flex align-items-center justify-content-between">
 
-                @if ($projects->count() > 0)
-                <p class="mb-0 px-0 mx-0">
+        @include('components.project-filters')
+
+        @if ($projects->count() > 0)
+                <p class="mb-3 px-0 mx-0">
                     ({{ $projects->count() ?? 0 }} {{ $projects->count() == 1 ? 'Property' : 'Properties' }} Available)
                 </p>
 
@@ -17,14 +17,6 @@
 
                 </p>
                 @endif
-                <a href="{{ URL::to('filters') }}" class="text-danger text-decoration-none clear_all">Clear all</a>
-            </div>
-        </div>
-
-
-        @include('components.project-filters')
-
-
         @if ($projects->count() > 0)
             <div class="row">
                 @foreach ($projects as $project)
