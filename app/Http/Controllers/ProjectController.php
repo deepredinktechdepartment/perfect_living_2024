@@ -102,7 +102,9 @@ class ProjectController extends Controller
 {
     $validator = $request->validate([
         'name' => 'required|string|max:255|unique:projects,name',
-        'company_id' => 'required|exists:companies,id',
+       // Update company_id to accept multiple values as an array
+       'company_id' => 'required|array',
+       'company_id.*' => 'exists:companies,id', // Validate that each company ID exists in the database
         'site_address' => 'required|string',
         'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
         'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
@@ -147,6 +149,8 @@ class ProjectController extends Controller
         $data['slug'] = Str::slug($request->name)??null;
         $data['city'] = $request->city_id??0;
         $data['area'] = $request->area_id??0;
+         // Convert company_id array to JSON format
+         $data['company_id'] = $request->has('company_id') ? json_encode($request->input('company_id')) : null;
 
         // Create a new project with the specified columns
         Project::create($data);
@@ -179,7 +183,9 @@ class ProjectController extends Controller
             // Ensure name is unique except for the current project
             Rule::unique('projects', 'name')->ignore($project->id),
         ],
-        'company_id' => 'required|exists:companies,id',
+        // Allow 'company_id' to accept an array of IDs
+        'company_id' => 'required|array',
+        'company_id.*' => 'exists:companies,id', // Validate each company ID
         'site_address' => 'required|string',
         'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
         'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
@@ -212,6 +218,9 @@ class ProjectController extends Controller
         $data['amenities'] = $request->has('amenities') ? json_encode($request->input('amenities')) : null;
         $data['city'] = $request->city_id??0;
         $data['area'] = $request->area_id??0;
+
+          // Convert company_id array to JSON format
+          $data['company_id'] = $request->has('company_id') ? json_encode($request->input('company_id')) : null;
 
         // Handle the file upload for 'logo'
         if ($request->hasFile('logo')) {
