@@ -86,12 +86,12 @@ return [
 	'defaultmytaskstatus'=>'not_started,started,in_review,rework,approved,scheduled',
 
 	'icons' => [
-        'edit' => 'text-warning fas fa-edit',
-        'delete' => 'text-danger fas fa-trash',
-        'link' => 'text-info fas fa-link',
-		'unit_configuration'=>'text-success fas fa-building',
-		'multiple_imges'=>'text-primary fas fa-images',
-		'info'=>'text-info fas fa-info-circle',
+        'edit' => 'text-grey fas fa-edit',
+        'delete' => 'text-grey fas fa-trash',
+        'link' => 'text-grey fas fa-link',
+		'unit_configuration'=>'text-grey fas fa-building',
+		'multiple_imges'=>'text-grey fas fa-images',
+		'info'=>'text-grey fas fa-info-circle',
 
     ],
 
