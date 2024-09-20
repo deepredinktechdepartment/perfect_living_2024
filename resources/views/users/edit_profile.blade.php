@@ -8,7 +8,19 @@
             <div class="card h-100">
                 <div class="profile_img">
                     <div class="d-flex justify-content-center">
-                        <img class="rounded-circle img-fluid" src="https://intranet.deepredink.in/storage/app/uploads/deep-red-ink-consulting-pvt-ltd_39/deep-red-ink-consulting-pvt-ltd_39/department/hr_72/profiles/6620b03190a62_1713418289.jpg" alt="">
+
+                        @if(Auth::user()->profile_photo && File::exists(storage_path('app/public/' . Auth::user()->profile_photo)))
+                          <img class="rounded-circle img-fluid" src="{{ URL::to(env('APP_STORAGE').''.Auth::user()->profile_photo) }}" alt="">
+                    @else
+                        <!-- No Profile Picture -->
+
+                        <img class="rounded-circle img-fluid" src="https://via.placeholder.com/200" alt="Default Image" width="200" height="200">
+
+
+                    @endif
+
+
+
                     </div>
                 </div>
                 <h2 class="text-center nowrap-link mb-2 pt-2">{{ old('firstname', Auth::user()->fullname ?? '') }}</h2>
