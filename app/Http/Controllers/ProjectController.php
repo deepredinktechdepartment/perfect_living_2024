@@ -44,18 +44,39 @@ class ProjectController extends Controller
         }
     }
 
-    public function index(): View
+    public function index(Request $request): View
     {
         try {
-            $projects = Project::with('company')->get(); // Fetch all projects with company data
+            // Get the 'tab' query parameter or default to 'newly_added'
+            $tab = $request->query('tab', 'newly_added');
+
+            // Valid status values
+            $validStatuses = ['newly_added', 'in_review', 'published', 'deactivated'];
+
+            // Build the query based on the 'tab' value
+            $query = Project::with('company');
+
+            // Check if the tab value is valid
+            if (in_array($tab, $validStatuses)) {
+                $query->where('status', $tab);
+            } else {
+                // Optionally, you can handle an invalid status here
+                // For example, you could redirect or log an error
+            }
+
+            // Execute the query
+            $projects = $query->get();
+
             $pageTitle = 'Projects List'; // Set the page title
             $addlink = route('projects.create'); // Link to the create page
-            return view('projects.index', compact('projects', 'addlink','pageTitle'));
+
+            return view('projects.index', compact('projects', 'addlink', 'pageTitle', 'tab'));
         } catch (Exception $e) {
             Log::error('Failed to fetch projects: ' . $e->getMessage());
             return view('projects.index')->with('error', 'Failed to fetch projects.');
         }
     }
+
 
     public function create(): View
     {
@@ -86,6 +107,7 @@ class ProjectController extends Controller
         'about_project' => 'nullable',
         'city_id' => 'required',
         'area_id' => 'required',
+        'status' => 'required',
 
         // Add validation rules for other fields
     ]);
@@ -151,6 +173,7 @@ class ProjectController extends Controller
         'latitude' => 'nullable',
         'longitude' => 'nullable',
         'website_url' => 'nullable|url',
+        'status' => 'required',
         'project_type' => 'required',
         'map_collections' => 'nullable|array', // Expecting an array
         'map_badges' => 'nullable|array',     // Expecting an array

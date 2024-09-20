@@ -307,6 +307,24 @@ $projectAmenities = isset($project->amenities) && is_string($project->amenities)
     </div>
 </div>
 
+<div class="col-4">
+    <div class="mb-3">
+        <label for="status" class="form-label">Project Status</label>
+        <select id="status" class="form-select @error('status') is-invalid @enderror" name="status" required>
+            <option value="">Select Status</option>
+            <option value="newly_added" {{ old('status', $project->status ?? '') == 'newly_added' ? 'selected' : '' }}>Newly Added</option>
+            <option value="in_review" {{ old('status', $project->status ?? '') == 'in_review' ? 'selected' : '' }}>In Review</option>
+            <option value="published" {{ old('status', $project->status ?? '') == 'published' ? 'selected' : '' }}>Published</option>
+            <option value="deactivated" {{ old('status', $project->status ?? '') == 'deactivated' ? 'selected' : '' }}>Deactivated</option>
+
+        </select>
+        @error('status')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
+
 
 
                     <!-- Continue with other fields -->

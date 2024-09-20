@@ -19,6 +19,7 @@ class Project extends Model
         'area',
         'logo',
         'website_url',
+        'status',
         'latitude',
         'longitude',
         'master_plan_layout',

@@ -9,11 +9,35 @@
 @endphp
 
 @section('content')
+
+<!-- Tabs for Project Status -->
+<ul class="nav nav-tabs mb-3" id="projectTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {{ request('tab') == 'newly_added' ? 'active border-bottom' : '' }}" href="{{ route('projects.index', ['tab' => 'newly_added']) }}" role="tab">Newly Added</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {{ request('tab') == 'in_review' ? 'active border-bottom' : '' }}" href="{{ route('projects.index', ['tab' => 'in_review']) }}" role="tab">In Review</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {{ request('tab') == 'published' ? 'active border-bottom' : '' }}" href="{{ route('projects.index', ['tab' => 'published']) }}" role="tab">Published</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {{ request('tab') == 'deactivated' ? 'active border-bottom' : '' }}" href="{{ route('projects.index', ['tab' => 'deactivated']) }}" role="tab">Deactivated</a>
+    </li>
+</ul>
+
+
     @if($projects->isEmpty())
         <div class="alert alert-info">
             No projects found. <a href="{{ route('projects.create') }}"><u>Create New Project</u></a>
         </div>
     @else
+
+
+
+
+
+
  <!-- Filter Column -->
  <div class="col-md-12 mb-3">
     <div class="card shadow-sm rounded m-0 p-0" >
