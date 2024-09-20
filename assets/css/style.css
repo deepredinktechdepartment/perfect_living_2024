@@ -706,9 +706,9 @@ textarea {
     transition: 0.4s;
 }
 
-.btn:hover {
+/* .btn:hover {
     color: #fff;
-}
+} */
 
 .common_tabs .nav-tabs .nav-link {
     font-size: 16px;
