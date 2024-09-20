@@ -71,6 +71,11 @@ class Project extends Model
             return $this->belongsTo(Company::class);
         }
 
+        public function companies()
+        {
+            return $this->belongsToMany(Company::class, 'company_project', 'project_id', 'company_id');
+        }
+
    public function citites()
     {
         return $this->belongsTo(CityMaster::class, 'city');

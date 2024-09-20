@@ -155,6 +155,9 @@ class ProjectController extends Controller
         // Create a new project with the specified columns
         Project::create($data);
 
+            // Attach the selected companies to the project
+    $project->companies()->attach($validated['company_id']);
+
         // Return a view with a success message
         return redirect()->route('projects.index', ['tab' => $request->query('tab', 'newly_added')])->with('success', 'Project created successfully.');
     } catch (Exception $e) {
@@ -184,8 +187,9 @@ class ProjectController extends Controller
             Rule::unique('projects', 'name')->ignore($project->id),
         ],
         // Allow 'company_id' to accept an array of IDs
-        'company_id' => 'required|array',
-        'company_id.*' => 'exists:companies,id', // Validate each company ID
+
+      'company_id' => 'array', // Ensure it's an array
+      'company_id.*' => 'integer|exists:companies,id', // Ensure each ID is valid
         'site_address' => 'required|string',
         'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
         'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
@@ -248,6 +252,9 @@ class ProjectController extends Controller
 
         // Update the project with the validated data
         $project->update($data);
+
+           // Sync the selected companies to the project
+    $project->companies()->sync($validated['company_id']);
 
         // Redirect with success message
         return redirect()->route('projects.index', ['tab' =>$project->status])->with('success', 'Project updated successfully.');
