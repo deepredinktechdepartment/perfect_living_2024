@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 20, 2024 at 03:06 PM
+-- Generation Time: Sep 20, 2024 at 03:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -654,7 +654,8 @@ INSERT INTO `user_types` (`id`, `organization_id`, `name`, `code`, `role_name_id
 (1, 0, 'Admin', '', NULL, 1, '2021-09-16 06:34:08', '2021-09-16 06:34:22'),
 (2, 0, 'Publisher', '', NULL, 1, '2021-09-16 06:34:08', '2021-09-16 06:34:22'),
 (3, 0, 'Editor', '', NULL, 1, '2021-09-16 06:34:08', '2021-09-16 06:34:22'),
-(4, 0, 'Creator', '', NULL, 1, '2021-09-16 06:34:08', '2021-09-16 06:34:22');
+(4, 0, 'Creator', '', NULL, 1, '2021-09-16 06:34:08', '2021-09-16 06:34:22'),
+(5, 0, 'Non Admin User', '', NULL, 1, '2021-09-16 06:34:08', '2021-09-16 06:34:22');
 
 -- --------------------------------------------------------
 
@@ -982,7 +983,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_types`
 --
 ALTER TABLE `user_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user_verifies`
