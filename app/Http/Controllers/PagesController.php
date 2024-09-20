@@ -45,7 +45,7 @@ class PagesController extends Controller
     }
     public function filtersprojects(Request $request)
     {
-        $pageTitle = 'Filters Projects';
+        $pageTitle = 'Apartments';
 
         // Retrieve input parameters as comma-separated strings
         $beds = $request->input('beds', ''); // Comma-separated string for beds

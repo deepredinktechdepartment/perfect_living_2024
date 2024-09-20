@@ -36,9 +36,13 @@
 
             </select>
         </div>
-        <div class="col-lg-1">
-            <button class="btn btn_black search_btn pe-2" type="submit">Search</button>
+        <div class="col-lg-2">
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn_black search_btn pe-2" type="submit">Search</button>
+                <a href="{{ URL::to('filters') }}" class="text-danger text-decoration-none clear_all">Clear all</a>
+            </div>
         </div>
+
     </div>
 
 
