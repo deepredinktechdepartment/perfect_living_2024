@@ -16,7 +16,7 @@ class CompanyController extends Controller
         try {
             $companies = Company::all();
             $addlink = route('companies.create');
-            $pageTitle = "Companies List";
+            $pageTitle = "Builders List";
             return view('companies.index', compact('companies', 'addlink', 'pageTitle'));
         } catch (Exception $e) {
             Log::error('Error fetching companies list: ' . $e->getMessage());
@@ -30,7 +30,7 @@ class CompanyController extends Controller
     public function create()
     {
         try {
-            $pageTitle = "Create New Company";
+            $pageTitle = "Create New Builder";
             return view('companies.create', compact('pageTitle'));
         } catch (Exception $e) {
             Log::error('Error displaying company creation form: ' . $e->getMessage());

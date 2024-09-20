@@ -22,7 +22,7 @@
                         </li>
                       @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
                           <li class="nav-item {{ Request::routeIs('companies.index','companies.create',) ? 'active' : '' }}">
-                              <a class="nav-link" href="{{ route('companies.index') }}">Companies</a>
+                              <a class="nav-link" href="{{ route('companies.index') }}">Builders</a>
                           </li>
                           @endif
 

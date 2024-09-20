@@ -98,7 +98,7 @@
                             <tr data-company-id="{{ $project->company_id }}">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $project->name ?? '' }}<br>&nbsp;-{{ $project->project_type ?? '' }}</td>
-                                <td>{{ $project->company->name ?? '' }}</td>
+                                <td>{{ $project->loaded_companies->name ?? '' }}</td>
                                 <td>
                                     <a href="{{ URL::to('company/project/'.$project->slug) }}" class="no-button" target="_blank" title="Preview Project">
                                         <i class="fas fa-link"></i>

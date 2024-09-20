@@ -37,7 +37,7 @@
                     <x-project-card-view2
                         :name="$project->name"
                         :address="$project->areas->name"
-                        :details="$project->project_type . ' ,' . $project->unitConfigurations->first()->beds . ' BHK'"
+                        :details="$project->project_type . ', ' . $project->unitConfigurations->first()->beds . ' BHK'"
                         :price="'₹' . number_format($project->price_per_sft) . ' per sqft'"
                         :image="$imageUrl"
                         :url="URL::to('company/project/'.$project->slug)"

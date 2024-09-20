@@ -68,7 +68,7 @@
                         <x-project-card
                             :name="$project->name"
                             :address="$project->areas->name"
-                            :details="$project->project_type . ' ,' . $project->unitConfigurations->first()->beds . ' BHK'"
+                            :details="$project->project_type . ', ' . $project->unitConfigurations->first()->beds . ' BHK'"
                             :price="'₹' . number_format($project->price_per_sft) . ' per sqft'"
                             :image="$fullImagePath??'#'"
                             :url="URL::to('company/project/'.$project->slug)"
@@ -132,7 +132,7 @@
                                         <div class="project-details-wrapper p-3">
                                             <h5 class="mb-0">{{ $project->name }}</h5>
                                             <p>{{ $project->areas->name ?? '' }}</p>
-                                            <p>{{ $project->project_type }} ,{{ $project->unitConfigurations->first()->beds }} BHK</p>
+                                            <p>{{ $project->project_type }}, {{ $project->unitConfigurations->first()->beds }} BHK</p>
                                             <p class="mb-0"> <span class="price-info">₹{{ $project->price_per_sft }} per sqft</span> <small>Onwards</small></p>
                                         </div>
                                     </a>

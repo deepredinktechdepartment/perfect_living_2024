@@ -50,7 +50,8 @@ class ProjectController extends Controller
     {
         try {
             // Get the 'tab' query parameter or default to 'newly_added'
-            $tab = $request->query('tab', 'newly_added');
+            $tab = $request->query('tab', 'newly_added')??'';
+
 
             // Valid status values
             $validStatuses = ['newly_added', 'in_review', 'published', 'deactivated'];
@@ -75,17 +76,16 @@ class ProjectController extends Controller
             // Execute the query
             $projects = $query->get();
 
+
             $pageTitle = 'Projects List'; // Set the page title
             $addlink = route('projects.create'); // Link to the create page
 
             return view('projects.index', compact('projects', 'addlink', 'pageTitle', 'tab', 'statusCounts'));
-        } catch (\InvalidArgumentException $e) {
-            Log::warning('Invalid status: ' . $e->getMessage());
-            return redirect()->route('projects.index', ['tab' => 'newly_added'])
-                ->with('error', 'Invalid project status. Redirecting to Newly Added.');
-        } catch (\Throwable $e) { // Use Throwable for broader exception handling
-            Log::error('Failed to fetch projects: ' . $e->getMessage());
-            return view('projects.index')->with('error', 'Failed to fetch projects. Please try again later.');
+        } catch (Exception $e) {
+            // Log the error message if needed
+            // Log::error('Failed to create project: ' . $e->getMessage());
+
+            return redirect()->route('projects.index', ['tab' => $request->query('tab', 'newly_added')])->with('error', 'Failed to create project.');
         }
     }
 
@@ -156,12 +156,12 @@ class ProjectController extends Controller
         Project::create($data);
 
         // Return a view with a success message
-        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
+        return redirect()->route('projects.index', ['tab' => $request->query('tab', 'newly_added')])->with('success', 'Project created successfully.');
     } catch (Exception $e) {
         // Log the error message if needed
         // Log::error('Failed to create project: ' . $e->getMessage());
 
-        return redirect()->route('projects.index')->with('error', 'Failed to create project.');
+        return redirect()->route('projects.index', ['tab' => $request->query('tab', 'newly_added')])->with('error', 'Failed to create project.');
     }
 }
 
@@ -250,13 +250,13 @@ class ProjectController extends Controller
         $project->update($data);
 
         // Redirect with success message
-        return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
+        return redirect()->route('projects.index', ['tab' =>$project->status])->with('success', 'Project updated successfully.');
     } catch (Exception $e) {
         // Optionally log the error message
         // Log::error('Failed to update project: ' . $e->getMessage());
 
         // Redirect with error message
-        return redirect()->route('projects.index')->with('error', 'Failed to update project.');
+        return redirect()->route('projects.index', ['tab' => $project->status])->with('error', 'Failed to update project.');
     }
 }
 
