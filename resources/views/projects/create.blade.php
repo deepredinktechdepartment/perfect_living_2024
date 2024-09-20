@@ -23,7 +23,7 @@
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    {{-- <div class="col-6">
                         <div class="form-group">
                             <label for="company" class="form-label">Company</label>
                             <select id="company" class="form-control @error('company_id') is-invalid @enderror" name="company_id" required>
@@ -38,7 +38,25 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                    </div> --}}
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="company" class="form-label">Builders</label>
+                            <div>
+                                @foreach($companies as $company)
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input @error('company_id') is-invalid @enderror" name="company_id[]" id="company_{{ $company->id }}" value="{{ $company->id }}"
+                                        {{ is_array(old('company_id', $project->company_id ?? [])) && in_array($company->id, old('company_id', $project->company_id ?? [])) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="company_{{ $company->id }}">
+                                            {{ $company->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        </div>
                     </div>
+
 
                     <!-- Type of Project dropdown -->
                     <div class="col-6">
