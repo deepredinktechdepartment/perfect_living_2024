@@ -5,20 +5,16 @@
 <section>
   <div class="container">
     <div class="row">
-      <div class="col-sm-8 order-sm-0 order-2">
-        <div class="mb-sm-3">
-        <h1>{{ $project->name ?? '' }}</h1>
-        @if(isset($project->company) && !empty($project->company->name))
-            <h5>By <span class="text-decoration-underline"><a href="{{ URL::to('filters?builders='.$project->company->slug) }}">{{ $project->company->name }}</a></span></h5>
-        @endif
-
-
-          @if(isset($project->areas) && !empty($project->areas->name))
-          <h6>{{$project->areas->name??''}} - {{$project->citites->name??''}}</h6>
+      <div class="col-sm-8 order-sm-0 order-2 mb-sm-3">
+        <div class="project-details-main-info">
+        <h1 class="mb-sm-0">{{ $project->name ?? '' }}</h1>
+        @if(isset($project->areas) && !empty($project->areas->name))
+          <h5>{{$project->areas->name??''}} - {{$project->citites->name??''}}</h5>
           @endif
+        @if(isset($project->company) && !empty($project->company->name))
+            <h6>By <span class="text-decoration-underline"><a href="{{ URL::to('filters?builders='.$project->company->slug) }}">{{ $project->company->name }}</a></span></h6>
+        @endif
         </div>
-      </div>
-      <div class="col-sm-4 order-sm-0 order-3">
         <div class="rating-display-wrapper text-sm-center">
           {{-- <div class="star-rating text-sm-center text-start">
             <span class="star" data-value="5">&#9733;</span>
@@ -47,7 +43,7 @@
 
             @endif
         <div>
-            <ul class="inline-links justify-content-sm-center">
+            <ul class="inline-links justify-content-sm-center mb-1">
                 @if($reviews->count() > 0)
                     <li>
                         <a href="{{ route('reviews.show', ['projectId' => Crypt::encryptString($project->id)]) }}" class="text-black">
@@ -64,10 +60,17 @@
                 @endif
             </ul>
         </div>
-
+      </div>
+      </div>
+      <div class="col-sm-4 order-sm-0 order-3 d-sm-flex align-items-center justify-content-end">
+        <div class="wishlist-wrapper">
+        <p>
+            <i class="fa-regular fa-heart wishlist-icon"></i>
+            <i class="fa-solid fa-heart wishlist-icon-hover text-brand"></i>
+        </p>
         </div>
 
-      </div>
+        </div>
 
 
 @if(isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty())
@@ -96,7 +99,7 @@
   <!-- resources/views/your-view.blade.php -->
 
 
-<div class="row mt-4 align-items-center">
+<div class="mt-4 d-sm-flex gap-4 align-items-center">
     @if($badges->isNotEmpty())
         @foreach($badges as $badge)
             <x-feature-item
