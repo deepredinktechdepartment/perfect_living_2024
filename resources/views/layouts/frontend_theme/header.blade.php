@@ -40,7 +40,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Apartments in Hyderabad
                 </a>
-                <ul class="dropdown-menu mega-menu p-sm-4 p-3" aria-labelledby="navbarDropdown">
+                <ul class="dropdown-menu mega-menu" aria-labelledby="navbarDropdown">
                   {{-- <li><a class="dropdown-item" href="#">2 BHK Apartments in Hyderabad</a></li>
                   <li><a class="dropdown-item" href="#">3 BHK Apartments in Hyderabad</a></li> --}}
 
@@ -53,8 +53,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Top Locations
                 </a>
-                <ul class="dropdown-menu mega-menu p-sm-4 p-3" aria-labelledby="navbarDropdown">
-                  <li><h6>Apartments in  Financial District</h6></li>
+                <ul class="dropdown-menu mega-menu" aria-labelledby="navbarDropdown">
 
 
                   @menu('Apartments in Financial District', 'list-unstyled', false, 'dropdown-item', 'false')

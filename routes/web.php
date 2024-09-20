@@ -259,6 +259,7 @@ Route::get('contact-us', [ContactController::class, 'index'])->name('contact.ind
 Route::post('contact-us', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('login', [UserController::class, 'userLogin']);
+Route::get('create_account', [UserController::class, 'createAccount']);
 
 
 

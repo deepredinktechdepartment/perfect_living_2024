@@ -467,7 +467,10 @@ public function userLogin(Request $request)
     return view('frontend.users.login', compact('pageTitle'));
 }
 
-
-
+public function createAccount(Request $request)
+{
+    $pageTitle="Create Account";
+    return view('frontend.users.create_account', compact('pageTitle'));
+}
 
 }

@@ -3,13 +3,13 @@
   <div class="container">
       <div class="row">
         <div class="col-lg-3 border-end">
-          <ul class="list-unstyled text-center">
+          <ul class="list-unstyled text-sm-center mb-sm-0 mb-4">
               <li>
                   <h6>Apartments in Hyderabad</h6>
               </li>
 
 
-              @menu('Apartments in Hyderabad', 'list-unstyled', false, 'dropdown-item', 'false')
+              @menu('Apartments in Hyderabad', 'list-unstyled', false, 'footer-dropdown-item', 'false')
 
 
           </ul>
@@ -17,28 +17,28 @@
 
 
           <div class="col-lg-3 border-end">
-              <ul class="list-unstyled text-center">
+              <ul class="list-unstyled text-sm-center mb-sm-0 mb-4">
                   <li>
                       <h6>Find Apartments by Budget</h6>
                   </li>
-                  @menu('Find Apartments by Budget', 'list-unstyled', false, 'dropdown-item', 'false')
+                  @menu('Find Apartments by Budget', 'list-unstyled', false, 'footer-dropdown-item', 'false')
               </ul>
           </div>
           <div class="col-lg-3 border-end">
-              <ul class="list-unstyled text-center">
+              <ul class="list-unstyled text-sm-center mb-sm-0 mb-4">
                   <li>
                       <h6>Top Locations in Hyderabad</h6>
                   </li>
 
-                  @menu('Top Locations in Hyderabad', 'list-unstyled', false, 'dropdown-item', 'false')
+                  @menu('Top Locations in Hyderabad', 'list-unstyled', false, 'footer-dropdown-item', 'false')
               </ul>
           </div>
           <div class="col-lg-3">
-              <ul class="list-unstyled text-center">
+              <ul class="list-unstyled text-sm-center mb-sm-0 mb-4">
                   <li>
                       <h6>Top builders</h6>
                   </li>
-                  @menu('Top builders', 'list-unstyled', false, 'dropdown-item', 'false')
+                  @menu('Top builders', 'list-unstyled', false, 'footer-dropdown-item', 'false')
               </ul>
           </div>
 
