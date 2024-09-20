@@ -18,6 +18,8 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Review;
 use Illuminate\Support\Facades\URL; // Add this line
+use Illuminate\Support\Facades\DB;
+
 
 class ProjectController extends Controller
 {
@@ -53,6 +55,12 @@ class ProjectController extends Controller
             // Valid status values
             $validStatuses = ['newly_added', 'in_review', 'published', 'deactivated'];
 
+            // Initialize status counts
+            $statusCounts = Project::select('status', \DB::raw('count(*) as count'))
+                ->groupBy('status')
+                ->pluck('count', 'status')
+                ->toArray();
+
             // Build the query based on the 'tab' value
             $query = Project::with('company');
 
@@ -60,8 +68,8 @@ class ProjectController extends Controller
             if (in_array($tab, $validStatuses)) {
                 $query->where('status', $tab);
             } else {
-                // Optionally, you can handle an invalid status here
-                // For example, you could redirect or log an error
+                // Handle invalid status
+                throw new \InvalidArgumentException('Invalid status provided.');
             }
 
             // Execute the query
@@ -70,12 +78,17 @@ class ProjectController extends Controller
             $pageTitle = 'Projects List'; // Set the page title
             $addlink = route('projects.create'); // Link to the create page
 
-            return view('projects.index', compact('projects', 'addlink', 'pageTitle', 'tab'));
-        } catch (Exception $e) {
+            return view('projects.index', compact('projects', 'addlink', 'pageTitle', 'tab', 'statusCounts'));
+        } catch (\InvalidArgumentException $e) {
+            Log::warning('Invalid status: ' . $e->getMessage());
+            return redirect()->route('projects.index', ['tab' => 'newly_added'])
+                ->with('error', 'Invalid project status. Redirecting to Newly Added.');
+        } catch (\Throwable $e) { // Use Throwable for broader exception handling
             Log::error('Failed to fetch projects: ' . $e->getMessage());
-            return view('projects.index')->with('error', 'Failed to fetch projects.');
+            return view('projects.index')->with('error', 'Failed to fetch projects. Please try again later.');
         }
     }
+
 
 
     public function create(): View
@@ -343,7 +356,7 @@ public function toggleApproval(Request $request, Project $project)
 {
     try {
         // Update the project's approval status
-        $project->is_approved = $request->input('is_approved');
+        $project->status = $request->input('is_approved');
         $project->save();
 
         return response()->json([

@@ -11,20 +11,33 @@
 @section('content')
 
 <!-- Tabs for Project Status -->
-<ul class="nav nav-tabs mb-3" id="projectTabs" role="tablist">
-    <li class="nav-item" role="presentation">
-        <a class="nav-link {{ request('tab') == 'newly_added' ? 'active border-bottom border-dark' : '' }}" href="{{ route('projects.index', ['tab' => 'newly_added']) }}" role="tab">Newly Added</a>
+
+<div class="common_tabs">
+    <!-- Nav Tabs -->
+    <ul class="nav nav-tabs" id="userTabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link {{ $tab === 'newly_added' ? 'active' : '' }}" href="{{ route('projects.index', ['tab' => 'newly_added']) }}">
+            Newly Added <span class="badge bg-primary">{{ $statusCounts['newly_added'] ?? 0 }}</span>
+        </a>
     </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link {{ request('tab') == 'in_review' ? 'active border-bottom border-dark' : '' }}" href="{{ route('projects.index', ['tab' => 'in_review']) }}" role="tab">In Review</a>
+    <li class="nav-item">
+        <a class="nav-link {{ $tab === 'in_review' ? 'active' : '' }}" href="{{ route('projects.index', ['tab' => 'in_review']) }}">
+            In Review <span class="badge bg-warning">{{ $statusCounts['in_review'] ?? 0 }}</span>
+        </a>
     </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link {{ request('tab') == 'published' ? 'active border-bottom border-dark' : '' }}" href="{{ route('projects.index', ['tab' => 'published']) }}" role="tab">Published</a>
+    <li class="nav-item">
+        <a class="nav-link {{ $tab === 'published' ? 'active' : '' }}" href="{{ route('projects.index', ['tab' => 'published']) }}">
+            Published <span class="badge bg-success">{{ $statusCounts['published'] ?? 0 }}</span>
+        </a>
     </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link {{ request('tab') == 'deactivated' ? 'active border-bottom border-dark' : '' }}" href="{{ route('projects.index', ['tab' => 'deactivated']) }}" role="tab">Deactivated</a>
+    <li class="nav-item">
+        <a class="nav-link {{ $tab === 'deactivated' ? 'active' : '' }}" href="{{ route('projects.index', ['tab' => 'deactivated']) }}">
+            Deactivated <span class="badge bg-danger">{{ $statusCounts['deactivated'] ?? 0 }}</span>
+        </a>
     </li>
 </ul>
+</div>
+
 
 
 
@@ -74,7 +87,7 @@
                             <th>Company</th>
                             <th>Preview</th>
                             @if(Auth::check() && in_array(Auth::user()->role, [1, 2,4]))
-                            <th>Approval Status</th>
+                            <th>Published</th>
                             <th>Featured Status</th>
                         @endif
                             <th>Actions</th>
@@ -96,22 +109,28 @@
                                     <span class="copy-message" id="message-{{ $loop->iteration }}">Copied!</span>
                                 </td>
 
-                                @if(Auth::check() && in_array(Auth::user()->role, [1, 2,4]))
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input toggle-approval" type="checkbox" id="toggle-{{ $project->id }}" {{ $project->is_approved ? 'checked' : '' }} data-id="{{ $project->id }}">
-                                            <label class="form-check-label" for="toggle-{{ $project->id }}">
-                                                {{ $project->is_approved ? 'Approved' : 'Disapproved' }}
-                                            </label>
-                                        </div>
-                                    </td>
-                                @endif
+
+
+                                @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 4]))
+    <td>
+        <div class="form-check form-switch">
+            <!-- Check if the status is 'published', and set the checkbox accordingly -->
+            <input class="form-check-input toggle-approval" type="checkbox" id="toggle-{{ $project->id }}" {{ $project->status === 'published' ? 'checked' : '' }} data-id="{{ $project->id }}">
+            <label class="form-check-label" for="toggle-{{ $project->id }}">
+                {{ $project->status === 'published' ? '' : '' }}
+            </label>
+        </div>
+    </td>
+@endif
+
+
+
                                 @if(Auth::check() && in_array(Auth::user()->role, [1, 2,4]))
                                 <td>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input toggle-featured" type="checkbox" id="featured-{{ $project->id }}" {{ $project->is_featured ? 'checked' : '' }} data-id="{{ $project->id }}">
                                         <label class="form-check-label" for="featured-{{ $project->id }}">
-                                            {{ $project->is_featured ? 'Featured' : 'Not Featured' }}
+                                            {{ $project->is_featured ? '' : '' }}
                                         </label>
                                     </div>
                                 </td>
@@ -169,10 +188,18 @@
                             '<a href="' + project.preview_url + '" class="no-button" target="_blank" title="Preview Project"><i class="fas fa-link"></i></a>' +
                             '<button onclick="copyToClipboard(\'' + project.preview_url + '\', ' + (index + 1) + ')" class="no-button" title="Copy Link"><i class="fas fa-copy"></i></button>' +
                             '<span class="copy-message" id="message-' + (index + 1) + '">Copied!</span>',
-                            project.is_approved ? '<div class="form-check form-switch"><input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" checked data-id="' + project.id + '"><label class="form-check-label" for="toggle-' + project.id + '">Approved</label></div>' :
-                            '<div class="form-check form-switch"><input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" data-id="' + project.id + '"><label class="form-check-label" for="toggle-' + project.id + '">Disapproved</label></div>',
-                            project.is_featured ? '<div class="form-check form-switch"><input class="form-check-input toggle-featured" type="checkbox" id="featured-' + project.id + '" checked data-id="' + project.id + '"><label class="form-check-label" for="featured-' + project.id + '">Featured</label></div>' :
-                            '<div class="form-check form-switch"><input class="form-check-input toggle-featured" type="checkbox" id="featured-' + project.id + '" data-id="' + project.id + '"><label class="form-check-label" for="featured-' + project.id + '">Not Featured</label></div>',
+                            project.status === 'published'
+    ? '<div class="form-check form-switch">' +
+        '<input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" checked data-id="' + project.id + '">' +
+        '<label class="form-check-label" for="toggle-' + project.id + '"></label>' +
+      '</div>'
+    : '<div class="form-check form-switch">' +
+        '<input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" data-id="' + project.id + '">' +
+        '<label class="form-check-label" for="toggle-' + project.id + '"></label>' +
+      '</div>',
+
+                            project.is_featured ? '<div class="form-check form-switch"><input class="form-check-input toggle-featured" type="checkbox" id="featured-' + project.id + '" checked data-id="' + project.id + '"><label class="form-check-label" for="featured-' + project.id + '"></label></div>' :
+                            '<div class="form-check form-switch"><input class="form-check-input toggle-featured" type="checkbox" id="featured-' + project.id + '" data-id="' + project.id + '"><label class="form-check-label" for="featured-' + project.id + '"></label></div>',
                             '<a href="{{ url('/projects') }}/' + project.id + '/edit" class="no-button" title="Edit"><i class="{{ config('constants.icons.edit') }}"></i></a>' +
                             '<form action="{{ url('/projects') }}/' + project.id + '" method="POST" class="delete-form" style="display:inline;">@csrf @method('DELETE')<button type="submit" class="no-button" title="Delete"><i class="{{ config('constants.icons.delete') }}"></i></button></form>' +
                             '<a href="{{ url('/unit_configurations') }}/?projectID=' + project.id + '" class="no-button" title="Units Config"><i class="{{ config('constants.icons.unit_configuration') }}"></i></a>' +
@@ -195,7 +222,7 @@
         // Toggle Approval Status
         $(document).on('change', '.toggle-approval', function() {
             var projectId = $(this).data('id');
-            var isApproved = $(this).is(':checked') ? 1 : 0;
+            var isApproved = $(this).is(':checked') ? 'published' : 'in_review';
             var label = $(this).next('label');
 
             // Send AJAX request to update approval status

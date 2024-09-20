@@ -10,7 +10,7 @@
 
         @if ($projects->count() > 0)
                 <p class="mb-3 px-0 mx-0">
-                    ({{ $projects->count() ?? 0 }} {{ $projects->count() == 1 ? 'Property' : 'Properties' }} Available)
+                    {{ $projects->count() ?? 0 }} {{ $projects->count() == 1 ? 'Property' : 'Properties' }} Available
                 </p>
 
                 @else
