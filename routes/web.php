@@ -27,6 +27,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -263,3 +264,11 @@ Route::get('create_account', [UserController::class, 'createAccount']);
 
 
 
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
+Route::get('email/verify/{id}/{hash}', [\App\Http\Controllers\Auth\VerificationController::class, '__invoke'])
+    ->middleware(['signed'])
+    ->name('verification.verify');
+Route::get('email/verify', function () {
+    return view('auth.verify'); // Your custom verification notice view
+})->name('verification.notice');
