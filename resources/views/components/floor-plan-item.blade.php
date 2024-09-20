@@ -9,7 +9,7 @@
         <p class="mb-0 zoom-text">Click to Zoom &nbsp; <i class="fa-solid fa-magnifying-glass-plus"></i></p>
     </div>
         <div class="floorplans-info-text">
-        <h5 class="mb-0">{{ $description }} {{ $size }} Sq.ft</h5>
+        <h5 class="mb-0">{{ $description }} <br>{{ $size }} Sq.ft</h5>
 
         </div>
     </div>

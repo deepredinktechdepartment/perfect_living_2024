@@ -5,7 +5,7 @@
 @section('mainContent')
 <section class="reviews-section">
     <div class="container">
-        <h1 class="text-left mb-4">Reviews for this Project</h1>
+        <h3 class="text-left mb-4">Reviews for this Project</h3>
 
         <!-- Approved Reviews -->
         @if($approvedReviews->count())
@@ -22,7 +22,7 @@
 
 
                         <p class="review-text">{{ $review->review }}</p>
-                        <p class="review-date">{{ $review->created_at->format('M d, Y') }}</p>
+                        <p class="review-date"><Small>{{ $review->created_at->format('M d, Y') }}</Small></p>
                     </div>
                 </div>
                 @endforeach

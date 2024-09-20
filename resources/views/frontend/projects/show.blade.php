@@ -5,7 +5,7 @@
 <section>
   <div class="container">
     <div class="row">
-      <div class="col-sm-8 order-sm-0 order-2 mb-sm-3">
+      <div class="col-sm-8 order-sm-0 order-3 mb-sm-3">
         <div class="project-details-main-info">
         <h1 class="mb-sm-0">{{ $project->name ?? '' }}</h1>
         @if(isset($project->areas) && !empty($project->areas->name))
@@ -62,7 +62,7 @@
         </div>
       </div>
       </div>
-      <div class="col-sm-4 order-sm-0 order-3 d-sm-flex align-items-center justify-content-end">
+      <div class="col-sm-4 order-sm-0 order-2 d-sm-flex align-items-center justify-content-end">
         <div class="wishlist-wrapper">
         <p>
             <i class="fa-regular fa-heart wishlist-icon"></i>

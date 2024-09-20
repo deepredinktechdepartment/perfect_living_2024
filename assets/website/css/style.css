@@ -514,17 +514,58 @@ footer p {
     .star-rating {
         font-size: 18px;
     }
+    .wishlist-wrapper{
+        text-align: right;
+        margin-bottom: -45px;
+        position: relative;
+        top: 15px;
+    }
 }
 
+.project-overview-images-wrapper{
+    height: 350px;
+}
+.project-overview-images-wrapper img{
+    height: 350px;
+    object-fit: cover;
+}
+.sub-project-overview-images-wrapper{
+    height: 111px;
+}
+.sub-project-overview-images-wrapper img{
+    height: 111px;
+    object-fit: cover;
+}
+
+@media(max-width:480px){
+    .project-overview-images-wrapper{
+        height: 250px;
+    }
+    .project-overview-images-wrapper img{
+        height: 250px;
+        object-fit: cover;
+    }
+    .sub-project-overview-images-wrapper{
+        height: 55px;
+    }
+    .sub-project-overview-images-wrapper img{
+        height: 55px;
+        object-fit: cover;
+    }
+}
+
+.sub-project-overview-images-wrapper,
 .project-overview-images-wrapper,
 .highlights-images-wrapper {
     overflow: hidden;
 }
+.sub-project-overview-images-wrapper img,
 .project-overview-images-wrapper img,
 .highlights-images-wrapper img {
     transition: 0.3s all ease-in-out;
 }
 
+.sub-project-overview-images-wrapper:hover img,
 .project-overview-images-wrapper:hover img,
 .highlights-images-wrapper:hover img {
     transform: scale(1.1);
@@ -669,9 +710,9 @@ footer p {
 }
 
 .bg-custom-btn {
-    background-color: #111b21;
+    background-color: #e40048;
     color: #fff;
-    border: 1px solid #111b21 !important;
+    border: 1px solid # !important;
     border-radius: 0;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -693,6 +734,9 @@ footer p {
     -ms-border-radius: 0;
     -o-border-radius: 0;
     font-size: 14px;
+}
+.form-select{
+    border-radius: 0;
 }
 
 .filter_bg .form-select {
