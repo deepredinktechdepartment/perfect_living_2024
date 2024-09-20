@@ -69,7 +69,7 @@ class ProjectController extends Controller
     $validator = $request->validate([
         'name' => 'required|string|max:255|unique:projects,name',
         'company_id' => 'required|exists:companies,id',
-        'site_address' => 'required|string|max:255',
+        'site_address' => 'required|string',
         'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
         'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
         'latitude' => 'nullable',
@@ -145,7 +145,7 @@ class ProjectController extends Controller
             Rule::unique('projects', 'name')->ignore($project->id),
         ],
         'company_id' => 'required|exists:companies,id',
-        'site_address' => 'required|string|max:255',
+        'site_address' => 'required|string',
         'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
         'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
         'latitude' => 'nullable',
