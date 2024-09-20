@@ -46,9 +46,9 @@ h5 {
 }
 
 h6 {
-    font-weight: 400;
+    font-weight: 300;
     color: #000000;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 a {
@@ -66,6 +66,9 @@ a:focus {
 
 .text-black {
     color: #000;
+}
+.text-brand{
+    color: #e40048;
 }
 
 section {
@@ -494,15 +497,54 @@ footer p {
 
 /* Projects CSS Starts */
 
+.project-details-main-info{
+    display: flex;
+    align-items: end;
+    gap: 20px;
+}
+
 .rating-display-wrapper .inline-links li:not(:last-child)::before {
     background: #000;
+}
+
+.rating-display-wrapper{
+    display: flex;
+    align-items: end;
+    gap: 20px;
+}
+.star-rating {
+    direction: rtl;
+    font-size: 20px;
+    cursor: pointer;
+}
+.star {
+    color: #e40048;
+    transition: color 0.3s ease;
+}
+.star:hover,
+.star:hover~.star {
+    color: #e40048;
+}
+.star.selected,
+.star.selected~.star {
+    color: #e40048;
+}
+.feature-badges-wrapper h6{
+    font-weight: 500;
+}
+@media(max-width: 480px){
+    .project-details-main-info{
+        display: initial;
+    }
+    .star-rating {
+        font-size: 18px;
+    }
 }
 
 .project-overview-images-wrapper,
 .highlights-images-wrapper {
     overflow: hidden;
 }
-
 .project-overview-images-wrapper img,
 .highlights-images-wrapper img {
     transition: 0.3s all ease-in-out;
@@ -620,26 +662,7 @@ footer p {
     }
 }
 
-.star-rating {
-    direction: rtl;
-    font-size: 35px;
-    cursor: pointer;
-}
 
-.star {
-    color: #ffcc00;
-    transition: color 0.3s ease;
-}
-
-.star:hover,
-.star:hover~.star {
-    color: #ffcc00;
-}
-
-.star.selected,
-.star.selected~.star {
-    color: #ffcc00;
-}
 
 .custom-list {
     list-style-type: none;
@@ -656,19 +679,18 @@ footer p {
     position: absolute;
     left: 0;
 }
-
 .star-rating .star {
-    font-size: 2rem;
+    font-size: 1.2rem;
     color: #ddd;
     cursor: pointer;
 }
 
 .star-rating .star.filled {
-    color: #f39c12;
+    color: #e40048;
 }
 
 .review-rating i {
-    color: #f39c12;
+    color: #e40048;
 }
 
 .bg-custom-btn {
@@ -828,7 +850,7 @@ label.error {
 
 .project-details-wrapper .price-info {
     text-align: left;
-    color: #ffa73d;
+    color: #e40048;
     font-size: 15px;
     padding: 16px 0 0;
     font-weight: 500;

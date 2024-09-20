@@ -37,7 +37,7 @@ class StoreProjectRequest extends FormRequest
                 'required',
                 'exists:companies,id', // Ensure the company ID exists in the companies table
             ],
-            'site_address' => 'nullable|string|max:255',
+            'site_address' => 'nullable|string',
             'logo' => [
                 'nullable',
                 'image',
