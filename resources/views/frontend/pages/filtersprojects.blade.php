@@ -4,6 +4,7 @@
 @section('mainContent')
 <section>
     <div class="container">
+        <h1>{{ $pageTitle??'' }}</h1>
 
         @include('components.project-filters')
 
