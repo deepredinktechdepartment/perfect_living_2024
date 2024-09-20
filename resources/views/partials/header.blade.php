@@ -28,7 +28,7 @@
 
                           @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
                           <li class="nav-item {{ Request::routeIs('projects.index','projects.create','projects.edit') ? 'active' : '' }}">
-                              <a class="nav-link" href="{{ route('projects.index') }}">Projects</a>
+                              <a class="nav-link" href="{{ route('projects.index',["tab"=>'newly_added']) }}">Projects</a>
                           </li>
                           @endif
                           {{-- @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))

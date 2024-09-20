@@ -7,13 +7,25 @@
         <div class="employee_profile h-100">
             <div class="card h-100">
                 <div class="profile_img">
-                    <div class="d-flex justify-content-center">                                                    
-                        <img class="rounded-circle img-fluid" src="https://intranet.deepredink.in/storage/app/uploads/deep-red-ink-consulting-pvt-ltd_39/deep-red-ink-consulting-pvt-ltd_39/department/hr_72/profiles/6620b03190a62_1713418289.jpg" alt="">
+                    <div class="d-flex justify-content-center">
+
+                        @if(Auth::user()->profile_photo && File::exists(storage_path('app/public/' . Auth::user()->profile_photo)))
+                          <img class="rounded-circle img-fluid" src="{{ URL::to(env('APP_STORAGE').''.Auth::user()->profile_photo) }}" alt="">
+                    @else
+                        <!-- No Profile Picture -->
+
+                        <img class="rounded-circle img-fluid" src="https://via.placeholder.com/200" alt="Default Image" width="200" height="200">
+
+
+                    @endif
+
+
+
                     </div>
                 </div>
-                <h2 class="text-center nowrap-link mb-2 pt-2">Suneel Garnepudi</h2>
-                <h5 class="text-center">suneel</h5>
-                <p class="text-center mb-3">9676451721</p> 
+                <h2 class="text-center nowrap-link mb-2 pt-2">{{ old('firstname', Auth::user()->fullname ?? '') }}</h2>
+                <h5 class="text-center">{{ old('email', Auth::user()->username ?? '') }}</h5>
+                <p class="text-center mb-3">{{ old('phone', Auth::user()->phone ?? '') }}</p>
             </div>
         </div>
     </div>

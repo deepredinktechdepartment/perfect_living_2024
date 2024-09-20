@@ -19,6 +19,7 @@ class Project extends Model
         'area',
         'logo',
         'website_url',
+        'status',
         'latitude',
         'longitude',
         'master_plan_layout',
@@ -90,7 +91,7 @@ class Project extends Model
    // Scope for 'is_approved'
    public function scopeIsApproved($query, $value = true)
    {
-       return $query->where('is_approved', $value);
+       return $query->where('status', 'published');
    }
 
 }
