@@ -1,10 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
+<div class="row mt-5">
     <!-- Start col -->
-    <div class="col-lg-4">
-        <div class="card shadow-sm">
+    <div class="col-md-4">
+        <div class="employee_profile h-100">
+            <div class="card h-100">
+                <div class="profile_img">
+                    <div class="d-flex justify-content-center">                                                    
+                        <img class="rounded-circle img-fluid" src="https://intranet.deepredink.in/storage/app/uploads/deep-red-ink-consulting-pvt-ltd_39/deep-red-ink-consulting-pvt-ltd_39/department/hr_72/profiles/6620b03190a62_1713418289.jpg" alt="">
+                    </div>
+                </div>
+                <h2 class="text-center nowrap-link mb-2 pt-2">Suneel Garnepudi</h2>
+                <h5 class="text-center">suneel</h5>
+                <p class="text-center mb-3">9676451721</p> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100">
             <div class="card-body">
                 <form id="profileForm" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
