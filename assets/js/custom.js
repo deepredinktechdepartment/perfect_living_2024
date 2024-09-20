@@ -1,19 +1,19 @@
 // Header Fxed custom js
-jQuery(document).ready(function($) {    
-window.onscroll = function() {myFunction()};
+// jQuery(document).ready(function($) {    
+// window.onscroll = function() {myFunction()};
             
-    var header = document.getElementById("main-header");
-    var sticky = header.offsetTop;
+//     var header = document.getElementById("main-header");
+//     var sticky = header.offsetTop;
     
-    function myFunction() {
-      if (window.scrollY > sticky) {
-        header.classList.add("fixed-top");
-      } else {
-        header.classList.remove("fixed-top");
-      }
+//     function myFunction() {
+//       if (window.scrollY > sticky) {
+//         header.classList.add("fixed-top");
+//       } else {
+//         header.classList.remove("fixed-top");
+//       }
       
-    }
-});
+//     }
+// });
 
 // Show or hide the "Go to Top" button based on scroll position
 window.onscroll = function() {

@@ -2,37 +2,29 @@
   <div class="container">
       <div class="row align-items-sm-center">
           <div class="col-sm-4 col-6">
-
-
               <a href="{{ route('dashboard') }}">
-
                     @if(isset($header_logo) && File::exists($header_logo))
                         <img src=" {{ URL::to(asset($header_logo)) }}" class="img-fluid header-logo" alt="{{ env('APP_NAME') }}">
                     @else
                     {{ env('APP_NAME') }}
                     @endif
-
               </a>
-
-
           </div>
           <div class="col-sm-8 col-6">
               <nav class="navbar navbar-expand-lg justify-content-end">
-                  <button class="navbar-toggler p-0 mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <button class="navbar-toggler p-lg-0 mt-lg-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <i class="fas fa-bars"></i>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-sm-start text-end align-items-center">
+                      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-sm-start text-end align-items-lg-center">
                         <li class="nav-item {{ Request::routeIs('dashboard') ? 'active' : '' }}">
                           <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
-                      </li>
-
+                        </li>
                       @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
                           <li class="nav-item {{ Request::routeIs('companies.index','companies.create',) ? 'active' : '' }}">
                               <a class="nav-link" href="{{ route('companies.index') }}">Companies</a>
                           </li>
                           @endif
-
 
                           @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
                           <li class="nav-item {{ Request::routeIs('projects.index','projects.create','projects.edit') ? 'active' : '' }}">
@@ -44,7 +36,6 @@
                               <a class="nav-link" href="{{ route('customcollections.index') }}">Collections</a>
                           </li>
                           @endif --}}
-
 
 
                           @if(Auth::user()->role && Auth::user()->role==1)
@@ -87,8 +78,6 @@
                                   <li><a class="dropdown-item {{ Request::routeIs('badges.index') ? 'active' : '' }}" href="{{ route('badges.index') }}">Badges</a></li>
                                   <li><a class="dropdown-item {{ Request::routeIs('collections.index') ? 'active' : '' }}" href="{{ route('collections.index') }}">Collections</a></li>
                                   <li><a class="dropdown-item {{ Request::routeIs('amenities.index') ? 'active' : '' }}" href="{{ route('amenities.index') }}">Amenities</a></li>
-
-
                               </ul>
                           </li>
                           @endif
@@ -124,21 +113,19 @@
                                 @endphp
 
 
-@if($user->profile_photo && File::exists(storage_path('app/public/' . $user->profile_photo)))
-<img src="{{ URL::to(env('APP_STORAGE').''.$user->profile_photo) }}" class="profile-image img-circle" height="40" alt="{{ $user->fullname }}">
-@else
-<i class="far fa-user-circle"></i>
-@endif
-{{ $initials }}
+                                @if($user->profile_photo && File::exists(storage_path('app/public/' . $user->profile_photo)))
+                                <img src="{{ URL::to(env('APP_STORAGE').''.$user->profile_photo) }}" class="profile-image img-circle" height="40" alt="{{ $user->fullname }}">
+                                @else
+                                <i class="far fa-user-circle"></i>
+                                @endif
+                                {{ $initials }}
                             </a>
-
 
                               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                   <li><a class="dropdown-item {{ Request::routeIs('profile.show') ? 'active' : '' }}" href="{{ route('profile.show') }}">Your Profile</a></li>
                                   <li><a class="dropdown-item {{ Request::routeIs('reset.password') ? 'active' : '' }}" href="{{ route('reset.password') }}">Change Password</a></li>
                                   <li><a class="dropdown-item {{ Request::routeIs('logout') ? 'active' : '' }}" href="{{ route('logout') }}">Logout</a></li>
                               </ul>
-
 
                           </li>
                       </ul>

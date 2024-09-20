@@ -70,7 +70,7 @@
         <!-- Sidebar End -->
 
         @auth
-        <section class="pt-5 pb-5" id="main-content">
+        <section id="main-content">
             <div class="container">
                 <div class="content-wrapper">
                     <div class="row">

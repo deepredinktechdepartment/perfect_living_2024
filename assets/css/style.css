@@ -35,8 +35,21 @@ header {
     width: 180px;
 }
 
+@media (max-width:991px){
+    .header-logo {
+        width: 180px;
+        margin-top: 5px;
+    }
+}
+@media (max-width:425px){
+    .header-logo {
+        width: 180px;
+        margin-top: 10px;
+    }
+}
+
 .navbar-toggler {
-    color: #000;
+    color: #ffffff;
 }
 
 .navbar-toggler:focus {
@@ -1367,7 +1380,9 @@ label {
 .content-wrapper {
     transition: 0.4s;
     border-top-left-radius: 50px;
-    /* min-height: 100vh; */
+    min-height: 100vh;
+    padding-top: 7rem;
+    padding-bottom: 3rem;
 }
 
 .content-wrapper.hide {

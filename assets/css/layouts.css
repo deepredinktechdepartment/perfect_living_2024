@@ -1,25 +1,27 @@
 .header-container {
     background: #063240;
     border-bottom: 1px solid #ddd;
-    transition: .3s all ease-in-out;
+    /* transition: .3s all ease-in-out; */
     /* box-shadow: -1px 4px 20px 1px #f1f1f185; */
+    position: fixed;
+    width: 100%;
+    z-index: 999;
 }
 
 .bg-peacockblue {
     background-color: #063240;
 }
 
-.fixed-top {
+/* .fixed-top {
     transition: .3s all ease-in-out;
-}
+} */
 
-header.header {
-    /* display: flex; */
+/* header.header {
     justify-content: space-between;
     align-items: center;
     padding: 0;
     transition: .3s all ease-in-out;
-}
+} */
 
 .icon {
     font-size: 20px;
