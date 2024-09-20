@@ -508,7 +508,7 @@ footer p {
     font-weight: 500;
 }
 @media(max-width: 480px){
-    .project-details-main-info{
+    .project-details-main-info, .rating-display-wrapper{
         display: initial;
     }
     .star-rating {
