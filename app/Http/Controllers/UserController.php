@@ -461,5 +461,13 @@ public function destroy($id)
     }
 }
 
+public function userLogin(Request $request)
+{
+    $pageTitle="User Login";
+    return view('frontend.users.login', compact('pageTitle'));
+}
+
+
+
 
 }

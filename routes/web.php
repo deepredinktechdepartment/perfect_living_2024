@@ -257,3 +257,8 @@ Route::get('/showReviews/{projectId}', [ReviewController::class, 'showReviews'])
 
 Route::get('contact-us', [ContactController::class, 'index'])->name('contact.index');
 Route::post('contact-us', [ContactController::class, 'store'])->name('contact.store');
+
+Route::get('login', [UserController::class, 'userLogin']);
+
+
+
