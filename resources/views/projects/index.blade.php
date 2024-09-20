@@ -13,18 +13,20 @@
 <!-- Tabs for Project Status -->
 <ul class="nav nav-tabs mb-3" id="projectTabs" role="tablist">
     <li class="nav-item" role="presentation">
-        <a class="nav-link {{ request('tab') == 'newly_added' ? 'active border-bottom' : '' }}" href="{{ route('projects.index', ['tab' => 'newly_added']) }}" role="tab">Newly Added</a>
+        <a class="nav-link {{ request('tab') == 'newly_added' ? 'active border-bottom border-dark' : '' }}" href="{{ route('projects.index', ['tab' => 'newly_added']) }}" role="tab">Newly Added</a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link {{ request('tab') == 'in_review' ? 'active border-bottom' : '' }}" href="{{ route('projects.index', ['tab' => 'in_review']) }}" role="tab">In Review</a>
+        <a class="nav-link {{ request('tab') == 'in_review' ? 'active border-bottom border-dark' : '' }}" href="{{ route('projects.index', ['tab' => 'in_review']) }}" role="tab">In Review</a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link {{ request('tab') == 'published' ? 'active border-bottom' : '' }}" href="{{ route('projects.index', ['tab' => 'published']) }}" role="tab">Published</a>
+        <a class="nav-link {{ request('tab') == 'published' ? 'active border-bottom border-dark' : '' }}" href="{{ route('projects.index', ['tab' => 'published']) }}" role="tab">Published</a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link {{ request('tab') == 'deactivated' ? 'active border-bottom' : '' }}" href="{{ route('projects.index', ['tab' => 'deactivated']) }}" role="tab">Deactivated</a>
+        <a class="nav-link {{ request('tab') == 'deactivated' ? 'active border-bottom border-dark' : '' }}" href="{{ route('projects.index', ['tab' => 'deactivated']) }}" role="tab">Deactivated</a>
     </li>
 </ul>
+
+
 
 
     @if($projects->isEmpty())
