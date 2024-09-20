@@ -13,6 +13,9 @@
                 </p>
 
                 @else
+                <p class="mb-0 px-0 mx-0">
+
+                </p>
                 @endif
                 <a href="{{ URL::to('filters') }}" class="text-danger text-decoration-none clear_all">Clear all</a>
             </div>
