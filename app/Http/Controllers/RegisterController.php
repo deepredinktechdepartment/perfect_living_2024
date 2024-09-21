@@ -142,6 +142,7 @@ class RegisterController extends Controller
 
      public function login(Request $request)
      {
+
          // Validate the incoming request
          $this->loginValidator($request->all())->validate();
 
@@ -155,15 +156,22 @@ class RegisterController extends Controller
 
          // Check if the user's account is active
          if ($user->active === 0) {
-             return redirect()->back()->with('error', 'Your account is inactive. Please contact support.');
+             return redirect()->back()->with('error', 'Your account is inactive.');
          }
 
          // Attempt to log the user in
          if (Auth::attempt(['username' => $request->email, 'password' => $request->password])) {
              // Check if the authenticated user has role 5
              if (Auth::user()->role === 5) {
-                 return redirect()->intended('/')->with('success', 'Successfully logged in!');
+                 // Check if 'redirect_to' exists in the request
+                 if ($request->has('redirect_to')) {
+                     return redirect($request->input('redirect_to'))->with('success', 'Successfully logged in!');
+                 } else {
+                     // Redirect to the default intended URL
+                     return redirect()->intended('/')->with('success', 'Successfully logged in!');
+                 }
              } else {
+                 // Logout the user if they do not have the correct role
                  Auth::logout();
                  return redirect()->back()->with('error', 'You do not have permission to access this area.');
              }
@@ -172,6 +180,7 @@ class RegisterController extends Controller
          // Authentication failed
          return redirect()->back()->with('error', 'Invalid email or password.');
      }
+
 
 
 

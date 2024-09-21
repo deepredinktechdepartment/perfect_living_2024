@@ -29,6 +29,8 @@
                             {{-- <div class="mb-5">
                                 <p><small>Have trouble logging in? <a href="#" class="text-brand">Get help</a></small></p>
                             </div> --}}
+                                <!-- Hidden Redirect URL -->
+    <input type="hidden" name="redirect_to" value="{{ request('redirect_to') }}">
                         </form>
                         <div class="mb-5">
                             <p><small>Don't have an account yet? <a href="{{ URL::TO('create_account') }}" class="text-brand">Create your account</a></small></p>
