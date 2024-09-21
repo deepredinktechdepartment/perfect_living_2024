@@ -65,8 +65,15 @@
       <div class="col-sm-4 order-sm-0 order-2 d-sm-flex align-items-center justify-content-end">
         <div class="wishlist-wrapper">
         <p>
-            <i class="fa-regular fa-heart wishlist-icon"></i>
-            <i class="fa-solid fa-heart wishlist-icon-hover text-brand"></i>
+
+
+
+
+
+            @include("frontend.projects.wishlistelements")
+
+
+
         </p>
         </div>
 

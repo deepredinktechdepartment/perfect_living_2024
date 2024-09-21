@@ -38,7 +38,7 @@
                         :name="$project->name"
                         :address="$project->areas->name"
                         :details="$project->project_type . ', ' . $project->unitConfigurations->first()->beds . ' BHK'"
-                        :price="'₹' . number_format($project->price_per_sft) . ' per sqft'"
+                         :price="number_format($project->price_per_sft)"
                         :image="$imageUrl"
                         :url="URL::to('company/project/'.$project->slug)"
                     />

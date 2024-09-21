@@ -5,6 +5,7 @@
 <div>
 
 
+
     <div class="main_bg">
       <div class="col-lg-6 col-md-8 col-12 position-relative">
         <div class="container">
@@ -69,7 +70,7 @@
                             :name="$project->name"
                             :address="$project->areas->name"
                             :details="$project->project_type . ', ' . $project->unitConfigurations->first()->beds . ' BHK'"
-                            :price="'₹' . number_format($project->price_per_sft) . ' per sqft'"
+                           :price="number_format($project->price_per_sft)"
                             :image="$fullImagePath??'#'"
                             :url="URL::to('company/project/'.$project->slug)"
                         />
@@ -132,8 +133,10 @@
                                         <div class="project-details-wrapper p-3">
                                             <h5 class="mb-0">{{ $project->name }}</h5>
                                             <p>{{ $project->areas->name ?? '' }}</p>
-                                            <p>{{ $project->project_type }}, {{ $project->unitConfigurations->first()->beds }} BHK</p>
-                                            <p class="mb-0"> <span class="price-info">₹{{ $project->price_per_sft }} per sqft</span> <small>Onwards</small></p>
+                                            <p class="mb-0 pb-0">{{ $project->project_type }}, {{ $project->unitConfigurations->first()->beds }} BHK</p>
+                                            @if(isset($project->price_per_sft) && $project->price_per_sft > 0)
+                                            <p class="mb-0"> <span class="price-info">₹{{ $project->price_per_sft }} per sq.ft</span> <small>Onwards</small></p>
+                                            @endif
                                         </div>
                                     </a>
                                 </div>

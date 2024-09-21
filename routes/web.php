@@ -28,7 +28,9 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\RegisterController;
-
+use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\WishlistController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -259,16 +261,45 @@ Route::get('/showReviews/{projectId}', [ReviewController::class, 'showReviews'])
 Route::get('contact-us', [ContactController::class, 'index'])->name('contact.index');
 Route::post('contact-us', [ContactController::class, 'store'])->name('contact.store');
 
-Route::get('login', [UserController::class, 'userLogin']);
+Route::get('login', [UserController::class, 'userLogin'])->name('userAuthLogin');
+
+Route::post('verifyAuthLogin', [RegisterController::class, 'login'])->name('verify.Auth.Login');
+
 Route::get('create_account', [UserController::class, 'createAccount']);
 
 
 
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [RegisterController::class, 'register']);
-Route::get('email/verify/{id}/{hash}', [\App\Http\Controllers\Auth\VerificationController::class, '__invoke'])
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('show.Register.Form');
+Route::post('postRegisterData', [RegisterController::class, 'register'])->name('post.Register.Data');
+
+
+
+Route::get('email/verify', function () {
+    return view('auth.verify');
+})->name('verification.notice');
+
+Route::get('email/verify/{id}/{hash}', [VerificationController::class, '__invoke'])
     ->middleware(['signed'])
     ->name('verification.verify');
-Route::get('email/verify', function () {
-    return view('auth.verify'); // Your custom verification notice view
-})->name('verification.notice');
+
+Route::get('email/verification-notification', [VerificationController::class, 'send'])
+
+    ->name('verification.send');
+
+    Route::get('/notAdminSerLogout', function () {
+        $user = Auth::user();
+
+        if ($user && $user->role === 5) { // Assuming role 5 is for website users
+            Auth::logout();
+            return redirect('/')->with('status', 'You have been logged out.');
+        }
+
+        return back()->withErrors(['error' => 'You are not authorized to log out.']);
+    })->name('notAdminSerLogout');
+
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/wishlists', [WishlistController::class, 'index'])->name('wishlists.index');
+        Route::post('/wishlists', [WishlistController::class, 'store'])->name('wishlists.store');
+        Route::delete('/wishlists/{id}', [WishlistController::class, 'destroy'])->name('wishlists.destroy');
+    });

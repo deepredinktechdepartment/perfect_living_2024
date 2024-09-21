@@ -23,16 +23,16 @@
                     <div class="project-details-wrapper  p-3">
                         <h5 class="mb-0">{{ $name }}</h5>
                         <p>{{ $address }}</p>
-                        <p>{{ $details }}</p>
-                        <p class="mb-0">
-                            <span class="price-info">{{ $price }}</span> <small>Onwards</small>
-                        </p>
+                        <p class="mb-0 pb-0">{{ $details }}</p>
+                    @if(isset($price) && $price > 0)
+                    <p class="mb-0 p-0">
+                    <span class="price-info">₹ {{ $price }} per sq.ft</span> <small>Onwards</small>
+                    </p>
+                    @endif
+
                     </div>
                 </div>
             </div>
         </a>
     </div>
 </div>
-
-
-

@@ -9,8 +9,12 @@
                     <div>
                         <h5 class="mb-0">{{ $name }}</h5>
                         <p><i class="fa-solid fa-location-dot"></i> {{ $address }}</p>
-                        <h5 class="mb-2">{{ $price }}</h5>
-                        <p>{{ $details }}</p>
+                         <p class="mb-0 p-0">{{ $details }}</p>
+                                   @if(isset($price) && $price > 0)
+                    <p class="mb-0 p-0">
+                    <span class="price-info">₹ {{ $price }} per sq.ft</span> <small>Onwards</small>
+                    </p>
+                    @endif
                     </div>
                 </div>
             </a>

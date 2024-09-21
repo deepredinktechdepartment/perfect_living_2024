@@ -67,12 +67,15 @@ a:focus {
 .text-black {
     color: #000;
 }
-.text-brand{
+
+.text-brand {
     color: #e40048;
 }
-.bg-yellow{
+
+.bg-yellow {
     background: #fffbe8;
 }
+
 section {
     padding: 60px 0px;
 }
@@ -319,10 +322,12 @@ header {
     white-space: break-spaces;
     color: #fff
 }
+
 .dropdown-menu {
     min-width: max-content;
     background: #000;
 }
+
 @media (min-width: 1024px) {
     .dropdown:hover .dropdown-menu {
         display: block;
@@ -350,7 +355,7 @@ header {
         -moz-border-radius: 0;
         -ms-border-radius: 0;
         -o-border-radius: 0;
-}
+    }
     .dropdown-menu h5 {
         text-align: right;
     }
@@ -472,7 +477,7 @@ footer p {
 
 /* Projects CSS Starts */
 
-.project-details-main-info{
+.project-details-main-info {
     display: flex;
     align-items: end;
     gap: 20px;
@@ -482,39 +487,46 @@ footer p {
     background: #000;
 }
 
-.rating-display-wrapper{
+.rating-display-wrapper {
     display: flex;
     align-items: end;
     gap: 20px;
 }
+
 .star-rating {
     direction: rtl;
     font-size: 20px;
     cursor: pointer;
 }
+
 .star {
     color: #e40048;
     transition: color 0.3s ease;
 }
+
 .star:hover,
 .star:hover~.star {
     color: #e40048;
 }
+
 .star.selected,
 .star.selected~.star {
     color: #e40048;
 }
-.feature-badges-wrapper h6{
+
+.feature-badges-wrapper h6 {
     font-weight: 500;
 }
-@media(max-width: 480px){
-    .project-details-main-info, .rating-display-wrapper{
+
+@media(max-width: 480px) {
+    .project-details-main-info,
+    .rating-display-wrapper {
         display: initial;
     }
     .star-rating {
         font-size: 18px;
     }
-    .wishlist-wrapper{
+    .wishlist-wrapper {
         text-align: right;
         margin-bottom: -45px;
         position: relative;
@@ -522,33 +534,36 @@ footer p {
     }
 }
 
-.project-overview-images-wrapper{
+.project-overview-images-wrapper {
     height: 350px;
 }
-.project-overview-images-wrapper img{
+
+.project-overview-images-wrapper img {
     height: 350px;
     object-fit: cover;
 }
-.sub-project-overview-images-wrapper{
+
+.sub-project-overview-images-wrapper {
     height: 111px;
 }
-.sub-project-overview-images-wrapper img{
+
+.sub-project-overview-images-wrapper img {
     height: 111px;
     object-fit: cover;
 }
 
-@media(max-width:480px){
-    .project-overview-images-wrapper{
+@media(max-width:480px) {
+    .project-overview-images-wrapper {
         height: 250px;
     }
-    .project-overview-images-wrapper img{
+    .project-overview-images-wrapper img {
         height: 250px;
         object-fit: cover;
     }
-    .sub-project-overview-images-wrapper{
+    .sub-project-overview-images-wrapper {
         height: 55px;
     }
-    .sub-project-overview-images-wrapper img{
+    .sub-project-overview-images-wrapper img {
         height: 55px;
         object-fit: cover;
     }
@@ -559,6 +574,7 @@ footer p {
 .highlights-images-wrapper {
     overflow: hidden;
 }
+
 .sub-project-overview-images-wrapper img,
 .project-overview-images-wrapper img,
 .highlights-images-wrapper img {
@@ -678,8 +694,6 @@ footer p {
     }
 }
 
-
-
 .custom-list {
     list-style-type: none;
     padding-left: 0;
@@ -695,6 +709,7 @@ footer p {
     position: absolute;
     left: 0;
 }
+
 .star-rating .star {
     font-size: 1.2rem;
     color: #ddd;
@@ -712,7 +727,7 @@ footer p {
 .bg-custom-btn {
     background-color: #e40048;
     color: #fff;
-    border: 1px solid # !important;
+    border: 1px solid #fff !important;
     border-radius: 0;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -735,7 +750,8 @@ footer p {
     -o-border-radius: 0;
     font-size: 14px;
 }
-.form-select{
+
+.form-select {
     border-radius: 0;
 }
 
@@ -985,10 +1001,10 @@ label.error {
     border-right: 1px solid #cdcdcd;
 }
 
-@media(max-width: 480px){
+@media(max-width: 480px) {
     .border-end {
         border-right: 0 !important;
-    } 
+    }
 }
 
 .filter_bg {
@@ -1045,24 +1061,38 @@ label.error {
     color: #000;
 }
 
+
 /* Login Page CSS Begins */
 
-.login-card{
+.login-card {
     border: 0;
     border-radius: 0;
     box-shadow: 0px 0px 9px -3px #ddd;
 }
-.login-card p{
+
+.login-card p {
     color: #979393;
 }
-.border-radius-0{
+
+.border-radius-0 {
     border-radius: 0;
 }
-.btn-createaccount{
+
+.btn-createaccount {
     border: 1px solid #ddd !important;
     font-size: 14px;
 }
-.btn-createaccount:hover{
+
+.btn-createaccount:hover {
     background: #f3f3f3;
 }
+
+.no-button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+
 /* Login Page CSS Ends */

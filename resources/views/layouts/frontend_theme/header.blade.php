@@ -60,7 +60,27 @@
 
 
                 </ul>
+
+
               </li>
+
+              @guest
+              <li class="nav-item">
+                  <a class="nav-link text-white" href="{{ URL('login') }}">Login</a>
+              </li>
+          @else
+              @if (Auth::user()->role === 5) <!-- Check if the user is a non-admin -->
+                  <li class="nav-item">
+                      <a class="nav-link text-white" href="{{ URL('wishlists') }}">My Wishlist</a>
+                  </li>
+                  <li class="nav-item">
+
+                      <a href="{{ route('notAdminSerLogout') }}" class="nav-link text-white" >Logout</a>
+                  </li>
+              @endif
+          @endguest
+
+
 
               {{-- <li class="nav-item">
                   <a class="nav-link text-white" href="{{ URL('') }}"><i class="fa-solid fa-house"></i></a>
