@@ -14,8 +14,15 @@ class WishlistController extends Controller
     {
 
         try {
+
+
             $wishlists = Wishlist::where('user_id', Auth::id())->with('project')->get();
-            return view('frontend.wishlists.index', compact('wishlists'));
+            $projects = $wishlists->pluck('project'); // Get the projects from the wishlist
+            $pageTitle = 'My Wishlist';
+
+
+
+            return view('frontend.wishlists.index', compact('wishlists','projects','pageTitle'));
         } catch (\Exception $e) {
             Log::error('Error fetching wishlists: ' . $e->getMessage());
             return redirect()->back()->withErrors(['error' => 'Unable to fetch wishlists. Please try again later.']);

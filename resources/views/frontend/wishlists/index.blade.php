@@ -1,37 +1,44 @@
 @extends('layouts.frontend_theme.main')
+
 @section('mainContent')
-<div class="container">
-    <h1>Your Wishlist</h1>
+<section>
+    <div class="container">
+        <h1>{{ $pageTitle ?? '' }}</h1>
 
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+        @if ($projects->count() > 0)
+        <p class="mb-3 px-0 mx-0">
+            You have {{ $projects->count() }} {{ $projects->count() == 1 ? 'property' : 'properties' }} in your wishlist.
+        </p>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Project Name</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($wishlists as $wishlist)
-                <tr>
-                    <td>{{ $wishlist->project->name }}</td>
-                    <td>
-                        <form action="{{ route('wishlists.destroy', $wishlist->project_id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Remove</button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="2">No projects in your wishlist.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+
+            <div class="row">
+                @foreach ($projects as $project)
+                    @php
+                        // Default placeholder image URL
+                        $defaultImageUrl = 'https://via.placeholder.com/150';
+
+                        // Check if elevationPictures is set and contains at least one image
+                        $imageUrl = $defaultImageUrl; // Default image
+
+                        if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
+                            $firstImagePath = $project->elevationPictures->first()->file_path;
+                            $imageUrl = URL::to(env('APP_STORAGE') . $firstImagePath);
+                        }
+                    @endphp
+
+                    <x-project-card-view2
+                        :name="$project->name"
+                        :address="$project->areas->name"
+                        :details="$project->project_type . ', ' . $project->unitConfigurations->first()->beds . ' BHK'"
+                        :price="number_format($project->price_per_sft)"
+                        :image="$imageUrl"
+                        :url="URL::to('company/project/' . $project->slug)"
+                    />
+                @endforeach
+            </div>
+        @else
+            <p>Nothing found in your wishlist.</p>
+        @endif
+    </div>
+</section>
 @endsection
