@@ -36,16 +36,18 @@ class RegisterController extends Controller
 
         try {
             // Create user and trigger registered event
-            $user = $this->create($validatedData);
+
+            $token = Str::random(60); // Generate a random verification token
+            $user = $this->create($validatedData,$token);
 
 
            // event(new Registered($user));
 
 // After user registration
-//$user = $this->create($validatedData); // Assuming this creates the user
+
 //$user->notify(new CustomVerifyEmail($user)); // Pass the user to the notification
 
-            return redirect()->route('verification.notice')->with('success', 'Registration successful! Please check your email for verification.');
+            return redirect()->route('verification.notice',['token'=>$token])->with('success', 'Registration successful! Please check your email for verification.');
         } catch (Exception $e) {
             Log::error('Registration failed: ' . $e->getMessage());
 
@@ -113,9 +115,9 @@ class RegisterController extends Controller
      */
 
 
-    protected function create(array $data)
+    protected function create(array $data,$token)
 {
-    $token = Str::random(60); // Generate a random verification token
+
 
     $user = User::create([
         'fullname' => $data['fullname'],

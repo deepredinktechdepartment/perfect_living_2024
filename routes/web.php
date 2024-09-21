@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
@@ -274,8 +275,14 @@ Route::post('postRegisterData', [RegisterController::class, 'register'])->name('
 
 
 
-Route::get('email/verify', function () {
-    return view('auth.verify');
+Route::get('email/verify', function (Request $request) {
+    // Get a specific query parameter (e.g., ?token=value)
+    $token = $request->query('token');
+
+    // Or get all query parameters as an associative array
+    $params = $request->all();
+
+    return view('auth.verify', compact('token', 'params'));
 })->name('verification.notice');
 
 Route::get('email/verify/{id}/{hash}', [VerificationController::class, '__invoke'])

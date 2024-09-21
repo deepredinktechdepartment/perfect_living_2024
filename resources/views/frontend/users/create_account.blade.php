@@ -28,13 +28,13 @@
                         <form id="registrationForm" method="POST" action="{{ route('post.Register.Data') }}">
                             @csrf
                             <div class="form-group mb-4">
-                                <input type="text" name="fullname" id="fullname" class="form-control" placeholder="Full Name" required value="" autocomplete="off">
+                                <input type="text" name="fullname" id="fullname" class="form-control" placeholder="Full Name" required value="{{ old('fullname') }}" autocomplete="off">
                             </div>
                             <div class="form-group mb-4">
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required value="" autocomplete="off">
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required value="{{ old('email') }}" autocomplete="off">
                             </div>
                             <div class="form-group mb-4">
-                                <input type="tel" name="phone" id="phone" class="form-control" placeholder="Phone Number" required pattern="[0-9]{10}" value="" autocomplete="off">
+                                <input type="tel" name="phone" id="phone" class="form-control" placeholder="Phone Number" required pattern="[0-9]{10}" value="{{ old('phone') }}" autocomplete="off">
                             </div>
                             <div class="form-group mb-4">
                                 <input type="password" name="password" id="password" class="form-control" placeholder="Password" required minlength="8" value="" autocomplete="off">
@@ -79,12 +79,16 @@ $(document).ready(function() {
         rules: {
             fullname: {
                 required: true,
-                noLeadingSpaces: true
+                noLeadingSpaces: true,
+                minlength: 1,
+                maxlength: 100
             },
             email: {
                 required: true,
                 email: true,
-                noLeadingSpaces: true
+                noLeadingSpaces: true,
+                minlength: 1,
+                maxlength: 150
             },
             phone: {
             required: true,
