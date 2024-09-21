@@ -12,7 +12,6 @@ use App\Notifications\CustomVerifyEmail;
 class User extends Authenticatable
 {
 
-    use Notifiable;
 
 
     use HasApiTokens, HasFactory, Notifiable;
@@ -25,6 +24,9 @@ class User extends Authenticatable
     protected $fillable = [
         'fullname',
         'username',
+        'active',
+        'verification_token',
+        'email_verified_at',
         'phone',
         'role',
         'password',

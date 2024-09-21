@@ -7,7 +7,7 @@
             <div class="col-sm-5">
                         <div class="card login-card p-3 px-sm-3 px-2">
                     <div class="card-body">
-                        <h3 class="mb-4">Login / Sign Up</h3>
+                        <h3 class="mb-4">Log in</h3>
                         <form id="loginForm" method="POST" action="{{ route('verify.Auth.Login') }}" autocomplete="off">
                             @csrf
                             <div class="form-group mb-4">
@@ -20,18 +20,18 @@
                                     <input type="password" name="password" id="password" class="form-control" placeholder="Password" required autocomplete="off">
                                 </div>
                             </div>
-                            <div class="mb-4">
+                            {{-- <div class="mb-4">
                                 <p><small>By continuing, you agree to <a href="#" class="text-brand">Terms of Use</a> & <a href="#" class="text-brand">Privacy Policy</a>.</small></p>
-                            </div>
+                            </div> --}}
                             <div class="form-group mb-4">
                                 <button type="submit" class="btn btn-danger border-radius-0 w-100">Continue</button>
                             </div>
-                            <div class="mb-5">
+                            {{-- <div class="mb-5">
                                 <p><small>Have trouble logging in? <a href="#" class="text-brand">Get help</a></small></p>
-                            </div>
+                            </div> --}}
                         </form>
-                        <div>
-                            <a href="{{ URL::TO('create_account') }}" class="btn btn-createaccount w-100">Create your account</a>
+                        <div class="mb-5">
+                            <p><small>Don't have an account yet? <a href="{{ URL::TO('create_account') }}" class="text-brand">Create your account</a></small></p>
                         </div>
                     </div>
                 </div>

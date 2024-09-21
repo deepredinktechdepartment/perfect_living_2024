@@ -297,6 +297,8 @@ Route::get('email/verification-notification', [VerificationController::class, 's
         return back()->withErrors(['error' => 'You are not authorized to log out.']);
     })->name('notAdminSerLogout');
 
+    Route::get('/verify-email/{token}', [RegisterController::class, 'verifyEmail'])->name('verify.email');
+
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/wishlists', [WishlistController::class, 'index'])->name('wishlists.index');

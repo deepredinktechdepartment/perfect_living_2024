@@ -28,28 +28,28 @@
                         <form id="registrationForm" method="POST" action="{{ route('post.Register.Data') }}">
                             @csrf
                             <div class="form-group mb-4">
-                                <input type="text" name="fullname" id="fullname" class="form-control" placeholder="Full Name" required value="venkat">
+                                <input type="text" name="fullname" id="fullname" class="form-control" placeholder="Full Name" required value="" autocomplete="off">
                             </div>
                             <div class="form-group mb-4">
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required value="venkat@gmail.com">
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required value="" autocomplete="off">
                             </div>
                             <div class="form-group mb-4">
-                                <input type="tel" name="phone" id="phone" class="form-control" placeholder="Phone Number" required pattern="[0-9]{10}" value="9876543210">
+                                <input type="tel" name="phone" id="phone" class="form-control" placeholder="Phone Number" required pattern="[0-9]{10}" value="" autocomplete="off">
                             </div>
                             <div class="form-group mb-4">
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required minlength="8" value="12345678">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required minlength="8" value="" autocomplete="off">
                             </div>
                             <div class="form-group mb-4">
-                                <input type="password" name="passwordagain" id="passwordagain" class="form-control" placeholder="Confirm Password" required value="12345678">
+                                <input type="password" name="passwordagain" id="passwordagain" class="form-control" placeholder="Confirm Password" required value="" autocomplete="off">
                             </div>
-                            <div class="mb-4">
+                            {{-- <div class="mb-4">
                                 <p><small>By continuing, you agree to our <a href="#" class="text-brand">Terms of Use</a> & <a href="#" class="text-brand">Privacy Policy</a>.</small></p>
-                            </div>
+                            </div> --}}
                             <div class="form-group mb-4">
                                 <button type="submit" class="btn btn-danger border-radius-0 w-100">Create Your Account</button>
                             </div>
                             <div class="mb-5">
-                                <p><small>Already have an account? <a href="{{ URL::to('login') }}" class="text-brand">Sign In</a></small></p>
+                                <p><small>Already have an account? <a href="{{ URL::to('login') }}" class="text-brand">Log in</a></small></p>
                             </div>
                         </form>
 

@@ -12,6 +12,9 @@ use Exception;
 use App\Notifications\CustomVerifyEmail;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Str;
+
+
 
 class RegisterController extends Controller
 {
@@ -34,13 +37,15 @@ class RegisterController extends Controller
         try {
             // Create user and trigger registered event
             $user = $this->create($validatedData);
+
+
            // event(new Registered($user));
 
 // After user registration
 //$user = $this->create($validatedData); // Assuming this creates the user
 //$user->notify(new CustomVerifyEmail($user)); // Pass the user to the notification
 
-            return redirect()->route('verification.notice')->with('status', 'Registration successful! Please check your email for verification.');
+            return redirect()->route('verification.notice')->with('success', 'Registration successful! Please check your email for verification.');
         } catch (Exception $e) {
             Log::error('Registration failed: ' . $e->getMessage());
 
@@ -106,16 +111,30 @@ class RegisterController extends Controller
      * @param array $data
      * @return \App\Models\User
      */
+
+
     protected function create(array $data)
-    {
-        return User::create([
-            'fullname' => $data['fullname'],
-            'username' => $data['email'], // Store email as username
-            'phone' => $data['phone'], // Save the phone number
-            'password' => Hash::make($data['password']),
-            'role' => 5, // Set role to 5 by default
-        ]);
-    }
+{
+    $token = Str::random(60); // Generate a random verification token
+
+    $user = User::create([
+        'fullname' => $data['fullname'],
+        'username' => $data['email'],
+        'phone' => $data['phone'],
+        'password' => Hash::make($data['password']),
+        'role' => 5,
+        'active' => 0,
+        'verification_token' => $token, // Store the verification token
+    ]);
+
+    // Send verification email (implement this method)
+    $user->notify(new CustomVerifyEmail($user, $token));
+
+    return $user;
+
+}
+
+
      /**
      * Handle a login request to the application.
      */
@@ -134,6 +153,11 @@ class RegisterController extends Controller
              return redirect()->back()->with('error', 'Account does not exist.');
          }
 
+         // Check if the user's account is active
+         if ($user->active === 0) {
+             return redirect()->back()->with('error', 'Your account is inactive. Please contact support.');
+         }
+
          // Attempt to log the user in
          if (Auth::attempt(['username' => $request->email, 'password' => $request->password])) {
              // Check if the authenticated user has role 5
@@ -148,6 +172,7 @@ class RegisterController extends Controller
          // Authentication failed
          return redirect()->back()->with('error', 'Invalid email or password.');
      }
+
 
 
 /**
@@ -177,4 +202,44 @@ protected function loginValidationMessages()
         'password.required' => 'Please provide your password.',
     ];
 }
+
+
+public function verifyEmail($token)
+{
+    try {
+        // Retrieve the user based on the verification token
+        $user = User::where('verification_token', $token)->first();
+
+        // Check if the user exists
+        if (!$user) {
+
+            return redirect('/')->with('error', 'Invalid verification token.');
+
+        }
+
+        // Check if the user is already verified
+        if ($user->email_verified_at) {
+
+            return redirect('/')->with('error', 'Your email is already verified.');
+        }
+
+        // Verify the user account
+        $user->email_verified_at = now(); // Set verification timestamp
+        $user->verification_token = null; // Clear the token
+        $user->active = true;
+        $user->save();
+
+        // Log in the user
+        Auth::login($user);
+
+        return redirect('/')->with('success', 'Your email has been verified! You are now logged in.');
+    } catch (\Exception $e) {
+        return redirect('/')->withErrors(['error' => 'An error occurred while verifying your email. Please try again.']);
+    }
+}
+
+
+
+
+
 }

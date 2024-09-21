@@ -66,12 +66,12 @@
 
               @guest
               <li class="nav-item">
-                  <a class="nav-link text-white" href="{{ URL('login') }}">Login</a>
+                  <a class="nav-link text-white" href="{{ URL::to('login') }}">Wishlist                  </a>
               </li>
           @else
               @if (Auth::user()->role === 5) <!-- Check if the user is a non-admin -->
                   <li class="nav-item">
-                      <a class="nav-link text-white" href="{{ URL('wishlists') }}">My Wishlist</a>
+                      <a class="nav-link text-white" href="{{ URL::to('wishlists') }}">My Wishlist</a>
                   </li>
                   <li class="nav-item">
 
