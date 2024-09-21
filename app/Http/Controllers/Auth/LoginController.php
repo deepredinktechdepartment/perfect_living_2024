@@ -78,22 +78,32 @@ class LoginController extends Controller
             // Destroy Session Variables
             Session::forget('OrganizationID');
 
+            // Find the user without the global ActiveOrganization scope
             $user = User::withoutGlobalScope(ActiveOrgaization::class)
                         ->where('username', $request->username)
                         ->first();
 
+            // Check if the user exists
             if (!$user) {
                 return redirect()->back()->with('error', 'Account not found.');
             }
 
+            // Check if the account is active
             if ($user->active != 1) {
                 return redirect()->back()->with('error', 'Account is not active.');
             }
 
+            // Check if the user is a non-admin (role 5) and prevent access
+            if ($user->role == 5) {
+                return redirect()->back()->with('error', 'You do not have access to this system. Please contact your organization for more details.');
+            }
+
+            // Attempt to authenticate the user
             if (!Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
                 return redirect()->back()->with('error', 'Invalid credentials.');
             }
 
+            // Store the Organization ID in the session
             Session::put('OrganizationID', auth()->user()->client_id ?? 0);
 
             // Update last login information
@@ -104,11 +114,14 @@ class LoginController extends Controller
             $user->current_login_ip = request()->ip();
             $user->save();
 
+            // Redirect to dashboard with a success message
             return redirect('dashboard')->with('toast_success', 'Account is verified.');
         } catch (Exception $exception) {
+            // Handle any exceptions and redirect with an error message
             return redirect()->back()->with('error', 'Authentication error: ' . $exception->getMessage());
         }
     }
+
 
     /**
      * Handle user logout.

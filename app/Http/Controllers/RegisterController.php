@@ -175,7 +175,7 @@ class RegisterController extends Controller
              } else {
                  // Logout the user if they do not have the correct role
                  Auth::logout();
-                 return redirect()->back()->with('error', 'You do not have permission to access this area.');
+                 return redirect()->back()->with('error', 'You do not have permission to access this account.');
              }
          }
 
