@@ -192,7 +192,9 @@ section {
 .three_slider .slick-slide {
     margin: 0.7rem;
 }
-
+.slick-arrow.slick-prev {
+    left: -50px;
+}
 .slick-arrow.slick-next {
     right: -50px;
 }
@@ -1130,7 +1132,7 @@ label.error {
   }
   
   .amenities-icon {
-    border: 1px solid #000;
+    border: 1px solid #ddd;
     padding: 20px;
     height: 100%;
   }
