@@ -22,7 +22,7 @@
                 <div class="col-sm-7">
                     <div class="project-details-wrapper  p-3">
                         <h5 class="mb-0">{{ $name }}</h5>
-                        <p>{{ $address }}</p>
+                        <p class="mb-1 pb-0">{{ $address }}</p>
                         <p class="mb-0 pb-0">{{ $details }}</p>
                     @if(isset($price) && $price > 0)
                     <p class="mb-0 p-0">

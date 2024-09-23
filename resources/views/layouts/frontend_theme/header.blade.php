@@ -77,6 +77,13 @@
 
                       <a href="{{ route('notAdminSerLogout') }}" class="nav-link text-white" >Logout</a>
                   </li>
+
+                  @else
+
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ URL::to('login') }}">Wishlist</a>
+                </li>
+
               @endif
           @endguest
 

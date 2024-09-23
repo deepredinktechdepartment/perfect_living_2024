@@ -8,7 +8,7 @@
                 <div class="project-details-wrapper p-3">
                     <div>
                         <h5 class="mb-0">{{ $name }}</h5>
-                        <p><i class="fa-solid fa-location-dot"></i> {{ $address }}</p>
+                        <p><i class="fa-solid fa-location-dot mb-1 pb-0"></i> {{ $address }}</p>
                          <p class="mb-0 p-0">{{ $details }}</p>
                                    @if(isset($price) && $price > 0)
                     <p class="mb-0 p-0">
