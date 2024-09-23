@@ -249,8 +249,12 @@ Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');
 
 Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 
-Route::get('/filters/{param?}', [PagesController::class, 'filtersprojects'])->name('homepage');
+//Route::get('/filters/{param?}', [PagesController::class, 'filtersprojects'])->name('homepage');
 
+
+Route::get('/{any?}', [PagesController::class, 'filtersprojects'])
+    ->where('any', '^(builders|collection|top-locations|budgets|project)(/[^/]+)?((/builders|/collection|/top-locations|/budgets|/project)(/[^/]+)?)*$')
+    ->name('filters.index');
 
 
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');

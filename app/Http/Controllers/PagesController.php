@@ -26,7 +26,7 @@ class PagesController extends Controller
         $pageTitle='Home page';
 
  $projects = Project::query()
-    
+
     ->isFeatured(true) // Assuming scopeIsFeatured exists
     ->isApproved(true) // Assuming scopeIsApproved exists
     ->orderBy('updated_at', 'desc')
@@ -45,19 +45,65 @@ class PagesController extends Controller
         $pageTitle='Contact Us';
         return view('frontend.pages.under_construction',compact('pageTitle'));
     }
-   
-   
-   public function filtersprojects(Request $request)
+
+
+   public function filtersprojects(Request $request,$any = null)
 {
+
+
+     // Break the URL into segments
+     $segments = explode('/', $any);
+
+     // Initialize variables for each type of segment
+     $builders = null;
+     $collection = null;
+     $topLocations = null;
+     $budgets = null;
+     $project = null;
+
+     // Iterate through the segments and extract values
+     for ($i = 0; $i < count($segments); $i++) {
+         switch ($segments[$i]) {
+             case 'builders':
+                 $builders = $segments[$i + 1] ?? null;
+                 break;
+             case 'collection':
+                 $collection = $segments[$i + 1] ?? null;
+                 break;
+             case 'top-locations':
+                 $topLocations = $segments[$i + 1] ?? null;
+                 break;
+             case 'budgets':
+                 $budgets = $segments[$i + 1] ?? null;
+                 break;
+             case 'project':
+                 $project = $segments[$i + 1] ?? null;
+                 break;
+         }
+     }
+
+
+
+
+
     $pageTitle = 'Apartments';
 
     // Retrieve input parameters as comma-separated strings
+    // $beds = $request->input('beds', ''); // Comma-separated string for beds
+    // $types = $request->input('property_type', ''); // Comma-separated string for types
+    // $priceRange = $request->input('budgets', ''); // Comma-separated string for budgets
+    // $areaNames = $request->input('areas', ''); // Comma-separated string for areas
+    // $projectName = $request->input('name', ''); // Get project name for filtering
+    // $builders = $request->input('builders', ''); // Comma-separated string for builders
+    // $searchQuery = $request->query('search', ''); // Get the search input (default to empty)
+
+
     $beds = $request->input('beds', ''); // Comma-separated string for beds
     $types = $request->input('property_type', ''); // Comma-separated string for types
     $priceRange = $request->input('budgets', ''); // Comma-separated string for budgets
     $areaNames = $request->input('areas', ''); // Comma-separated string for areas
     $projectName = $request->input('name', ''); // Get project name for filtering
-    $builders = $request->input('builders', ''); // Comma-separated string for builders
+    $builders = $builders; // Comma-separated string for builders
     $searchQuery = $request->query('search', ''); // Get the search input (default to empty)
 
     // Start building the query
@@ -165,6 +211,48 @@ if (!empty($builders)) {
 
 
 
+public function index($any = null)
+{
+    // Break the URL into segments
+    $segments = explode('/', $any);
 
+    // Initialize variables for each type of segment
+    $builders = null;
+    $collection = null;
+    $topLocations = null;
+    $budgets = null;
+    $project = null;
+
+    // Iterate through the segments and extract values
+    for ($i = 0; $i < count($segments); $i++) {
+        switch ($segments[$i]) {
+            case 'builders':
+                $builders = $segments[$i + 1] ?? null;
+                break;
+            case 'collection':
+                $collection = $segments[$i + 1] ?? null;
+                break;
+            case 'top-locations':
+                $topLocations = $segments[$i + 1] ?? null;
+                break;
+            case 'budgets':
+                $budgets = $segments[$i + 1] ?? null;
+                break;
+            case 'project':
+                $project = $segments[$i + 1] ?? null;
+                break;
+        }
+    }
+
+    // Return the common view and pass the values as data to the view
+    return view('filtes-demo', [
+        'builders' => $builders,
+        'collection' => $collection,
+        'topLocations' => $topLocations,
+        'budgets' => $budgets,
+        'project' => $project,
+
+    ]);
+}
 
 }

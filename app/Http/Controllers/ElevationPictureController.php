@@ -74,7 +74,8 @@ class ElevationPictureController extends Controller
             return redirect()->route('elevation_pictures.index', ['projectID' => $request->project_id])
                              ->with('success', 'Elevation Picture added successfully.');
         } catch (\Exception $e) {
-            Log::error('Error creating elevation picture for project ID ' . $request->project_id . ': ' . $e->getMessage());
+
+
             return redirect()->back()->with('error', 'An error occurred while creating the elevation picture.');
         }
     }

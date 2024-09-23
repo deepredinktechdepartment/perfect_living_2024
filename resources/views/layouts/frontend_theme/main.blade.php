@@ -5,7 +5,7 @@
 
 
     @if(isset($favicon) && File::exists($favicon))
-<link rel="shortcut icon" href="{{ URL::to(asset($favicon)) }}">
+<link rel="shortcut icon" href="{{ URL::to('favicon.png') }}">
 @else
 @endif
 
@@ -29,15 +29,15 @@
  <!-- Open Graph Meta Tags for Social Media -->
  <meta property="og:title" content="Hyderabad Real Estate Projects - Honest Reviews & Transparent Information">
  <meta property="og:description" content="Discover upcoming real estate projects in Hyderabad. Honest customer reviews, transparent information, and more. Stay tuned for updates!">
- <meta property="og:image" content="URL_TO_YOUR_IMAGE">
- <meta property="og:url" content="https://perfectliving.in/">
+ <meta property="og:image" content="{{ URL::to('favicon.png') }}">
+ <meta property="og:url" content="{{ URL::to('/') }}">
  <meta property="og:type" content="website">
 
  <!-- Twitter Card Meta Tags -->
  <meta name="twitter:card" content="summary_large_image">
  <meta name="twitter:title" content="Hyderabad Real Estate Projects - Honest Reviews & Transparent Information">
  <meta name="twitter:description" content="Discover upcoming real estate projects in Hyderabad. Honest customer reviews, transparent information, and more. Stay tuned for updates!">
- <meta name="twitter:image" content="URL_TO_YOUR_IMAGE">
+ <meta name="twitter:image" content="{{ URL::to('favicon.png') }}">
 
 
 
