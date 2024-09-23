@@ -239,6 +239,34 @@ $(document).ready(function() {
     });
 });
 
+if (window.matchMedia("(max-width: 768px)").matches) {
+    /* the viewport is less than 768 pixels wide */
+    $('.amenities-slider').slick({
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    pauseOnHover:true,
+    dots: true,
+    fade: false,
+    arrows: false,
+    infinite: false,
+    loop: false,
+    responsive:[
+    {
+       breakpoint:480,
+       settings:
+       {
+          slidesToShow:2,
+          slidesToScroll:2,
+       }
+    }
+ ]
+});
+  } 
+
+
+
 // Review Js
 const stars = document.querySelectorAll('.star');
 stars.forEach(star => {

@@ -204,7 +204,49 @@
 
 
 
-
+<section>
+    <div class="container">
+    <h2 class="mb-4">Amenities</h2>
+        <div class="row amenities-slider">
+            <div class="expertise-col">
+                <div class="amenities-icon">
+                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
+                    <p>Creche/Toddlers Play</p>
+                </div>
+            </div>
+            <div class="expertise-col">
+                <div class="amenities-icon">
+                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
+                    <p>Creche/Toddlers Play</p>
+                </div>
+            </div>
+            <div class="expertise-col">
+                <div class="amenities-icon">
+                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
+                    <p>Creche/Toddlers Play</p>
+                </div>
+            </div>
+            <div class="expertise-col">
+                <div class="amenities-icon">
+                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
+                    <p>Creche/Toddlers Play</p>
+                </div>
+            </div>
+            <div class="expertise-col">
+                <div class="amenities-icon">
+                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
+                    <p>Creche/Toddlers Play</p>
+                </div>
+            </div>
+            <div class="expertise-col">
+                <div class="amenities-icon">
+                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
+                    <p>Creche/Toddlers Play</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section>
   <div class="container">
