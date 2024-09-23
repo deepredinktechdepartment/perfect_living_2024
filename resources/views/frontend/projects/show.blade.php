@@ -212,7 +212,7 @@
  @endif
 
 
-<section>
+<section class="bg-yellow">
   <div class="container">
 
     <div class="row">
