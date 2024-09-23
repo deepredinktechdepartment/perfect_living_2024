@@ -474,7 +474,7 @@ public function userLogin(Request $request)
             // If the user's role is not 5 (CMS user), don't allow access to the login page
             if ($user->role != 5) {
                 // Return error message, do not log the user out
-                return redirect('/')->back()->with('error', 'You are already logged in as a CMS user. Please log out first to access the login page.');
+                return redirect('/')->with('error', 'You are already logged in as a CMS user. Please log out first to access the login page.');
 
             }
         }
@@ -503,7 +503,7 @@ public function createAccount(Request $request)
             // If the user's role is not 5 (CMS user), don't allow access to the create account page
             if ($user->role != 5) {
                 // Return error message, do not log the user out
-                return redirect('/')->back()->with('error', 'You are already logged in as a CMS user. Please log out first to access the create account page.');
+                return redirect('/')->with('error', 'You are already logged in as a CMS user. Please log out first to access the create account page.');
             }
         }
 
