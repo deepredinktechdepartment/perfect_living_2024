@@ -11,9 +11,23 @@
         @if(isset($project->areas) && !empty($project->areas->name))
           <h5>{{$project->areas->name??''}} - {{$project->citites->name??''}}</h5>
           @endif
-        @if(isset($project->company) && !empty($project->company->name))
-            <h6>By <span class="text-decoration-underline"><a href="{{ URL::to('filters?builders='.$project->company->slug) }}">{{ $project->company->name }}</a></span></h6>
-        @endif
+          
+          
+   @if($project->company()->count())
+    <h6>By 
+        
+        @foreach($project->company() as $company) <!-- Ensure to call get() to retrieve the companies -->
+            <span class="text-decoration-underline">
+                <a href="{{ URL::to('filters?builders='.$company->slug) }}">{{ $company->name }}</a>
+            </span>{{ !$loop->last ? ', ' : '' }} <!-- Add comma except for the last company -->
+        @endforeach
+    </h6>
+@else
+    <h6>No Companies Assigned</h6>
+@endif
+
+        
+        
         </div>
         <div class="rating-display-wrapper text-sm-center">
           {{-- <div class="star-rating text-sm-center text-start">
@@ -205,14 +219,20 @@
             </div>
         @endif
 
-        @if(!empty($project->company->about_builder))
-            <div class="col-sm-4 ps-sm-4">
-                <div>
-                    <h2 class="mb-sm-5 mb-3">About The Builder</h2>
-                    {!! $project->company->about_builder !!}
-                </div>
+@if($project->company()->count())
+    @php
+        $firstCompany = $project->company()->first(); // Get the first company
+    @endphp
+    @if(!empty($firstCompany->about_builder))
+        <div class="col-sm-4 ps-sm-4">
+            <div>
+                <h2 class="mb-sm-5 mb-3">About The Builder</h2>
+                {!! $firstCompany->about_builder !!}
             </div>
-        @endif
+        </div>
+    @endif
+@endif
+
     </div>
 
 

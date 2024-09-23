@@ -6,6 +6,7 @@
 @php
     use App\Models\Company;
     $companies = Company::orderBy('name', 'asc')->get();
+    
 @endphp
 
 @section('content')
@@ -84,7 +85,7 @@
                         <tr>
                             <th>S.No.</th>
                             <th>Name</th>
-                            <th>Company</th>
+                            <th>Builder</th>
                             <th>Preview</th>
                             @if(Auth::check() && in_array(Auth::user()->role, [1, 2,4]))
                             <th>Published</th>
@@ -95,10 +96,22 @@
                     </thead>
                     <tbody>
                         @foreach ($projects as $project)
-                            <tr data-company-id="{{ $project->company_id }}">
+                          
+                                <tr data-company-id="{{ is_array($project->company_id) ? implode(',', $project->company_id) : $project->company_id }}">
+
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $project->name ?? '' }}<br>&nbsp;-{{ $project->project_type ?? '' }}</td>
-                                <td>{{ $project->loaded_companies->name ?? '' }}</td>
+                      <td>
+                          
+                        
+    @if($project->company()->count())
+        @foreach($project->company() as $company) <!-- Ensure to call get() to retrieve the companies -->
+            {{ $company->name }}{{ !$loop->last ? ', ' : '' }} <!-- Display the company names separated by commas -->
+        @endforeach
+    @else
+        No Companies Assigned
+    @endif
+</td>
                                 <td>
                                     <a href="{{ URL::to('company/project/'.$project->slug) }}" class="no-button" target="_blank" title="Preview Project">
                                         <i class="fas fa-link"></i>
@@ -180,32 +193,34 @@
                     table.clear().draw();
 
                     // Add new data
-                    data.projects.forEach(function(project, index) {
-                        table.row.add([
-                            index + 1,
-                            project.name + '<br>&nbsp;-' + project.project_type,
-                            project.company_name,
-                            '<a href="' + project.preview_url + '" class="no-button" target="_blank" title="Preview Project"><i class="fas fa-link"></i></a>' +
-                            '<button onclick="copyToClipboard(\'' + project.preview_url + '\', ' + (index + 1) + ')" class="no-button" title="Copy Link"><i class="fas fa-copy"></i></button>' +
-                            '<span class="copy-message" id="message-' + (index + 1) + '">Copied!</span>',
-                            project.status === 'published'
-    ? '<div class="form-check form-switch">' +
-        '<input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" checked data-id="' + project.id + '">' +
-        '<label class="form-check-label" for="toggle-' + project.id + '"></label>' +
-      '</div>'
-    : '<div class="form-check form-switch">' +
-        '<input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" data-id="' + project.id + '">' +
-        '<label class="form-check-label" for="toggle-' + project.id + '"></label>' +
-      '</div>',
+                   data.projects.forEach(function(project, index) {
+    // Assuming project.company_name is now a string of company names separated by commas
+    table.row.add([
+        index + 1,
+        project.name + '<br>&nbsp;-' + project.project_type,
+        project.company_name || 'No Companies Assigned', // Handle case where there are no companies
+        '<a href="' + project.preview_url + '" class="no-button" target="_blank" title="Preview Project"><i class="fas fa-link"></i></a>' +
+        '<button onclick="copyToClipboard(\'' + project.preview_url + '\', ' + (index + 1) + ')" class="no-button" title="Copy Link"><i class="fas fa-copy"></i></button>' +
+        '<span class="copy-message" id="message-' + (index + 1) + '">Copied!</span>',
+        project.status === 'published'
+            ? '<div class="form-check form-switch">' +
+                '<input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" checked data-id="' + project.id + '">' +
+                '<label class="form-check-label" for="toggle-' + project.id + '"></label>' +
+              '</div>'
+            : '<div class="form-check form-switch">' +
+                '<input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" data-id="' + project.id + '">' +
+                '<label class="form-check-label" for="toggle-' + project.id + '"></label>' +
+              '</div>',
+        project.is_featured
+            ? '<div class="form-check form-switch"><input class="form-check-input toggle-featured" type="checkbox" id="featured-' + project.id + '" checked data-id="' + project.id + '"><label class="form-check-label" for="featured-' + project.id + '"></label></div>'
+            : '<div class="form-check form-switch"><input class="form-check-input toggle-featured" type="checkbox" id="featured-' + project.id + '" data-id="' + project.id + '"><label class="form-check-label" for="featured-' + project.id + '"></label></div>',
+        '<a href="{{ url('/projects') }}/' + project.id + '/edit" class="no-button" title="Edit"><i class="{{ config('constants.icons.edit') }}"></i></a>' +
+        '<form action="{{ url('/projects') }}/' + project.id + '" method="POST" class="delete-form" style="display:inline;">@csrf @method('DELETE')<button type="submit" class="no-button" title="Delete"><i class="{{ config('constants.icons.delete') }}"></i></button></form>' +
+        '<a href="{{ url('/unit_configurations') }}/?projectID=' + project.id + '" class="no-button" title="Units Config"><i class="{{ config('constants.icons.unit_configuration') }}"></i></a>' +
+        '<a href="{{ url('/elevation_pictures') }}/?projectID=' + project.id + '" class="no-button" title="Elevation Pictures"><i class="{{ config('constants.icons.multiple_imges') }}"></i></a>'
+    ]).draw();
+});
 
-                            project.is_featured ? '<div class="form-check form-switch"><input class="form-check-input toggle-featured" type="checkbox" id="featured-' + project.id + '" checked data-id="' + project.id + '"><label class="form-check-label" for="featured-' + project.id + '"></label></div>' :
-                            '<div class="form-check form-switch"><input class="form-check-input toggle-featured" type="checkbox" id="featured-' + project.id + '" data-id="' + project.id + '"><label class="form-check-label" for="featured-' + project.id + '"></label></div>',
-                            '<a href="{{ url('/projects') }}/' + project.id + '/edit" class="no-button" title="Edit"><i class="{{ config('constants.icons.edit') }}"></i></a>' +
-                            '<form action="{{ url('/projects') }}/' + project.id + '" method="POST" class="delete-form" style="display:inline;">@csrf @method('DELETE')<button type="submit" class="no-button" title="Delete"><i class="{{ config('constants.icons.delete') }}"></i></button></form>' +
-                            '<a href="{{ url('/unit_configurations') }}/?projectID=' + project.id + '" class="no-button" title="Units Config"><i class="{{ config('constants.icons.unit_configuration') }}"></i></a>' +
-                            '<a href="{{ url('/elevation_pictures') }}/?projectID=' + project.id + '" class="no-button" title="Elevation Pictures"><i class="{{ config('constants.icons.multiple_imges') }}"></i></a>'
-                        ]).draw();
-                    });
                 }
             });
         });

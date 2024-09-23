@@ -66,15 +66,38 @@ class Project extends Model
         return $this->hasMany(ElevationPicture::class);
         }
 
-  public function company()
-        {
-            return $this->belongsTo(Company::class);
-        }
+   
+// Custom method to retrieve all companies based on the JSON `company_id`
+public function company()
+{
+    $companyIds = $this->company_id;
 
-        public function companies()
-        {
-            return $this->belongsToMany(Company::class, 'company_project', 'project_id', 'company_id');
-        }
+    // Check if `company_id` is a valid JSON string or array and has at least one value
+    if (!is_array($companyIds)) {
+        $companyIds = json_decode($companyIds, true); // Decode if it's stored as a JSON string
+    }
+
+    if (is_array($companyIds) && count($companyIds)) {
+        // Return all companies from the list of company IDs
+        return Company::whereIn('id', $companyIds)->get();
+    }
+
+    return collect(); // Return an empty collection if no valid company_ids exist
+}
+
+
+    // Accessor to decode the JSON company IDs safely
+    public function getCompanyIdAttribute($value)
+    {
+        return $value ? json_decode($value, true) : []; // Return empty array if null
+    }
+
+    // Mutator to encode the company IDs as JSON before saving
+    public function setCompanyIdAttribute($value)
+    {
+        $this->attributes['company_id'] = json_encode($value ?: []); // Store an empty array if value is null
+    }
+
 
    public function citites()
     {

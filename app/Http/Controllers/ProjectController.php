@@ -46,48 +46,52 @@ class ProjectController extends Controller
         }
     }
 
-    public function index(Request $request): View
-    {
-        try {
-            // Get the 'tab' query parameter or default to 'newly_added'
-            $tab = $request->query('tab', 'newly_added')??'';
+   public function index(Request $request): View
+{
+    try {
+        // Get the 'tab' query parameter or default to 'newly_added'
+        $tab = $request->query('tab', 'newly_added');
 
+        // Valid status values
+        $validStatuses = ['newly_added', 'in_review', 'published', 'deactivated'];
 
-            // Valid status values
-            $validStatuses = ['newly_added', 'in_review', 'published', 'deactivated'];
+        // Initialize status counts
+        $statusCounts = Project::select('status', \DB::raw('count(*) as count'))
+            ->groupBy('status')
+            ->pluck('count', 'status')
+            ->toArray();
 
-            // Initialize status counts
-            $statusCounts = Project::select('status', \DB::raw('count(*) as count'))
-                ->groupBy('status')
-                ->pluck('count', 'status')
-                ->toArray();
+        // Build the query based on the 'tab' value
+        $query = Project::query();
 
-            // Build the query based on the 'tab' value
-            $query = Project::with('company');
-
-            // Check if the tab value is valid
-            if (in_array($tab, $validStatuses)) {
-                $query->where('status', $tab);
-            } else {
-                // Handle invalid status
-                throw new \InvalidArgumentException('Invalid status provided.');
-            }
-
-            // Execute the query
-            $projects = $query->get();
-
-
-            $pageTitle = 'Projects List'; // Set the page title
-            $addlink = route('projects.create'); // Link to the create page
-
-            return view('projects.index', compact('projects', 'addlink', 'pageTitle', 'tab', 'statusCounts'));
-        } catch (Exception $e) {
-            // Log the error message if needed
-            // Log::error('Failed to create project: ' . $e->getMessage());
-
-            return redirect()->route('projects.index', ['tab' => $request->query('tab', 'newly_added')])->with('error', 'Failed to create project.');
+        // Check if the tab value is valid
+        if (in_array($tab, $validStatuses)) {
+            $query->where('status', $tab);
+        } else {
+            // Handle invalid status
+            throw new \InvalidArgumentException('Invalid status provided.');
         }
+
+        // Execute the query to get the projects
+        $projects = $query->get();
+
+
+
+        $pageTitle = 'Projects List'; // Set the page title
+        $addlink = route('projects.create'); // Link to the create page
+
+        // Pass the projects with the loaded first company, and other variables to the view
+        return view('projects.index', compact('projects', 'addlink', 'pageTitle', 'tab', 'statusCounts'));
+    } catch (Exception $e) {
+        // Log the error message if needed
+        // Log::error('Failed to fetch projects: ' . $e->getMessage());
+      
+
+        // Return to the previous page with an error message
+        return redirect()->back()->with('error', 'Failed to fetch projects.');
     }
+}
+
 
 
 
@@ -144,19 +148,19 @@ class ProjectController extends Controller
 
         // Convert checkbox values to JSON format
         $data['map_collections'] = $request->has('map_collections') ? json_encode($request->input('map_collections')) : null;
+         $data['company_id'] = $request->has('company_id') ? json_encode($request->input('company_id')) : null;
         $data['map_badges'] = $request->has('map_badges') ? json_encode($request->input('map_badges')) : null;
         $data['amenities'] = $request->has('amenities') ? json_encode($request->input('amenities')) : null;
         $data['slug'] = Str::slug($request->name)??null;
         $data['city'] = $request->city_id??0;
         $data['area'] = $request->area_id??0;
-         // Convert company_id array to JSON format
-         $data['company_id'] = $request->has('company_id') ? json_encode($request->input('company_id')) : null;
+       // Store company_id as a JSON array
+  
 
         // Create a new project with the specified columns
         Project::create($data);
 
-            // Attach the selected companies to the project
-    $project->companies()->attach($validated['company_id']);
+       
 
         // Return a view with a success message
         return redirect()->route('projects.index', ['tab' => $request->query('tab', 'newly_added')])->with('success', 'Project created successfully.');
@@ -177,6 +181,7 @@ class ProjectController extends Controller
 
     public function update(Request $request, Project $project)
 {
+   
     // Validate the request
     $validator = $request->validate([
         'name' => [
@@ -188,8 +193,7 @@ class ProjectController extends Controller
         ],
         // Allow 'company_id' to accept an array of IDs
 
-      'company_id' => 'array', // Ensure it's an array
-      'company_id.*' => 'integer|exists:companies,id', // Ensure each ID is valid
+ 
         'site_address' => 'required|string',
         'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
         'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
@@ -201,6 +205,7 @@ class ProjectController extends Controller
         'map_collections' => 'nullable|array', // Expecting an array
         'map_badges' => 'nullable|array',     // Expecting an array
         'amenities' => 'nullable|array',      // Expecting an array
+        'company_id' => 'required|array',      // Expecting an array
         'no_of_acres' => 'nullable',
         'no_of_towers' => 'nullable',
         'no_of_units' => 'nullable',
@@ -218,13 +223,16 @@ class ProjectController extends Controller
 
         // Convert checkbox values to JSON format if present, otherwise set to null
         $data['map_collections'] = $request->has('map_collections') ? json_encode($request->input('map_collections')) : null;
+        $data['company_id'] = $request->has('company_id') ? json_encode($request->input('company_id')) : null;
+            
         $data['map_badges'] = $request->has('map_badges') ? json_encode($request->input('map_badges')) : null;
         $data['amenities'] = $request->has('amenities') ? json_encode($request->input('amenities')) : null;
         $data['city'] = $request->city_id??0;
         $data['area'] = $request->area_id??0;
 
-          // Convert company_id array to JSON format
-          $data['company_id'] = $request->has('company_id') ? json_encode($request->input('company_id')) : null;
+
+
+
 
         // Handle the file upload for 'logo'
         if ($request->hasFile('logo')) {
@@ -253,8 +261,7 @@ class ProjectController extends Controller
         // Update the project with the validated data
         $project->update($data);
 
-           // Sync the selected companies to the project
-    $project->companies()->sync($validated['company_id']);
+
 
         // Redirect with success message
         return redirect()->route('projects.index', ['tab' =>$project->status])->with('success', 'Project updated successfully.');
@@ -300,7 +307,7 @@ public function companySingleProject(Request $request, $slug)
 
 
         // Attempt to retrieve the project by slug
-        $project = Project::with('company', 'citites', 'areas','elevationPictures','unitConfigurations')->where('slug', $slug)->firstOrFail();
+        $project = Project::with('citites', 'areas','elevationPictures','unitConfigurations')->where('slug', $slug)->firstOrFail();
 
    $groupedConfigurations = [];
 
@@ -343,7 +350,6 @@ $groupedConfigurations = $groupedConfigurations->sortKeys();
         // Optionally, return a custom 404 page or redirect with an error message
         return redirect()->back()->with('error', 'Project not found.');
     } catch (\Exception $e) {
-
         // Optionally, return a generic error page or message
         return redirect()->back()->with('error', 'An unexpected error occurred. Please try again later.');
     }
@@ -391,25 +397,23 @@ public function toggleApproval(Request $request, Project $project)
 
 // app/Http/Controllers/ProjectController.php
 
+
 public function filter(Request $request)
 {
-
+    
     $companyId = $request->input('company_id');
 
-    $projects = Project::with('company')
+    $projects = Project::query()
         ->when($companyId, function($query, $companyId) {
-            return $query->where('company_id', $companyId);
+            return $query->whereJsonContains('company_id', $companyId);
         })
         ->get();
 
-    $projects->map(function($project) {
-        $project->company_name = $project->company->name ?? '';
-        $project->preview_url = URL::to('company/project/'.$project->slug);
-        return $project;
-    });
+
 
     return response()->json(['projects' => $projects]);
 }
+
 public function updateFeaturedStatus(Request $request)
 {
 
