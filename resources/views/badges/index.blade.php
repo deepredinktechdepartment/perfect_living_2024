@@ -13,9 +13,9 @@
                     <div class="card shadow-sm rounded" style="width: 100%; max-width: 250px;">
 
                             @if(isset($badge->icon) && File::exists(env('APP_STORAGE').'icons/'.$badge->icon))
-                                <img src="{{ URL::to(env('APP_STORAGE').'icons/'.$badge->icon) }}" alt="{{ $badge->name }}" class="card-img-top" style="height: 80px; object-fit: cover;">
+                                <img src="{{ URL::to(env('APP_STORAGE').'icons/'.$badge->icon) }}" alt="{{ $badge->name }}" class="card-img-top" style="height: 40px; object-fit: cover;">
                             @else
-                                <div class="bg-secondary text-white rounded-circle d-flex justify-content-center align-items-center" style="height: 80px; object-fit: cover;">
+                                <div class="bg-secondary text-white rounded-circle d-flex justify-content-center align-items-center" style="height: 40px; object-fit: cover;">
                                     <span>No Icon</span>
                                 </div>
                             @endif
