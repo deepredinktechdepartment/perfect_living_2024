@@ -85,7 +85,7 @@ class ProjectController extends Controller
     } catch (Exception $e) {
         // Log the error message if needed
         // Log::error('Failed to fetch projects: ' . $e->getMessage());
-      
+
 
         // Return to the previous page with an error message
         return redirect()->back()->with('error', 'Failed to fetch projects.');
@@ -155,12 +155,12 @@ class ProjectController extends Controller
         $data['city'] = $request->city_id??0;
         $data['area'] = $request->area_id??0;
        // Store company_id as a JSON array
-  
+
 
         // Create a new project with the specified columns
         Project::create($data);
 
-       
+
 
         // Return a view with a success message
         return redirect()->route('projects.index', ['tab' => $request->query('tab', 'newly_added')])->with('success', 'Project created successfully.');
@@ -181,7 +181,7 @@ class ProjectController extends Controller
 
     public function update(Request $request, Project $project)
 {
-   
+
     // Validate the request
     $validator = $request->validate([
         'name' => [
@@ -193,7 +193,7 @@ class ProjectController extends Controller
         ],
         // Allow 'company_id' to accept an array of IDs
 
- 
+
         'site_address' => 'required|string',
         'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
         'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
@@ -224,7 +224,7 @@ class ProjectController extends Controller
         // Convert checkbox values to JSON format if present, otherwise set to null
         $data['map_collections'] = $request->has('map_collections') ? json_encode($request->input('map_collections')) : null;
         $data['company_id'] = $request->has('company_id') ? json_encode($request->input('company_id')) : null;
-            
+
         $data['map_badges'] = $request->has('map_badges') ? json_encode($request->input('map_badges')) : null;
         $data['amenities'] = $request->has('amenities') ? json_encode($request->input('amenities')) : null;
         $data['city'] = $request->city_id??0;
@@ -344,12 +344,14 @@ $groupedConfigurations = $groupedConfigurations->sortKeys();
      // Fetch actual collection data based on IDs in $mapCollections
     $highlightImages = Collection::whereIn('id', $mapCollections)->get();
 
+
         return view('frontend.projects.show', compact('project', 'pageTitle','highlightImages','badges','groupedConfigurations','reviews','roundedRating'));
 
     } catch (ModelNotFoundException $e) {
         // Optionally, return a custom 404 page or redirect with an error message
         return redirect()->back()->with('error', 'Project not found.');
     } catch (\Exception $e) {
+
         // Optionally, return a generic error page or message
         return redirect()->back()->with('error', 'An unexpected error occurred. Please try again later.');
     }
@@ -400,7 +402,7 @@ public function toggleApproval(Request $request, Project $project)
 
 public function filter(Request $request)
 {
-    
+
     $companyId = $request->input('company_id');
 
     $projects = Project::query()

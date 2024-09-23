@@ -35,7 +35,7 @@ class Project extends Model
         'no_of_units',
         'price_per_sft',
         'unit_configurations',  // Assuming this is a JSON field or similar
-        'amenities',            // Assuming this is a JSON field or similar
+
     ];
 
 
@@ -45,10 +45,22 @@ class Project extends Model
         return $this->hasMany(UnitConfiguration::class);
     }
 
-    public function projectAmenities()
-    {
-        return $this->hasMany(ProjectAmenity::class);
+ public function projectAmenities()
+{
+    $amenityIds = $this->amenities;
+
+    // Check if `company_id` is a valid JSON string or array and has at least one value
+    if (!is_array($amenityIds)) {
+        $amenityIds = json_decode($amenityIds, true); // Decode if it's stored as a JSON string
     }
+
+    if (is_array($amenityIds) && count($amenityIds)) {
+        // Return all companies from the list of company IDs
+        return Amenity::whereIn('id', $amenityIds)->get();
+    }
+
+    return collect(); // Return an empty collection if no valid company_ids exist
+}
         // Define the relationship with the Company model
 
         public function collections()
@@ -66,7 +78,7 @@ class Project extends Model
         return $this->hasMany(ElevationPicture::class);
         }
 
-   
+
 // Custom method to retrieve all companies based on the JSON `company_id`
 public function company()
 {

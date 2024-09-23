@@ -2,6 +2,7 @@
 @extends('layouts.frontend_theme.main')
 @section('mainContent')
 
+
 <section>
   <div class="container">
     <div class="row">
@@ -203,50 +204,13 @@
 
 
 
+     {{-- Call projectAmenities method directly --}}
+     @if($project->projectAmenities()->count() > 0)
+     <x-amenity-list :amenities="$project->projectAmenities()" />
+ @else
 
-<section>
-    <div class="container">
-    <h2 class="mb-4">Amenities</h2>
-        <div class="row amenities-slider">
-            <div class="expertise-col">
-                <div class="amenities-icon">
-                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
-                    <p>Creche/Toddlers Play</p>
-                </div>
-            </div>
-            <div class="expertise-col">
-                <div class="amenities-icon">
-                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
-                    <p>Creche/Toddlers Play</p>
-                </div>
-            </div>
-            <div class="expertise-col">
-                <div class="amenities-icon">
-                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
-                    <p>Creche/Toddlers Play</p>
-                </div>
-            </div>
-            <div class="expertise-col">
-                <div class="amenities-icon">
-                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
-                    <p>Creche/Toddlers Play</p>
-                </div>
-            </div>
-            <div class="expertise-col">
-                <div class="amenities-icon">
-                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
-                    <p>Creche/Toddlers Play</p>
-                </div>
-            </div>
-            <div class="expertise-col">
-                <div class="amenities-icon">
-                    <img  src="https://a2ahomeland.in/img/icons/icons/icon-1.png" alt="Creche/Toddlers Play" class="lazy loaded" width="90" height="90" data-ll-status="loaded">
-                    <p>Creche/Toddlers Play</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+ @endif
+
 
 <section>
   <div class="container">
