@@ -11,11 +11,11 @@
         @if(isset($project->areas) && !empty($project->areas->name))
           <h5>{{$project->areas->name??''}} - {{$project->citites->name??''}}</h5>
           @endif
-          
-          
+
+
    @if($project->company()->count())
-    <h6>By 
-        
+    <h6>By
+
         @foreach($project->company() as $company) <!-- Ensure to call get() to retrieve the companies -->
             <span class="text-decoration-underline">
                 <a href="{{ URL::to('filters?builders='.$company->slug) }}">{{ $company->name }}</a>
@@ -26,8 +26,8 @@
     <h6>No Companies Assigned</h6>
 @endif
 
-        
-        
+
+
         </div>
         <div class="rating-display-wrapper text-sm-center">
           {{-- <div class="star-rating text-sm-center text-start">
