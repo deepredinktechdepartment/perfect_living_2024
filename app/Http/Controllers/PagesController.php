@@ -51,36 +51,40 @@ class PagesController extends Controller
 {
 
 
-     // Break the URL into segments
-     $segments = explode('/', $any);
+    // Break the URL into segments
+    $segments = explode('/', $any);
 
-     // Initialize variables for each type of segment
-     $builders = null;
-     $collection = null;
-     $topLocations = null;
-     $budgets = null;
-     $project = null;
+    // Initialize variables for each type of segment
+    $builders = null;
+    $collection = null;
+    $topLocations = null;
+    $budgets = null;
+    $project = null;
+    $apartments = null;
 
-     // Iterate through the segments and extract values
-     for ($i = 0; $i < count($segments); $i++) {
-         switch ($segments[$i]) {
-             case 'builders':
-                 $builders = $segments[$i + 1] ?? null;
-                 break;
-             case 'collection':
-                 $collection = $segments[$i + 1] ?? null;
-                 break;
-             case 'top-locations':
-                 $topLocations = $segments[$i + 1] ?? null;
-                 break;
-             case 'budgets':
-                 $budgets = $segments[$i + 1] ?? null;
-                 break;
-             case 'project':
-                 $project = $segments[$i + 1] ?? null;
-                 break;
-         }
-     }
+    // Iterate through the segments and extract values
+    for ($i = 0; $i < count($segments); $i++) {
+        switch ($segments[$i]) {
+            case 'builders':
+                $builders = $segments[$i + 1] ?? null;
+                break;
+            case 'collection':
+                $collection = $segments[$i + 1] ?? null;
+                break;
+            case 'top-locations':
+                $topLocations = $segments[$i + 1] ?? null;
+                break;
+            case 'budgets':
+                $budgets = $segments[$i + 1] ?? null;
+                break;
+            case 'project':
+                $project = $segments[$i + 1] ?? null;
+                break;
+            case 'apartments-in-hyderabad':
+                $apartments = $segments[$i + 1] ?? null;
+                break;
+        }
+    }
 
 
 
@@ -101,7 +105,7 @@ class PagesController extends Controller
     $beds = $request->input('beds', ''); // Comma-separated string for beds
     $types = $request->input('property_type', ''); // Comma-separated string for types
     $priceRange = $request->input('budgets', ''); // Comma-separated string for budgets
-    $areaNames = $request->input('areas', ''); // Comma-separated string for areas
+    $areaNames = $topLocations; // Comma-separated string for areas
     $projectName = $request->input('name', ''); // Get project name for filtering
     $builders = $builders; // Comma-separated string for builders
     $searchQuery = $request->query('search', ''); // Get the search input (default to empty)

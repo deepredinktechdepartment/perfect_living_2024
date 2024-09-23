@@ -253,7 +253,7 @@ Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 
 
 Route::get('/{any?}', [PagesController::class, 'filtersprojects'])
-    ->where('any', '^(builders|collection|top-locations|budgets|project)(/[^/]+)?((/builders|/collection|/top-locations|/budgets|/project)(/[^/]+)?)*$')
+    ->where('any', '^(builders|collection|top-locations|budgets|project|apartments-in-hyderabad)(/[^/]+)?((/builders|/collection|/top-locations|/budgets|/project|apartments-in-hyderabad)(/[^/]+)?)*$')
     ->name('filters.index');
 
 
