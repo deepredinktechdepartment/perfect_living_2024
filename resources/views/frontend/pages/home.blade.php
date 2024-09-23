@@ -123,9 +123,9 @@
                               }
                           @endphp
 
-                          <div class="col-sm-4">
-                              <div class="card_two">
-                                <div class="project-card-wrapper">
+                          <div class="col-sm-4 mb-4">
+                              <div class="card_two h-100">
+                                <div class="project-card-wrapper h-100">
                                     <a href="{{ URL::to('company/project/'.$project->slug) }}" class="text-decoration-none">
                                         <div class="project-image-wrapper">
                                             <img src="{{ $fullImagePath ?? $defaultImageUrl }}" alt="{{ $project->name }}" class="img-fluid project-image">

@@ -75,7 +75,12 @@ a:focus {
 .bg-yellow {
     background: #fffbe8;
 }
-
+.bg-brand {
+    background: #e40048;
+}
+.border-brand{
+    border: 1px solid #e40048;
+}
 section {
     padding: 60px 0px;
 }
@@ -87,6 +92,16 @@ section {
 }
 
 
+.btn.btn-brand{
+    background: #e40048;
+    border: 1px solid #e40048;
+    color: #fff;
+    border-radius: 0;
+}
+.btn.btn-brand:hover{
+    background: #fff;
+    color: #e40048;
+}
 /* Common CSS ENDS */
 
 
