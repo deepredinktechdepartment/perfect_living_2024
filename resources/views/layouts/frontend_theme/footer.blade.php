@@ -135,3 +135,40 @@
     </div>
   </div>
 </footer>
+
+<!-- Cookie Modal -->
+<div class="modal fade" id="cookieModal" tabindex="-1" aria-labelledby="cookieModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h5 class="modal-title text-brand" id="cookieModalLabel">Disclaimer</h5>
+        </div>
+        <div class="modal-body">
+          <p>
+          All information present on <a href="perfectliving.in" class="text-brand">perfectliving.in</a> has been made available for informational purposes only. 
+          No representation or warranty is expressly or impliedly given as to its accuracy. Any investment decisions 
+          that you take should not be based relying solely on the information that is available on <a href="perfectliving.in" class="text-brand">perfectliving.in</a> or 
+          on any secondary source of information that relies on data downloaded from <a href="perfectliving.in" class="text-brand">perfectliving.in</a></p>
+          <p>
+          Nothing contained herein shall be deemed to constitute legal advice, solicitation, or invitation to acquire 
+          by the developer/builder or any other entity. You are advised to visit the relevant RERA website and contact 
+          builder/advertisers directly to know more about the project before taking any decision based on the contents 
+          displayed on the website <a href="perfectliving.in" class="text-brand">perfectliving.in</a>.
+          </p>
+          <p>
+          Owners or the representatives of the projects can reach out to <a href="mailto:info@perfectliving.in" class="text-brand">info@perfectliving.in</a> to rectify any factually 
+          incorrect information pertaining to their own projects. All customer reviews expressed on this website are 
+          subject to review and approval.
+          </p>
+          <p>
+          <a href="perfectliving.in" class="text-brand">perfectliving.in</a> may set cookies or track your activity to provide you with personalized content, and your 
+          usage of the site is deemed as consent to set tracking cookies. Trademarks belong to the respective owners.
+          </p>
+        </div>
+        <div class="modal-footer cookie-modal-footer justify-content-center">
+        <button type="button" class="btn btn-success" id="acceptCookies">Accept</button>
+          <button type="button" class="btn btn-secondary" id="declineCookies">Decline</button>
+        </div>
+      </div>
+    </div>
+  </div>

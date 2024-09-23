@@ -9,7 +9,7 @@
 }
 
 body {
-    font-size: 16px;
+    font-size: 15px;
     color: #000000;
     font-family: "Inter", sans-serif;
     font-weight: 400;
@@ -676,6 +676,8 @@ footer p {
 
 .floorplans-images-wrapper img {
     transition: 0.3s all ease-in-out;
+    height: 300px;
+    width: 100%;
 }
 
 .floorplans-images-wrapper:hover img {
