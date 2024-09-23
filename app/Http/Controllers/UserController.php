@@ -474,7 +474,8 @@ public function userLogin(Request $request)
             // If the user's role is not 5 (CMS user), don't allow access to the login page
             if ($user->role != 5) {
                 // Return error message, do not log the user out
-                return redirect()->back()->with('error', 'You are already logged in as a CMS user. Please log out first to access the login page.');
+                return redirect('/')->back()->with('error', 'You are already logged in as a CMS user. Please log out first to access the login page.');
+
             }
         }
 
@@ -482,27 +483,39 @@ public function userLogin(Request $request)
         return view('frontend.users.login', compact('pageTitle'));
     } catch (Exception $e) {
         // Log the exception for debugging
-        Log::error('Error in userLogin: ' . $e->getMessage());
+
 
         // Redirect with error message
         return redirect()->back()->with('error', 'An error occurred while loading the login page. Please try again later.');
     }
 }
 
-    public function createAccount(Request $request)
-    {
-        $pageTitle = "Create Account";
+public function createAccount(Request $request)
+{
+    $pageTitle = "Create Account";
 
-        try {
-            // Render the create account view
-            return view('frontend.users.create_account', compact('pageTitle'));
-        } catch (Exception $e) {
-            // Log the exception for debugging
+    try {
+        // Check if the user is already logged in
+        if (Auth::check()) {
+            // Get the logged-in user's role
+            $user = Auth::user();
 
-
-            // Redirect with error message
-            return redirect()->back()->with('error', 'An error occurred while loading the create account page. Please try again later.');
+            // If the user's role is not 5 (CMS user), don't allow access to the create account page
+            if ($user->role != 5) {
+                // Return error message, do not log the user out
+                return redirect('/')->back()->with('error', 'You are already logged in as a CMS user. Please log out first to access the create account page.');
+            }
         }
+
+        // Render the create account view if no user is logged in or role is valid
+        return view('frontend.users.create_account', compact('pageTitle'));
+    } catch (Exception $e) {
+        // Log the exception for debugging
+
+
+        // Redirect with error message
+        return redirect()->back()->with('error', 'An error occurred while loading the create account page. Please try again later.');
     }
+}
 
 }
