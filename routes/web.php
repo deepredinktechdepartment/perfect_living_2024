@@ -291,6 +291,12 @@ Route::post('verifyAuthLogin', [RegisterController::class, 'login'])->name('veri
 
 Route::get('create_account', [UserController::class, 'createAccount']);
 
+Route::get('profile', [UserController::class, 'yourProfile']);
+
+Route::get('reset_password', [UserController::class, 'resetPassword']);
+
+
+
 
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('show.Register.Form');

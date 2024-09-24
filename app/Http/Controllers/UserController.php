@@ -518,4 +518,60 @@ public function createAccount(Request $request)
     }
 }
 
+public function yourProfile(Request $request)
+{
+    $pageTitle = "Profile";
+
+    try {
+        // Check if the user is already logged in
+        if (Auth::check()) {
+            // Get the logged-in user's role
+            $user = Auth::user();
+
+            // If the user's role is not 5 (CMS user), don't allow access to the create account page
+            if ($user->role != 5) {
+                // Return error message, do not log the user out
+                return redirect('/')->with('error', 'You are already logged in as a CMS user. Please log out first to access the create account page.');
+            }
+        }
+
+        // Render the create account view if no user is logged in or role is valid
+        return view('frontend.users.profile', compact('pageTitle'));
+    } catch (Exception $e) {
+        // Log the exception for debugging
+
+
+        // Redirect with error message
+        return redirect()->back()->with('error', 'An error occurred while loading the create account page. Please try again later.');
+    }
+}
+
+public function resetPassword(Request $request)
+{
+    $pageTitle = "Change Password";
+
+    try {
+        // Check if the user is already logged in
+        if (Auth::check()) {
+            // Get the logged-in user's role
+            $user = Auth::user();
+
+            // If the user's role is not 5 (CMS user), don't allow access to the create account page
+            if ($user->role != 5) {
+                // Return error message, do not log the user out
+                return redirect('/')->with('error', 'You are already logged in as a CMS user. Please log out first to access the create account page.');
+            }
+        }
+
+        // Render the create account view if no user is logged in or role is valid
+        return view('frontend.users.reset_password', compact('pageTitle'));
+    } catch (Exception $e) {
+        // Log the exception for debugging
+
+
+        // Redirect with error message
+        return redirect()->back()->with('error', 'An error occurred while loading the create account page. Please try again later.');
+    }
+}
+
 }

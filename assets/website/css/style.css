@@ -329,6 +329,10 @@ header {
     -o-border-radius: 4px;
 }
 
+.navbar .nav-link:focus{
+    color: #fff;
+}
+
 .dropdown-menu h5 {
     padding: 0 0.5rem;
 }
