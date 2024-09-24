@@ -166,7 +166,7 @@ class RegisterController extends Controller
              // Check if the authenticated user has role 5
              if (Auth::user()->role === 5) {
                  // Check if 'redirect_to' exists in the request
-                 if ($request->has('redirect_to')) {
+                 if ($request->has('redirect_to') && !empty($request->redirect_to)) {
                      return redirect($request->input('redirect_to'))->with('success', 'Successfully logged in!');
                  } else {
                      // Redirect to the default intended URL
