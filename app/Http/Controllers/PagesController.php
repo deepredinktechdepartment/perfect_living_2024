@@ -47,8 +47,9 @@ class PagesController extends Controller
     }
 
 
-   public function filtersprojects(Request $request,$any = null)
+   public function newFiltersprojects(Request $request,$any = null)
 {
+
 
 
     // Break the URL into segments
@@ -90,7 +91,7 @@ class PagesController extends Controller
 
 
 
-    $pageTitle = 'Apartments';
+
 
     // Retrieve input parameters as comma-separated strings
     // $beds = $request->input('beds', ''); // Comma-separated string for beds
@@ -102,13 +103,53 @@ class PagesController extends Controller
     // $searchQuery = $request->query('search', ''); // Get the search input (default to empty)
 
 
-    $beds = $request->input('beds', ''); // Comma-separated string for beds
+    $beds = $apartments; // Comma-separated string for beds
     $types = $request->input('property_type', ''); // Comma-separated string for types
-    $priceRange = $request->input('budgets', ''); // Comma-separated string for budgets
+    $priceRange = $budgets; // Comma-separated string for budgets
     $areaNames = $topLocations; // Comma-separated string for areas
     $projectName = $request->input('name', ''); // Get project name for filtering
     $builders = $builders; // Comma-separated string for builders
     $searchQuery = $request->query('search', ''); // Get the search input (default to empty)
+    $collection = $collection; // Get the search input (default to empty)
+
+
+    $pageTitle = 'Apartments'; // Default title
+
+    // Check if any of the filters have values and append to the title
+    if (!empty($beds)) {
+        $pageTitle .= ' with ' . $beds . ' beds';
+    }
+
+    if (!empty($types)) {
+        $pageTitle .= ' in ' . $types;
+    }
+
+    if (!empty($priceRange)) {
+        $pageTitle .= ' priced at ' . $priceRange;
+    }
+
+    if (!empty($areaNames)) {
+        $pageTitle .= ' located in ' . $areaNames;
+    }
+
+    if (!empty($projectName)) {
+        $pageTitle .= ' for project ' . $projectName;
+    }
+
+    if (!empty($builders)) {
+        $pageTitle .= ' by ' . $builders;
+    }
+    if (!empty($collection)) {
+        $pageTitle .= ' by ' . $collection;
+    }
+
+    if (!empty($searchQuery)) {
+        $pageTitle .= ' matching search: ' . $searchQuery;
+    }
+
+    // Trim and format the final title if needed
+    $pageTitle = trim($pageTitle);
+
 
     // Start building the query
     $query = Project::with(['citites', 'areas', 'elevationPictures', 'unitConfigurations'])
@@ -173,15 +214,21 @@ if (!empty($builders)) {
     // Fetch the company IDs corresponding to the passed slugs
     $companyIds = Company::whereIn('slug', $buildersArray)->pluck('id')->toArray();
 
+
     // If we have company IDs, filter projects by those company IDs (stored in the company_id JSON field)
     if (!empty($companyIds)) {
         $query->where(function ($q) use ($companyIds) {
+
             foreach ($companyIds as $companyId) {
-                // Ensure proper format for JSON_CONTAINS
-                $q->orWhereRaw("JSON_CONTAINS(company_id, '\"$companyId\"') OR company_id LIKE '%\"$companyId\"%' OR company_id LIKE '%\"$companyId' OR company_id LIKE '%$companyId\"%'");
+                // Ensure company_id is not empty and matches exactly
+                $q->orWhereRaw("JSON_CONTAINS(JSON_UNQUOTE(company_id), ?, '$') AND JSON_LENGTH(company_id) > 0", [json_encode((string)$companyId)]);
             }
         });
     }
+
+
+
+
 }
 
 
@@ -200,6 +247,19 @@ if (!empty($builders)) {
         });
     }
 
+    if (!empty($collection)) {
+        $query->where(function ($q) use ($collection) {
+            $q->where('name', 'LIKE', "%$collection%") // Search by project name
+              ->orWhereHas('areas', function ($q) use ($collection) { // Search by area name
+                  $q->where('name', 'LIKE', "%$collection%");
+              })
+              ->orWhereHas('unitConfigurations', function ($q) use ($collection) { // Search by unit configurations
+                  $q->where('beds', 'LIKE', "%$collection%");
+              })
+              ->orWhereRaw('LOWER(project_type) LIKE ?', ["%$collection%"]); // Search by project type
+        });
+    }
+
     // Execute the query and get results
     $projects = $query->orderBy('updated_at', 'desc')->get();
 
@@ -213,7 +273,7 @@ if (!empty($builders)) {
 }
 
 
-public function filtersprojects_hold(Request $request)
+public function filtersprojects(Request $request)
 {
     $pageTitle = 'Apartments';
 

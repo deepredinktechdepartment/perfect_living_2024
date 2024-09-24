@@ -270,9 +270,9 @@ Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 Route::get('/filters/{param?}', [PagesController::class, 'filtersprojects'])->name('homepage');
 
 
-// Route::get('/{any?}', [PagesController::class, 'filtersprojects'])
-//     ->where('any', '^(builders|collection|top-locations|budgets|project|apartments-in-hyderabad)(/[^/]+)?((/builders|/collection|/top-locations|/budgets|/project|/apartments-in-hyderabad)(/[^/]+)?)*$')
-//     ->name('filters.index');
+Route::get('/{any?}', [PagesController::class, 'newFiltersprojects'])
+    ->where('any', '^(builders|collection|top-locations|budgets|project|apartments-in-hyderabad)(/[^/]+)?((/builders|/collection|/top-locations|/budgets|/project|/apartments-in-hyderabad)(/[^/]+)?)*$')
+    ->name('filters.index');
 
 
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');

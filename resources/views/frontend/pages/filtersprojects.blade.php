@@ -2,7 +2,7 @@
 @extends('layouts.frontend_theme.main')
 
 @section('mainContent')
-<section>
+
     <div class="container">
         <h1>{{ $pageTitle??'' }}</h1>
 
@@ -49,5 +49,5 @@
             <p>Nothing found</p>
         @endif
     </div>
-</section>
+
 @endsection
