@@ -167,9 +167,9 @@ CREATE TABLE `collections` (
 --
 
 INSERT INTO `collections` (`id`, `name`, `background_image`, `target_link`, `created_at`, `updated_at`) VALUES
-(2, 'Top Gated communities <br>close to Hitec & Gachibowli', 'background_images/aTk7j6osEkiJ8o68o4hkLOwYHqUlDpzwQbMb6sSG.jpg', 'https://perfectliving.in/company/project/nestcon', '2024-09-05 06:36:56', '2024-09-19 17:03:07'),
-(3, 'Top properties abutting green<br> lung spaces', 'background_images/n1cPwR12yYAa4DCfVdZmVYudorXIEleUxlre7o3t.jpg', 'https://perfectliving.in/company/project/nestcon', '2024-09-05 12:20:11', '2024-09-19 17:03:12'),
-(4, '30 properties <br>30 min from Airport', 'background_images/Pzv66AKEjOEDZuq9TwhQzAHpm581hDaDOt7mqI1P.jpg', 'https://perfectliving.in/company/project/nestcon', '2024-09-06 18:02:16', '2024-09-19 17:03:17');
+(2, 'Top Gated communities <br>close to Hitec & Gachibowli', 'background_images/aTk7j6osEkiJ8o68o4hkLOwYHqUlDpzwQbMb6sSG.jpg', 'https://perfectliving.in/project/nestcon', '2024-09-05 06:36:56', '2024-09-19 17:03:07'),
+(3, 'Top properties abutting green<br> lung spaces', 'background_images/n1cPwR12yYAa4DCfVdZmVYudorXIEleUxlre7o3t.jpg', 'https://perfectliving.in/project/nestcon', '2024-09-05 12:20:11', '2024-09-19 17:03:12'),
+(4, '30 properties <br>30 min from Airport', 'background_images/Pzv66AKEjOEDZuq9TwhQzAHpm581hDaDOt7mqI1P.jpg', 'https://perfectliving.in/project/nestcon', '2024-09-06 18:02:16', '2024-09-19 17:03:17');
 
 -- --------------------------------------------------------
 

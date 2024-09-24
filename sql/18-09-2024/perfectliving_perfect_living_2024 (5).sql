@@ -232,9 +232,9 @@ CREATE TABLE `menus` (
 
 INSERT INTO `menus` (`id`, `name`, `url`, `position`, `active`, `created_at`, `updated_at`) VALUES
 (1, 'Home', '/', 'header', 1, '2024-09-09 07:08:06', '2024-09-09 07:08:06'),
-(4, 'Botanika', 'https://perfectliving.in/app/company/project/the-botanika', 'Top Locations in Hyderabad', 1, '2024-09-09 08:01:33', '2024-09-10 13:19:05'),
-(5, 'Nestcon', 'https://perfectliving.in/app/company/project/nestcon', 'Top Locations in Hyderabad', 1, '2024-09-09 08:09:48', '2024-09-10 13:19:51'),
-(6, 'Botanika', 'https://perfectliving.in/app/company/project/the-botanika', 'Top Locations in Bengaluru', 1, '2024-09-09 15:14:43', '2024-09-10 13:19:20'),
+(4, 'Botanika', 'https://perfectliving.in/app/project/the-botanika', 'Top Locations in Hyderabad', 1, '2024-09-09 08:01:33', '2024-09-10 13:19:05'),
+(5, 'Nestcon', 'https://perfectliving.in/app/project/nestcon', 'Top Locations in Hyderabad', 1, '2024-09-09 08:09:48', '2024-09-10 13:19:51'),
+(6, 'Botanika', 'https://perfectliving.in/app/project/the-botanika', 'Top Locations in Bengaluru', 1, '2024-09-09 15:14:43', '2024-09-10 13:19:20'),
 (8, 'About us', 'https://perfectliving.in/app/about-us', 'About us', 1, '2024-09-09 15:50:02', '2024-09-09 15:50:02'),
 (9, 'Contact Us', 'https://perfectliving.in/app/contact-us', 'Contact Us', 1, '2024-09-09 16:03:41', '2024-09-09 16:03:49');
 

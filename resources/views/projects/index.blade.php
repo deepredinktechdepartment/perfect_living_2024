@@ -6,7 +6,7 @@
 @php
     use App\Models\Company;
     $companies = Company::orderBy('name', 'asc')->get();
-    
+
 @endphp
 
 @section('content')
@@ -96,14 +96,14 @@
                     </thead>
                     <tbody>
                         @foreach ($projects as $project)
-                          
+
                                 <tr data-company-id="{{ is_array($project->company_id) ? implode(',', $project->company_id) : $project->company_id }}">
 
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $project->name ?? '' }}<br>&nbsp;-{{ $project->project_type ?? '' }}</td>
                       <td>
-                          
-                        
+
+
     @if($project->company()->count())
         @foreach($project->company() as $company) <!-- Ensure to call get() to retrieve the companies -->
             {{ $company->name }}{{ !$loop->last ? ', ' : '' }} <!-- Display the company names separated by commas -->
@@ -113,10 +113,10 @@
     @endif
 </td>
                                 <td>
-                                    <a href="{{ URL::to('company/project/'.$project->slug) }}" class="no-button" target="_blank" title="Preview Project">
+                                    <a href="{{ URL::to('project/'.$project->slug) }}" class="no-button" target="_blank" title="Preview Project">
                                         <i class="fas fa-link"></i>
                                     </a>
-                                    <!--<button onclick="copyToClipboard('{{ URL::to('company/project/'.$project->slug) }}', {{ $loop->iteration }})" class="no-button" title="Copy Link">-->
+                                    <!--<button onclick="copyToClipboard('{{ URL::to('project/'.$project->slug) }}', {{ $loop->iteration }})" class="no-button" title="Copy Link">-->
                                     <!--    <i class="fas fa-copy"></i>-->
                                     <!--</button>-->
                                     <!--<span class="copy-message" id="message-{{ $loop->iteration }}">Copied!</span>-->
@@ -172,7 +172,7 @@
     <a href="{{ route('projects.editCollections', $project->id) }}" class="no-button" alt="Collections"  title="Collections" id="collections-icon-{{ $project->id }}">
         <i class="{{ config('constants.icons.collections') }}"></i>
     </a>
-    
+
         <a href="{{ route('projects.editBadges', $project->id) }}" class="no-button" alt="Badges"  title="Badges" id="badges-icon-{{ $project->id }}">
         <i class="{{ config('constants.icons.badges') }}"></i>
     </a>

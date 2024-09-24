@@ -40,7 +40,7 @@
                         :details="$project->project_type . ', ' . $project->unitConfigurations->first()->beds . ' BHK'"
                          :price="number_format($project->price_per_sft)"
                         :image="$imageUrl"
-                        :url="URL::to('company/project/'.$project->slug)"
+                        :url="URL::to('project/'.$project->slug)"
                     />
                 @endforeach
             </div>
