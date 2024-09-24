@@ -3,42 +3,53 @@
 @section('mainContent')
 <section>
     <div class="container">
-        <h1>{{ $pageTitle ?? '' }}</h1>
-
-        @if ($projects->count() > 0)
-        <p class="mb-3 px-0 mx-0">
-            You have {{ $projects->count() }} {{ $projects->count() == 1 ? 'property' : 'properties' }} in your wishlist.
-        </p>
-
-
-            <div class="row">
-                @foreach ($projects as $project)
-                    @php
-                        // Default placeholder image URL
-                        $defaultImageUrl = 'https://via.placeholder.com/150';
-
-                        // Check if elevationPictures is set and contains at least one image
-                        $imageUrl = $defaultImageUrl; // Default image
-
-                        if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
-                            $firstImagePath = $project->elevationPictures->first()->file_path;
-                            $imageUrl = URL::to(env('APP_STORAGE') . $firstImagePath);
-                        }
-                    @endphp
-
-                    <x-project-card-view2
-                        :name="$project->name"
-                        :address="$project->areas->name"
-                        :details="$project->project_type . ', ' . $project->unitConfigurations->first()->beds . ' BHK'"
-                        :price="number_format($project->price_per_sft)"
-                        :image="$imageUrl"
-                        :url="URL::to('project/' . $project->slug)"
-                    />
-                @endforeach
+        @guest
+            <div class="row justify-content-center">
+                <div class="col-sm-6">
+                    <div class="card login-card p-3 px-sm-3 px-2 text-center">
+                        <h3 class="mb-4">PLEASE LOG IN</h3>
+                        <p class="mb-4">Login to view items in your wishlist.</p>
+                        <a href="{{ route('login') }}" class="btn bg-custom-btn">LOGIN</a>
+                    </div>
+                </div>
             </div>
         @else
-            <p>Nothing found in your wishlist.</p>
-        @endif
+            <h1>{{ $pageTitle ?? 'Wishlist' }}</h1>
+
+            @if ($projects->count() > 0)
+                <p class="mb-3 px-0 mx-0">
+                    You have {{ $projects->count() }} {{ $projects->count() == 1 ? 'property' : 'properties' }} in your wishlist.
+                </p>
+
+                <div class="row">
+                    @foreach ($projects as $project)
+                        @php
+                            // Default placeholder image URL
+                            $defaultImageUrl = 'https://via.placeholder.com/150';
+
+                            // Check if elevationPictures is set and contains at least one image
+                            $imageUrl = $defaultImageUrl; // Default image
+
+                            if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
+                                $firstImagePath = $project->elevationPictures->first()->file_path;
+                                $imageUrl = asset(env('APP_STORAGE') . $firstImagePath);
+                            }
+                        @endphp
+
+                        <x-project-card-view2
+                            :name="$project->name"
+                            :address="$project->areas->name"
+                            :details="$project->project_type . ', ' . ($project->unitConfigurations->first()->beds ?? 'N/A') . ' BHK'"
+                            :price="number_format($project->price_per_sft)"
+                            :image="$imageUrl"
+                            :url="route('project.show', $project->slug)"
+                        />
+                    @endforeach
+                </div>
+            @else
+                <p>Nothing found in your wishlist.</p>
+            @endif
+        @endguest
     </div>
 </section>
 @endsection

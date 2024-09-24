@@ -257,8 +257,8 @@ if (window.matchMedia("(max-width: 768px)").matches) {
        breakpoint:480,
        settings:
        {
-          slidesToShow:2,
-          slidesToScroll:2,
+          slidesToShow:3,
+          slidesToScroll:3,
        }
     }
  ]

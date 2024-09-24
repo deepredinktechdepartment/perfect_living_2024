@@ -43,7 +43,7 @@
     <section>
         <div class="container">
             <h2 class="mb-4 text-center">Featured Gated Communities in Hyderabad</h2>
-            <div class="row">
+            <div class="row featured-properties-slider">
                 @foreach ($projects as $project)
                     @php
                         // Default placeholder image URL
@@ -89,9 +89,9 @@
     $groupedProjects = $projects->groupBy('project_type');
 @endphp
 
-<section class="home_tab_sec">
+<section class="home_tab_sec pt-0">
   <div class="container">
-      <h2 class="mb-4 text-center">Explore Perfect Living Top Picks</h2>
+      <h2 class="mb-4 pb-sm-3 text-center">Explore Perfect Living Top Picks</h2>
 
       <!-- Nav Pills for Tabs with margin between items -->
       <ul class="nav nav-pills mb-3 border-bottom mb-5 flex-nowrap overflow-auto" id="pills-tab" role="tablist">
