@@ -6,10 +6,10 @@
         @guest
             <div class="row justify-content-center">
                 <div class="col-sm-6">
-                    <div class="card login-card p-3 px-sm-3 px-2 text-center">
+                    <div class="card login-card p-5 px-sm-3 px-2 text-center">
                         <h3 class="mb-4">PLEASE LOG IN</h3>
                         <p class="mb-4">Login to view items in your wishlist.</p>
-                        <a href="{{ route('login') }}" class="btn bg-custom-btn">LOGIN</a>
+                        <a href="{{ URL::to('login') }}" class="btn bg-custom-btn">LOGIN</a>
                     </div>
                 </div>
             </div>
