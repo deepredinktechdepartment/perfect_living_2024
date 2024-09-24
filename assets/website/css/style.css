@@ -706,6 +706,7 @@ footer p {
     -ms-border-radius: 0;
     -o-border-radius: 0;
     padding: 6px 30px;
+    width: fit-content;
 }
 
 .bg-custom-btn:hover {
