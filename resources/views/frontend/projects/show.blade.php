@@ -218,7 +218,7 @@
     <div class="row">
         @if(!empty($project->about_project))
             <div class="col-sm-8 pe-sm-5 border-end">
-                <div class="mb-sm-0 mb-5">
+                <div class="mb-sm-0 mb-4">
                     <h2 class="mb-sm-5 mb-3">About {{ $project->name ?? '' }}</h2>
                     {!! $project->about_project !!}
                 </div>

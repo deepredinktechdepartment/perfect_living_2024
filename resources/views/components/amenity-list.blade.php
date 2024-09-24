@@ -4,9 +4,9 @@
             <h2 class="mb-4">Amenities</h2>
             <div class="row amenities-slider">
                 @foreach($amenities as $amenity)
-                <div class="expertise-col">
+                <div class="expertise-col col-sm-2 col-4 mb-sm-3 mb-2 px-sm-2 px-1">
                     <div class="amenities-icon">
-                        <img src="{{ URL::to(env('APP_STORAGE').''.$amenity->icon) }}" alt="{{ $amenity->name }}" class="lazy loaded" width="90" height="90">
+                        <img src="{{ URL::to(env('APP_STORAGE').''.$amenity->icon) }}" alt="{{ $amenity->name }}" class="img-fluid">
                         <p>{{ $amenity->name }}</p>
                     </div>
                 </div>
