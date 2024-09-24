@@ -31,7 +31,7 @@
                 <div class="card login-card p-3 px-sm-3 px-2">
                     <div class="card-body">
 
-                        <form id="profileupdateForm" method="POST" action="{{ route('profile.update') }}">
+                        <form id="profileupdateForm" method="POST" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group mb-4">
                                 <input type="text" name="firstname" id="fullname" class="form-control" placeholder="Full Name" required value="{{ old('firstname', Auth::user()->fullname ?? '') }}" autocomplete="off">
