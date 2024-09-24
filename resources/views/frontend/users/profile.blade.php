@@ -22,8 +22,8 @@
 
                         </div>
                         <h3 class="text-center nowrap-link mb-2 pt-2">{{ old('firstname', Auth::user()->fullname ?? '') }}</h3>
-                        <h6 class="text-center">youremail@gmail.com</h6>
-                        <p class="text-center mb-3">0000000000</p>
+                        <h6 class="text-center">{{ old('email', Auth::user()->username ?? '') }}</h6>
+                        <p class="text-center mb-3">{{ old('phone', Auth::user()->phone ?? '') }}</p>
                     </div>
                 </div>
             </div>
