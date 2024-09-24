@@ -66,7 +66,7 @@
 
               @guest
               <li class="nav-item">
-                  <a class="nav-link text-white" href="{{ URL::to('login') }}"> <i class="fa-regular fa-heart wishlist-icon"></i></a>
+                  <a class="nav-link text-white" href="{{ URL::to('shortLists') }}"> <i class="fa-regular fa-heart wishlist-icon"></i></a>
               </li>
           @else
               @if (Auth::user()->role === 5) <!-- Check if the user is a non-admin -->
