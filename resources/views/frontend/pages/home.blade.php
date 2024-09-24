@@ -39,50 +39,47 @@
     </div>
 
 
-
     @if ($projects->count() > 0)
     <section>
         <div class="container">
+            <h2 class="mb-4 text-center">Featured Gated Communities in Hyderabad</h2>
+            <div class="row">
+                @foreach ($projects as $project)
+                    @php
+                        // Default placeholder image URL
+                        $defaultImageUrl = 'https://via.placeholder.com/150';
+                        // Check if elevationPictures is set and contains at least one image
+                        $imageUrl = $defaultImageUrl; // Default image
+                        if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
+                            $firstImagePath = $project->elevationPictures->first()->file_path;
+                            $fullImagePath = URL::to(env('APP_STORAGE').$firstImagePath);
+                        }
 
-                <h2 class="mb-4 text-center">Featured Gated Communities in Hyderabad</h2>
-                <div class="featured-properties-slider">
-                    @foreach ($projects as $project)
-                        @php
-                            // Default placeholder image URL
-                            $defaultImageUrl = 'https://via.placeholder.com/150';
+                        // Check if unitConfigurations is set and contains at least one item
+                        $beds = isset($project->unitConfigurations) && $project->unitConfigurations->isNotEmpty() 
+                            ? $project->unitConfigurations->first()->beds 
+                            : 'N/A'; // Default value if not available
+                    @endphp
 
-                            // Check if elevationPictures is set and contains at least one image
-                            $imageUrl = $defaultImageUrl; // Default image
-
-                            if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
-                                $firstImagePath = $project->elevationPictures->first()->file_path;
-
-                                $fullImagePath = URL::to(env('APP_STORAGE').$firstImagePath);
-
-
-
-                            }
-
-
-                        @endphp
-
+                    <div class="col-md-6 mb-4"> <!-- Each card takes half the width (6 columns) -->
                         <x-project-card
                             :name="$project->name"
                             :address="$project->areas->name"
-                            :details="$project->project_type . ', ' . $project->unitConfigurations->first()->beds . ' BHK'"
-                           :price="number_format($project->price_per_sft)"
-                            :image="$fullImagePath??'#'"
+                            :details="$project->project_type . ', ' . $beds . ' BHK'"
+                            :price="number_format($project->price_per_sft)"
+                            :image="$fullImagePath ?? '#'"
                             :url="URL::to('company/project/'.$project->slug)"
                         />
-                    @endforeach
-                </div>
-
+                    </div>
+                @endforeach
+            </div>
         </div>
     </section>
+@endif
 
-    @else
 
-    @endif
+
+
 
 
 
@@ -133,7 +130,7 @@
                                         <div class="project-details-wrapper p-3">
                                             <h5 class="mb-0">{{ $project->name }}</h5>
                                             <p  class="mb-1 pb-0">{{ $project->areas->name ?? '' }}</p>
-                                            <p class="mb-0 pb-0">{{ $project->project_type }}, {{ $project->unitConfigurations->first()->beds }} BHK</p>
+                                            <p class="mb-0 pb-0">{{ $project->project_type }}, {{ $project->unitConfigurations->first()->beds??'' }} BHK</p>
                                             @if(isset($project->price_per_sft) && $project->price_per_sft > 0)
                                             <p class="mb-0"> <span class="price-info">₹{{ $project->price_per_sft }} per sq.ft</span> <small>Onwards</small></p>
                                             @endif

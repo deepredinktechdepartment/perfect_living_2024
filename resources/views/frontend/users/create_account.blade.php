@@ -33,9 +33,14 @@
                             <div class="form-group mb-4">
                                 <input type="email" name="email" id="email" class="form-control" placeholder="Email" required value="{{ old('email') }}" autocomplete="off">
                             </div>
-                            <div class="form-group mb-4">
-                                <input type="tel" name="phone" id="phone" class="form-control" placeholder="Phone Number" required pattern="[0-9]{10}" value="{{ old('phone') }}" autocomplete="off">
+                            <div class="form-group mb-3">
+                                <input type="hidden" id="phone_with_country_code_one" name="phone_with_country_code"/>
+                                <input type="hidden" id="country_code_one" name="country_code"/>
+                                <input type="tel" name="phone" id="phone" class="form-control d-block w-100" placeholder="Phone Number" required>
                             </div>
+                            <!-- <div class="form-group mb-4">
+                                <input type="tel" name="phone" id="phone" class="form-control" placeholder="Phone Number" required pattern="[0-9]{10}" value="{{ old('phone') }}" autocomplete="off">
+                            </div> -->
                             <div class="form-group mb-4">
                                 <input type="password" name="password" id="password" class="form-control" placeholder="Password" required minlength="8" value="" autocomplete="off">
                             </div>
@@ -64,6 +69,32 @@
 
 <script>
 $(document).ready(function() {
+
+
+// Initialize intl-tel-input
+var input = document.querySelector("#phone");
+    var iti = window.intlTelInput(input, {
+        initialCountry:"in",
+        autoHideDialCode: true,
+        separateDialCode: true,
+        autoPlaceholder:"polite",
+        formatOnDisplay:true,
+        dropdownContainer: document.body,  
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+    });
+
+    // Custom phone validation method to include Jio numbers starting with '6' and ensure 10 digits
+    $.validator.addMethod("validPhone", function(value, element) {
+        var fullNumber = iti.getNumber(); // Get full phone number
+        var isValid = iti.isValidNumber(); // Check using intl-tel-input validation
+
+        // Check if the number starts with '6', is 10 digits long, and belongs to India
+        var isJioNumber = fullNumber.startsWith('+91') && fullNumber[3] == '6' && fullNumber.length == 13; // +91 6XXXXXXXXX (13 chars with country code)
+        
+        return isValid || isJioNumber; // Pass validation if it's valid or a Jio number with 10 digits
+    }, "Please enter a valid phone number starting with 6 and 10 digits long.");
+
+
     // Custom method to prevent leading spaces
     $.validator.addMethod("noLeadingSpaces", function(value, element) {
         return this.optional(element) || /^\S.*/.test(value);
@@ -120,9 +151,6 @@ $(document).ready(function() {
             },
             phone: {
             required: "Please enter your phone number.",
-            digits: "Phone number must be 10 digits.",
-            minlength: "Phone number must be 10 digits.",
-            maxlength: "Phone number must be 10 digits."
         },
             password: {
                 required: "Please provide a password.",
