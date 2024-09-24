@@ -55,26 +55,37 @@
 
 @push('scripts')
 
+
 <script>
     $(document).ready(function() {
         $('#searchForm').on('submit', function(event) {
             // Prevent default form submission to modify action
             event.preventDefault();
 
-            // Get the search input value
-            var searchInput = $('#searchInput').val().trim();
+            // Get selected values
+            var propertyType = $('#propertyType').val();
+            var budgets = $('#budget').val();
+            var beds = $('#beds').val();
 
-            // If the search input is not empty, set the form action
-            if (searchInput) {
-                // Set the base URL using PHP's URL::to in a Blade template
-                var baseUrl = "{{ URL::to('search') }}";
+            // Create the base URL
+            var baseUrl = "{{ URL::to('filters') }}";
 
-                // Change the form action to baseUrl/searchInput
-                this.action = baseUrl + "/" + encodeURIComponent(searchInput);
-            } else {
-                // If searchInput is empty, set action to baseUrl to prevent any issues
-                this.action = "{{ URL::to('search') }}";
+            // Construct the new action URL based on selected values
+            var actionUrl = baseUrl;
+
+            // Append the property type, budgets, and beds if they are selected
+            if (propertyType) {
+                actionUrl += "/" + encodeURIComponent(propertyType);
             }
+            if (budgets) {
+                actionUrl += "/" + encodeURIComponent(budgets);
+            }
+            if (beds) {
+                actionUrl += "/" + encodeURIComponent(beds);
+            }
+
+            // Set the form action to the new URL
+            this.action = actionUrl;
 
             // Submit the form with the new action
             this.submit();

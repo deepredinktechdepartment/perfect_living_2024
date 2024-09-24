@@ -63,6 +63,7 @@ class PagesController extends Controller
     $project = null;
     $apartments = null;
     $search = null;
+    $propertytypes = null;
 
     // Iterate through the segments and extract values
     for ($i = 0; $i < count($segments); $i++) {
