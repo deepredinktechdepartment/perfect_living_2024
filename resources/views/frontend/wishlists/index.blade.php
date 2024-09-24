@@ -9,7 +9,7 @@
                     <div class="card login-card p-5 px-sm-3 px-2 text-center">
                         <h3 class="mb-4">PLEASE LOG IN</h3>
                         <p class="mb-4">Login to view items in your wishlist.</p>
-                        <a href="{{ URL::to('login') }}" class="btn bg-custom-btn">LOGIN</a>
+                        <a href="{{ URL::to('login') }}" class="btn bg-custom-btn m-auto">LOGIN</a>
                     </div>
                 </div>
             </div>
