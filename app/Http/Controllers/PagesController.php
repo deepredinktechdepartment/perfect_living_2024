@@ -62,6 +62,7 @@ class PagesController extends Controller
     $budgets = null;
     $project = null;
     $apartments = null;
+    $search = null;
 
     // Iterate through the segments and extract values
     for ($i = 0; $i < count($segments); $i++) {
@@ -83,6 +84,9 @@ class PagesController extends Controller
                 break;
             case 'apartments-in-hyderabad':
                 $apartments = $segments[$i + 1] ?? null;
+                break;
+            case 'search':
+                $search = $segments[$i + 1] ?? null;
                 break;
         }
     }
@@ -109,7 +113,7 @@ class PagesController extends Controller
     $areaNames = $topLocations; // Comma-separated string for areas
     $projectName = $request->input('name', ''); // Get project name for filtering
     $builders = $builders; // Comma-separated string for builders
-    $searchQuery = $request->query('search', ''); // Get the search input (default to empty)
+    $searchQuery = $search; // Get the search input (default to empty)
     $collection = $collection; // Get the search input (default to empty)
 
 

@@ -9,28 +9,28 @@
     <div class="main_bg">
       <div class="col-lg-6 col-md-8 col-12 position-relative">
         <div class="container">
-            <form action="{{ route('homepage') }}" method="GET">
+            <form id="searchForm" method="GET">
                 <div class="d-flex">
-
-                    <input class="form-control me-2" type="search" id="searchInput" name="search" placeholder="Search Locality / Builder or Project" aria-label="Search" value="{{ request()->query('search') }}">
-                    {{-- <input class="form-control me-2" type="search" id="searchInput" placeholder="Search Locality / Builder or Project" aria-label="Search" onkeyup="filterDropdown()"> --}}
+                    <input class="form-control me-2" type="search" id="searchInput" placeholder="Search Locality / Builder or Project" aria-label="Search" value="{{ request()->query('search') }}">
                     <button class="btn btn_black" type="submit">Search</button>
                 </div>
 
                 <!-- Dropdown for Categories and Subcategories -->
                 <ul class="dropdown-menu w-50" id="categoryDropdown" style="display:none;">
-                    <!-- Category 1 with Subcategories -->
                     <li class="dropdown-header">Fruits</li>
                     <li><a class="dropdown-item" href="#" data-category="Category 1" data-value="1.1">Apple</a></li>
                     <li><a class="dropdown-item" href="#" data-category="Category 1" data-value="1.2">Mango</a></li>
                     <li><a class="dropdown-item" href="#" data-category="Category 1" data-value="1.3">Banana</a></li>
 
-                    <!-- Category 2 with Subcategories -->
                     <li class="dropdown-header">Movies</li>
                     <li><a class="dropdown-item" href="#" data-category="Category 2" data-value="2.1">Leo</a></li>
                     <li><a class="dropdown-item" href="#" data-category="Category 2" data-value="2.2">Spiderman</a></li>
                 </ul>
             </form>
+
+
+
+
 
 
 
@@ -56,8 +56,8 @@
                         }
 
                         // Check if unitConfigurations is set and contains at least one item
-                        $beds = isset($project->unitConfigurations) && $project->unitConfigurations->isNotEmpty() 
-                            ? $project->unitConfigurations->first()->beds 
+                        $beds = isset($project->unitConfigurations) && $project->unitConfigurations->isNotEmpty()
+                            ? $project->unitConfigurations->first()->beds
                             : 'N/A'; // Default value if not available
                     @endphp
 
@@ -154,6 +154,34 @@
 
 </div>
 
+@push('scripts')
 
+<script>
+    $(document).ready(function() {
+        $('#searchForm').on('submit', function(event) {
+            // Prevent default form submission to modify action
+            event.preventDefault();
+
+            // Get the search input value
+            var searchInput = $('#searchInput').val().trim();
+
+            // If the search input is not empty, set the form action
+            if (searchInput) {
+                // Set the base URL using PHP's URL::to in a Blade template
+                var baseUrl = "{{ URL::to('search') }}";
+
+                // Change the form action to baseUrl/searchInput
+                this.action = baseUrl + "/" + encodeURIComponent(searchInput);
+            } else {
+                // If searchInput is empty, set action to baseUrl to prevent any issues
+                this.action = "{{ URL::to('search') }}";
+            }
+
+            // Submit the form with the new action
+            this.submit();
+        });
+    });
+</script>
+@endpush
 
 @endsection

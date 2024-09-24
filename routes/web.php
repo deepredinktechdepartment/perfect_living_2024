@@ -267,11 +267,12 @@ Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');
 
 Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 
-Route::get('/filters/{param?}', [PagesController::class, 'filtersprojects'])->name('homepage');
+//Route::get('/filters/{param?}', [PagesController::class, 'filtersprojects'])->name('searchquerystring');
+
 
 
 Route::get('/{any?}', [PagesController::class, 'newFiltersprojects'])
-    ->where('any', '^(builders|collection|top-locations|budgets|project|apartments-in-hyderabad)(/[^/]+)?((/builders|/collection|/top-locations|/budgets|/project|/apartments-in-hyderabad)(/[^/]+)?)*$')
+    ->where('any', '^(builders|collection|top-locations|budgets|project|apartments-in-hyderabad|search)(/[^/]+)?((/builders|/collection|/top-locations|/budgets|/project|/apartments-in-hyderabad|/search)(/[^/]+)?)*$')
     ->name('filters.index');
 
 
