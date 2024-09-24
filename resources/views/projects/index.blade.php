@@ -89,7 +89,7 @@
                             <th>Preview</th>
                             @if(Auth::check() && in_array(Auth::user()->role, [1, 2,4]))
                             <th>Published</th>
-                            <th>Featured Status</th>
+                            <th>Featured</th>
                         @endif
                             <th>Actions</th>
                         </tr>
@@ -116,10 +116,10 @@
                                     <a href="{{ URL::to('company/project/'.$project->slug) }}" class="no-button" target="_blank" title="Preview Project">
                                         <i class="fas fa-link"></i>
                                     </a>
-                                    <button onclick="copyToClipboard('{{ URL::to('company/project/'.$project->slug) }}', {{ $loop->iteration }})" class="no-button" title="Copy Link">
-                                        <i class="fas fa-copy"></i>
-                                    </button>
-                                    <span class="copy-message" id="message-{{ $loop->iteration }}">Copied!</span>
+                                    <!--<button onclick="copyToClipboard('{{ URL::to('company/project/'.$project->slug) }}', {{ $loop->iteration }})" class="no-button" title="Copy Link">-->
+                                    <!--    <i class="fas fa-copy"></i>-->
+                                    <!--</button>-->
+                                    <!--<span class="copy-message" id="message-{{ $loop->iteration }}">Copied!</span>-->
                                 </td>
 
 
@@ -165,7 +165,18 @@
                                     <a href="{{ route('elevation_pictures.index', ['projectID' => $project->id]) }}" class="no-button" title="Elevation Pictures">
                                         <i class="{{ config('constants.icons.multiple_imges') }}"></i>
                                     </a>
-                                </td>
+                                       <!-- Other icons -->
+    <a href="{{ route('amenities.show', $project->id) }}" class="no-button" alt="Amenities"  title="Amenities" id="amenities-icon-{{ $project->id }}">
+        <i class="{{ config('constants.icons.amenities') }}"></i>
+    </a>                                    <!-- Other icons -->
+    <a href="{{ route('projects.editCollections', $project->id) }}" class="no-button" alt="Collections"  title="Collections" id="collections-icon-{{ $project->id }}">
+        <i class="{{ config('constants.icons.collections') }}"></i>
+    </a>
+    
+        <a href="{{ route('projects.editBadges', $project->id) }}" class="no-button" alt="Badges"  title="Badges" id="badges-icon-{{ $project->id }}">
+        <i class="{{ config('constants.icons.badges') }}"></i>
+    </a>
+                     </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -200,8 +211,8 @@
         project.name + '<br>&nbsp;-' + project.project_type,
         project.company_name || 'No Companies Assigned', // Handle case where there are no companies
         '<a href="' + project.preview_url + '" class="no-button" target="_blank" title="Preview Project"><i class="fas fa-link"></i></a>' +
-        '<button onclick="copyToClipboard(\'' + project.preview_url + '\', ' + (index + 1) + ')" class="no-button" title="Copy Link"><i class="fas fa-copy"></i></button>' +
-        '<span class="copy-message" id="message-' + (index + 1) + '">Copied!</span>',
+        // '<button onclick="copyToClipboard(\'' + project.preview_url + '\', ' + (index + 1) + ')" class="no-button" title="Copy Link"><i class="fas fa-copy"></i></button>' +
+        // '<span class="copy-message" id="message-' + (index + 1) + '">Copied!</span>',
         project.status === 'published'
             ? '<div class="form-check form-switch">' +
                 '<input class="form-check-input toggle-approval" type="checkbox" id="toggle-' + project.id + '" checked data-id="' + project.id + '">' +

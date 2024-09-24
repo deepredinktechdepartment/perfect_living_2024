@@ -24,33 +24,6 @@
                         </div>
                     </div>
 
-@php
-// Decode company_id if it exists and is not null for editing projects
-$decodedCompanyIds = isset($project) && isset($project->company_id) 
-    ? (is_array($project->company_id) ? $project->company_id : json_decode($project->company_id, true))
-    : [];
-
-
-@endphp
-
-<div class="col-6">
-    <div class="form-group">
-        <label for="company" class="form-label">Builders</label>
-        <div>
-            @foreach($companies as $company)
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input @error('company_id') is-invalid @enderror"
-                           name="company_id[]" id="company_{{ $company->id }}" value="{{ $company->id }}"
-                           {{ in_array($company->id, $decodedCompanyIds) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="company_{{ $company->id }}">
-                        {{ $company->name }}
-                    </label>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</div>
-
 
 
 
@@ -192,78 +165,7 @@ $decodedCompanyIds = isset($project) && isset($project->company_id)
 
 
 
-                    @php
-    // Decode map_collections and map_badges if they exist and are valid JSON, otherwise default to empty array
-    $projectCollections = isset($project->map_collections) && is_string($project->map_collections) ? json_decode($project->map_collections, true) : [];
-    $projectBadges = isset($project->map_badges) && is_string($project->map_badges) ? json_decode($project->map_badges, true) : [];
-@endphp
-
-<!-- Collections checkboxes -->
-<div class="col-6">
-    <div class="form-group">
-        <label class="form-label">Collections</label>
-        <div class="form-check">
-            @foreach($collections as $collection)
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="collection_{{ $collection->id }}" name="map_collections[]" value="{{ $collection->id }}" {{ in_array($collection->id, old('map_collections', $projectCollections)) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="collection_{{ $collection->id }}">
-                        {{ $collection->name??'' }}
-                    </label>
-                </div>
-            @endforeach
-        </div>
-        @error('collections')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
-</div>
-
-<!-- Badges checkboxes -->
-<div class="col-6">
-    <div class="form-group">
-        <label class="form-label">Badges</label>
-        <div class="form-check">
-            @foreach($badges as $badge)
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="badge_{{ $badge->id }}" name="map_badges[]" value="{{ $badge->id }}" {{ in_array($badge->id, old('map_badges', $projectBadges)) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="badge_{{ $badge->id }}">
-                        {{ $badge->name }}
-                    </label>
-                </div>
-            @endforeach
-        </div>
-        @error('badges')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
-</div>
-
-@php
-// Decode amenities if they exist and are valid JSON, otherwise default to empty array
-$projectAmenities = isset($project->amenities) && is_string($project->amenities) ? json_decode($project->amenities, true) : [];
-@endphp
-
-<!-- Amenities checkboxes -->
-<div class="col-6">
-<div class="form-group">
-    <label class="form-label">Amenities</label>
-    <div class="form-check">
-        @foreach($amenities as $amenity)
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="amenity_{{ $amenity->id }}" name="amenities[]" value="{{ $amenity->id }}" {{ in_array($amenity->id, old('amenities', $projectAmenities)) ? 'checked' : '' }}>
-                <label class="form-check-label" for="amenity_{{ $amenity->id }}">
-                    {{ $amenity->name }}
-                </label>
-            </div>
-        @endforeach
-    </div>
-    @error('amenities')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-</div>
-</div>
-
-
+       
 
 <div class="row">
     <!-- Other existing form fields -->
@@ -325,7 +227,7 @@ $projectAmenities = isset($project->amenities) && is_string($project->amenities)
     </div>
 </div>
 
-<div class="col-4">
+<div class="col-6">
     <div class="mb-3">
         <label for="status" class="form-label">Project Status</label>
         <select id="status" class="form-select @error('status') is-invalid @enderror" name="status" required>
@@ -339,6 +241,41 @@ $projectAmenities = isset($project->amenities) && is_string($project->amenities)
         @error('status')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
+    </div>
+</div>
+
+
+@php
+// Decode company_id if it exists and is not null for editing projects
+$decodedCompanyIds = isset($project) && isset($project->company_id) 
+    ? (is_array($project->company_id) ? $project->company_id : json_decode($project->company_id, true))
+    : [];
+@endphp
+
+<div class="col-6">
+    <div class="form-group">
+        <label for="company" class="form-label">Builders</label>
+        <div class="row">
+            @foreach($companies as $index => $company)
+                <div class="col-6 form-check">
+                    <input type="checkbox" class="form-check-input @error('company_id') is-invalid @enderror"
+                           name="company_id[]" id="company_{{ $company->id }}" value="{{ $company->id }}"
+                           {{ in_array($company->id, $decodedCompanyIds) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="company_{{ $company->id }}">
+                        {{ $company->name }}
+                    </label>
+                </div>
+
+                @if (($index + 1) % 2 == 0)
+                    <!-- End of row for every two companies -->
+                    </div>
+                    <div class="row">
+                @endif
+            @endforeach
+
+            <!-- Close the last row if there are an odd number of companies -->
+            </div>
+        </div>
     </div>
 </div>
 

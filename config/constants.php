@@ -92,6 +92,9 @@ return [
 		'unit_configuration'=>'text-grey fas fa-building',
 		'multiple_imges'=>'text-grey fas fa-images',
 		'info'=>'text-grey fas fa-info-circle',
+		'amenities'=>'text-grey fas fa-cog',
+		'collections'=>'text-grey fas fa-cog',
+		'badges'=>'text-grey fas fa-cog',
 
     ],
 

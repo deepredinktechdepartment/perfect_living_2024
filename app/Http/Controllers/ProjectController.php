@@ -116,9 +116,6 @@ class ProjectController extends Controller
         'longitude' => 'nullable',
         'website_url' => 'nullable|url',
         'project_type' => 'required',
-        'map_collections' => 'nullable|array', // Expecting an array
-        'map_badges' => 'nullable|array',     // Expecting an array
-        'amenities' => 'nullable|array',      // Expecting an array
         'no_of_acres' => 'nullable',
         'no_of_towers' => 'nullable',
         'no_of_units' => 'nullable',
@@ -147,10 +144,9 @@ class ProjectController extends Controller
         }
 
         // Convert checkbox values to JSON format
-        $data['map_collections'] = $request->has('map_collections') ? json_encode($request->input('map_collections')) : null;
+      
          $data['company_id'] = $request->has('company_id') ? json_encode($request->input('company_id')) : null;
-        $data['map_badges'] = $request->has('map_badges') ? json_encode($request->input('map_badges')) : null;
-        $data['amenities'] = $request->has('amenities') ? json_encode($request->input('amenities')) : null;
+        
         $data['slug'] = Str::slug($request->name)??null;
         $data['city'] = $request->city_id??0;
         $data['area'] = $request->area_id??0;
@@ -202,9 +198,9 @@ class ProjectController extends Controller
         'website_url' => 'nullable|url',
         'status' => 'required',
         'project_type' => 'required',
-        'map_collections' => 'nullable|array', // Expecting an array
-        'map_badges' => 'nullable|array',     // Expecting an array
-        'amenities' => 'nullable|array',      // Expecting an array
+     
+     
+       
         'company_id' => 'required|array',      // Expecting an array
         'no_of_acres' => 'nullable',
         'no_of_towers' => 'nullable',
@@ -222,11 +218,11 @@ class ProjectController extends Controller
         $data = $validator;
 
         // Convert checkbox values to JSON format if present, otherwise set to null
-        $data['map_collections'] = $request->has('map_collections') ? json_encode($request->input('map_collections')) : null;
+        
         $data['company_id'] = $request->has('company_id') ? json_encode($request->input('company_id')) : null;
 
-        $data['map_badges'] = $request->has('map_badges') ? json_encode($request->input('map_badges')) : null;
-        $data['amenities'] = $request->has('amenities') ? json_encode($request->input('amenities')) : null;
+       
+        
         $data['city'] = $request->city_id??0;
         $data['area'] = $request->area_id??0;
 
@@ -429,6 +425,145 @@ public function updateFeaturedStatus(Request $request)
 
     return response()->json(['success' => false], 404);
 }
+
+public function showAmenities($id)
+{
+    try {
+        // Attempt to find the project by ID
+        $project = Project::findOrFail($id);
+        $amenities = Amenity::all(); // Assuming you have an Amenity model
+
+        // Set the page title dynamically if needed
+        $pageTitle = "Amenities for ".$project->name ?? '';
+
+        return view('projects.amenities', compact('amenities', 'project', 'pageTitle'));
+    } catch (\Exception $e) {
+        // Handle exceptions gracefully, no logging
+        return redirect()->back()->with('error', 'Unable to load amenities. Please try again.');
+    }
+}
+
+
+public function updateAmenities(Request $request, $id)
+{
+    // Validate that at least one amenity is selected
+    $request->validate([
+        'amenities' => 'required|array|min:1',  // The 'min:1' ensures that at least one checkbox is selected
+    ], [
+        'amenities.required' => 'Please select at least one amenity.',
+        'amenities.min' => 'Please select at least one amenity.'
+    ]);
+
+    try {
+        // Find the project by ID
+        $project = Project::findOrFail($id);
+
+        // Get the selected amenities (if none are selected, it will trigger the validation error)
+        $selectedAmenities = $request->input('amenities', []);
+
+        // Encode the selected amenities as JSON to store in the database
+        $project->amenities = json_encode($selectedAmenities);
+
+        // Save the project
+        $project->save();
+
+        // Optionally, add a success message
+        return redirect()->route('projects.index')->with('success', 'Amenities updated successfully.');
+    } catch (\Exception $e) {
+        // Return with an error message but don't log the exception
+        return redirect()->back()->with('error', 'Something went wrong while updating amenities. Please try again.');
+    }
+}
+public function editCollections($id)
+{
+    try {
+        // Find the project by ID
+        $project = Project::findOrFail($id);
+
+        // Fetch all collections
+        $collections = Collection::all(); // Assuming you have a Collection model
+
+ // Set the page title dynamically if needed
+        $pageTitle = "Collections for ".$project->name ?? '';
+        
+        return view('projects.collections', compact('project', 'collections','pageTitle'));
+    } catch (\Exception $e) {
+        // Handle the exception by returning an error message
+        return redirect()->route('projects.index')->with('error', 'Failed to load the project or collections. Please try again.');
+    }
+}
+
+public function updateCollections(Request $request, $id)
+{
+    try {
+        // Validate that at least one collection is selected
+        $request->validate([
+            'map_collections' => 'required|array|min:1',  // Ensure at least one collection is selected
+        ], [
+            'map_collections.required' => 'Please select at least one collection.',
+        ]);
+
+        // Find the project by ID
+        $project = Project::findOrFail($id);
+
+        // Update the map_collections field
+        $project->map_collections = json_encode($request->input('map_collections'));
+
+        // Save the project
+        $project->save();
+
+        // Redirect back with success message
+        return redirect()->route('projects.index', $project->id)->with('success', 'Collections updated successfully.');
+    } catch (\Exception $e) {
+        // Handle the exception by returning an error message
+        return redirect()->route('projects.index', $id)->with('error', 'Failed to update collections. Please try again.');
+    }
+}
+
+public function editBadges($id)
+{
+    try {
+        // Find the project by ID
+        $project = Project::findOrFail($id);
+
+        // Fetch all badges
+        $badges = Badge::all(); // Assuming you have a Badge model
+        
+         // Set the page title dynamically if needed
+        $pageTitle = "Badges for ".$project->name ?? '';
+
+        return view('projects.badges', compact('project', 'badges','pageTitle'));
+    } catch (\Exception $e) {
+        return redirect()->route('projects.index')->with('error', 'Failed to load the project or badges. Please try again.');
+    }
+}
+
+public function updateBadges(Request $request, $id)
+{
+    try {
+        // Validate that at least one badge is selected
+        $request->validate([
+            'map_badges' => 'required|array|min:1',  // Ensure at least one badge is selected
+        ], [
+            'map_badges.required' => 'Please select at least one badge.',
+        ]);
+
+        // Find the project by ID
+        $project = Project::findOrFail($id);
+
+        // Update the map_badges field
+        $project->map_badges = json_encode($request->input('map_badges'));
+
+        // Save the project
+        $project->save();
+
+        // Redirect back with success message
+        return redirect()->route('projects.index')->with('success', 'Badges updated successfully.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Failed to update badges. Please try again.');
+    }
+}
+
 
 
 }

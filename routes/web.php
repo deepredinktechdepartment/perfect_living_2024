@@ -214,6 +214,24 @@ Route::put('elevation_pictures/{project}/{picture}', [ElevationPictureController
 // Project Amenities
 Route::resource('project_amenities', ProjectAmenityController::class);
 
+// Route to display the amenities form
+Route::get('/projects/{id}/amenities', [ProjectController::class, 'showAmenities'])->name('amenities.show');
+// Route to handle the amenities update
+Route::put('/projects/{id}/amenities', [ProjectController::class, 'updateAmenities'])->name('projects.updateAmenities');
+
+// Route to display the badges form
+Route::get('/projects/{id}/badges/edit', [ProjectController::class, 'editBadges'])->name('projects.editBadges');
+// Route to handle the badges update
+Route::put('/projects/{id}/badges', [ProjectController::class, 'updateBadges'])->name('projects.updateBadges');
+
+
+
+// Route to display the collections form
+Route::get('/projects/{id}/collections', [ProjectController::class, 'editCollections'])->name('projects.editCollections');
+
+// Route to handle the collections update
+Route::put('/projects/{id}/update-collections', [ProjectController::class, 'updateCollections'])->name('projects.updateCollections');
+
 Route::resource('menus', MenuController::class)->except(['show']);
 Route::get('menus/{id}/edit', [MenuController::class, 'create'])->name('menus.edit');
 Route::post('menus', [MenuController::class, 'store'])->name('menus.store');
@@ -249,12 +267,12 @@ Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');
 
 Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 
-//Route::get('/filters/{param?}', [PagesController::class, 'filtersprojects'])->name('homepage');
+Route::get('/filters/{param?}', [PagesController::class, 'filtersprojects'])->name('homepage');
 
 
-Route::get('/{any?}', [PagesController::class, 'filtersprojects'])
-    ->where('any', '^(builders|collection|top-locations|budgets|project|apartments-in-hyderabad)(/[^/]+)?((/builders|/collection|/top-locations|/budgets|/project|apartments-in-hyderabad)(/[^/]+)?)*$')
-    ->name('filters.index');
+// Route::get('/{any?}', [PagesController::class, 'filtersprojects'])
+//     ->where('any', '^(builders|collection|top-locations|budgets|project|apartments-in-hyderabad)(/[^/]+)?((/builders|/collection|/top-locations|/budgets|/project|/apartments-in-hyderabad)(/[^/]+)?)*$')
+//     ->name('filters.index');
 
 
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
