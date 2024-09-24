@@ -272,7 +272,7 @@ Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 
 
 Route::get('/{any?}', [PagesController::class, 'newFiltersprojects'])
-    ->where('any', '^(builders|collection|top-locations|budgets|project|apartments-in-hyderabad|search)(/[^/]+)?((/builders|/collection|/top-locations|/budgets|/project|/apartments-in-hyderabad|/search)(/[^/]+)?)*$')
+    ->where('any', '^(builders|collection|top-locations|budgets|apartments-in-hyderabad|search|property-type)(/[^/]+)?((/builders|/collection|/top-locations|/budgets|/apartments-in-hyderabad|/search\/property-type)(/[^/]+)?)*$')
     ->name('filters.index');
 
 

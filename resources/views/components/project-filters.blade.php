@@ -1,4 +1,5 @@
-<form action="{{ route('homepage') }}" method="GET">
+{{-- <form action="{{ route('homepage') }}" method="GET"> --}}
+    <form id="searchForm" method="GET">
     <div class="row py-2 mb-3 bg-grey align-items-center">
         <div class="col-lg-2">
             <select class="form-select" name="beds" aria-label="BHK">
@@ -23,7 +24,7 @@
         </div>
 
         <div class="col-lg-2">
-            <select class="form-select" name="property_type" aria-label="Property Type">
+            <select class="form-select" name="property-type" aria-label="Property Type">
                 <option value="" selected>Property Type</option>
                 <option value="Apartment Gated Community" {{ request()->query('property_type') == 'Apartment Gated Community' ? 'selected' : '' }}>Apartment Gated Community</option>
                 <option value="Retail Space" {{ request()->query('property_type') == 'Retail Space' ? 'selected' : '' }}>Retail Space</option>

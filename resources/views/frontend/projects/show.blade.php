@@ -19,7 +19,7 @@
 
         @foreach($project->company() as $company) <!-- Ensure to call get() to retrieve the companies -->
             <span class="text-decoration-underline">
-                <a href="{{ URL::to('filters?builders='.$company->slug) }}">{{ $company->name }}</a>
+                <a href="{{ URL::to('builders/'.$company->slug) }}">{{ $company->name }}</a>
             </span>{{ !$loop->last ? ', ' : '' }} <!-- Add comma except for the last company -->
         @endforeach
     </h6>

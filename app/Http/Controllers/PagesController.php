@@ -88,6 +88,9 @@ class PagesController extends Controller
             case 'search':
                 $search = $segments[$i + 1] ?? null;
                 break;
+            case 'property-type':
+                $propertytypes = $segments[$i + 1] ?? null;
+                break;
         }
     }
 
@@ -108,7 +111,7 @@ class PagesController extends Controller
 
 
     $beds = $apartments; // Comma-separated string for beds
-    $types = $request->input('property_type', ''); // Comma-separated string for types
+    $types = $propertytypes; // Comma-separated string for types
     $priceRange = $budgets; // Comma-separated string for budgets
     $areaNames = $topLocations; // Comma-separated string for areas
     $projectName = $request->input('name', ''); // Get project name for filtering

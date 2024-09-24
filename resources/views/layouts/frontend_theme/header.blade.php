@@ -87,9 +87,12 @@
               @endif
           @endguest
 
-              <li class="nav-item dropdown">
+
+
+
+              {{-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle profile-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="far fa-user-circle"></i> Your Name
+                  <i class="far fa-user-circle"></i>{{ $initials }}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{{ URL::to('profile') }}">Your Profile</a></li>
@@ -97,7 +100,7 @@
                     <li><a class="dropdown-item " href="{{ route('notAdminSerLogout') }}">Logout</a></li>
                 </ul>
 
-              </li>
+              </li> --}}
 
               {{-- <li class="nav-item">
                   <a class="nav-link text-white" href="{{ URL('') }}"><i class="fa-solid fa-house"></i></a>

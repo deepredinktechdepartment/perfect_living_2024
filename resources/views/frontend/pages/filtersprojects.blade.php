@@ -3,6 +3,7 @@
 
 @section('mainContent')
 
+    <section>
     <div class="container">
         <h1>{{ $pageTitle??'' }}</h1>
 
@@ -49,5 +50,37 @@
             <p>Nothing found</p>
         @endif
     </div>
+</section>
+
+
+@push('scripts')
+
+<script>
+    $(document).ready(function() {
+        $('#searchForm').on('submit', function(event) {
+            // Prevent default form submission to modify action
+            event.preventDefault();
+
+            // Get the search input value
+            var searchInput = $('#searchInput').val().trim();
+
+            // If the search input is not empty, set the form action
+            if (searchInput) {
+                // Set the base URL using PHP's URL::to in a Blade template
+                var baseUrl = "{{ URL::to('search') }}";
+
+                // Change the form action to baseUrl/searchInput
+                this.action = baseUrl + "/" + encodeURIComponent(searchInput);
+            } else {
+                // If searchInput is empty, set action to baseUrl to prevent any issues
+                this.action = "{{ URL::to('search') }}";
+            }
+
+            // Submit the form with the new action
+            this.submit();
+        });
+    });
+</script>
+@endpush
 
 @endsection
