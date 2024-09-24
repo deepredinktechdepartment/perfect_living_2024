@@ -47,7 +47,7 @@
                     @endforeach
                 </div>
             @else
-                <p>Nothing found in your wishlist.</p>
+                <p>No Apartments are Listed.</p>
             @endif
         @endguest
     </div>
