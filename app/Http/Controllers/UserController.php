@@ -320,10 +320,14 @@ public function storeOrUpdate(Request $request)
           // Validate the request
           $validatedData = $request->validate([
               'password' => 'required|min:8|max:16|confirmed',
+              'page' => 'nullable',
           ]);
 
           try {
               // Get the currently authenticated user
+
+              $page=$request->page??'';
+              
               $user = User::find(auth()->user()->id);
 
               // Update the user's password
@@ -358,12 +362,14 @@ public function updateProfile(Request $request)
     $request->validate([
         'firstname' => 'required|min:1|max:100',
         'email' => 'required|email',
+        'page' => 'nullable',
         'phone' => 'required|regex:/^[6-9]{1}[0-9]{9}$/',
         'profile' => 'nullable|mimes:jpg,jpeg,png|max:2048', // Optional file, max size 2MB
     ]);
 
     try {
 
+        $page=$request->page??'';
         // Get the authenticated user
         $user = User::findOrFail(auth()->user()->id);
         // Handle profile picture upload
@@ -386,10 +392,19 @@ public function updateProfile(Request $request)
         // Save user details
         $user->save();
 
-        return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');
+
+
+        if(isset($page) && $page=="nonadminuser"){
+            return redirect()->route('userprofile')->with('success', 'Profile updated successfully.');
+        }
+        else{
+            return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');
+        }
+
+
     } catch (\Exception $e) {
         // Log error message
-        \Log::error('Profile update failed: ' . $e->getMessage());
+
 
         // Redirect back with error message
         return redirect()->back()->with('error', 'Failed to update profile. Please try again.'. $e->getMessage());

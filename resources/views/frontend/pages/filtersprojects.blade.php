@@ -64,11 +64,12 @@
 
             // Get selected values
             var propertyType = $('#propertyType').val();
+
             var budgets = $('#budget').val();
             var beds = $('#beds').val();
 
             // Create the base URL
-            var baseUrl = "{{ URL::to('filters') }}";
+            var baseUrl = "{{ URL::to('search') }}";
 
             // Construct the new action URL based on selected values
             var actionUrl = baseUrl;

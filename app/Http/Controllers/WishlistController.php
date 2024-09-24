@@ -18,7 +18,7 @@ class WishlistController extends Controller
 
             $wishlists = Wishlist::where('user_id', Auth::id())->with('project')->get();
             $projects = $wishlists->pluck('project'); // Get the projects from the wishlist
-            $pageTitle = 'My Wishlist';
+            $pageTitle = 'My Short Lists';
 
 
 

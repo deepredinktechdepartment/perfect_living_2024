@@ -66,22 +66,30 @@
 
               @guest
               <li class="nav-item">
-                  <a class="nav-link text-white" href="{{ URL::to('login') }}">Wishlist</a>
+                  <a class="nav-link text-white" href="{{ URL::to('login') }}"> <i class="fa-regular fa-heart wishlist-icon"></i></a>
               </li>
           @else
               @if (Auth::user()->role === 5) <!-- Check if the user is a non-admin -->
                   <li class="nav-item">
-                      <a class="nav-link text-white" href="{{ URL::to('wishlists') }}">My Wishlist</a>
-                  </li>
-                  <li class="nav-item">
-
-                      <a href="{{ route('notAdminSerLogout') }}" class="nav-link text-white" >Logout</a>
+                      <a class="nav-link text-white" href="{{ URL::to('shortLists') }}"> <i class="fa-regular fa-heart wishlist-icon"></i></a>
                   </li>
 
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle profile-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="far fa-user-circle"></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ URL::to('userprofile') }}">Your Profile</a></li>
+                        <li><a class="dropdown-item " href="{{ URL::to('reset_password') }}">Change Password</a></li>
+                        <li><a class="dropdown-item " href="{{ route('notAdminSerLogout') }}">Logout</a></li>
+                    </ul>
+
+                  </li>
                   @else
 
                   <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ URL::to('login') }}">Wishlist</a>
+                    <a class="nav-link text-white" href="{{ URL::to('login') }}"> <i class="fa-regular fa-heart wishlist-icon"></i></a>
                 </li>
 
               @endif
@@ -90,17 +98,7 @@
 
 
 
-              {{-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle profile-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="far fa-user-circle"></i>{{ $initials }}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{{ URL::to('profile') }}">Your Profile</a></li>
-                    <li><a class="dropdown-item " href="{{ URL::to('reset_password') }}">Change Password</a></li>
-                    <li><a class="dropdown-item " href="{{ route('notAdminSerLogout') }}">Logout</a></li>
-                </ul>
 
-              </li> --}}
 
               {{-- <li class="nav-item">
                   <a class="nav-link text-white" href="{{ URL('') }}"><i class="fa-solid fa-house"></i></a>

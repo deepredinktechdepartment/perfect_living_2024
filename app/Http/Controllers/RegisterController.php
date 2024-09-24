@@ -250,6 +250,23 @@ public function verifyEmail($token)
 }
 
 
+public function userLogout(Request $request)
+{
+    try {
+        // Logout the user
+        Auth::logout();
+
+        // Invalidate the session
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Redirect to the home page with a success message
+        return redirect('/')->with('success', 'Successfully logged out!');
+    } catch (\Exception $e) {
+        // Handle any exceptions that may occur during the logout process
+        return redirect('/')->with('error', 'An error occurred while logging out. Please try again.');
+    }
+}
 
 
 

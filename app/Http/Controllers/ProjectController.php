@@ -144,9 +144,9 @@ class ProjectController extends Controller
         }
 
         // Convert checkbox values to JSON format
-      
+
          $data['company_id'] = $request->has('company_id') ? json_encode($request->input('company_id')) : null;
-        
+
         $data['slug'] = Str::slug($request->name)??null;
         $data['city'] = $request->city_id??0;
         $data['area'] = $request->area_id??0;
@@ -198,9 +198,9 @@ class ProjectController extends Controller
         'website_url' => 'nullable|url',
         'status' => 'required',
         'project_type' => 'required',
-     
-     
-       
+
+
+
         'company_id' => 'required|array',      // Expecting an array
         'no_of_acres' => 'nullable',
         'no_of_towers' => 'nullable',
@@ -218,11 +218,11 @@ class ProjectController extends Controller
         $data = $validator;
 
         // Convert checkbox values to JSON format if present, otherwise set to null
-        
+
         $data['company_id'] = $request->has('company_id') ? json_encode($request->input('company_id')) : null;
 
-       
-        
+
+
         $data['city'] = $request->city_id??0;
         $data['area'] = $request->area_id??0;
 
@@ -485,7 +485,7 @@ public function editCollections($id)
 
  // Set the page title dynamically if needed
         $pageTitle = "Collections for ".$project->name ?? '';
-        
+
         return view('projects.collections', compact('project', 'collections','pageTitle'));
     } catch (\Exception $e) {
         // Handle the exception by returning an error message
@@ -528,7 +528,7 @@ public function editBadges($id)
 
         // Fetch all badges
         $badges = Badge::all(); // Assuming you have a Badge model
-        
+
          // Set the page title dynamically if needed
         $pageTitle = "Badges for ".$project->name ?? '';
 

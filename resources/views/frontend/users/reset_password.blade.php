@@ -8,17 +8,27 @@
                 <div class="card login-card p-3 px-sm-3 px-2">
                     <div class="card-body">
                         <h3 class="mb-4">Change Password</h3>
-                        <form id="resetpasswordForm" method="POST" action="{{ route('post.Register.Data') }}">
+                        <form id="changePasswordForm" action="{{ route('verifying.password') }}" method="post">
                             @csrf
-                            <div class="form-group mb-4">
-                                <input type="password" name="password" id="password" class="form-control" placeholder="New Password" required minlength="8" value="" autocomplete="off">
+                            <!-- New Password -->
+                            <div class="mb-3">
+
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter new password" required>
+                                <div class="invalid-feedback"></div>
                             </div>
-                            <div class="form-group mb-4">
-                                <input type="password" name="passwordagain" id="passwordagain" class="form-control" placeholder="Confirm New Password" required value="" autocomplete="off">
+
+                            <!-- Confirm New Password -->
+                            <div class="mb-3">
+
+                                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Confirm new password" required>
+                                <div class="invalid-feedback"></div>
                             </div>
-                            <div class="form-group mb-4">
-                                <button type="submit" class="btn btn-danger border-radius-0 w-100">Save</button>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn bg-custom-btn btn-lg">Change Password</button>
                             </div>
+                            <input type="hidden" name="page"  value="nonadminuser">
                         </form>
 
                     </div>
@@ -28,56 +38,57 @@
     </div>
 </section>
 
+
+
 @push('scripts')
-
 <script>
-$(document).ready(function() {
-    // Custom method to prevent leading spaces
-    $.validator.addMethod("noLeadingSpaces", function(value, element) {
-        return this.optional(element) || /^\S.*/.test(value);
-    }, "Cannot start with a space.");
-
-    // Custom method to prevent spaces in the password
+$(document).ready(function () {
+    // Custom validator to prevent spaces in the password
     $.validator.addMethod("noSpaces", function(value, element) {
-        return this.optional(element) || /^\S*$/.test(value);
-    }, "Password cannot contain spaces.");
+        return value.trim() === value && value.indexOf(" ") === -1;
+    }, "Password cannot contain spaces");
 
-    // Initialize form validation
-    $('#resetpasswordForm').validate({
+    $('#changePasswordForm').validate({
         rules: {
             password: {
                 required: true,
                 minlength: 8,
-                noSpaces: true
+                noSpaces: true // Applying the custom validator
             },
-            passwordagain: {
+            password_confirmation: {
                 required: true,
+                minlength: 8,
                 equalTo: "#password",
-                noSpaces: true
+                noSpaces: true // Applying the custom validator
             }
         },
         messages: {
             password: {
-                required: "Please provide a password.",
-                minlength: "Your password must be at least 8 characters long.",
-                noSpaces: "Password cannot contain spaces."
+                required: "Please enter a new password",
+                minlength: "Your password must be at least 8 characters long",
+                noSpaces: "Password cannot contain spaces or only spaces"
             },
-            passwordagain: {
-                required: "Please confirm your password.",
-                equalTo: "Passwords do not match.",
-                noSpaces: "Password cannot contain spaces."
+            password_confirmation: {
+                required: "Please confirm your new password",
+                minlength: "Your password must be at least 8 characters long",
+                equalTo: "Passwords do not match",
+                noSpaces: "Password cannot contain spaces or only spaces"
             }
         },
         errorElement: 'div',
-        errorClass: 'text-danger',
-        highlight: function(element) {
-            $(element).addClass('is-invalid');
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.mb-3').append(error);
         },
-        unhighlight: function(element) {
-            $(element).removeClass('is-invalid');
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid').removeClass('is-valid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-valid').removeClass('is-invalid');
         }
     });
 });
 </script>
 @endpush
+
 @endsection

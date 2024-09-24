@@ -291,7 +291,8 @@ Route::post('verifyAuthLogin', [RegisterController::class, 'login'])->name('veri
 
 Route::get('create_account', [UserController::class, 'createAccount']);
 
-//Route::get('profile', [UserController::class, 'yourProfile']);
+Route::get('userprofile', [UserController::class, 'yourProfile'])->name('userprofile');
+Route::post('/userLogout', [RegisterController::class, 'userLogout'])->name('userLogout');
 
 Route::get('reset_password', [UserController::class, 'resetPassword']);
 
@@ -330,14 +331,14 @@ Route::get('email/verification-notification', [VerificationController::class, 's
             return redirect('/')->with('status', 'You have been logged out.');
         }
 
-        return back()->withErrors(['error' => 'You are not authorized to log out.']);
+        return back()->with('error','You are not authorized to log out.');
     })->name('notAdminSerLogout');
 
     Route::get('/verify-email/{token}', [RegisterController::class, 'verifyEmail'])->name('verify.email');
 
 
     Route::middleware(['auth'])->group(function () {
-        Route::get('/wishlists', [WishlistController::class, 'index'])->name('wishlists.index');
+        Route::get('/shortLists', [WishlistController::class, 'index'])->name('wishlists.index');
         Route::post('/wishlists', [WishlistController::class, 'store'])->name('wishlists.store');
         Route::delete('/wishlists/{id}', [WishlistController::class, 'destroy'])->name('wishlists.destroy');
     });

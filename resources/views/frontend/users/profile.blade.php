@@ -3,17 +3,25 @@
 @section('mainContent')
 <section class="bg-yellow">
     <div class="container">
-        <h2 class="mb-4">My Profile</h2>
+
         <div class="row">
             <div class="col-md-4">
                 <div class="employee_profile h-100">
                     <div class="card login-card p-3 px-sm-3 px-2 h-100">
                         <div class="profile_img">
                             <div class="d-flex justify-content-center">
-                                <img class="rounded-circle img-fluid" src="https://via.placeholder.com/200" alt="Default Image" width="100" height="100">
-                            </div>
+
+
+@if(Auth::user()->profile_photo && File::exists(storage_path('app/public/' . Auth::user()->profile_photo)))
+<img class="rounded-circle img-fluid" src="{{ URL::to(env('APP_STORAGE').''.Auth::user()->profile_photo) }}" alt="" width="100" height="100">
+@else
+<!-- No Profile Picture -->
+<img class="rounded-circle img-fluid" src="https://via.placeholder.com/200" alt="Default Image" width="100" height="100">
+@endif
+                    </div>
+
                         </div>
-                        <h3 class="text-center nowrap-link mb-2 pt-2">Your Name</h3>
+                        <h3 class="text-center nowrap-link mb-2 pt-2">{{ old('firstname', Auth::user()->fullname ?? '') }}</h3>
                         <h6 class="text-center">youremail@gmail.com</h6>
                         <p class="text-center mb-3">0000000000</p>
                     </div>
@@ -22,19 +30,19 @@
             <div class="col-sm-5">
                 <div class="card login-card p-3 px-sm-3 px-2">
                     <div class="card-body">
-                        <h3 class="mb-4">Update Profile</h3>
-                        <form id="profileupdateForm" method="POST" action="{{ route('post.Register.Data') }}">
+
+                        <form id="profileupdateForm" method="POST" action="{{ route('profile.update') }}">
                             @csrf
                             <div class="form-group mb-4">
-                                <input type="text" name="fullname" id="fullname" class="form-control" placeholder="Full Name" required value="{{ old('fullname') }}" autocomplete="off">
+                                <input type="text" name="firstname" id="fullname" class="form-control" placeholder="Full Name" required value="{{ old('firstname', Auth::user()->fullname ?? '') }}" autocomplete="off">
                             </div>
                             <div class="form-group mb-4">
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required value="{{ old('email') }}" autocomplete="off">
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required value="{{ old('email', Auth::user()->username ?? '') }}" autocomplete="off">
                             </div>
                             <div class="form-group mb-3">
                                 <input type="hidden" id="phone_with_country_code_one" name="phone_with_country_code"/>
                                 <input type="hidden" id="country_code_one" name="country_code"/>
-                                <input type="tel" name="phone" id="phone" class="form-control d-block w-100" placeholder="Phone Number" required>
+                                <input type="tel" name="phone" id="phone" class="form-control d-block w-100" placeholder="Phone Number" required value="{{ old('phone', Auth::user()->phone ?? '') }}">
                             </div>
                             <!-- <div class="form-group mb-4">
                                 <input type="tel" name="phone" id="phone" class="form-control" placeholder="Phone Number" required pattern="[0-9]{10}" value="{{ old('phone') }}" autocomplete="off">
@@ -47,6 +55,8 @@
                             <div class="form-group mb-4">
                                 <button type="submit" class="btn btn-danger border-radius-0 w-100">Save</button>
                             </div>
+
+                            <input type="hidden" name="page"  value="nonadminuser">
                         </form>
 
                     </div>
@@ -70,7 +80,7 @@ var input = document.querySelector("#phone");
         separateDialCode: true,
         autoPlaceholder:"polite",
         formatOnDisplay:true,
-        dropdownContainer: document.body,  
+        dropdownContainer: document.body,
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
@@ -81,7 +91,7 @@ var input = document.querySelector("#phone");
 
         // Check if the number starts with '6', is 10 digits long, and belongs to India
         var isJioNumber = fullNumber.startsWith('+91') && fullNumber[3] == '6' && fullNumber.length == 13; // +91 6XXXXXXXXX (13 chars with country code)
-        
+
         return isValid || isJioNumber; // Pass validation if it's valid or a Jio number with 10 digits
     }, "Please enter a valid phone number starting with 6 and 10 digits long.");
 
