@@ -36,14 +36,14 @@
                             }
                         @endphp
 
-                        <x-project-card-view2
-                            :name="$project->name"
-                            :address="$project->areas->name"
-                            :details="$project->project_type . ', ' . ($project->unitConfigurations->first()->beds ?? 'N/A') . ' BHK'"
-                            :price="number_format($project->price_per_sft)"
-                            :image="$imageUrl"
-                            :url="route('project.show', $project->slug)"
-                        />
+<x-project-card-view2
+:name="$project->name"
+:address="$project->areas->name"
+:details="$project->project_type . ', ' . $project->unitConfigurations->first()->beds . ' BHK'"
+:price="number_format($project->price_per_sft)"
+:image="$imageUrl"
+:url="URL::to('project/' . $project->slug)"
+/>
                     @endforeach
                 </div>
             @else
