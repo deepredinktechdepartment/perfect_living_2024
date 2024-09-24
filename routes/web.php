@@ -336,9 +336,9 @@ Route::get('email/verification-notification', [VerificationController::class, 's
 
     Route::get('/verify-email/{token}', [RegisterController::class, 'verifyEmail'])->name('verify.email');
 
-
+    Route::get('/shortLists', [WishlistController::class, 'index'])->name('wishlists.index');
     Route::middleware(['auth'])->group(function () {
-        Route::get('/shortLists', [WishlistController::class, 'index'])->name('wishlists.index');
+
         Route::post('/wishlists', [WishlistController::class, 'store'])->name('wishlists.store');
         Route::delete('/wishlists/{id}', [WishlistController::class, 'destroy'])->name('wishlists.destroy');
     });

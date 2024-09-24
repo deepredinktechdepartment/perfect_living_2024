@@ -22,8 +22,8 @@
 
                         </div>
                         <h3 class="text-center nowrap-link mb-2 pt-2">{{ old('firstname', Auth::user()->fullname ?? '') }}</h3>
-                        <h6 class="text-center">youremail@gmail.com</h6>
-                        <p class="text-center mb-3">0000000000</p>
+                        <h6 class="text-center">{{ old('email', Auth::user()->username ?? '') }}</h6>
+                        <p class="text-center mb-3">{{ old('phone', Auth::user()->phone ?? '') }}</p>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="card login-card p-3 px-sm-3 px-2">
                     <div class="card-body">
 
-                        <form id="profileupdateForm" method="POST" action="{{ route('profile.update') }}">
+                        <form id="profileupdateForm" method="POST" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group mb-4">
                                 <input type="text" name="firstname" id="fullname" class="form-control" placeholder="Full Name" required value="{{ old('firstname', Auth::user()->fullname ?? '') }}" autocomplete="off">
