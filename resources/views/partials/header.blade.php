@@ -122,7 +122,7 @@
                             </a>
 
                               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
+                                  <li><a class="dropdown-item {{ Request::routeIs('profile.show') ? 'active' : '' }}" href="{{ route('profile.show') }}">Your Profile</a></li>
                                   <li><a class="dropdown-item {{ Request::routeIs('reset.password') ? 'active' : '' }}" href="{{ route('reset.password') }}">Change Password</a></li>
                                   <li><a class="dropdown-item {{ Request::routeIs('logout') ? 'active' : '' }}" href="{{ route('logout') }}">Logout</a></li>
                               </ul>
