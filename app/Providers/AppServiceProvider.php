@@ -4,6 +4,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
+use App\Models\Wishlist; // Adjust according to your Wishlist model path
 
 class AppServiceProvider extends ServiceProvider
 {
