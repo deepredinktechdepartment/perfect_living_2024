@@ -1154,3 +1154,22 @@ label.error {
 
 
 /* Amenities CSS ENDS */
+
+.wishlist-count {
+    position: absolute;
+    /* Position it relative to the heart icon */
+    top: -10px;
+    /* Adjust position */
+    right: -10px;
+    /* Adjust position */
+    background-color: red;
+    /* Background color */
+    color: white;
+    /* Text color */
+    border-radius: 50%;
+    /* Circular shape */
+    padding: 2px 5px;
+    /* Padding for better appearance */
+    font-size: 12px;
+    /* Font size */
+}

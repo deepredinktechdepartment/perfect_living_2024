@@ -74,6 +74,16 @@
                       <a class="nav-link text-white" href="{{ URL::to('shortLists') }}"> <i class="fa-regular fa-heart wishlist-icon"></i></a>
                   </li>
 
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ URL::to('shortLists') }}">
+                        <i class="fa-regular fa-heart wishlist-icon"></i>
+                        @if($wishlistCount > 0)
+                            <span class="wishlist-count">{{ $wishlistCount }}</span>
+                        @endif
+                    </a>
+                </li>
+
+
 
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle profile-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
