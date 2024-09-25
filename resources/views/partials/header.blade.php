@@ -66,33 +66,35 @@
 
 
 
-                          @if(Auth::check() && in_array(Auth::user()->role, [1,2,4]))
-                          <li class="nav-item dropdown {{ Request::routeIs('city-masters.index','city-masters.create','badges.index','badges.create','collections.index','collections.create','amenities.index','amenities.create','area-masters.index','area-masters.create') ? 'active' : '' }}">
-                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Masters
-                              </a>
-                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <li><a class="dropdown-item {{ Request::routeIs('city-masters.index') ? 'active' : '' }}" href="{{ route('city-masters.index') }}">Cities</a></li>
-                                  <li><a class="dropdown-item {{ Request::routeIs('area-masters.index') ? 'active' : '' }}" href="{{ route('area-masters.index') }}">Area Masters</a></li>
-                                  <li><a class="dropdown-item {{ Request::routeIs('badges.index') ? 'active' : '' }}" href="{{ route('badges.index') }}">Badges</a></li>
-                                  <li><a class="dropdown-item {{ Request::routeIs('collections.index') ? 'active' : '' }}" href="{{ route('collections.index') }}">Collections</a></li>
-                                  <li><a class="dropdown-item {{ Request::routeIs('amenities.index') ? 'active' : '' }}" href="{{ route('amenities.index') }}">Amenities</a></li>
-                              </ul>
-                          </li>
-                          @endif
+                          <li class="nav-item dropdown {{ Request::routeIs('city-masters.index','city-masters.create','badges.index','badges.create','collections.index','collections.create','amenities.index','amenities.create','area-masters.index','area-masters.create','menus.index','theme_options.index') ? 'active' : '' }}">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Settings
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                          @if(Auth::user()->role && Auth::user()->role==1)
-                          <li class="nav-item dropdown {{ Request::routeIs('theme_options.index', 'theme_options.index') ? 'active' : '' }}">
-                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Setting
-                              </a>
-                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <li><a class="dropdown-item {{ Request::routeIs('menus.index') ? 'active' : '' }}" href="{{ route('menus.index') }}">Menus</a></li>
-                                  <li><a class="dropdown-item {{ Request::routeIs('theme_options.index') ? 'active' : '' }}" href="{{ route('theme_options.index') }}">Theme Options</a></li>
+                                <!-- Menus and Theme Options for Role 1 -->
+                                @if(Auth::user()->role && Auth::user()->role == 1)
+                                    <!-- Menus -->
+                                    <li><a class="dropdown-item {{ Request::routeIs('menus.index') ? 'active' : '' }}" href="{{ route('menus.index') }}">Menus</a></li>
 
-                              </ul>
-                          </li>
-                          @endif
+                                    <!-- Theme Options -->
+                                    <li><a class="dropdown-item {{ Request::routeIs('theme_options.index') ? 'active' : '' }}" href="{{ route('theme_options.index') }}">Theme Options</a></li>
+
+                                    <!-- Divider (hr) -->
+                                    <li><hr class="dropdown-divider"></li>
+                                @endif
+
+                                <!-- Master Menus for Roles 1, 2, and 4 -->
+                                @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 4]))
+                                    <li><a class="dropdown-item {{ Request::routeIs('city-masters.index') ? 'active' : '' }}" href="{{ route('city-masters.index') }}">Cities</a></li>
+                                    <li><a class="dropdown-item {{ Request::routeIs('area-masters.index') ? 'active' : '' }}" href="{{ route('area-masters.index') }}">Area Masters</a></li>
+                                    <li><a class="dropdown-item {{ Request::routeIs('badges.index') ? 'active' : '' }}" href="{{ route('badges.index') }}">Badges</a></li>
+                                    <li><a class="dropdown-item {{ Request::routeIs('collections.index') ? 'active' : '' }}" href="{{ route('collections.index') }}">Collections</a></li>
+                                    <li><a class="dropdown-item {{ Request::routeIs('amenities.index') ? 'active' : '' }}" href="{{ route('amenities.index') }}">Amenities</a></li>
+                                @endif
+                            </ul>
+                        </li>
+
 
                           <li class="nav-item dropdown {{ Request::routeIs('profile.show', 'reset.password', 'logout') ? 'active' : '' }}">
                             <a class="nav-link dropdown-toggle profile-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
