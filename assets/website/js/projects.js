@@ -250,31 +250,23 @@ $(document).ready(function() {
     });
 });
 
-// if (window.matchMedia("(max-width: 768px)").matches) {
-/* the viewport is less than 768 pixels wide */
-//     $('.amenities-slider').slick({
-//     slidesToShow: 5,
-//     slidesToScroll: 5,
-//     autoplay: false,
-//     autoplaySpeed: 5000,
-//     pauseOnHover:true,
-//     dots: true,
-//     fade: false,
-//     arrows: false,
-//     infinite: false,
-//     loop: false,
-//     responsive:[
-//     {
-//        breakpoint:480,
-//        settings:
-//        {
-//           slidesToShow:3,
-//           slidesToScroll:3,
-//        }
-//     }
-//  ]
-// });
-//   }
+
+if ($(window).width() < 992) { // Adjust the breakpoint as needed
+    $('.amenities-slider').slick({
+        slidesToShow: 1, // Show one group of amenities per slide
+        slidesToScroll: 1,
+        autoplay: false,
+        autoplaySpeed: 5000,
+        pauseOnHover: true,
+        dots: true,
+        fade: false,
+        arrows: true,
+        infinite: true, // Allow continuous scrolling
+    });
+}
+
+
+
 
 
 

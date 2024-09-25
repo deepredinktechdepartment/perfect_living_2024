@@ -15,7 +15,7 @@ body {
     font-weight: 400;
 }
 
-main{
+main {
     min-height: 60vh;
 }
 
@@ -79,12 +79,15 @@ a:focus {
 .bg-yellow {
     background: #fffbe8;
 }
+
 .bg-brand {
     background: #e40048;
 }
-.border-brand{
+
+.border-brand {
     border: 1px solid #e40048;
 }
+
 .container {
     padding: 40px 15px;
 }
@@ -95,17 +98,19 @@ a:focus {
     }
 }
 
-
-.btn.btn-brand{
+.btn.btn-brand {
     background: #e40048;
     border: 1px solid #e40048;
     color: #fff;
     border-radius: 0;
 }
-.btn.btn-brand:hover{
+
+.btn.btn-brand:hover {
     background: #fff;
     color: #e40048;
 }
+
+
 /* Common CSS ENDS */
 
 
@@ -152,7 +157,6 @@ a:focus {
     }
 }
 
-
 .slick-arrow.slick-prev:before {
     font-family: "Font Awesome 6 Free";
     content: "\f060";
@@ -165,6 +169,7 @@ a:focus {
 .slick-arrow.slick-prev {
     left: -50px;
 }
+
 .slick-arrow.slick-next {
     right: -50px;
 }
@@ -284,7 +289,7 @@ header {
     -o-border-radius: 4px;
 }
 
-.navbar .nav-link:focus{
+.navbar .nav-link:focus {
     color: #fff;
 }
 
@@ -753,11 +758,13 @@ footer p {
     background-color: #ddd;
     color: #000;
 }
-@media(max-width: 480px){
+
+@media(max-width: 480px) {
     .form-select {
         font-size: 12px;
     }
 }
+
 .iti {
     display: block;
     position: relative;
@@ -908,10 +915,11 @@ label.error {
     border-bottom-right-radius: 0;
 }
 
-#searchForm .btn_black{
+#searchForm .btn_black {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
+
 
 /* Home page Main Banner CSS End */
 
@@ -1048,14 +1056,16 @@ label.error {
     background-color: #fff;
     color: #000;
 }
-@media(max-width: 480px){
-    .btn_black{
+
+@media(max-width: 480px) {
+    .btn_black {
         font-size: 12px;
     }
-    .clear_all{
+    .clear_all {
         font-size: 12px;
     }
 }
+
 
 /* Login Page CSS Begins */
 
@@ -1092,6 +1102,7 @@ label.error {
 
 /* Login Page CSS Ends */
 
+
 /* Amenities CSS Begins */
 
 .expertise-col {
@@ -1100,44 +1111,46 @@ label.error {
     /* padding: 0 10px;
     margin-bottom: 20px;
     height: 100%; */
-  }
-  
-  .expertise-col img {
+}
+
+.expertise-col img {
     width: 60px;
     margin: auto;
     height: auto;
-  }
-  
-  .amenities-icon {
+}
+
+.amenities-icon {
     border: 1px solid #ddd;
     padding: 20px;
     height: 100%;
-  }
-  
-  .amenities-icon:hover {
+}
+
+.amenities-icon:hover {
     border: 1px solid #e40048;
-  }
-  
-  .amenities-icon p {
+}
+
+.amenities-icon p {
     padding-top: 15px;
     margin-bottom: 0;
     font-size: 14px;
     line-height: 1.2;
-  }
+}
 
-  @media (max-width: 480px) {
+@media (max-width: 480px) {
     .expertise-col {
         /* width: 50%;
         padding: 0; */
     }
     .expertise-col img {
         width: 40px;
-      }
+    }
     .amenities-icon {
         padding: 10px 12px;
     }
     .amenities-icon p {
         font-size: 11px;
     }
-  }
+}
+
+
 /* Amenities CSS ENDS */
