@@ -6,9 +6,9 @@
 
     @if(isset($favicon) && File::exists($favicon))
 
-<link rel="icon"  type="image/x-icon" href="{{ URL::to('favicon.ico') }}">
+<link rel="shortcut icon"  type="image/x-icon" href="{{ URL::to('favicon.ico') }}">
 
-<link rel="icon"  type="image/png"  sizes="30x30" href="{{ URL::to('favicon.png') }}">
+<link rel="shortcut icon"  type="image/png"  sizes="30x30" href="{{ URL::to('favicon.png') }}">
 
 @else
 @endif
