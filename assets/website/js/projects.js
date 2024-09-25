@@ -167,8 +167,8 @@ $('.three_slider').slick({
 });
 
 $('.featured-properties-slider').slick({
-    slidesToShow: 2,
-    slidesToScroll: 2,
+    slidesToShow: 1, // Only show 1 "group" of 4 cards (2 rows of 2) per slide
+    slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 4000,
     pauseOnHover: true,
@@ -177,16 +177,27 @@ $('.featured-properties-slider').slick({
     arrows: true,
     infinite: true,
     responsive: [{
-        breakpoint: 480,
-        settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            dots: true,
-            fade: false,
-            arrows: true,
+            breakpoint: 1024, // On tablets and smaller
+            settings: {
+                slidesToShow: 1, // Still show 1 group of 4 cards
+                slidesToScroll: 1,
+                dots: true,
+                arrows: true,
+            }
+        },
+        {
+            breakpoint: 768, // On mobile, show 1 group of 2 cards
+            settings: {
+                slidesToShow: 1, // Show 2 cards per slide
+                slidesToScroll: 1,
+                dots: true,
+                arrows: true,
+            }
         }
-    }]
+    ]
 });
+
+
 
 
 $('.highlights-images-slider').slick({
@@ -240,7 +251,7 @@ $(document).ready(function() {
 });
 
 // if (window.matchMedia("(max-width: 768px)").matches) {
-    /* the viewport is less than 768 pixels wide */
+/* the viewport is less than 768 pixels wide */
 //     $('.amenities-slider').slick({
 //     slidesToShow: 5,
 //     slidesToScroll: 5,
@@ -263,7 +274,7 @@ $(document).ready(function() {
 //     }
 //  ]
 // });
-//   } 
+//   }
 
 
 

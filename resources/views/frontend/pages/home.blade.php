@@ -43,39 +43,46 @@
     <section>
         <div class="container">
             <h2 class="mb-4 text-center">Featured Gated Communities in Hyderabad</h2>
-            <div class="row featured-properties-slider">
-                @foreach ($projects as $project)
-                    @php
-                        // Default placeholder image URL
-                        $defaultImageUrl = 'https://via.placeholder.com/150';
-                        // Check if elevationPictures is set and contains at least one image
-                        $imageUrl = $defaultImageUrl; // Default image
-                        if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
-                            $firstImagePath = $project->elevationPictures->first()->file_path;
-                            $fullImagePath = URL::to(env('APP_STORAGE').$firstImagePath);
-                        }
+            <div class="featured-properties-slider"> <!-- Remove row from here -->
+                @foreach ($projects->chunk(4) as $projectChunk) <!-- Group 4 projects per slide -->
+                    <div class="slide"> <!-- Each slide contains 4 projects -->
+                        <div class="row">
+                            @foreach ($projectChunk as $project)
+                                @php
+                                    // Default placeholder image URL
+                                    $defaultImageUrl = 'https://via.placeholder.com/150';
+                                    // Check if elevationPictures is set and contains at least one image
+                                    $imageUrl = $defaultImageUrl; // Default image
+                                    if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
+                                        $firstImagePath = $project->elevationPictures->first()->file_path;
+                                        $fullImagePath = URL::to(env('APP_STORAGE').$firstImagePath);
+                                    }
 
-                        // Check if unitConfigurations is set and contains at least one item
-                        $beds = isset($project->unitConfigurations) && $project->unitConfigurations->isNotEmpty()
-                            ? $project->unitConfigurations->first()->beds
-                            : 'N/A'; // Default value if not available
-                    @endphp
+                                    // Check if unitConfigurations is set and contains at least one item
+                                    $beds = isset($project->unitConfigurations) && $project->unitConfigurations->isNotEmpty()
+                                        ? $project->unitConfigurations->first()->beds
+                                        : 'N/A'; // Default value if not available
+                                @endphp
 
-                    <div class="col-md-6 mb-4"> <!-- Each card takes half the width (6 columns) -->
-                        <x-project-card
-                            :name="$project->name"
-                            :address="$project->areas->name"
-                            :details="$project->project_type . ', ' . $beds . ' BHK'"
-                            :price="number_format($project->price_per_sft)"
-                            :image="$fullImagePath ?? '#'"
-                            :url="URL::to('project/'.$project->slug)"
-                        />
+                                <div class="col-md-6 mb-4"> <!-- 6 columns, 2 cards per row -->
+                                    <x-project-card
+                                        :name="$project->name"
+                                        :address="$project->areas->name"
+                                        :details="$project->project_type . ', ' . $beds . ' BHK'"
+                                        :price="number_format($project->price_per_sft)"
+                                        :image="$fullImagePath ?? '#'"
+                                        :url="URL::to('project/'.$project->slug)"
+                                    />
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
 @endif
+
 
 
 
