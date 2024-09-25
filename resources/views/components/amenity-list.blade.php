@@ -16,7 +16,7 @@
             </div>
 
             <div class="amenities-slider d-lg-none"> <!-- Display this only on small screens -->
-                @foreach($amenities->chunk(10) as $amenityChunk) <!-- Group amenities into chunks of 10 -->
+                @foreach($amenities->chunk(9) as $amenityChunk) <!-- Group amenities into chunks of 10 -->
                     <div class="slide"> <!-- Each slide contains 10 amenities -->
                         <div class="row">
                             @foreach($amenityChunk as $amenity)
