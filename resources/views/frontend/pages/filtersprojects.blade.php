@@ -3,7 +3,7 @@
 
 @section('mainContent')
 
-    <section>
+
     <div class="container">
         <h1>{{ $pageTitle??'' }}</h1>
 
@@ -47,10 +47,10 @@
             </div>
 
             @else
-            <p>Nothing found</p>
+            <p>No Apartments are listed.</p>
         @endif
     </div>
-</section>
+
 
 
 @push('scripts')

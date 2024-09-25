@@ -27,7 +27,7 @@
           <div class="col-lg-3 border-end">
               <ul class="list-unstyled text-sm-center mb-sm-0 mb-4">
                   <li>
-                      <h6>Top Locations in Hyderabad</h6>
+                      <h6>Popular locations in Hyderabad</h6>
                   </li>
 
                   @menu('Top Locations in Hyderabad', 'list-unstyled', false, 'footer-dropdown-item', 'false')
@@ -36,7 +36,7 @@
           <div class="col-lg-3">
               <ul class="list-unstyled text-sm-center mb-sm-0 mb-4">
                   <li>
-                      <h6>Top builders</h6>
+                      <h6>Hyderabad Top builders</h6>
                   </li>
                   @menu('Top builders', 'list-unstyled', false, 'footer-dropdown-item', 'false')
               </ul>
