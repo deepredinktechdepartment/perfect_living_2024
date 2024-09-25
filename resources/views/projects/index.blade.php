@@ -112,9 +112,10 @@
         No Companies Assigned
     @endif
 </td>
-                                <td>
+                                <td align="right">
                                     <a href="{{ URL::to('project/'.$project->slug) }}" class="no-button" target="_blank" title="Preview Project">
-                                        <i class="fas fa-link"></i>
+
+                                        <img src="https://i.imgur.com/7rkMFI0.png" width=20/>
                                     </a>
                                     <!--<button onclick="copyToClipboard('{{ URL::to('project/'.$project->slug) }}', {{ $loop->iteration }})" class="no-button" title="Copy Link">-->
                                     <!--    <i class="fas fa-copy"></i>-->
@@ -125,7 +126,7 @@
 
 
                                 @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 4]))
-    <td>
+    <td align="right">
         <div class="form-check form-switch">
             <!-- Check if the status is 'published', and set the checkbox accordingly -->
             <input class="form-check-input toggle-approval" type="checkbox" id="toggle-{{ $project->id }}" {{ $project->status === 'published' ? 'checked' : '' }} data-id="{{ $project->id }}">
@@ -139,7 +140,7 @@
 
 
                                 @if(Auth::check() && in_array(Auth::user()->role, [1, 2,4]))
-                                <td>
+                                <td align="right">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input toggle-featured" type="checkbox" id="featured-{{ $project->id }}" {{ $project->is_featured ? 'checked' : '' }} data-id="{{ $project->id }}">
                                         <label class="form-check-label" for="featured-{{ $project->id }}">
@@ -148,37 +149,55 @@
                                     </div>
                                 </td>
                                 @endif
-                                <td>
+                                <td align="right">
                                     <a href="{{ route('projects.edit', $project->id) }}" class="no-button" title="Edit">
-                                        <i class="{{ config('constants.icons.edit') }}"></i>
-                                    </a>
-                                    <form action="{{ route('projects.destroy', $project->id) }}" method="POST" class="delete-form" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="no-button" title="Delete">
-                                            <i class="{{ config('constants.icons.delete') }}"></i>
-                                        </button>
-                                    </form>
-                                    <a href="{{ route('unit_configurations.index', ['projectID' => $project->id]) }}" class="no-button" title="Units Config">
-                                        <i class="{{ config('constants.icons.unit_configuration') }}"></i>
-                                    </a>
 
-                                    <a href="{{ route('elevation_pictures.index', ['projectID' => $project->id]) }}" class="no-button ml-1" title="Elevation Pictures">
-                                        <i class="{{ config('constants.icons.multiple_imges') }}"></i>
+                                        <img src="https://i.imgur.com/Oy59BAN.png" width=16/>
+
                                     </a>
+                                    &nbsp;
+                                    <a href="{{ route('unit_configurations.index', ['projectID' => $project->id]) }}" class="no-button" title="Units Config">
+                                        <img src="https://i.imgur.com/QTHxvFs.png" width=16/>
+                                    </a>
+&nbsp;
+                                    <a href="{{ route('elevation_pictures.index', ['projectID' => $project->id]) }}" class="no-button ml-1" title="Elevation Pictures">
+
+                                        <img src="https://i.imgur.com/z2SYxLH.png" width=16/>
+
+
+                                    </a>
+                                    &nbsp;
                                        <!-- Other icons -->
     <a href="{{ route('amenities.show', $project->id) }}" class="no-button" alt="Amenities"  title="Amenities" id="amenities-icon-{{ $project->id }}">
 
-        <img src="https://i.imgur.com/3RwcFOk.png" width=24/>
-    </a>                                    <!-- Other icons -->
+        <img src="https://i.imgur.com/3RwcFOk.png" width=20/>
+    </a>
+    &nbsp;                                 <!-- Other icons -->
     <a href="{{ route('projects.editCollections', $project->id) }}" class="no-button" alt="Collections"  title="Collections" id="collections-icon-{{ $project->id }}">
-        <i class="{{ config('constants.icons.collections') }}"></i>
-    </a>
 
-        <a href="{{ route('projects.editBadges', $project->id) }}" class="no-button" alt="Badges"  title="Badges" id="badges-icon-{{ $project->id }}">
-        <i class="{{ config('constants.icons.badges') }}"></i>
+        <img src="https://i.imgur.com/MuCPL1S.png" width=24/>
     </a>
-                     </td>
+    &nbsp;
+        <a href="{{ route('projects.editBadges', $project->id) }}" class="no-button" alt="Badges"  title="Badges" id="badges-icon-{{ $project->id }}">
+
+       <img src="https://i.imgur.com/NdMSUey.png" width=20/>
+
+    </a>
+    &nbsp;
+    <form action="{{ route('projects.destroy', $project->id) }}" method="POST" class="delete-form" style="display:inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="no-button" title="Delete">
+
+            <img src="https://i.imgur.com/wWbe0EQ.png" width=15/>
+        </button>
+    </form>
+
+
+
+
+
+            </td>
                             </tr>
                         @endforeach
                     </tbody>

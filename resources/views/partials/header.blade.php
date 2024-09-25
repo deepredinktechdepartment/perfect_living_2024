@@ -78,7 +78,7 @@
 
                             <li class="nav-item dropdown {{ Request::routeIs('city-masters.index','city-masters.create','badges.index','badges.create','collections.index','collections.create','amenities.index','amenities.create','area-masters.index','area-masters.create','menus.index','theme_options.index') ? 'active' : '' }}">
                               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Settings
+                                <i class="fa-solid fa-gear"></i>
                               </a>
                               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 

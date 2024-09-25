@@ -40,11 +40,18 @@
 
                 <div class="mb-3">
                     <label for="facing" class="form-label">Facing</label>
-                    <input id="facing" type="text" class="form-control @error('facing') is-invalid @enderror" name="facing" value="{{ old('facing', $unit->facing ?? '') }}" required>
+                    <select id="facing" class="form-control @error('facing') is-invalid @enderror" name="facing" required>
+                        <option value="">Select Facing</option> <!-- Default empty option -->
+                        <option value="East" {{ old('facing', $unit->facing ?? '') == 'East' ? 'selected' : '' }}>East</option>
+                        <option value="West" {{ old('facing', $unit->facing ?? '') == 'West' ? 'selected' : '' }}>West</option>
+                        <option value="North" {{ old('facing', $unit->facing ?? '') == 'North' ? 'selected' : '' }}>North</option>
+                        <option value="South" {{ old('facing', $unit->facing ?? '') == 'South' ? 'selected' : '' }}>South</option>
+                    </select>
                     @error('facing')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
 
                 <div class="mb-3">
                     <label for="unit_size" class="form-label">Unit Size (sq.ft)</label>
@@ -95,7 +102,7 @@
                 },
                 facing: {
                     required: true,
-                    minlength: 2
+
                 },
                 unit_size: {
                     required: true,
@@ -128,7 +135,7 @@
                 },
                 facing: {
                     required: "Please enter the facing direction.",
-                    minlength: "Facing direction must be at least 2 characters long."
+                 
                 },
                 unit_size: {
                     required: "Please enter the unit size.",
@@ -151,5 +158,18 @@
             return true;
         }, 'File size must be less than {0} bytes.');
     });
+
+
+       // Automatically prefill bathrooms input with the same value as beds, and clear baths if beds is empty
+       $('#beds').on('input', function () {
+            var bedsValue = $(this).val();
+            if (bedsValue) {
+                $('#baths').val(bedsValue); // Prefill bathrooms input with beds value
+            } else {
+                $('#baths').val(''); // Clear bathrooms input if beds value is cleared
+            }
+        });
+
+
 </script>
 @endpush
