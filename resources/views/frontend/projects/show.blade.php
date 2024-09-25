@@ -5,7 +5,7 @@
 
 
 <section>
-  <div class="container">
+  <div class="container pt-sm-5 pt-4">
     <div class="row">
       <div class="col-sm-8 order-sm-0 order-3 mb-sm-3">
         <div class="project-details-main-info">
