@@ -128,8 +128,8 @@
       </div>
       <div class="col-lg-3">
         <ul class="inline-links d-flex justify-content-center">
-          <li><a href="{{ URL('terms-of-use') }}" class="text-white">Terms of Use</a></li>
-          <li><a href="{{ URL('advertise-with-us') }}" class="text-white">Advertise with us</a></li>
+          <li><a href="{{ URL::to('terms-of-use') }}" class="text-white">Terms of Use</a></li>
+          <li><a href="{{ URL::to('contact-us') }}" class="text-white">Contact us</a></li>
         </ul>
       </div>
     </div>
