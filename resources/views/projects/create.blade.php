@@ -168,53 +168,57 @@
 
 
 
-<div class="row">
-    <!-- Other existing form fields -->
+                        <!-- Grouping two fields in a col-6 grid -->
+                        <div class="col-6">
+                            <div class="row">
+                                <!-- No of Acres -->
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="no_of_acres" class="form-label">No of Acres</label>
+                                        <input id="no_of_acres" type="number" step="0.01" class="form-control @error('no_of_acres') is-invalid @enderror" name="no_of_acres" value="{{ old('no_of_acres', $project->no_of_acres ?? '') }}" required>
+                                        @error('no_of_acres')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
 
-    <!-- No of Acres -->
-    <div class="col-6">
-        <div class="form-group">
-            <label for="no_of_acres" class="form-label">No of Acres</label>
-            <input id="no_of_acres" type="number" step="0.01" class="form-control @error('no_of_acres') is-invalid @enderror" name="no_of_acres" value="{{ old('no_of_acres', $project->no_of_acres ?? '') }}" required>
-            @error('no_of_acres')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-    </div>
+                                <!-- No of Towers -->
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="no_of_towers" class="form-label">No of Towers</label>
+                                        <input id="no_of_towers" type="number" class="form-control @error('no_of_towers') is-invalid @enderror" name="no_of_towers" value="{{ old('no_of_towers', $project->no_of_towers ?? '') }}" required>
+                                        @error('no_of_towers')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
 
-    <!-- No of Towers -->
-    <div class="col-6">
-        <div class="form-group">
-            <label for="no_of_towers" class="form-label">No of Towers</label>
-            <input id="no_of_towers" type="number" class="form-control @error('no_of_towers') is-invalid @enderror" name="no_of_towers" value="{{ old('no_of_towers', $project->no_of_towers ?? '') }}" required>
-            @error('no_of_towers')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-    </div>
 
-    <!-- No of Units -->
-    <div class="col-6">
-        <div class="form-group">
-            <label for="no_of_units" class="form-label">No of Units</label>
-            <input id="no_of_units" type="number" class="form-control @error('no_of_units') is-invalid @enderror" name="no_of_units" value="{{ old('no_of_units', $project->no_of_units ?? '') }}" required>
-            @error('no_of_units')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-    </div>
 
-    <!-- Price per sft -->
-    <div class="col-6">
-        <div class="form-group">
-            <label for="price_per_sft" class="form-label">Price per sft</label>
-            <input id="price_per_sft" type="number" step="0.01" class="form-control @error('price_per_sft') is-invalid @enderror" name="price_per_sft" value="{{ old('price_per_sft', $project->price_per_sft ?? '') }}" required>
-            @error('price_per_sft')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-    </div>
-</div>
+                                <!-- No of Units -->
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="no_of_units" class="form-label">No of Units</label>
+                                        <input id="no_of_units" type="number" class="form-control @error('no_of_units') is-invalid @enderror" name="no_of_units" value="{{ old('no_of_units', $project->no_of_units ?? '') }}" required>
+                                        @error('no_of_units')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <!-- Price per sft -->
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="price_per_sft" class="form-label">Price per sft</label>
+                                        <input id="price_per_sft" type="number" step="0.01" class="form-control @error('price_per_sft') is-invalid @enderror" name="price_per_sft" value="{{ old('price_per_sft', $project->price_per_sft ?? '') }}" required>
+                                        @error('price_per_sft')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                </div>
+
+                        </div>
 
 
 
