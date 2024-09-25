@@ -319,7 +319,9 @@ $groupedConfigurations = $groupedConfigurations->sortKeys();
 
 
         // Set the page title dynamically if needed
-        $pageTitle = $project->name ?? 'Project';
+
+
+
 
         $reviews = Review::with('project')->where('approval_status',1)->where('project_id', $project->id??0)->get();
 
@@ -339,6 +341,8 @@ $groupedConfigurations = $groupedConfigurations->sortKeys();
 
      // Fetch actual collection data based on IDs in $mapCollections
     $highlightImages = Collection::whereIn('id', $mapCollections)->get();
+
+    $pageTitle = Str::title($project->name ?? 'Project') . " at " . Str::title($project->areas->name ?? 'Location') . " - Project details and reviews";
 
 
         return view('frontend.projects.show', compact('project', 'pageTitle','highlightImages','badges','groupedConfigurations','reviews','roundedRating'));

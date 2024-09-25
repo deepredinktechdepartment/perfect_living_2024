@@ -1,6 +1,7 @@
 <!-- Example view file -->
 @extends('layouts.frontend_theme.main')
 @section('mainContent')
+@section('pageTitle', $pageTitle)
 
 
 <section>
