@@ -129,7 +129,7 @@
       <div class="col-lg-3">
         <ul class="inline-links d-flex justify-content-center">
           <li><a href="{{ URL::to('terms-of-use') }}" class="text-white">Terms of Use</a></li>
-          <li><a href="{{ URL::to('contact-us') }}" class="text-white">Contact us</a></li>
+          <li><a href="{{ URL::to('contact-us') }}" class="text-white">Contact Us</a></li>
         </ul>
       </div>
     </div>

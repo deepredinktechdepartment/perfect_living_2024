@@ -51,11 +51,11 @@
                           </li>
                           @endif
 
-{{--
+
                           @if(Auth::check() && in_array(Auth::user()->role, [1]))
                           <li class="nav-item dropdown {{ Request::routeIs('admin.contacts.index') ? 'active' : '' }}">
                               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Leads
+                                  Contact Requests
                               </a>
                               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
@@ -63,7 +63,7 @@
 
                               </ul>
                           </li>
-                          @endif --}}
+                          @endif
 
 
 
