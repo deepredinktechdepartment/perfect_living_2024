@@ -91,7 +91,7 @@ a:focus {
 
 @media (max-width: 480px) {
     .container {
-        padding: 40px 15px;
+        padding: 30px 20px;
     }
 }
 
