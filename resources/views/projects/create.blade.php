@@ -37,12 +37,13 @@
                             <label for="project_type" class="form-label">Type of Project</label>
                             <select id="project_type" class="form-control @error('project_type') is-invalid @enderror" name="project_type" required>
                                 <option value="">Select Project Type</option>
-                                <option value="Standalone Villa" {{ old('project_type', $project->project_type ?? '') == 'Standalone Villa' ? 'selected' : '' }}>Standalone Villa</option>
-                                <option value="Standalone Apartment" {{ old('project_type', $project->project_type ?? '') == 'Standalone Apartment' ? 'selected' : '' }}>Standalone Apartment</option>
-                                <option value="Villa Gated Community" {{ old('project_type', $project->project_type ?? '') == 'Villa Gated Community' ? 'selected' : '' }}>Villa Gated Community</option>
-                                <option value="Apartment Gated Community" {{ old('project_type', $project->project_type ?? '') == 'Apartment Gated Community' ? 'selected' : '' }}>Apartment Gated Community</option>
-                                <option value="Commercial Space" {{ old('project_type', $project->project_type ?? '') == 'Commercial Space' ? 'selected' : '' }}>Commercial Space</option>
-                                <option value="Retail Space" {{ old('project_type', $project->project_type ?? '') == 'Retail Space' ? 'selected' : '' }}>Retail Space</option>
+                                <option value="Standalone Villas" {{ old('project_type', $project->project_type ?? '') == 'Standalone Villas' ? 'selected' : '' }}>Standalone Villas</option>
+                                <option value="Standalone Apartments" {{ old('project_type', $project->project_type ?? '') == 'Standalone Apartments' ? 'selected' : '' }}>Standalone Apartments</option>
+                                <option value="Villa Gated Communities" {{ old('project_type', $project->project_type ?? '') == 'Villa Gated Communities' ? 'selected' : '' }}>Villa Gated Communities</option>
+                                <option value="Apartment Gated Communities" {{ old('project_type', $project->project_type ?? '') == 'Apartment Gated Communities' ? 'selected' : '' }}>Apartment Gated Communities</option>
+                                <option value="Commercial Spaces" {{ old('project_type', $project->project_type ?? '') == 'Commercial Spaces' ? 'selected' : '' }}>Commercial Spaces</option>
+                                <option value="Retail Spaces" {{ old('project_type', $project->project_type ?? '') == 'Retail Spaces' ? 'selected' : '' }}>Retail Spaces</option>
+
                             </select>
                             @error('project_type')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -165,7 +166,7 @@
 
 
 
-       
+
 
 <div class="row">
     <!-- Other existing form fields -->
@@ -247,7 +248,7 @@
 
 @php
 // Decode company_id if it exists and is not null for editing projects
-$decodedCompanyIds = isset($project) && isset($project->company_id) 
+$decodedCompanyIds = isset($project) && isset($project->company_id)
     ? (is_array($project->company_id) ? $project->company_id : json_decode($project->company_id, true))
     : [];
 @endphp
