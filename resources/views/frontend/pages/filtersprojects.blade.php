@@ -5,7 +5,7 @@
 
     <section>
     <div class="container">
-        <h1>{{ $pageTitle??'' }}</h1>
+        <h1 class="mb-3">{{ $pageTitle??'' }}</h1>
 
         @include('components.project-filters')
 
