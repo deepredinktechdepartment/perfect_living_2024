@@ -162,12 +162,14 @@
                                     <a href="{{ route('unit_configurations.index', ['projectID' => $project->id]) }}" class="no-button" title="Units Config">
                                         <i class="{{ config('constants.icons.unit_configuration') }}"></i>
                                     </a>
-                                    <a href="{{ route('elevation_pictures.index', ['projectID' => $project->id]) }}" class="no-button" title="Elevation Pictures">
+
+                                    <a href="{{ route('elevation_pictures.index', ['projectID' => $project->id]) }}" class="no-button ml-1" title="Elevation Pictures">
                                         <i class="{{ config('constants.icons.multiple_imges') }}"></i>
                                     </a>
                                        <!-- Other icons -->
     <a href="{{ route('amenities.show', $project->id) }}" class="no-button" alt="Amenities"  title="Amenities" id="amenities-icon-{{ $project->id }}">
-        <i class="{{ config('constants.icons.amenities') }}"></i>
+
+        <img src="https://i.imgur.com/3RwcFOk.png" width=24/>
     </a>                                    <!-- Other icons -->
     <a href="{{ route('projects.editCollections', $project->id) }}" class="no-button" alt="Collections"  title="Collections" id="collections-icon-{{ $project->id }}">
         <i class="{{ config('constants.icons.collections') }}"></i>
