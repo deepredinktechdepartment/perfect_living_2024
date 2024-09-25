@@ -105,7 +105,7 @@
 </footer> -->
 
 <footer class="py-3">
-  <div class="container">
+  <div class="container py-0">
     <div class="row align-items-center">
       <div class="col-lg-3">
       <div class="footer-logo">

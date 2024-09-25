@@ -2,7 +2,7 @@
 
 
   <header id="main-header">
-    <div class="container">
+    <div class="container py-0">
       <div class="row align-items-lg-center">
         <div class="col-sm-3 col-6 px-sm-3 p-0">
         <a href="{{ url('/') }}">
