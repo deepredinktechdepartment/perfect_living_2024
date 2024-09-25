@@ -435,7 +435,7 @@ public function showAmenities($id)
     try {
         // Attempt to find the project by ID
         $project = Project::findOrFail($id);
-        $amenities = Amenity::all(); // Assuming you have an Amenity model
+        $amenities = Amenity::orderBy('name', 'asc')->get();
 
         // Set the page title dynamically if needed
         $pageTitle = "Amenities for ".$project->name ?? '';

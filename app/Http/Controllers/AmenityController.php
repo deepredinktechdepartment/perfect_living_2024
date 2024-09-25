@@ -14,7 +14,7 @@ class AmenityController extends Controller
      */
     public function index()
     {
-        $amenities = Amenity::all();
+        $amenities = Amenity::orderBy('name', 'asc')->get();
         $pageTitle = "Amenities List";
         $addlink = route('amenities.create');
         return view('amenities.index', compact('amenities', 'pageTitle','addlink'));
