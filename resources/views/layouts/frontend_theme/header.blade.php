@@ -72,10 +72,10 @@
               @if (Auth::user()->role === 5) <!-- Check if the user is a non-admin -->
 
                   <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ URL::to('shortLists') }}">
+                    <a class="nav-link text-white pos-relative" href="{{ URL::to('shortLists') }}">
                         <i class="fa-regular fa-heart wishlist-icon"></i>
                         @if($wishlistCount > 0)
-                            <span class="wishlist-count">{{ $wishlistCount }}</span>
+                            <p class="wishlist-count">{{ $wishlistCount }}</p>
                         @endif
                     </a>
                 </li>

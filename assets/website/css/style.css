@@ -109,7 +109,9 @@ a:focus {
     background: #fff;
     color: #e40048;
 }
-
+.pos-relative{
+    position: relative;
+}
 
 /* Common CSS ENDS */
 
@@ -1157,19 +1159,15 @@ label.error {
 
 .wishlist-count {
     position: absolute;
-    /* Position it relative to the heart icon */
-    top: -10px;
-    /* Adjust position */
-    right: -10px;
-    /* Adjust position */
-    background-color: red;
-    /* Background color */
+    top: 0;
+    right: 0;
+    background-color: #e40048;
     color: white;
-    /* Text color */
     border-radius: 50%;
-    /* Circular shape */
-    padding: 2px 5px;
-    /* Padding for better appearance */
-    font-size: 12px;
-    /* Font size */
+    font-size: 10px;
+    display: flex;
+    width: 15px;
+    height: 15px;
+    align-items: center;
+    justify-content: center;
 }
