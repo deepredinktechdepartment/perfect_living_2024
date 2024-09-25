@@ -199,6 +199,44 @@ $('.featured-properties-slider').slick({
 
 
 
+// Function to initialize the Slick slider
+function initializeSlider(selector) {
+    $(selector).slick({
+        slidesToShow: 1, // Show one slide at a time
+        slidesToScroll: 1,
+        autoplay: false,
+        autoplaySpeed: 5000,
+        pauseOnHover: true,
+        dots: true,
+        fade: false,
+        arrows: true,
+        infinite: true,
+        responsive: [{
+            breakpoint: 768, // Adjust this as needed for small screens
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            }
+        }]
+    });
+}
+
+// Initialize sliders for all tab panes on load
+$('.projects-slider').each(function() {
+    initializeSlider(this);
+});
+
+// Reinitialize slider when switching tabs
+$('button[data-bs-toggle="pill"]').on('shown.bs.tab', function() {
+    // Destroy and reinitialize the slider when switching tabs
+    $('.projects-slider').slick('unslick'); // Destroy existing slider
+    $('.projects-slider').each(function() {
+        initializeSlider(this); // Reinitialize slider
+    });
+});
+
+
+
 
 $('.highlights-images-slider').slick({
     slidesToShow: 3,
@@ -222,33 +260,33 @@ $('.highlights-images-slider').slick({
     }]
 });
 
-$(document).ready(function() {
-    $('.floorplans-slider').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: false,
-        autoplaySpeed: 4000,
-        pauseOnHover: true,
-        dots: false,
-        fade: false,
-        arrows: true,
-        infinite: true,
-        responsive: [{
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                dots: true,
-                fade: false,
-                arrows: false,
-            }
-        }]
-    });
-    // Reinitialize slider when switching between tabs
-    $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
-        $('.tab-pane .floorplans-slider').slick('setPosition');
-    });
+
+$('.floorplans-slider').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 4000,
+    pauseOnHover: true,
+    dots: false,
+    fade: false,
+    arrows: true,
+    infinite: true,
+    responsive: [{
+        breakpoint: 480,
+        settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            dots: true,
+            fade: false,
+            arrows: false,
+        }
+    }]
 });
+// Reinitialize slider when switching between tabs
+$('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
+    $('.tab-pane .floorplans-slider').slick('setPosition');
+});
+
 
 
 if ($(window).width() < 992) { // Adjust the breakpoint as needed

@@ -87,72 +87,76 @@
 
 
 
-
-
-
-
-    @php
-    // Group projects by project_type
-    $groupedProjects = $projects->groupBy('project_type');
+@php
+// Group projects by project_type
+$groupedProjects = $projects->groupBy('project_type')->sortKeys();
 @endphp
 
 <section class="home_tab_sec pt-0">
-  <div class="container">
-      <h2 class="mb-4 pb-sm-3 text-center">Explore Perfect Living Top Picks</h2>
+    <div class="container">
+        <h2 class="mb-4 pb-sm-3 text-center">Explore Perfect Living Top Picks</h2>
 
-      <!-- Nav Pills for Tabs with margin between items -->
-      <ul class="nav nav-pills mb-3 border-bottom mb-5 flex-nowrap overflow-auto" id="pills-tab" role="tablist">
-          @foreach($groupedProjects as $type => $projects)
-              <li class="nav-item" role="presentation">
-                  <button class="nav-link {{ $loop->first ? 'active' : '' }} me-2" id="pills-tab{{ $loop->index + 1 }}-tab" data-bs-toggle="pill" data-bs-target="#pills-tab{{ $loop->index + 1 }}" type="button" role="tab" aria-controls="pills-tab{{ $loop->index + 1 }}" aria-selected="{{ $loop->first ? 'true' : 'false' }}">{{ $type }}</button>
-              </li>
-          @endforeach
-      </ul>
+        <!-- Nav Pills for Tabs with margin between items -->
+        <ul class="nav nav-pills mb-3 border-bottom mb-5 flex-nowrap overflow-auto" id="pills-tab" role="tablist">
+            @foreach($groupedProjects as $type => $projects)
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {{ $loop->first ? 'active' : '' }} me-2" id="pills-tab{{ $loop->index + 1 }}-tab" data-bs-toggle="pill" data-bs-target="#pills-tab{{ $loop->index + 1 }}" type="button" role="tab" aria-controls="pills-tab{{ $loop->index + 1 }}" aria-selected="{{ $loop->first ? 'true' : 'false' }}">{{ $type }}</button>
+                </li>
+            @endforeach
+        </ul>
 
-      <!-- Tab Content -->
-      <div class="tab-content" id="pills-tabContent">
-          @foreach($groupedProjects as $type => $projects)
-              <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="pills-tab{{ $loop->index + 1 }}" role="tabpanel" aria-labelledby="pills-tab{{ $loop->index + 1 }}-tab">
-                  <div class="row">
-                      @foreach($projects as $project)
-                          @php
-                              // Default placeholder image URL
-                              $defaultImageUrl = 'https://via.placeholder.com/150';
-                              // Check if elevationPictures is set and contains at least one image
-                              $imageUrl = $defaultImageUrl; // Default image
+        <!-- Tab Content -->
+        <div class="tab-content" id="pills-tabContent">
+            @foreach($groupedProjects as $type => $projects)
+                <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="pills-tab{{ $loop->index + 1 }}" role="tabpanel" aria-labelledby="pills-tab{{ $loop->index + 1 }}-tab">
+                    <div class="projects-slider">
+                        @foreach($projects->chunk(6) as $projectChunk) <!-- Each slide contains 6 projects -->
+                            <div class="slide">
+                                <div class="row">
+                                    @foreach($projectChunk as $project)
+                                        @php
+                                            // Default placeholder image URL
+                                            $defaultImageUrl = 'https://via.placeholder.com/150';
+                                            // Check if elevationPictures is set and contains at least one image
+                                            $imageUrl = $defaultImageUrl; // Default image
 
-                              if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
-                                  $firstImagePath = $project->elevationPictures->first()->file_path;
-                                  $fullImagePath = URL::to(env('APP_STORAGE').$firstImagePath);
-                              }
-                          @endphp
+                                            if (isset($project->elevationPictures) && $project->elevationPictures->isNotEmpty()) {
+                                                $firstImagePath = $project->elevationPictures->first()->file_path;
+                                                $fullImagePath = URL::to(env('APP_STORAGE').$firstImagePath);
+                                            }
+                                        @endphp
 
-                          <div class="col-sm-4 mb-4">
-                              <div class="card_two h-100">
-                                <div class="project-card-wrapper h-100">
-                                    <a href="{{ URL::to('project/'.$project->slug) }}" class="text-decoration-none">
-                                        <div class="project-image-wrapper">
-                                            <img src="{{ $fullImagePath ?? $defaultImageUrl }}" alt="{{ $project->name }}" class="img-fluid project-image">
+                                        <div class="col-md-4 mb-4"> <!-- 3 cards per row on large screens -->
+                                            <div class="card_two h-100">
+                                                <div class="project-card-wrapper h-100">
+                                                    <a href="{{ URL::to('project/'.$project->slug) }}" class="text-decoration-none">
+                                                        <div class="project-image-wrapper">
+                                                            <img src="{{ $fullImagePath ?? $defaultImageUrl }}" alt="{{ $project->name }}" class="img-fluid project-image">
+                                                        </div>
+                                                        <div class="project-details-wrapper p-3">
+                                                            <h5 class="mb-0">{{ $project->name }}</h5>
+                                                            <p class="mb-1 pb-0"><i class="fa-solid fa-location-dot mb-1 pb-0"></i> {{ $project->areas->name ?? '' }}</p>
+                                                            <p class="mb-0 pb-0">{{ $project->project_type }}, {{ $project->unitConfigurations->first()->beds ?? '' }} BHK</p>
+                                                            @if(isset($project->price_per_sft) && $project->price_per_sft > 0)
+                                                                <p class="mb-0"><span class="price-info">₹{{ $project->price_per_sft }} per sq.ft</span> <small>Onwards</small></p>
+                                                            @endif
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="project-details-wrapper p-3">
-                                            <h5 class="mb-0">{{ $project->name }}</h5>
-                                            <p  class="mb-1 pb-0"><i class="fa-solid fa-location-dot mb-1 pb-0"></i> {{ $project->areas->name ?? '' }}</p>
-                                            <p class="mb-0 pb-0">{{ $project->project_type }}, {{ $project->unitConfigurations->first()->beds??'' }} BHK</p>
-                                            @if(isset($project->price_per_sft) && $project->price_per_sft > 0)
-                                            <p class="mb-0"> <span class="price-info">₹{{ $project->price_per_sft }} per sq.ft</span> <small>Onwards</small></p>
-                                            @endif
-                                        </div>
-                                    </a>
+                                    @endforeach
                                 </div>
-                              </div>
-                          </div>
-                      @endforeach
-                  </div>
-              </div>
-          @endforeach
-      </div>
-  </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </section>
+
+
 
 
 

@@ -145,10 +145,10 @@ class PagesController extends Controller
     }
 
     if (!empty($builders)) {
-        $pageTitle .= ' by ' . $builders;
+        $pageTitle .= ' in ' . $builders;
     }
     if (!empty($collection)) {
-        $pageTitle .= ' by ' . $collection;
+        $pageTitle .= ' in ' . $collection;
     }
 
     if (!empty($searchQuery)) {
@@ -156,7 +156,7 @@ class PagesController extends Controller
     }
 
     // Trim and format the final title if needed
-    $pageTitle = trim($pageTitle);
+    $pageTitle = trim(str_replace('-', ' ', $pageTitle));
 
 
     // Start building the query
