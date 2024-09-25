@@ -103,7 +103,7 @@
                         </div>
 
                         @if(isset($project->logo) && File::exists(env('APP_STORAGE').''.$project->logo))
-                            <img src="{{ URL::to(env('APP_STORAGE').''.$project->logo) }}" alt="{{ $project->name??'' }}" class="card-img-left" style="height: 20px; object-fit: cover;">
+                            <img src="{{ URL::to(env('APP_STORAGE').''.$project->logo) }}" alt="{{ $project->name??'' }}" class="card-img-left" style="height: 50px; object-fit: cover;">
                         @else
                         @endif
                     </div>
@@ -158,7 +158,7 @@
                                 <a href="{{ URL::to(env('APP_STORAGE').''.$project->master_plan_layout) }}" target="_blank" class="btn btn-link btn-sm">View PDF</a>
                             @else
                                 <!-- If the file is an image, display it -->
-                                <img src="{{ URL::to(env('APP_STORAGE').''.$project->master_plan_layout) }}" alt="{{ $project->name??'' }}" class="card-img-left" style="height: 20px; object-fit: cover;">
+                                <img src="{{ URL::to(env('APP_STORAGE').''.$project->master_plan_layout) }}" alt="{{ $project->name??'' }}" class="card-img-left" style="height: 50px; object-fit: cover;">
                             @endif
                         @else
                         @endif
