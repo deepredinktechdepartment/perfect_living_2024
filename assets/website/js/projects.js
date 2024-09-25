@@ -260,7 +260,7 @@ if ($(window).width() < 992) { // Adjust the breakpoint as needed
         pauseOnHover: true,
         dots: true,
         fade: false,
-        arrows: true,
+        arrows: false,
         infinite: true, // Allow continuous scrolling
     });
 }

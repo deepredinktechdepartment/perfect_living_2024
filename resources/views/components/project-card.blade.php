@@ -7,7 +7,7 @@
     'url' => '#'
 ])
 <div class="card_one">
-    <div class="project-card-wrapper m-lg-3">
+    <div class="project-card-wrapper">
         <a href="{{ $url }}" class="text-decoration-none">
             <div class="row">
                 <div class="col-sm-5 pe-sm-0">

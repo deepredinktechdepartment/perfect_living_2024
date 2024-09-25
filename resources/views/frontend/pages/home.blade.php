@@ -64,7 +64,7 @@
                                         : 'N/A'; // Default value if not available
                                 @endphp
 
-                                <div class="col-md-6 mb-4"> <!-- 6 columns, 2 cards per row -->
+                                <div class="col-md-6"> <!-- 6 columns, 2 cards per row -->
                                     <x-project-card
                                         :name="$project->name"
                                         :address="$project->areas->name"
