@@ -2,7 +2,7 @@
 @extends('layouts.frontend_theme.main')
 
 @section('mainContent')
-<section>
+
     <div class="container">
         <div class="row">
             <div class="col-sm-6 order-sm-0 order-2">
@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-</section>
+
 @endsection
 
 @push('scripts')
@@ -70,7 +70,7 @@ $(document).ready(function() {
         separateDialCode: true,
         autoPlaceholder:"polite",
         formatOnDisplay:true,
-        dropdownContainer: document.body,  
+        dropdownContainer: document.body,
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
@@ -81,7 +81,7 @@ $(document).ready(function() {
 
         // Check if the number starts with '6', is 10 digits long, and belongs to India
         var isJioNumber = fullNumber.startsWith('+91') && fullNumber[3] == '6' && fullNumber.length == 13; // +91 6XXXXXXXXX (13 chars with country code)
-        
+
         return isValid || isJioNumber; // Pass validation if it's valid or a Jio number with 10 digits
     }, "Please enter a valid phone number starting with 6 and 10 digits long.");
 
