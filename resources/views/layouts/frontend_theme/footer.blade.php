@@ -165,7 +165,7 @@
           usage of the site is deemed as consent to set tracking cookies. Trademarks belong to the respective owners.
           </p>
         </div>
-        <div class="modal-footer cookie-modal-footer justify-content-center">
+        <div class="modal-footer cookie-modal-footer justify-content-sm-center">
         <button type="button" class="btn btn-success border-radius-0" id="acceptCookies">Accept</button>
           <button type="button" class="btn btn-brand" id="declineCookies">Decline</button>
         </div>
