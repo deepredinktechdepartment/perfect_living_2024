@@ -42,7 +42,7 @@
     @if ($projects->count() > 0)
     <section>
         <div class="container">
-            <h2 class="mb-4 text-center">Featured Gated Communities in Hyderabad</h2>
+            <h2 class="mb-4 pb-sm-2 text-center">Featured Gated Communities in Hyderabad</h2>
             <div class="featured-properties-slider"> <!-- Remove row from here -->
                 @foreach ($projects->chunk(4) as $projectChunk) <!-- Group 4 projects per slide -->
                     <div class="slide"> <!-- Each slide contains 4 projects -->
@@ -93,8 +93,10 @@ $groupedProjects = $projects->groupBy('project_type')->sortKeys();
 @endphp
 
 <section class="home_tab_sec pt-0">
+
     <div class="container">
         <h2 class="mb-4 pb-sm-3 text-center">Explore Perfect Living Top Picks</h2>
+
 
         <!-- Nav Pills for Tabs with margin between items -->
         <ul class="nav nav-pills mb-3 border-bottom mb-5 flex-nowrap overflow-auto" id="pills-tab" role="tablist">
