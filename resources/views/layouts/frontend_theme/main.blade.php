@@ -13,9 +13,10 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Hyderabad Real Estate Projects - Honest Reviews & Transparent Information</title>
+ <title>@yield('pageTitle', env('DEFAULT_TITLE'))</title>
 
-    {{-- <title>{{ $pageTitle ?? 'Default Title' }}</title> --}}
+
+
 
  <!-- Meta Description -->
  <meta name="description" content="Discover upcoming real estate projects in Hyderabad. Honest customer reviews, transparent information, and more. Stay tuned for updates!">
@@ -27,7 +28,7 @@
  <meta name="author" content="Your Company Name">
 
  <!-- Open Graph Meta Tags for Social Media -->
- <meta property="og:title" content="Hyderabad Real Estate Projects - Honest Reviews & Transparent Information">
+ <meta property="og:title" content="@yield('pageTitle', env('DEFAULT_TITLE'))">
  <meta property="og:description" content="Discover upcoming real estate projects in Hyderabad. Honest customer reviews, transparent information, and more. Stay tuned for updates!">
  <meta property="og:image" content="{{ URL::to('favicon.png') }}">
  <meta property="og:url" content="{{ URL::to('/') }}">
@@ -35,7 +36,7 @@
 
  <!-- Twitter Card Meta Tags -->
  <meta name="twitter:card" content="summary_large_image">
- <meta name="twitter:title" content="Hyderabad Real Estate Projects - Honest Reviews & Transparent Information">
+ <meta name="twitter:title" content="@yield('pageTitle', env('DEFAULT_TITLE'))">
  <meta name="twitter:description" content="Discover upcoming real estate projects in Hyderabad. Honest customer reviews, transparent information, and more. Stay tuned for updates!">
  <meta name="twitter:image" content="{{ URL::to('favicon.png') }}">
 
