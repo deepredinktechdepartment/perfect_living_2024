@@ -6,7 +6,7 @@
         @guest
             <div class="row justify-content-center">
                 <div class="col-sm-6">
-                    <div class="card login-card p-5 px-sm-3 px-2 text-center">
+                    <div class="card login-card bg-yellow p-5 px-sm-3 px-2 text-center">
                         <h3 class="mb-4">PLEASE LOG IN</h3>
                         <p class="mb-4">Login to view items in your wishlist.</p>
                         <a href="{{ URL::to('login') }}" class="btn bg-custom-btn m-auto">LOGIN</a>
