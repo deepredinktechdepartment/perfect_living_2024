@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-sm-6 order-sm-0 order-2">
                 <h1 class="card-title">{{ $pageTitle ?? 'Contact Us' }}</h1>
-                <div class="card shadow mt-4 p-3">
+                <div class="card shadow border-radius-0 border-0 mt-4 p-3">
                     <div class="card-body">
                         <!-- Display success or error messages using Toastr -->
                         @if (session('success'))
