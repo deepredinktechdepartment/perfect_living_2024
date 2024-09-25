@@ -10,6 +10,8 @@
        $projectCount = Project::count(); // Get total count of projects
        use App\Models\Review;
        $reviewCount = Review::approvalStatus(true)->count(); // Get total count of projects
+       use App\Models\Company;
+       $builderCount = Company::count(); // Get total count of projects
 @endphp
 
 <!-- Page Under Construction Message -->
@@ -18,23 +20,36 @@
 
     <div class="row">
         <!-- Card 1 -->
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <x-card
+                title="Builders"
+                number="{{ $builderCount??0 }}"
+                bgColor="bg-danger"
+                link="{{ URL::to('companies') }}"
+            />
+        </div>
+
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <x-card
                 title="Projects"
-                number="{{ $projectCount }}"
+                number="{{ $projectCount??0 }}"
                 bgColor="bg-success"
-                link="{{ url('/projects') }}"
+                link="{{ URL::to('/projects') }}"
             />
         </div>
 
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <x-card
                 title="Reviews"
-                number="{{ $reviewCount }}"
+                number="{{ $reviewCount??0 }}"
                 bgColor="bg-primary"
-                link="{{ url('admin/reviews') }}"
+                link="{{ URL::to('admin/reviews') }}"
             />
         </div>
+
+
+
 
 
     </div>

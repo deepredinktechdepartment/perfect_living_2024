@@ -20,17 +20,24 @@
                         <li class="nav-item {{ Request::routeIs('dashboard') ? 'active' : '' }}">
                           <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                         </li>
-                      @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
-                          <li class="nav-item {{ Request::routeIs('companies.index','companies.create',) ? 'active' : '' }}">
-                              <a class="nav-link" href="{{ route('companies.index') }}">Builders</a>
+
+
+
+                          @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
+                          <li class="nav-item dropdown {{ Request::routeIs('projects.index','projects.create','projects.edit','companies.index','companies.create') ? 'active' : '' }}">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Projects
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item {{ Request::routeIs('projects.index','projects.create','projects.edit','companies.index','companies.create') ? 'active' : '' }}" href="{{ route('projects.index',["tab"=>'newly_added']) }}">Lists</a></li>
+                                  <li><a class="dropdown-item {{ Request::routeIs() ? 'active' : '' }}" href="{{ route('companies.index') }}">Builders</a></li>
+                                  <li><a class="dropdown-item {{ Request::routeIs('admin.reviews.index') ? 'active' : '' }}" href="{{ route('admin.reviews.index') }}">Reviews</a></li>
+
+                              </ul>
                           </li>
                           @endif
 
-                          @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
-                          <li class="nav-item {{ Request::routeIs('projects.index','projects.create','projects.edit') ? 'active' : '' }}">
-                              <a class="nav-link" href="{{ route('projects.index',["tab"=>'newly_added']) }}">Projects</a>
-                          </li>
-                          @endif
+
                           {{-- @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
                           <li class="nav-item {{ Request::routeIs('customcollections.index','customcollections.create','customcollections.edit') ? 'active' : '' }}">
                               <a class="nav-link" href="{{ route('customcollections.index') }}">Collections</a>
@@ -43,14 +50,6 @@
                               <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                           </li>
                           @endif
-
-                          @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
-
-                          <li class="nav-item {{ Request::routeIs('admin.reviews.index') ? 'active' : '' }}">
-                              <a class="nav-link" href="{{ route('admin.reviews.index') }}">Reviews</a>
-                          </li>
-                          @endif
-
 
                           @if(Auth::check() && in_array(Auth::user()->role, [1]))
                           <li class="nav-item dropdown {{ Request::routeIs('admin.contacts.index') ? 'active' : '' }}">
@@ -118,7 +117,7 @@
                                 @else
                                 <i class="far fa-user-circle"></i>
                                 @endif
-                                {{ $initials }}
+                                {{-- {{ $initials }} --}}
                             </a>
 
                               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

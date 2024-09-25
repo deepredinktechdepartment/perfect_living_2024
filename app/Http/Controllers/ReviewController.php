@@ -103,7 +103,8 @@ protected function isProjectIdValid($projectId)
                              ->get();
 
             // Return the view with the data
-            return view('reviews.index', compact('reviews', 'projects'));
+            $pageTitle="Reviews List";
+            return view('reviews.index', compact('reviews', 'projects','pageTitle'));
 
         } catch (\Exception $e) {
             // Log the error for debugging purposes
