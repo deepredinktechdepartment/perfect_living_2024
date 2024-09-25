@@ -57,7 +57,7 @@ class UnitConfigurationController extends Controller
             'balconies' => 'required|integer|min:0',
             'facing' => 'required|string|min:2',
             'unit_size' => 'required|numeric|min:0.1',
-            'floor_plan' => 'required|file|mimes:pdf,jpg,jpeg,png|max:1024', // 1MB
+            'floor_plan' => 'required|file|mimes:jpg,jpeg|max:1024', // 1MB
         ]);
 
         try {
@@ -105,7 +105,7 @@ class UnitConfigurationController extends Controller
             'balconies' => 'required|integer|min:0',
             'facing' => 'required|string|min:2',
             'unit_size' => 'required|numeric|min:0.1',
-            'floor_plan' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:1024', // 1MB
+            'floor_plan' => 'nullable|file|mimes:jpg,jpeg|max:1024', // 1MB
         ]);
 
 

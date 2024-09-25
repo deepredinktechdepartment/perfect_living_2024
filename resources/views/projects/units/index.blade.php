@@ -25,7 +25,7 @@
                                 <th>Balconies</th>
                                 <th>Facing</th>
                                 <th>Unit Size (sq ft)</th>
-                                <th>Floor Plan</th>
+                                <th align="center">Floor Plan</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -38,10 +38,10 @@
                                     <td>{{ $unit->balconies }}</td>
                                     <td>{{ $unit->facing ?? 'N/A' }}</td>
                                     <td>{{ $unit->unit_size }}</td>
-                                    <td>
+                                    <td align="center">
 
                                         @if(isset($unit->floor_plan) && File::exists(env('APP_STORAGE').''.$unit->floor_plan))
-                                            <a href="{{ URL::to(env('APP_STORAGE').''.$unit->floor_plan) }}" target="_blank">View</a>
+                                            <a href="{{ URL::to(env('APP_STORAGE').''.$unit->floor_plan) }}" target="_blank">  <img src="https://i.imgur.com/7rkMFI0.png" width=20/></a>
                                         @else
 
                                         @endif

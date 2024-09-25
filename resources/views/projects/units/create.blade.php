@@ -113,7 +113,7 @@
                     required: function(element) {
                         return $(element).data('exist') === 'false' && !element.files.length;
                     },
-                    extension: "pdf|jpg|jpeg|png",
+                    extension: "jpg|jpeg",
                     filesize: 1048576 // 1MB in bytes
                 }
             },
@@ -135,7 +135,7 @@
                 },
                 facing: {
                     required: "Please enter the facing direction.",
-                 
+
                 },
                 unit_size: {
                     required: "Please enter the unit size.",
@@ -144,7 +144,7 @@
                 },
                 floor_plan: {
                     required: "Please upload a floor plan.",
-                    extension: "Please upload a file in PDF, JPG, JPEG, or PNG format.",
+                    extension: "Please upload a file in jpg|jpeg format.",
                     filesize: "The file size must be less than 1MB."
                 }
             }
