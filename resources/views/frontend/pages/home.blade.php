@@ -7,11 +7,11 @@
 
 
     <div class="main_bg">
-      <div class="col-lg-6 col-md-8 col-12 position-relative">
+      <div class="col-sm-7 col-xl-4 position-relative">
         <div class="container">
             <form id="searchForm" method="GET">
                 <div class="d-flex">
-                    <input class="form-control me-2" type="search" id="searchInput" placeholder="Search Locality / Builder or Project" aria-label="Search" value="{{ request()->query('search') }}">
+                    <input class="form-control" type="search" id="searchInput" placeholder="Search Locality / Builder or Project" aria-label="Search" value="{{ request()->query('search') }}">
                     <button class="btn btn_black" type="submit">Search</button>
                 </div>
 

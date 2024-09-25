@@ -907,8 +907,14 @@ label.error {
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
+#searchForm .btn_black{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
 
 /* Home page Main Banner CSS End */
 
