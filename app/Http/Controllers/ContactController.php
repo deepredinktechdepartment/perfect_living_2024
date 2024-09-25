@@ -23,7 +23,7 @@ class ContactController extends Controller
     public function store(Request $request)
     {
 
-   
+
         // Validate the request
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -50,7 +50,7 @@ class ContactController extends Controller
     {
         try {
             $contacts = Contact::latest()->paginate(10);
-            $pageTitle="Contact Inquiries";
+            $pageTitle="Contacts";
             return view('contacts.index', compact('contacts','pageTitle'));
         } catch (\Exception $e) {
             Log::error('Error displaying contacts in admin: ' . $e->getMessage());

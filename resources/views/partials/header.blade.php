@@ -45,11 +45,16 @@
                           @endif --}}
 
 
+
+
                           @if(Auth::user()->role && Auth::user()->role==1)
                           <li class="nav-item {{ Request::routeIs('users.index') ? 'active' : '' }}">
-                              <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+                              <a class="nav-link" href="{{ route('users.index') }}">Customers</a>
                           </li>
                           @endif
+
+
+
 
                           @if(Auth::check() && in_array(Auth::user()->role, [1]))
                           <li class="nav-item dropdown {{ Request::routeIs('admin.contacts.index') ? 'active' : '' }}">
@@ -65,6 +70,11 @@
                           @endif
 
 
+                          @if(Auth::user()->role && Auth::user()->role==1)
+                          <li class="nav-item {{ Request::routeIs('users.index') ? 'active' : '' }}">
+                              <a class="nav-link" href="{{ route('users.index') }}">Admin Users</a>
+                          </li>
+                          @endif
 
                           <li class="nav-item dropdown {{ Request::routeIs('city-masters.index','city-masters.create','badges.index','badges.create','collections.index','collections.create','amenities.index','amenities.create','area-masters.index','area-masters.create','menus.index','theme_options.index') ? 'active' : '' }}">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
