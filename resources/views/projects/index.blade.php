@@ -112,7 +112,7 @@
         No Companies Assigned
     @endif
 </td>
-                                <td align="right">
+                                <td align="center">
                                     <a href="{{ URL::to('project/'.$project->slug) }}" class="no-button" target="_blank" title="Preview Project">
 
                                         <img src="https://i.imgur.com/7rkMFI0.png" width=20/>
@@ -126,8 +126,8 @@
 
 
                                 @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 4]))
-    <td align="right">
-        <div class="form-check form-switch">
+    <td align="center">
+        <div class="form-check form-switch d-flex justify-content-center">
             <!-- Check if the status is 'published', and set the checkbox accordingly -->
             <input class="form-check-input toggle-approval" type="checkbox" id="toggle-{{ $project->id }}" {{ $project->status === 'published' ? 'checked' : '' }} data-id="{{ $project->id }}">
             <label class="form-check-label" for="toggle-{{ $project->id }}">
@@ -140,8 +140,8 @@
 
 
                                 @if(Auth::check() && in_array(Auth::user()->role, [1, 2,4]))
-                                <td align="right">
-                                    <div class="form-check form-switch">
+                                <td align="center">
+                                    <div class="form-check form-switch d-flex justify-content-center">
                                         <input class="form-check-input toggle-featured" type="checkbox" id="featured-{{ $project->id }}" {{ $project->is_featured ? 'checked' : '' }} data-id="{{ $project->id }}">
                                         <label class="form-check-label" for="featured-{{ $project->id }}">
                                             {{ $project->is_featured ? '' : '' }}

@@ -37,10 +37,10 @@
                             <label for="project_type" class="form-label">Type of Project</label>
                             <select id="project_type" class="form-control @error('project_type') is-invalid @enderror" name="project_type" required>
                                 <option value="">Select Project Type</option>
-                                <option value="Standalone Villas" {{ old('project_type', $project->project_type ?? '') == 'Standalone Villas' ? 'selected' : '' }}>Standalone Villas</option>
-                                <option value="Standalone Apartments" {{ old('project_type', $project->project_type ?? '') == 'Standalone Apartments' ? 'selected' : '' }}>Standalone Apartments</option>
+                                <option value="Stand Alone Villas" {{ old('project_type', $project->project_type ?? '') == 'Stand Alone Villas' ? 'selected' : '' }}>Stand Alone Villas</option>
+                                <option value="Stand Alone Apartments" {{ old('project_type', $project->project_type ?? '') == 'Stand Alone Apartments' ? 'selected' : '' }}>Stand Alone Apartments</option>
                                 <option value="Villa Gated Communities" {{ old('project_type', $project->project_type ?? '') == 'Villa Gated Communities' ? 'selected' : '' }}>Villa Gated Communities</option>
-                                <option value="Apartment Gated Communities" {{ old('project_type', $project->project_type ?? '') == 'Apartment Gated Communities' ? 'selected' : '' }}>Apartment Gated Communities</option>
+                                <option value="Gated Community Apartments" {{ old('project_type', $project->project_type ?? '') == 'Gated Community Apartments' ? 'selected' : '' }}>Gated Community Apartments</option>
                                 <option value="Commercial Spaces" {{ old('project_type', $project->project_type ?? '') == 'Commercial Spaces' ? 'selected' : '' }}>Commercial Spaces</option>
                                 <option value="Retail Spaces" {{ old('project_type', $project->project_type ?? '') == 'Retail Spaces' ? 'selected' : '' }}>Retail Spaces</option>
 
