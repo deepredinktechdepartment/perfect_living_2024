@@ -242,30 +242,29 @@
 
     </div>
 
-
-    <!-- resources/views/your-view.blade.php -->
-
-<div class="highlights-images-slider row mt-4">
-    @if($highlightImages->isNotEmpty())
-        @foreach($highlightImages as $image)
-            <x-projectcollections
-                :imageSrc="URL::to(env('APP_STORAGE').''.$image->background_image)"
-                :altText="$image->name"
-                :description="$image->name"
-                :link="$image->target_link"
-            />
-        @endforeach
-    @else
-
-    @endif
-</div>
-
-
-
-
-
   </div>
 </section>
 
+
+<section>
+    <div class="container">
+        <!-- resources/views/your-view.blade.php -->
+
+        <div class="highlights-images-slider row">
+            @if($highlightImages->isNotEmpty())
+                @foreach($highlightImages as $image)
+                    <x-projectcollections
+                        :imageSrc="URL::to(env('APP_STORAGE').''.$image->background_image)"
+                        :altText="$image->name"
+                        :description="$image->name"
+                        :link="$image->target_link"
+                    />
+                @endforeach
+            @else
+
+            @endif
+        </div>
+    </div>
+</section>
 
 @endsection

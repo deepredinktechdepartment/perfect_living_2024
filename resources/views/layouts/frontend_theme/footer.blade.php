@@ -144,10 +144,10 @@
 <div class="modal fade" id="cookieModal" tabindex="-1" aria-labelledby="cookieModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
-        <div class="modal-header justify-content-center">
+        <div class="modal-header border-bottom-0 pb-2 pt-4 justify-content-center">
           <h5 class="modal-title text-brand" id="cookieModalLabel">Disclaimer</h5>
         </div>
-        <div class="modal-body">
+        <div class="modal-body px-sm-4">
           <p>
           All information present on <a href="https://perfectliving.in/">perfectliving.in</a> has been made available for informational purposes only.
           No representation or warranty is expressly or impliedly given as to its accuracy. Any investment decisions
@@ -169,14 +169,18 @@
           usage of the site is deemed as consent to set tracking cookies. Trademarks belong to the respective owners.
           </p>
         </div>
-        <div class="modal-footer cookie-modal-footer justify-content-sm-center">
+        <div class="modal-footer cookie-modal-footer border-top-0 pb-4 pt-0 justify-content-sm-center">
         <button type="button" class="btn btn-success border-radius-0" id="acceptCookies">Accept</button>
-          <button type="button" class="btn btn-brand" id="declineCookies">Decline</button>
+          <!-- <button type="button" class="btn btn-brand" id="declineCookies">Decline</button> -->
         </div>
       </div>
     </div>
   </div>
 
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cookieModal">
+  Launch demo modal
+</button> -->
 
 <!-- Button trigger modal -->
 <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

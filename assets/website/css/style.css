@@ -121,7 +121,9 @@ a:focus {
 .slider-container {
     position: relative;
 }
-
+.slick-track{
+    margin-bottom: inherit;
+}
 .slick-arrow {
     background: transparent;
     width: 35px;
@@ -1182,3 +1184,19 @@ label.error {
     color: #fff;
     border-radius: 50%;
 }
+
+/* Smooth scaling transition */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: scale(0.8); /* Shrink on initial state */
+  }
+  
+  .modal.fade.show .modal-dialog {
+    transform: scale(1); /* Expand to full size */
+  }
+
+  /* Control the modal backdrop fade timing if needed */
+.modal-backdrop {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
