@@ -92,6 +92,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 
+    Route::get('customers', [UserController::class, 'customers'])->name('users.index');
+
+
     Route::post('/users/updatePassword', [UserController::class, 'updatePassword'])->name('users.updatePassword');
     Route::post('/users/toggleStatus', [UserController::class, 'toggleStatus'])->name('users.toggleStatus');
 
