@@ -136,6 +136,10 @@
   </div>
 </footer>
 
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cookieModal">
+  Launch demo modal
+</button> -->
 <!-- Cookie Modal -->
 <div class="modal fade" id="cookieModal" tabindex="-1" aria-labelledby="cookieModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -172,3 +176,54 @@
       </div>
     </div>
   </div>
+
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade"  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content login-card px-sm-5 py-sm-4">
+      <div class="modal-header py-2 border-bottom-0">
+        <h3 class="modal-title w-100 text-center" id="exampleModalLabel">Log in</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <div class="">
+        <div class="card-body">
+            <form id="loginForm" method="POST" action="{{ route('verify.Auth.Login') }}" autocomplete="off">
+                @csrf
+                <div class="form-group mb-4">
+                    <div class="">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email" required autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required autocomplete="off">
+                    </div>
+                </div>
+                {{-- <div class="mb-4">
+                    <p><small>By continuing, you agree to <a href="#" class="text-brand">Terms of Use</a> & <a href="#" class="text-brand">Privacy Policy</a>.</small></p>
+                </div> --}}
+                <div class="form-group mb-4">
+                    <button type="submit" class="btn btn-danger border-radius-0 w-100">Continue</button>
+                </div>
+                {{-- <div class="">
+                    <p><small>Have trouble logging in? <a href="#" class="text-brand">Get help</a></small></p>
+                </div> --}}
+                    <!-- Hidden Redirect URL -->
+                <input type="hidden" name="redirect_to" value="{{ request('redirect_to') }}">
+            </form>
+            <div class="">
+                <p><small>Don't have an account yet? <a href="{{ URL::TO('create_account') }}" class="text-brand">Create your account</a></small></p>
+            </div>
+        </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
