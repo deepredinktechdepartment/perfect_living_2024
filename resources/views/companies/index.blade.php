@@ -8,10 +8,8 @@
                 No companies found. <a href="{{ route('companies.create') }}"><u>Create a Company</u></a>
             </div>
         @else
-
-        <div class="card shadow-sm rounded">
-            <div class="card-body">
-
+            <div class="card shadow-sm rounded">
+                <div class="card-body">
                     <table class="table table-bordered mt-3 bg-white" id="companies">
                         <thead>
                             <tr>
@@ -19,6 +17,7 @@
                                 <th>Name</th>
                                 <th>Phone</th>
                                 <th>Website URL</th>
+                                <th>Projects</th> <!-- New column for Projects -->
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -30,11 +29,26 @@
                                     <td>{{ $company->phone }}</td>
                                     <td><a href="{{ $company->website_url }}" target="_blank">{{ $company->website_url }}</a></td>
                                     <td>
-                                        <!-- Edit Icon -->
+                                        @if($company->projects->isNotEmpty())
+                                        <div class="text-center">
+                                            <a href="{{ route('projects.index', ['company_id' => $company->id,"tab"=>'all']) }}" class="btn btn-link">
+                                                View
+                                                <span class="badge bg-danger">{{ $company->projects->count() }}</span>
+                                            </a>
+                                        </div>
+                                    @else
+                                        <div class="text-center">
+                                            <span>No Projects</span>
+                                        </div>
+                                    @endif
+
+
+
+                                    </td>
+                                    <td>
                                         <a href="{{ route('companies.edit', $company->id) }}" class="btn btn-link" title="Edit">
                                             <i class="{{ config('constants.icons.edit') }}"></i>
                                         </a>
-                                        <!-- Delete Icon -->
                                         <form action="{{ route('companies.destroy', $company->id) }}" method="POST" class="delete-form" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
@@ -47,14 +61,9 @@
                             @endforeach
                         </tbody>
                     </table>
-             
                 </div>
-                </div>
+            </div>
         @endif
     </div>
 </div>
 @endsection
-
-@push('scripts')
-
-@endpush

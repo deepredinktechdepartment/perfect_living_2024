@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; // Import the Log facade
 use Exception;
 use Illuminate\Support\Str;
-
+use App\Models\Project; // Import the Company model
 class CompanyController extends Controller
 {
     /**
@@ -14,7 +14,16 @@ class CompanyController extends Controller
     public function index()
     {
         try {
-            $companies = Company::all();
+            // Fetch all companies and convert to an array
+            $companies = Company::get(); // Convert to array
+
+
+            foreach ($companies as $key => $company) {
+                // Check if the company has associated projects
+
+                $companies[$key]->projects = Project::WhereRaw("JSON_CONTAINS(JSON_UNQUOTE(company_id), ?, '$') AND JSON_LENGTH(company_id) > 0", [json_encode((string)$company->id)])->get();
+            }
+
             $addlink = route('companies.create');
             $pageTitle = "Builders List";
             return view('companies.index', compact('companies', 'addlink', 'pageTitle'));
@@ -23,6 +32,9 @@ class CompanyController extends Controller
             return redirect()->back()->with('error', 'An error occurred while fetching the companies list.');
         }
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.

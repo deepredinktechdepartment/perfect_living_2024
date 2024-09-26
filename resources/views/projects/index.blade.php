@@ -36,6 +36,12 @@
             Deactivated <span class="badge bg-danger">{{ $statusCounts['deactivated'] ?? 0 }}</span>
         </a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ $tab === 'all' ? 'active' : '' }}" href="{{ route('projects.index', ['tab' => 'all']) }}">
+            All <span class="badge bg-info">{{ $statusCounts['all'] ?? 0 }}</span>
+        </a>
+    </li>
 </ul>
 </div>
 

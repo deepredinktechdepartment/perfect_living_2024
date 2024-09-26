@@ -9,6 +9,8 @@ class Project extends Model
 {
     use HasFactory;
 
+
+
     protected $fillable = [
         'name',
         'slug',
@@ -38,7 +40,9 @@ class Project extends Model
 
     ];
 
-
+    protected $casts = [
+        'company_id' => 'array', // Automatically casts the JSON to an array
+    ];
     // Relationships
     public function unitConfigurations()
     {
@@ -133,5 +137,11 @@ public function company()
    {
        return $query->where('status', 'published');
    }
+
+     // Method to get companies associated with the project
+     public function getAssociatedCompanies()
+     {
+         return Company::whereIn('id', $this->company_id)->get();
+     }
 
 }

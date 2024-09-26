@@ -25,12 +25,14 @@
                     <label for="category" class="form-label">Amenity Category</label>
                     <select id="category" class="form-select @error('category') is-invalid @enderror" name="category" required>
                         <option value="" disabled selected>Select Category</option>
-                        <option value="indoor" {{ old('category', $amenity->category ?? '') == 'indoor' ? 'selected' : '' }}>Indoor</option>
-                        <option value="outdoor" {{ old('category', $amenity->category ?? '') == 'outdoor' ? 'selected' : '' }}>Outdoor</option>
+                        <option value="indoor-games" {{ old('category', $amenity->category ?? '') == 'indoor-games' ? 'selected' : '' }}>Indoor Games</option>
+                        <option value="outdoor-games" {{ old('category', $amenity->category ?? '') == 'outdoor-games' ? 'selected' : '' }}>Outdoor Games</option>
                         <option value="sports" {{ old('category', $amenity->category ?? '') == 'sports' ? 'selected' : '' }}>Sports</option>
-                        <option value="recreational" {{ old('category', $amenity->category ?? '') == 'recreational' ? 'selected' : '' }}>Recreational</option>
+                        <option value="security" {{ old('category', $amenity->category ?? '') == 'security' ? 'selected' : '' }}>Security</option>
+                        <option value="convenience" {{ old('category', $amenity->category ?? '') == 'convenience' ? 'selected' : '' }}>Convenience</option>
                         <option value="fitness" {{ old('category', $amenity->category ?? '') == 'fitness' ? 'selected' : '' }}>Fitness</option>
                         <option value="entertainment" {{ old('category', $amenity->category ?? '') == 'entertainment' ? 'selected' : '' }}>Entertainment</option>
+                        <option value="clubhouse" {{ old('category', $amenity->category ?? '') == 'clubhouse' ? 'selected' : '' }}>Clubhouse</option>
                         <option value="wellness" {{ old('category', $amenity->category ?? '') == 'wellness' ? 'selected' : '' }}>Wellness</option>
                         <option value="kids" {{ old('category', $amenity->category ?? '') == 'kids' ? 'selected' : '' }}>Kids</option>
                         <option value="community" {{ old('category', $amenity->category ?? '') == 'community' ? 'selected' : '' }}>Community</option>

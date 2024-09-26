@@ -46,51 +46,92 @@ class ProjectController extends Controller
         }
     }
 
-   public function index(Request $request): View
+    public function index(Request $request): View
 {
     try {
         // Get the 'tab' query parameter or default to 'newly_added'
         $tab = $request->query('tab', 'newly_added');
+        $companyId = $request->query('company_id'); // Get company_id from the query parameters
 
         // Valid status values
-        $validStatuses = ['newly_added', 'in_review', 'published', 'deactivated'];
+        $validStatuses = ['newly_added', 'in_review', 'published', 'deactivated', 'all'];
 
-        // Initialize status counts
-        $statusCounts = Project::select('status', \DB::raw('count(*) as count'))
-            ->groupBy('status')
-            ->pluck('count', 'status')
-            ->toArray();
+        // Initialize status counts array with default values, including 'all'
+        $statusCounts = [
+            'newly_added' => 0,
+            'in_review' => 0,
+            'published' => 0,
+            'deactivated' => 0,
+            'all' => 0,  // Add 'all' status
+        ];
 
-        // Build the query based on the 'tab' value
+        // Build the query for counting projects
         $query = Project::query();
 
-        // Check if the tab value is valid
-        if (in_array($tab, $validStatuses)) {
+        // If company_id exists, add condition to the query
+        if ($companyId) {
+            $query->whereRaw("JSON_CONTAINS(JSON_UNQUOTE(company_id), ?, '$') AND JSON_LENGTH(company_id) > 0", [json_encode((string)$companyId)]);
+        }
+
+        // Count total projects for 'all' key
+        $totalProjectsCount = $query->count();
+        $statusCounts['all'] = $totalProjectsCount;  // Set 'all' count
+
+        // If the tab is 'all', we don't need to filter by status
+        if ($tab === 'all') {
+            // Fetch all projects without status filtering
+            $projects = $query->get();
+        } elseif (in_array($tab, $validStatuses)) {
+            // Filter by specific status
             $query->where('status', $tab);
+            // Fetch projects based on selected status
+            $projects = $query->get();
         } else {
             // Handle invalid status
             throw new \InvalidArgumentException('Invalid status provided.');
         }
 
-        // Execute the query to get the projects
-        $projects = $query->get();
+        // Initialize status counts based on the presence of company_id
+        $statusCountsQuery = Project::select('status', \DB::raw('count(*) as count'))
+            ->groupBy('status');
 
+        // Add condition for status counts if company_id exists
+        if ($companyId) {
+            $statusCountsQuery->whereRaw("JSON_CONTAINS(JSON_UNQUOTE(company_id), ?, '$') AND JSON_LENGTH(company_id) > 0", [json_encode((string)$companyId)]);
+        }
 
+        // Fetch status counts
+        $counts = $statusCountsQuery->pluck('count', 'status')->toArray();
+
+        // Merge counts into the statusCounts array
+        foreach ($counts as $status => $count) {
+            if (array_key_exists($status, $statusCounts)) {
+                $statusCounts[$status] = $count;
+            }
+        }
+
+        // If any status is not set, ensure it defaults to 0
+        foreach ($validStatuses as $status) {
+            if (!isset($statusCounts[$status])) {
+                $statusCounts[$status] = 0;
+            }
+        }
 
         $pageTitle = 'Projects List'; // Set the page title
         $addlink = route('projects.create'); // Link to the create page
 
-        // Pass the projects with the loaded first company, and other variables to the view
+        // Pass the projects and other variables to the view
         return view('projects.index', compact('projects', 'addlink', 'pageTitle', 'tab', 'statusCounts'));
     } catch (Exception $e) {
         // Log the error message if needed
         // Log::error('Failed to fetch projects: ' . $e->getMessage());
 
-
         // Return to the previous page with an error message
         return redirect()->back()->with('error', 'Failed to fetch projects.');
     }
 }
+
+
 
 
 
