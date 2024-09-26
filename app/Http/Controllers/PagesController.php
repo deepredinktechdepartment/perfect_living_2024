@@ -145,7 +145,7 @@ class PagesController extends Controller
     }
 
     if (!empty($builders)) {
-        $pageTitle .= ' in ' . $builders;
+        $pageTitle .= ' by ' . $builders;
     }
     if (!empty($collection)) {
         $pageTitle .= ' in ' . $collection;
