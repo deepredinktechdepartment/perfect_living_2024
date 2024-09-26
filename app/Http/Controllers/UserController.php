@@ -47,6 +47,27 @@ class UserController extends Controller
     }
 
 
+    public function customers(Request $request)
+    {
+        if (isset($request->company_name) && !empty($request->company_name)) {
+            $organizationID = $request->company_name;
+        } else {
+            $organizationID = '-1';
+        }
+
+        $users = User::select('users.*', 'user_types.name as ut_name')
+        ->where('users.role',5)
+            ->leftJoin('user_types', 'user_types.id', '=', 'users.role')
+            ->orderBy('users.fullname')
+            ->orderByRaw('FIELD(users.role, 5)')
+            ->get();
+
+        $pageTitle = "Customers List";
+        $addlink = route('users.create');
+        return view('customers.index', compact('pageTitle', 'users', 'organizationID', 'addlink'));
+    }
+
+
 
     public function edit(Request $request)
     {
@@ -327,7 +348,7 @@ public function storeOrUpdate(Request $request)
               // Get the currently authenticated user
 
               $page=$request->page??'';
-              
+
               $user = User::find(auth()->user()->id);
 
               // Update the user's password
