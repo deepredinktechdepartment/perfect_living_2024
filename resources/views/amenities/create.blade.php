@@ -20,9 +20,34 @@
                     @enderror
                 </div>
 
+                <!-- Extended Amenity Category Dropdown -->
+                <div class="mb-3">
+                    <label for="category" class="form-label">Amenity Category</label>
+                    <select id="category" class="form-select @error('category') is-invalid @enderror" name="category" required>
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="indoor" {{ old('category', $amenity->category ?? '') == 'indoor' ? 'selected' : '' }}>Indoor</option>
+                        <option value="outdoor" {{ old('category', $amenity->category ?? '') == 'outdoor' ? 'selected' : '' }}>Outdoor</option>
+                        <option value="sports" {{ old('category', $amenity->category ?? '') == 'sports' ? 'selected' : '' }}>Sports</option>
+                        <option value="recreational" {{ old('category', $amenity->category ?? '') == 'recreational' ? 'selected' : '' }}>Recreational</option>
+                        <option value="fitness" {{ old('category', $amenity->category ?? '') == 'fitness' ? 'selected' : '' }}>Fitness</option>
+                        <option value="entertainment" {{ old('category', $amenity->category ?? '') == 'entertainment' ? 'selected' : '' }}>Entertainment</option>
+                        <option value="wellness" {{ old('category', $amenity->category ?? '') == 'wellness' ? 'selected' : '' }}>Wellness</option>
+                        <option value="kids" {{ old('category', $amenity->category ?? '') == 'kids' ? 'selected' : '' }}>Kids</option>
+                        <option value="community" {{ old('category', $amenity->category ?? '') == 'community' ? 'selected' : '' }}>Community</option>
+                        <option value="transport" {{ old('category', $amenity->category ?? '') == 'transport' ? 'selected' : '' }}>Transport</option>
+                        <option value="pet-friendly" {{ old('category', $amenity->category ?? '') == 'pet-friendly' ? 'selected' : '' }}>Pet-Friendly</option>
+                        <option value="other" {{ old('category', $amenity->category ?? '') == 'other' ? 'selected' : '' }}>Other</option>
+                    </select>
+                    @error('category')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
                 <div class="mb-3">
                     <label for="icon" class="form-label">Icon</label>
-                    <input id="icon" type="file" class="form-control @error('icon') is-invalid @enderror" name="icon" >
+                    <input id="icon" type="file" class="form-control @error('icon') is-invalid @enderror" name="icon">
                     @error('icon')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -52,6 +77,9 @@
                     required: true,
                     minlength: 2
                 },
+                category: {
+                    required: true
+                },
                 icon: {
                     extension: "jpg|jpeg|png|gif",
                     filesize: 2048 // max 2MB
@@ -61,6 +89,9 @@
                 name: {
                     required: "Please enter the amenity name",
                     minlength: "The amenity name must be at least 2 characters long"
+                },
+                category: {
+                    required: "Please select a category"
                 },
                 icon: {
                     extension: "Please upload a valid image (jpg, jpeg, png, gif)",
