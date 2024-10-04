@@ -7,9 +7,10 @@
 <section>
   <div class="container pt-sm-5 pt-4">
     <div class="row">
-      <div class="col-sm-8 order-sm-0 order-3 mb-sm-3">
+      <div class="col-sm-10 order-sm-0 order-3 mb-sm-3">
         <div class="project-details-main-info">
         <h1 class="mb-sm-0">{{ $project->name ?? '' }}</h1>
+
         @if(isset($project->areas) && !empty($project->areas->name))
           <h5>{{$project->areas->name??''}} - {{$project->citites->name??''}}</h5>
           @endif
@@ -25,12 +26,14 @@
         @endforeach
     </h6>
 @else
-    <h6>No Companies Assigned</h6>
+    <h6></h6>
 @endif
 
 
 
         </div>
+
+        <h6>{{ $project->project_type??'' }}</h6>
         <div class="rating-display-wrapper text-sm-center">
           {{-- <div class="star-rating text-sm-center text-start">
             <span class="star" data-value="5">&#9733;</span>
@@ -40,13 +43,13 @@
             <span class="star" data-value="1">&#9733;</span>
         </div> --}}
 
-        @if($reviews->count() > 0)
-              <!-- Display average rating -->
+        {{-- @if($reviews->count() > 0)
+
               <div class="star-rating text-sm-center text-start">
                 @for ($i = 5; $i >= 1; $i--)
                     <span class="star {{ $roundedRating >= $i ? 'filled' : '' }}" data-value="{{ $i }}">&#9733;</span>
                 @endfor
-                {{-- <p>Average Rating: {{ $roundedRating }} / 5</p> --}}
+
             </div>
 @else
 
@@ -54,15 +57,16 @@
     @for ($i = 5; $i >= 1; $i--)
         <span class="star {{ $roundedRating >= $i ? 'filled' : '' }}" data-value="{{ $i }}">&#9733;</span>
     @endfor
-    {{-- <p>Average Rating: {{ $roundedRating }} / 5</p> --}}
+
 </div>
 
-            @endif
+            @endif --}}
         <div>
             <ul class="inline-links justify-content-sm-center mb-1">
                 @if($reviews->count() > 0)
                     <li>
-                        <a href="{{ route('reviews.show', ['projectId' => Crypt::encryptString($project->id)]) }}" class="text-black">
+                        {{-- <a href="{{ route('reviews.show', ['projectId' => Crypt::encryptString($project->id)]) }}" class="text-black"> --}}
+                        <a href="{{ URL::to('reviews/'.$project->slug) }}" class="text-black">
                             {{ $reviews->count() }} {{ $reviews->count() === 1 ? 'Review' : 'Reviews' }}
                         </a>
                     </li>
@@ -70,6 +74,11 @@
                         <a href="{{ route('review.create', ['projectId' => Crypt::encryptString($project->id)]) }}" class="text-black">Write a review</a>
                     </li>
                 @else
+                <li>
+
+                         No Reviews
+
+                </li>
                     <li>
                         <a href="{{ route('review.create', ['projectId' => Crypt::encryptString($project->id)]) }}" class="text-black">Write a review</a>
                     </li>
@@ -78,7 +87,7 @@
         </div>
       </div>
       </div>
-      <div class="col-sm-4 order-sm-0 order-2 d-sm-flex align-items-center justify-content-end">
+      <div class="col-sm-2 order-sm-0 order-2 d-sm-flex align-items-center justify-content-end">
         <div class="wishlist-wrapper">
         <p>
 
@@ -100,8 +109,22 @@
 <x-project-images :project="$project->elevationPictures" />
 @else
 <!-- Show empty if there are no elevation pictures -->
-<div class="img-placeholder"></div>
+
+<div class="col-sm-8 order-sm-0 order-1">
+    <div class="row">
+
+    <!-- First Image (Main Image) -->
+    <div class="col-sm-9 col-12 pe-sm-1 mb-sm-0 mb-2">
+        <div class="img-placeholder"></div>
+</div>
+<div class="col-sm-3 col-12 ps-sm-1">
+    <div class="row m-0 justify-content-center"></div>
+</div>
+</div>
+</div>
+
 @endif
+
 
 
 
@@ -135,6 +158,11 @@
     @else
 
     @endif
+@if($project->project_status)
+<div class="d-flex gap-2 align-items-center mb-3">
+{{ getProjectStatusLabel($project->project_status ?? '') }}
+</div>
+@endif
 </div>
 
 
@@ -189,7 +217,7 @@
                         <div class="floorplans-slider row mt-4">
                             @foreach($configurations as $configuration)
                                 <x-floor-plan-item
-                                    :image_path="URL::to(env('APP_STORAGE') . '/' . $configuration['floor_plan'])"
+                                    :image_path="URL::to(env('APP_STORAGE') . '' . $configuration['floor_plan'])"
                                     :description="$withoutformattedKey . ' BHK ' . $configuration['facing']"
                                     :size="$configuration['unit_size']"
                                 />
@@ -266,5 +294,39 @@
         </div>
     </div>
 </section>
+
+
+
+@if(!empty($totalReviewsCount))
+<section class="bg-yellow">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="p-0 m-0">
+                    Customer Reviews
+                    @if($totalReviewsCount > 4) <!-- Only show the count if more than 4 -->
+                        ({{ $totalReviewsCount ?? 0 }})
+                    @endif
+                </h2>
+                
+                <!-- Show "View More" link if total reviews are greater than 4 -->
+                @if($totalReviewsCount > 4)
+                    <p class="p-0 m-0">
+                        <a href="{{ URL::to('reviews/'.$project->slug) }}" class="btn btn-link text-gray" style="font-size: 0.875rem;">View More</a>
+                    </p>
+                @endif
+
+                <!-- Display approved reviews -->
+                 <div class="col-md-12 mt-1">
+                <x-approved-reviews :projectId="$project->id" :projectName="$project->name" :limit="4" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+
+
+
 
 @endsection

@@ -92,7 +92,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 
-    Route::get('customers', [UserController::class, 'customers'])->name('users.index');
+    Route::get('customers', [UserController::class, 'customers'])->name('customers.index');
 
 
     Route::post('/users/updatePassword', [UserController::class, 'updatePassword'])->name('users.updatePassword');
@@ -246,14 +246,19 @@ Route::post('/reviews/toggle-approval/{id?}', [ReviewController::class, 'toggleA
 Route::delete('/reviews/{id}', [ReviewController::class, 'destroy'])->name('reviews.delete');
 Route::get('/reviews/filter', [ReviewController::class, 'filterReviews'])->name('reviews.filter');
 
+Route::POST('/updatereviews/{id}', [ReviewController::class, 'reviewupdate'])->name('reviews.update');
+
+
 
     Route::get('admin/contacts', [ContactController::class, 'adminIndex'])->name('admin.contacts.index');
     Route::get('admin/contacts/{id}', [ContactController::class, 'show'])->name('admin.contacts.show');
     Route::delete('admin/contacts/{id}', [ContactController::class, 'destroy'])->name('admin.contacts.destroy');
 
     Route::resource('customcollections', CustomCollectionController::class);
+    Route::get('searchkeywords', [PagesController::class, 'showSearchkeywords'])->name('searchkeywords.lists');
 
-});
+});Route::delete('/search-logs/{id}', [PagesController::class, 'deleteLog'])->name('search-logs.destroy');
+
 
 
 //Websites URL
@@ -270,6 +275,7 @@ Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');
 
 Route::get('/', [PagesController::class, 'homepage'])->name('homepage');
 
+
 //Route::get('/filters/{param?}', [PagesController::class, 'filtersprojects'])->name('searchquerystring');
 
 
@@ -279,9 +285,9 @@ Route::get('/{any?}', [PagesController::class, 'newFiltersprojects'])
     ->name('filters.index');
 
 
-Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
-Route::get('/review/form', [ReviewController::class, 'create'])->name('review.create');
-Route::get('/showReviews/{projectId}', [ReviewController::class, 'showReviews'])->name('reviews.show');
+Route::post('/writereview', [ReviewController::class, 'store'])->name('reviews.store')->middleware('noindex');
+Route::get('/review/form', [ReviewController::class, 'create'])->name('review.create')->middleware('noindex');
+Route::get('/reviews/{slug?}', [ReviewController::class, 'showReviews'])->name('reviews.show');
 
 
 

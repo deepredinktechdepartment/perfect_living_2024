@@ -207,7 +207,7 @@ function initializeSlider(selector) {
         autoplay: false,
         autoplaySpeed: 5000,
         pauseOnHover: true,
-        dots: true,
+        dots: false,
         fade: false,
         arrows: true,
         infinite: true,

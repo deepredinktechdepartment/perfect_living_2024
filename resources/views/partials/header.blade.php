@@ -26,12 +26,13 @@
                             @if(Auth::check() && in_array(Auth::user()->role, [1, 2, 3, 4]))
                             <li class="nav-item dropdown {{ Request::routeIs('projects.index','projects.create','projects.edit','companies.index','companies.create') ? 'active' : '' }}">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Projects
+                                    Content
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item {{ Request::routeIs('projects.index','projects.create','projects.edit','companies.index','companies.create') ? 'active' : '' }}" href="{{ route('projects.index',["tab"=>'newly_added']) }}">Lists</a></li>
-                                    <li><a class="dropdown-item {{ Request::routeIs() ? 'active' : '' }}" href="{{ route('companies.index') }}">Builders</a></li>
+                                    <li><a class="dropdown-item {{ Request::routeIs('projects.index','projects.create','projects.edit','companies.index','companies.create') ? 'active' : '' }}" href="{{ route('projects.index',["tab"=>'newly_added']) }}">Projects</a></li>
                                     <li><a class="dropdown-item {{ Request::routeIs('admin.reviews.index') ? 'active' : '' }}" href="{{ route('admin.reviews.index') }}">Reviews</a></li>
+                                    <li><a class="dropdown-item {{ Request::routeIs() ? 'active' : '' }}" href="{{ route('companies.index') }}">Builders</a></li>
+
 
                                 </ul>
                             </li>
@@ -47,9 +48,21 @@
 
 
 
+
+
+
                             @if(Auth::user()->role && Auth::user()->role==1)
-                            <li class="nav-item {{ Request::routeIs('users.index') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('users.index') }}">Customers</a>
+                            <li class="nav-item dropdown {{ Request::routeIs('customers.index','searchkeywords.lists') ? 'active' : '' }}">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Customers
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item {{ Request::routeIs('customers.index') ? 'active' : '' }}" href="{{ route('customers.index',["tab"=>'newly_added']) }}">Lists</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item {{ Request::routeIs('searchkeywords.lists') ? 'active' : '' }}" href="{{ route('searchkeywords.lists') }}">Search Keywords</a></li>
+
+
+                                </ul>
                             </li>
                             @endif
 
@@ -64,6 +77,8 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                                     <li><a class="dropdown-item {{ Request::routeIs('admin.contacts.index') ? 'active' : '' }}" href="{{ route('admin.contacts.index') }}">Contacts</a></li>
+                                   <!-- Divider (hr) -->
+
 
                                 </ul>
                             </li>
@@ -101,7 +116,11 @@
                                       <li><a class="dropdown-item {{ Request::routeIs('badges.index') ? 'active' : '' }}" href="{{ route('badges.index') }}">Badges</a></li>
                                       <li><a class="dropdown-item {{ Request::routeIs('collections.index') ? 'active' : '' }}" href="{{ route('collections.index') }}">Collections</a></li>
                                       <li><a class="dropdown-item {{ Request::routeIs('amenities.index') ? 'active' : '' }}" href="{{ route('amenities.index') }}">Amenities</a></li>
-                                  @endif
+
+
+
+
+                                      @endif
                               </ul>
                           </li>
 

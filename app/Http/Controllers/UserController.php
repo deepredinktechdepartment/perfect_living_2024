@@ -385,7 +385,7 @@ public function updateProfile(Request $request)
         'email' => 'required|email',
         'page' => 'nullable',
         'phone' => 'required|regex:/^[6-9]{1}[0-9]{9}$/',
-        'profile' => 'nullable|mimes:jpg,jpeg,png|max:2048', // Optional file, max size 2MB
+        'profile' => 'nullable|mimes:jpg,jpeg,png|max:512', // Optional file, max size 2MB
     ]);
 
     try {

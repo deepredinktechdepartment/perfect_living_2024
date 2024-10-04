@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CollectionController extends Controller
 {
@@ -35,7 +36,7 @@ class CollectionController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:collections,name',
-            'background_image' => 'required_if:existing_image,null|image|mimes:jpg,jpeg,png|max:1024',
+            'background_image' => 'required_if:existing_image,null|image|mimes:jpg,jpeg,png|max:512',
             'target_link' => 'nullable|url',
         ]);
 
@@ -44,6 +45,7 @@ class CollectionController extends Controller
                 $validatedData['background_image'] = $request->file('background_image')->store('background_images', 'public');
             }
 
+            $validatedData['slug'] = Str::slug($request->name)??null;
             Collection::create($validatedData);
 
             return redirect()->route('collections.index')->with('success', 'Collection created successfully.');
@@ -69,7 +71,7 @@ class CollectionController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:collections,name,' . $id,
-            'background_image' => 'nullable|image|mimes:jpg,jpeg,png|max:1024',
+            'background_image' => 'nullable|image|mimes:jpg,jpeg,png|max:512',
             'target_link' => 'nullable|url',
         ]);
 
@@ -85,6 +87,7 @@ class CollectionController extends Controller
                 $validatedData['background_image'] = $request->file('background_image')->store('background_images', 'public');
             }
 
+            //$validatedData['slug'] = Str::slug($request->name)??null;
             $collection->update($validatedData);
 
             return redirect()->route('collections.index')->with('success', 'Collection updated successfully.');

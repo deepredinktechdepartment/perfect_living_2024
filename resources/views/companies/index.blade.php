@@ -28,23 +28,32 @@
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->phone }}</td>
                                     <td><a href="{{ $company->website_url }}" target="_blank">{{ $company->website_url }}</a></td>
+
+
                                     <td>
-                                        @if($company->projects->isNotEmpty())
-                                        <div class="text-center">
-                                            <a href="{{ route('projects.index', ['company_id' => $company->id,"tab"=>'all']) }}" class="btn btn-link">
-                                                View
-                                                <span class="badge bg-danger">{{ $company->projects->count() }}</span>
-                                            </a>
+                                        <div class="">
+                                            @if($company->projects->isNotEmpty())
+                                                <a href="{{ route('projects.index', ['company_id' => $company->id, 'tab' => 'all']) }}" class="btn btn-link">
+                                                    @php
+                                                        $count = $company->projects->count();
+                                                        $statusClass = $company->projects->contains('status', 'published') ? 'text-success' : 'text-danger';
+                                                    @endphp
+                                                    <strong class="{{ $statusClass }}">{{ $count }} {{ Str::plural('Project', $count) }}</strong>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('projects.create') }}" class="btn btn-link">
+                                                    <strong>Create Project</strong>
+                                                </a>
+                                            @endif
                                         </div>
-                                    @else
-                                        <div class="text-center">
-                                            <span>No Projects</span>
-                                        </div>
-                                    @endif
-
-
-
                                     </td>
+
+
+
+
+
+
+
                                     <td>
                                         <a href="{{ route('companies.edit', $company->id) }}" class="btn btn-link" title="Edit">
                                             <i class="{{ config('constants.icons.edit') }}"></i>

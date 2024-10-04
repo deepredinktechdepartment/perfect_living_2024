@@ -37,7 +37,7 @@ class AmenityController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'category' => 'required|string',
-            'icon' => 'required|mimes:jpg,jpeg,png|max:1024', // Validate icon file
+            'icon' => 'required|mimes:jpg,jpeg,png|max:512', // Validate icon file
         ]);
 
         $amenity = new Amenity();
@@ -74,7 +74,7 @@ class AmenityController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'category' => 'required|string',
-            'icon' => 'nullable|mimes:jpg,jpeg,png|max:1024', // Validate icon file, not required if already exists
+            'icon' => 'nullable|mimes:jpg,jpeg,png|max:512', // Validate icon file, not required if already exists
         ]);
 
         $amenity->name = $request->name;

@@ -23,19 +23,16 @@
 
                 <div class="mb-3">
                     <label for="icon" class="form-label">Icon (PNG, JPG)</label>
-                    <input id="icon" type="file" class="form-control @error('icon') is-invalid @enderror" name="icon" >
+                    <input id="icon" type="file" class="form-control @error('icon') is-invalid @enderror" name="icon">
                     @error('icon')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
 
-
                     @if(isset($badge->icon) && File::exists(env('APP_STORAGE').'icons/'.$badge->icon))
-                    <img src="{{ URL::to(env('APP_STORAGE').'icons/'.$badge->icon) }}" class="mt-2" alt="Client Logo" style="width: 50px; height: auto;">
-
+                        <img src="{{ URL::to(env('APP_STORAGE').'icons/'.$badge->icon) }}" class="mt-2" alt="Client Logo" style="width: 50px; height: auto;">
                     @endif
-
                 </div>
 
                 <button type="submit" class="btn bg-custom-btn">
@@ -59,7 +56,7 @@
                 icon: {
                     required: {{ isset($badge) ? 'false' : 'true' }},
                     extension: "png|jpg|jpeg",
-                    filesize: 1048576 // 1MB in bytes
+                    filesize: 524288 // 512KB in bytes
                 }
             },
             messages: {
@@ -70,7 +67,7 @@
                 icon: {
                     required: "Please upload a badge icon",
                     extension: "Only PNG and JPG files are allowed",
-                    filesize: "The file size must be less than 1MB"
+                    filesize: "The file size must be less than 512KB"
                 }
             }
         });
@@ -78,7 +75,7 @@
         // Custom validator for file size
         $.validator.addMethod('filesize', function(value, element, param) {
             return this.optional(element) || (element.files[0].size <= param);
-        }, 'The file size must be less than 1MB');
+        }, 'The file size must be less than 512KB');
     });
 </script>
 @endpush

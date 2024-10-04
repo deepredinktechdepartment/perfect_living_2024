@@ -16,7 +16,7 @@
 <img class="rounded-circle img-fluid" src="{{ URL::to(env('APP_STORAGE').''.Auth::user()->profile_photo) }}" alt="" width="100" height="100">
 @else
 <!-- No Profile Picture -->
-<img class="rounded-circle img-fluid" src="https://via.placeholder.com/200" alt="Default Image" width="100" height="100">
+<img class="rounded-circle img-fluid" src="https://i.imgur.com/lqNUZwI.png" alt="Default Image" width="100" height="100">
 @endif
                     </div>
 

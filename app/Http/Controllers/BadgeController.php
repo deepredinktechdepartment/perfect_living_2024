@@ -35,7 +35,7 @@ class BadgeController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:badges,name',
-            'icon' => 'required|mimes:png,jpg,jpeg|max:1024', // Validate file type and size
+            'icon' => 'required|mimes:png,jpg,jpeg|max:512', // Validate file type and size
         ]);
 
         try {
@@ -69,7 +69,7 @@ class BadgeController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|unique:badges,name,' . $id,
-            'icon' => 'nullable|mimes:png,jpg,jpeg|max:1024', // Validate file type and size
+            'icon' => 'nullable|mimes:png,jpg,jpeg|max:512', // Validate file type and size
         ]);
 
         try {

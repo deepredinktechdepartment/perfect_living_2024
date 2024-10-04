@@ -18,7 +18,7 @@ class WishlistController extends Controller
 
             $wishlists = Wishlist::where('user_id', Auth::id())->with('project')->get();
             $projects = $wishlists->pluck('project'); // Get the projects from the wishlist
-            $pageTitle = 'My Short Lists';
+            $pageTitle = 'My Short lists';
 
 
 
@@ -36,16 +36,27 @@ class WishlistController extends Controller
         ]);
 
         try {
+            // Check if the project already exists in the user's wishlist
+            $exists = Wishlist::where('user_id', Auth::id())
+                        ->where('project_id', $request->project_id)
+                        ->exists();
+
+            if ($exists) {
+                return redirect()->back()->withErrors(['error' => 'This project is already in your Short list.']);
+            }
+
+            // Create a new wishlist entry
             Wishlist::create([
                 'user_id' => Auth::id(),
                 'project_id' => $request->project_id,
             ]);
-            return redirect()->back()->with('success', 'Project added to wishlist.');
+
+            return redirect()->back()->with('success', 'Project added to Short list.');
         } catch (\Exception $e) {
-            Log::error('Error adding project to wishlist: ' . $e->getMessage());
-            return redirect()->back()->withErrors(['error' => 'Unable to add project to wishlist. Please try again later.']);
+            return redirect()->back()->withErrors(['error' => 'Unable to add project to Short list. Please try again later.']);
         }
     }
+
 
     public function destroy($id)
     {
@@ -53,13 +64,13 @@ class WishlistController extends Controller
             $wishlist = Wishlist::where('user_id', Auth::id())->where('project_id', $id)->first();
             if ($wishlist) {
                 $wishlist->delete();
-                return redirect()->back()->with('success', 'Project removed from wishlist.');
+                return redirect()->back()->with('success', 'Project removed from Short list.');
             } else {
-                return redirect()->back()->withErrors(['error' => 'Project not found in wishlist.']);
+                return redirect()->back()->withErrors(['error' => 'Project not found in Short list.']);
             }
         } catch (\Exception $e) {
-            Log::error('Error removing project from wishlist: ' . $e->getMessage());
-            return redirect()->back()->withErrors(['error' => 'Unable to remove project from wishlist. Please try again later.']);
+
+            return redirect()->back()->withErrors(['error' => 'Unable to remove project from Short list. Please try again later.']);
         }
     }
 }

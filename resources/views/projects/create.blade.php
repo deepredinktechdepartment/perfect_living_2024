@@ -232,9 +232,9 @@
     </div>
 </div>
 
-<div class="col-6">
+<div class="col-3">
     <div class="mb-3">
-        <label for="status" class="form-label">Project Status</label>
+        <label for="status" class="form-label">Listing Status</label>
         <select id="status" class="form-select @error('status') is-invalid @enderror" name="status" required>
             <option value="">Select Status</option>
             <option value="newly_added" {{ old('status', $project->status ?? '') == 'newly_added' ? 'selected' : '' }}>Newly Added</option>
@@ -248,6 +248,24 @@
         @enderror
     </div>
 </div>
+<div class="col-3">
+    <div class="mb-3">
+        <label for="project_status" class="form-label">Project Status</label>
+        <select id="project_status" class="form-select @error('project_status') is-invalid @enderror" name="project_status" required>
+            <option value="">Select Status</option>
+
+
+            {!! projectStatusOptions($project->project_status ?? '') !!}
+
+
+        </select>
+
+        @error('status')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
 
 
 @php
@@ -304,7 +322,20 @@ $decodedCompanyIds = isset($project) && isset($project->company_id)
 
 @push('scripts')
 <script>
+
+
 $(document).ready(function() {
+            // Custom method to validate file size
+            $.validator.addMethod("filesize", function (value, element, param) {
+            var fileInput = $(element);
+            if (fileInput[0].files.length > 0) {
+                var fileSize = fileInput[0].files[0].size; // File size in bytes
+                return this.optional(element) || (fileSize <= param); // Check file size
+            }
+            return true; // If no file is selected, skip validation
+        });
+
+
     $("#project-form").validate({
         rules: {
             name: {
@@ -318,10 +349,12 @@ $(document).ready(function() {
                 required: true
             },
             logo: {
-                extension: "jpg|jpeg|png|gif"
+                extension: "jpg|jpeg|png|gif",
+                filesize: 512000 // 512 KB
             },
             master_plan_layout: {
-                extension: "jpg|jpeg|png|gif|pdf"
+                extension: "jpg|jpeg|png|gif|pdf",
+                filesize: 512000 // 512 KB
             },
             website_url: {
                 url: true
@@ -390,10 +423,12 @@ $(document).ready(function() {
                 required: "Please select a company."
             },
             logo: {
-                extension: "Please upload a valid image file (jpg, jpeg, png, gif)."
+                extension: "Please upload a valid image file (jpg, jpeg, png, gif).",
+                 filesize: "File size must be less than 512 KB"
             },
             master_plan_layout: {
-                extension: "Please upload a valid image file (jpg, jpeg, png, gif,pdf)."
+                extension: "Please upload a valid image file (jpg, jpeg, png, gif,pdf).",
+                 filesize: "File size must be less than 512 KB"
             },
             website_url: {
                 url: "Please enter a valid URL."

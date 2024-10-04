@@ -61,32 +61,52 @@ protected function isProjectIdValid($projectId)
     return is_numeric($projectId) && $projectId > 0;
 }
 
-    public function store(Request $request)
-    {
-        try {
-            $request->validate([
-                'star_rating' => 'required|integer|between:1,5',
-                'review' => 'required|string|max:1000',
-            ]);
+public function store(Request $request)
+{
+    try {
+        // Validate the request inputs
+        $request->validate([
+            'star_rating' => 'required|integer|between:1,5',
+            'review' => 'required|string|max:1000',
+        ]);
 
-            Review::create([
-                'user_id' => Auth::id()??0,
-                'project_id' => $request->project_id ?? 0,
-                'star_rating' => $request->star_rating ?? 0,
-                'review' => $request->review ?? '',
-                'reviewed_on' => now(),
-                'ip_address' => $request->ip(),
-            ]);
+        // Create a new review
+        Review::create([
+            'user_id' => Auth::id() ?? 0,
+            'project_id' => $request->project_id ?? 0,
+            'star_rating' => $request->star_rating ?? 0,
+            'review' => $request->review ?? '',
+            'reviewed_on' => now(),
+            'ip_address' => $request->ip(),
+            'fullname'=> $request->name??null,
+            'email'=> $request->email??null,
+            'phone'=> $request->phone??null,
+            'iam_resident_in_project'=> $request->resident??0,
+            'tower'=> $request->tower??null,
+            'flat'=> $request->flat??null
+        ]);
 
-            return redirect()->back()->with('success', 'Your review has been submitted.');
-        } catch (ValidationException $e) {
-            return redirect()->back()->withErrors($e->errors())->withInput();
-        } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'There was an error processing your review.');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'An unexpected error occurred.');
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Your review has been submitted.');
+    } catch (ValidationException $e) {
+        // Check for star_rating error specifically
+        if (isset($e->errors()['star_rating']) && $e->errors()['star_rating'][0] === 'The star rating field is required.') {
+            return redirect()->back()->withErrors(['star_rating' => 'Rating is mandatory.'])->withInput();
         }
+
+        // Redirect back with all validation errors
+        return redirect()->back()->withErrors($e->errors())->withInput();
+    } catch (QueryException $e) {
+
+        // Handle query-related errors
+        return redirect()->back()->with('error', 'There was an error processing your review.');
+    } catch (Exception $e) {
+        // Handle any other unexpected errors
+
+        return redirect()->back()->with('error', 'Rating is mandatory.');
     }
+}
+
 
     public function index(Request $request)
     {
@@ -202,31 +222,20 @@ protected function isProjectIdValid($projectId)
     }
 
 
-    public function showReviews(Request $request)
+    public function showReviews(Request $request,$slug)
 {
     try {
-        // Attempt to decrypt the provided projectId from the request
-        $decryptedProjectId = Crypt::decryptString($request->projectId);
 
-        // Check if the decrypted projectId is valid
-        if ($this->isProjectIdValid($decryptedProjectId)) {
-            $projectId = $decryptedProjectId;
-        } else {
-            throw new Exception('Invalid project ID.');
-        }
-
+        $project = Project::where('slug',$slug)->first();
+        $projectId=$project->id??0;
         // Fetch approved reviews
         $approvedReviews = Review::where('project_id', $projectId)
                                  ->where('approval_status', true)
                                  ->orderBy('created_at', 'desc')
                                  ->get();
-
-
-
-
-
+        $pageTitle="Reviews of ".$project->name??'';
         // Return the view with the reviews
-        return view('frontend.reviews.index', compact('approvedReviews'));
+        return view('frontend.reviews.index', compact('approvedReviews','project','pageTitle'));
 
     } catch (Exception $e) {
         // Log the exception
@@ -252,6 +261,37 @@ public function filterReviews(Request $request)
         'success' => true,
         'reviews' => $reviews
     ]);
+}
+
+public function reviewupdate(Request $request, $id)
+{
+    try {
+        // Validate the incoming request data
+        $request->validate([
+            'review' => 'required|string',
+            'star_rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        // Find the review by its ID; throws ModelNotFoundException if not found
+        $review = Review::findOrFail($id);
+
+        // Update the review properties
+        $review->review = $request->input('review'); // Use input() for consistency
+        $review->star_rating = $request->input('star_rating');
+        $review->save(); // Save the updated review
+
+        // Return a JSON response indicating success
+        return response()->json(['success' => true, 'message' => 'Review updated successfully.', 'review' => $review]);
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        // Handle validation errors specifically
+        return response()->json(['success' => false, 'message' => 'Validation error: ' . $e->validator->errors()->first()], 422);
+    } catch (ModelNotFoundException $e) {
+        // Handle case where review is not found
+        return response()->json(['success' => false, 'message' => 'Review not found.'], 404);
+    } catch (Exception $e) {
+        // Handle any other exceptions
+        return response()->json(['success' => false, 'message' => 'Error updating review: ' . $e->getMessage()], 500);
+    }
 }
 
 

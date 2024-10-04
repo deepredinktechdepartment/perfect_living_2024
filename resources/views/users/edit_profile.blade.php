@@ -8,19 +8,12 @@
             <div class="card h-100">
                 <div class="profile_img">
                     <div class="d-flex justify-content-center">
-
                         @if(Auth::user()->profile_photo && File::exists(storage_path('app/public/' . Auth::user()->profile_photo)))
-                          <img class="rounded-circle img-fluid" src="{{ URL::to(env('APP_STORAGE').''.Auth::user()->profile_photo) }}" alt="">
-                    @else
-                        <!-- No Profile Picture -->
-
-                        <img class="rounded-circle img-fluid" src="https://via.placeholder.com/200" alt="Default Image" width="200" height="200">
-
-
-                    @endif
-
-
-
+                            <img class="rounded-circle img-fluid" src="{{ URL::to(env('APP_STORAGE').''.Auth::user()->profile_photo) }}" alt="">
+                        @else
+                            <!-- No Profile Picture -->
+                            <img class="rounded-circle img-fluid" src="https://via.placeholder.com/200" alt="Default Image" width="200" height="200">
+                        @endif
                     </div>
                 </div>
                 <h2 class="text-center nowrap-link mb-2 pt-2">{{ old('firstname', Auth::user()->fullname ?? '') }}</h2>
@@ -104,7 +97,8 @@ $(document).ready(function() {
                 maxlength: 10
             },
             profile: {
-                extension: "jpg|jpeg|png|gif"
+                extension: "jpg|jpeg|png|gif",
+                filesize: true // Custom rule for filesize validation
             }
         },
         messages: {
@@ -121,7 +115,8 @@ $(document).ready(function() {
                 maxlength: "Mobile number must be exactly 10 digits"
             },
             profile: {
-                extension: "Only image files are allowed (jpg, jpeg, png, gif)"
+                extension: "Only image files are allowed (jpg, jpeg, png, gif)",
+                filesize: "The image size must be less than 512KB"
             }
         },
         errorElement: 'div',
@@ -136,6 +131,15 @@ $(document).ready(function() {
             $(element).addClass('is-valid').removeClass('is-invalid');
         }
     });
+
+    // Custom jQuery validation method for file size
+    $.validator.addMethod("filesize", function(value, element, param) {
+        if (element.files.length > 0) {
+            var size = element.files[0].size; // File size in bytes
+            return size <= param; // Check if size is less than or equal to 512KB
+        }
+        return true; // If no file selected, valid
+    }, "File size must be less than 512KB.");
 });
 </script>
 @endpush

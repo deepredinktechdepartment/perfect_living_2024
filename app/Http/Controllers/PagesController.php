@@ -7,6 +7,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Company;
+use App\Models\SearchLog;
+use Jenssegers\Agent\Agent;
+use Illuminate\Support\Str;
+use App\Models\Collection;
 
 class PagesController extends Controller
 {
@@ -52,8 +56,10 @@ class PagesController extends Controller
 
 
 
+
     // Break the URL into segments
     $segments = explode('/', $any);
+ 
 
     // Initialize variables for each type of segment
     $builders = null;
@@ -89,7 +95,7 @@ class PagesController extends Controller
             case 'search':
                 $search = $segments[$i + 1] ?? null;
                 break;
-            case 'property-type':
+            case 'propertytype':
                 $propertytypes = $segments[$i + 1] ?? null;
                 break;
         }
@@ -121,42 +127,17 @@ class PagesController extends Controller
     $collection = $collection; // Get the search input (default to empty)
 
 
-    $pageTitle = 'Apartments'; // Default title
-
-    // Check if any of the filters have values and append to the title
-    if (!empty($beds)) {
-        $pageTitle .= ' with ' . $beds . ' beds';
-    }
-
-    if (!empty($types)) {
-        $pageTitle .= ' in ' . $types;
-    }
-
-    if (!empty($priceRange)) {
-        $pageTitle .= ' priced at ' . $priceRange;
-    }
-
-    if (!empty($areaNames)) {
-        $pageTitle .= ' located in ' . $areaNames;
-    }
-
-    if (!empty($projectName)) {
-        $pageTitle .= ' for project ' . $projectName;
-    }
-
-    if (!empty($builders)) {
-        $pageTitle .= ' by ' . $builders;
-    }
-    if (!empty($collection)) {
-        $pageTitle .= ' in ' . $collection;
-    }
+    $pageTitle = 'Properties'; // Default title
 
     if (!empty($searchQuery)) {
-        $pageTitle .= ' matching search: ' . $searchQuery;
-    }
+            try{
+            $saveSarchKeywords=$this->saveSarchKeywords($request,$searchQuery);
 
-    // Trim and format the final title if needed
-    $pageTitle = trim(str_replace('-', ' ', $pageTitle));
+            }  catch (\Exception $e) {
+
+            }
+}
+
 
 
     // Start building the query
@@ -170,10 +151,21 @@ class PagesController extends Controller
 
     // Filter by beds if provided (comma-separated string)
     if (!empty($beds)) {
+       
+          // Check if 'beds' exists in GET or POST, if not, set a default value (e.g., 3BHK)
+    if (!$request->has('beds')) {
+        // Set the 'beds' query parameter if it's not present
+        $request->merge(['beds' => $beds]); // Assuming 3 beds for 3BHK
+    }
+       
         $bedsArray = explode(',', $beds); // Convert the comma-separated string into an array
         $query->whereHas('unitConfigurations', function ($q) use ($bedsArray) {
             $q->whereIn('beds', $bedsArray);
         });
+
+       // Generate dynamic page title using the first value from $bedsArray
+    $bedsTitle = implode(',', $bedsArray); // If multiple bed options are selected, it will display like '2,3'
+    $pageTitle = $bedsTitle . ' BHK Properties in Hyderabad';
     }
 
     // Filter by project types if provided (comma-separated string)
@@ -199,6 +191,23 @@ class PagesController extends Controller
                   });
             });
         }
+
+        if (!empty($priceRange)) {
+            $priceArray = explode(',', $priceRange); // Convert the comma-separated string into an array
+
+            if (count($priceArray) === 2) {
+                // Check if the first value is 0 and adjust the title accordingly
+                if ($priceArray[0] == 0) {
+                    $pageTitle = 'Properties under ' . $priceArray[1] . ' Cr'; // Do not show 0 Cr
+                } else {
+                    $pageTitle = 'Properties between ' . $priceArray[0] . ' Cr & ' . $priceArray[1] . ' Cr';
+                }
+            } elseif (count($priceArray) === 1) {
+                // If there is only one price, adjust the title accordingly
+                $pageTitle = 'Properties priced at ' . $priceArray[0] . ' Cr';
+            }
+        }
+
     }
 
     // Filter by area names (comma-separated string)
@@ -211,6 +220,40 @@ class PagesController extends Controller
                 }
             });
         });
+
+        $locations=$areaNames??'';
+        if (!empty($locations)) {
+            try {
+                // Try to split the locations into an array
+                $locationArray = explode(',', $locations);
+                $locationCount = count($locationArray);
+
+                // Handle the cases based on the count of locations
+                if ($locationCount === 1) {
+                    // If there is only one location
+                    $pageTitle = 'Properties at ' . ucfirst(trim($locationArray[0]));
+                } elseif ($locationCount === 2) {
+                    // If there are exactly two locations
+                    $pageTitle = 'Properties in ' . ucfirst(trim($locationArray[0])) . '-' . ucfirst(trim($locationArray[1]));
+                } elseif ($locationCount > 2) {
+                    // If there are more than two locations, show the first and last location
+                    $pageTitle = 'Properties in ' . ucfirst(trim($locationArray[0])) . '-' . ucfirst(trim(end($locationArray)));
+                } else {
+                    // If $locationArray is empty, handle the error
+                    throw new Exception('Invalid locations format');
+                }
+
+            } catch (Exception $e) {
+                // Handle any potential errors here
+                $pageTitle = 'Invalid Properties'; // Default fallback message
+                // You can also log the error or display a more detailed message if needed
+                error_log($e->getMessage());
+            }
+        } else {
+            // Fallback in case $locations is empty or not provided
+            $pageTitle = 'Properties data missing';
+        }
+
     }
 
     // Filter by builders using the company_id JSON field
@@ -219,8 +262,16 @@ class PagesController extends Controller
 if (!empty($builders)) {
     $buildersArray = explode(',', $builders); // Convert the comma-separated string into an array
 
+          // Check if 'beds' exists in GET or POST, if not, set a default value (e.g., 3BHK)
+    if (!$request->has('propertytype')) {
+        // Set the 'beds' query parameter if it's not present
+        //$request->merge(['propertytype' => $builders]); // Assuming 3 beds for 3BHK
+    }
+
     // Fetch the company IDs corresponding to the passed slugs
     $companyIds = Company::whereIn('slug', $buildersArray)->pluck('id')->toArray();
+    $companynames = Company::whereIn('slug', $buildersArray)->first();
+    $pageTitle = "Properties by ". Str::title($companynames->name)??'';
 
 
     // If we have company IDs, filter projects by those company IDs (stored in the company_id JSON field)
@@ -243,7 +294,23 @@ if (!empty($builders)) {
 
     // Filter by search query (name, area, unit configurations, or project type)
     if (!empty($searchQuery)) {
-        $query->where(function ($q) use ($searchQuery) {
+
+        $query->where(function ($q) use ($searchQuery,$request) {
+
+            $buildersArray = explode(',', $searchQuery);
+
+
+
+
+            // Fetch the company IDs corresponding to the passed slugs using LIKE
+            $companyIds = Company::where(function ($query) use ($buildersArray) {
+                foreach ($buildersArray as $builder) {
+                    $query->orWhere('name', 'LIKE', '%' . trim($builder) . '%'); // Use LIKE for partial matches
+                }
+            })->pluck('id')->toArray();
+
+            $companyIds=$companyIds[0]??'';
+
             $q->where('name', 'LIKE', "%$searchQuery%") // Search by project name
               ->orWhereHas('areas', function ($q) use ($searchQuery) { // Search by area name
                   $q->where('name', 'LIKE', "%$searchQuery%");
@@ -251,28 +318,104 @@ if (!empty($builders)) {
               ->orWhereHas('unitConfigurations', function ($q) use ($searchQuery) { // Search by unit configurations
                   $q->where('beds', 'LIKE', "%$searchQuery%");
               })
-              ->orWhereRaw('LOWER(project_type) LIKE ?', ["%$searchQuery%"]); // Search by project type
+              ->orWhereRaw('LOWER(project_type) LIKE ?', ["%$searchQuery%"]) // Search by project type
+              ->orWhereRaw("JSON_CONTAINS(JSON_UNQUOTE(company_id), ?, '$') AND JSON_LENGTH(company_id) > 0", [json_encode((string)$companyIds)]);
         });
+
+
+        $pageTitle = 'Properties by '; // Initialize pageTitle
+
+        // Error handling for invalid or missing inputs
+        try {
+            // Check if beds are available and append to the title
+            if (!empty($request->beds)) {
+                if (is_numeric($request->beds)) {
+                    $pageTitle .= $request->beds . ' BHK '; // Append number of beds with BHK
+                } else {
+                    throw new Exception('Invalid value for beds');
+                }
+            }
+
+            // Check if property type is available and append to the title
+            if (!empty($request->propertytype)) {
+                $pageTitle .= htmlspecialchars($request->propertytype) . ' '; // Sanitize and append project type
+            }
+
+            // Check if budget (prices) is available and in the correct format "min-max"
+            if (!empty($request->budgets)) {
+                $budgetRange = explode('-', $request->budgets); // Split the budget range by '-'
+
+                if (count($budgetRange) == 2 && is_numeric($budgetRange[0]) && is_numeric($budgetRange[1])) {
+                    // Append the formatted budget range
+                    $pageTitle .= 'between ' . floatval($budgetRange[0]) . ' Cr to ' . floatval($budgetRange[1]) . ' Cr';
+                } else {
+                    throw new Exception('Invalid budget format. Please provide in "min-max" format');
+                }
+            }
+
+            // If all values (beds, propertytype, and budget) are empty, use the searchQuery key
+            if (empty($request->beds) && empty($request->propertytype) && empty($request->budgets)) {
+                if (!empty($searchQuery)) {
+                    $pageTitle .= htmlspecialchars($searchQuery); // Sanitize and use the search key
+                } else {
+                    throw new Exception('No search parameters provided');
+                }
+            }
+        } catch (Exception $e) {
+            // Handle any caught exceptions by setting an error page title or logging
+            $pageTitle = 'Error: ' . $e->getMessage();
+        }
+
+        // Trim any extra spaces from the final page title
+        $pageTitle = trim($pageTitle);
+
+        // Return or display the pageTitle as needed
+
+
+
+
+
+
+
     }
 
+
     if (!empty($collection)) {
-        $query->where(function ($q) use ($collection) {
-            $q->where('name', 'LIKE', "%$collection%") // Search by project name
-              ->orWhereHas('areas', function ($q) use ($collection) { // Search by area name
-                  $q->where('name', 'LIKE', "%$collection%");
-              })
-              ->orWhereHas('unitConfigurations', function ($q) use ($collection) { // Search by unit configurations
-                  $q->where('beds', 'LIKE', "%$collection%");
-              })
-              ->orWhereRaw('LOWER(project_type) LIKE ?', ["%$collection%"]); // Search by project type
-        });
-    }
+    $query->where(function ($q) use ($collection) {
+
+        // Attempt to fetch the collection data using the slug or name
+        $collectionData = Collection::where('slug', 'LIKE', "%$collection%")
+            ->orWhere('name', 'LIKE', "%$collection%")
+            ->first();
+
+        // Check if collection data exists
+        if ($collectionData) {
+            $collectionId = $collectionData->id; // Get the collection ID
+            $pageTitle = $collectionData->name ?? '';  // Set the page title based on collection name
+
+
+            // Query the projects where 'map_collections' contains the collection ID
+            // The 'map_collections' column stores a JSON array, so we use whereJsonContains
+            $q->orwhereJsonContains('map_collections', (string) $collectionId); // Cast to string for matching
+
+            // Add the map_collections condition using JSON_CONTAINS and JSON_UNQUOTE
+
+
+        } else {
+            // Collection not found, handle accordingly
+            $pageTitle = '';
+            throw new Exception("Collection not found for the given slug or name: $collection");
+        }
+    });
+}
+
 
     // Execute the query and get results
     $projects = $query->orderBy('updated_at', 'desc')->get();
 
+
     // If all filters are empty, return an empty collection
-    if (empty($beds) && empty($types) && empty($priceRange) && empty($areaNames) && empty($projectName) && empty($searchQuery) && empty($builders)) {
+    if (empty($beds) && empty($types) && empty($priceRange) && empty($areaNames) && empty($projectName) && empty($searchQuery) && empty($builders) && empty($collection) ) {
         $projects = collect(); // Return an empty collection if no filters are applied
     }
 
@@ -441,6 +584,104 @@ public function index($any = null)
         'project' => $project,
 
     ]);
+}
+
+
+public function saveSarchKeywords($request,$searchQuery)
+{
+
+    // Validate the search query
+
+  // Create an instance of the Agent
+  $agent = new Agent();
+
+  // Get the IP address of the user
+  $ip = $request->ip();
+
+  // Get the location using your getLocationByIp function (if defined)
+  $location = $this->getLocationByIp($ip); // Optional
+
+  // Detect if it's a mobile device, tablet, or desktop
+  $device = 'Desktop'; // Default to desktop
+  if ($agent->isMobile()) {
+      $device = 'Mobile';
+  } elseif ($agent->isTablet()) {
+      $device = 'Tablet';
+  }
+
+  // Get the platform (OS) and browser
+  $platform = $agent->platform();  // e.g., Windows, iOS, Android
+  $browser = $agent->browser();    // e.g., Chrome, Firefox, Safari
+
+  // Log the search keyword, IP address, location, and device
+  SearchLog::create([
+      'user_id' => auth()->user()->id ?? 0,
+      'keyword' => $searchQuery??null, // Search query from request
+      'ip_address' => $ip??null,
+      'location' => $location??null,
+      'device' => $device??null,
+      'platform' => $platform??null,
+      'browser' => $browser??null,
+  ]);
+
+
+
+}
+
+public function getLocationByIp($ip)
+{
+    // Default location in case the API response is empty or doesn't contain location data
+    $defaultLocation = 'Unknown Location';
+
+    try {
+        // Make the API request to ipinfo.io
+        $response = file_get_contents("http://ipinfo.io/{$ip}/json");
+
+        // Parse the response
+        $details = json_decode($response);
+
+        // Check if 'city' and 'region' are set in the response object
+        $city = isset($details->city) ? $details->city : 'Unknown City';
+        $region = isset($details->region) ? $details->region : 'Unknown Region';
+
+        // Return the formatted location (city, region)
+        return $city . ', ' . $region;
+    } catch (\Exception $e) {
+        // Return default location if there's an error with the API request
+        return $defaultLocation;
+    }
+}
+
+public function showSearchKeywords()
+{
+    try {
+        // Fetch the search logs with pagination
+        $searchLogs = SearchLog::orderBy('created_at', 'desc')->paginate(10);
+
+        // Return the view with the search logs data
+        $pageTitle="Search Keywords";
+        return view('reports.searchKeywords', compact('searchLogs','pageTitle'));
+    } catch (Exception $e) {
+        // Log the error message if needed
+        \Log::error('Failed to fetch search logs: ' . $e->getMessage());
+
+        // Return to the previous page with an error message
+        return redirect()->back()->with('error', 'Failed to fetch search logs. Please try again later.');
+    }
+}
+public function deleteLog($id)
+{
+    try {
+        // Find and delete the log entry
+        $log = SearchLog::findOrFail($id);
+        $log->delete();
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Search log deleted successfully.');
+    } catch (Exception $e) {
+        // Handle any errors and return with an error message
+        return redirect()->back()->with('error', 'Failed to delete search log: ' . $e->getMessage());
+    }
 }
 
 }

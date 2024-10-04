@@ -57,7 +57,7 @@ class ElevationPictureController extends Controller
         $request->validate([
             'project_id' => 'required|integer',
             'title' => 'nullable|string|max:255',
-            'file' => 'required|image|mimes:jpeg,png,jpg|max:2048', // 2MB
+            'file' => 'required|image|mimes:jpeg,jpg|max:512', // 512KB
         ]);
 
         try {
@@ -97,7 +97,7 @@ class ElevationPictureController extends Controller
         $request->validate([
             'project_id' => 'required|integer',
             'title' => 'nullable|string|max:255',
-            'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // 2MB
+            'file' => 'nullable|image|mimes:jpeg,jpg|max:512', // 512KB
         ]);
 
         try {

@@ -14,11 +14,11 @@
                 </div>
             </div>
         @else
-            <h1>{{ $pageTitle ?? 'Wishlist' }}</h1>
+            <h1>{{ $pageTitle ?? 'Short list' }}</h1>
 
             @if ($projects->count() > 0)
                 <p class="mb-3 px-0 mx-0">
-                    You have {{ $projects->count() }} {{ $projects->count() == 1 ? 'property' : 'properties' }} in your wishlist.
+                    You have {{ $projects->count() }} {{ $projects->count() == 1 ? 'property' : 'properties' }} in your Short lists.
                 </p>
 
                 <div class="row">

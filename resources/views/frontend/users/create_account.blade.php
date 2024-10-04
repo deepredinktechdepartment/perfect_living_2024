@@ -54,7 +54,7 @@
                                 <button type="submit" class="btn btn-danger border-radius-0 w-100">Create Your Account</button>
                             </div>
                             <div class="mb-5">
-                                <p><small>Already have an account? <a href="{{ URL::to('login') }}" class="text-brand">Log in</a></small></p>
+                                <p><small>Already have an account? <a href="#" class="text-brand" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Log in</a></small></p>
                             </div>
                         </form>
 
@@ -79,7 +79,7 @@ var input = document.querySelector("#phone");
         separateDialCode: true,
         autoPlaceholder:"polite",
         formatOnDisplay:true,
-        dropdownContainer: document.body,  
+        dropdownContainer: document.body,
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
@@ -90,7 +90,7 @@ var input = document.querySelector("#phone");
 
         // Check if the number starts with '6', is 10 digits long, and belongs to India
         var isJioNumber = fullNumber.startsWith('+91') && fullNumber[3] == '6' && fullNumber.length == 13; // +91 6XXXXXXXXX (13 chars with country code)
-        
+
         return isValid || isJioNumber; // Pass validation if it's valid or a Jio number with 10 digits
     }, "Please enter a valid phone number starting with 6 and 10 digits long.");
 

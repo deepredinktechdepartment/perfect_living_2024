@@ -1,5 +1,6 @@
 <div class="col-sm-8 order-sm-0 order-1">
     <div class="row">
+
         <!-- First Image (Main Image) -->
         <div class="col-sm-9 col-12 pe-sm-1 mb-sm-0 mb-2">
             @if($project->isNotEmpty())
@@ -19,7 +20,7 @@
                     <div class="img-placeholder"></div>
                 @endif
             @else
-                <div class="img-placeholder"></div>
+
             @endif
         </div>
 
@@ -46,7 +47,7 @@
                     @endif
                 @endforeach
             @else
-                <div class="img-placeholder"></div>
+
             @endif
         </div>
         </div>

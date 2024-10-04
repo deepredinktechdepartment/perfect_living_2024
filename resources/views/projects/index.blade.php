@@ -155,7 +155,7 @@
                                     </div>
                                 </td>
                                 @endif
-                                <td align="right">
+                                <td>
                                     <a href="{{ route('projects.edit', $project->id) }}" class="no-button" title="Edit">
 
                                         <img src="https://i.imgur.com/Oy59BAN.png" width=16/>

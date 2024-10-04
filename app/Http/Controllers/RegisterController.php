@@ -47,7 +47,7 @@ class RegisterController extends Controller
 
 //$user->notify(new CustomVerifyEmail($user)); // Pass the user to the notification
 
-            return redirect()->route('verification.notice',['token'=>$token])->with('success', 'Registration successful! Please check your email for verification.');
+            return redirect()->route('verification.notice',['token'=>$token])->with('success', 'Registration successful! Please click on this link for manual verification.');
         } catch (Exception $e) {
             Log::error('Registration failed: ' . $e->getMessage());
 
@@ -231,7 +231,7 @@ public function verifyEmail($token)
         // Check if the user is already verified
         if ($user->email_verified_at) {
 
-            return redirect('/')->with('error', 'Your email is already verified.');
+            return redirect('/')->with('error', 'Your account is already verified.');
         }
 
         // Verify the user account
@@ -243,9 +243,9 @@ public function verifyEmail($token)
         // Log in the user
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Your email has been verified! You are now logged in.');
+        return redirect('/')->with('success', 'Your account has been verified! You are now logged in.');
     } catch (\Exception $e) {
-        return redirect('/')->withErrors(['error' => 'An error occurred while verifying your email. Please try again.']);
+        return redirect('/')->withErrors(['error' => 'An error occurred while verifying your account. Please try again.']);
     }
 }
 

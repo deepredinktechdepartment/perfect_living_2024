@@ -52,7 +52,6 @@
                     @enderror
                 </div>
 
-
                 <div class="mb-3">
                     <label for="unit_size" class="form-label">Unit Size (sq.ft)</label>
                     <input id="unit_size" type="number" class="form-control @error('unit_size') is-invalid @enderror" name="unit_size" value="{{ old('unit_size', $unit->unit_size ?? '') }}" step="0.01" required>
@@ -102,7 +101,6 @@
                 },
                 facing: {
                     required: true,
-
                 },
                 unit_size: {
                     required: true,
@@ -114,7 +112,7 @@
                         return $(element).data('exist') === 'false' && !element.files.length;
                     },
                     extension: "jpg|jpeg",
-                    filesize: 1048576 // 1MB in bytes
+                    filesize: 524288 // 512KB in bytes
                 }
             },
             messages: {
@@ -135,7 +133,6 @@
                 },
                 facing: {
                     required: "Please enter the facing direction.",
-
                 },
                 unit_size: {
                     required: "Please enter the unit size.",
@@ -145,7 +142,7 @@
                 floor_plan: {
                     required: "Please upload a floor plan.",
                     extension: "Please upload a file in jpg|jpeg format.",
-                    filesize: "The file size must be less than 1MB."
+                    filesize: "The file size must be less than 512KB."
                 }
             }
         });
@@ -157,11 +154,9 @@
             }
             return true;
         }, 'File size must be less than {0} bytes.');
-    });
 
-
-       // Automatically prefill bathrooms input with the same value as beds, and clear baths if beds is empty
-       $('#beds').on('input', function () {
+        // Automatically prefill bathrooms input with the same value as beds, and clear baths if beds is empty
+        $('#beds').on('input', function () {
             var bedsValue = $(this).val();
             if (bedsValue) {
                 $('#baths').val(bedsValue); // Prefill bathrooms input with beds value
@@ -169,7 +164,6 @@
                 $('#baths').val(''); // Clear bathrooms input if beds value is cleared
             }
         });
-
-
+    });
 </script>
 @endpush

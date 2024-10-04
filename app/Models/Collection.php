@@ -13,6 +13,7 @@ class Collection extends Model
 
 protected $fillable = [
 'name',
+'slug',
 'background_image',
 'target_link',
 ];

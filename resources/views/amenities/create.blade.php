@@ -84,7 +84,7 @@
                 },
                 icon: {
                     extension: "jpg|jpeg|png|gif",
-                    filesize: 2048 // max 2MB
+                    filesize: 512 // max 512KB
                 }
             },
             messages: {
@@ -97,10 +97,20 @@
                 },
                 icon: {
                     extension: "Please upload a valid image (jpg, jpeg, png, gif)",
-                    filesize: "The image size must be less than 2MB"
+                    filesize: "The image size must be less than 512KB"
                 }
             }
         });
     });
+
+    $.validator.addMethod("filesize", function(value, element, param) {
+    if (element.files.length) {
+        return element.files[0].size <= param * 1024; // Convert KB to bytes
+    }
+    return true; // Skip validation if no file is selected
+});
+
+
+
 </script>
 @endpush

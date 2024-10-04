@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Review;
 use Illuminate\Support\Facades\URL; // Add this line
 use Illuminate\Support\Facades\DB;
+use App\View\Components\ApprovedReviews;
 
 
 class ProjectController extends Controller
@@ -151,8 +152,8 @@ class ProjectController extends Controller
        'company_id' => 'required|array',
        'company_id.*' => 'exists:companies,id', // Validate that each company ID exists in the database
         'site_address' => 'required|string',
-        'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
-        'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
+        'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:512',
+        'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:512',
         'latitude' => 'nullable',
         'longitude' => 'nullable',
         'website_url' => 'nullable|url',
@@ -165,6 +166,7 @@ class ProjectController extends Controller
         'city_id' => 'required',
         'area_id' => 'required',
         'status' => 'required',
+        'project_status' => 'required',
 
         // Add validation rules for other fields
     ]);
@@ -191,6 +193,7 @@ class ProjectController extends Controller
         $data['slug'] = Str::slug($request->name)??null;
         $data['city'] = $request->city_id??0;
         $data['area'] = $request->area_id??0;
+        $data['project_status'] = $request->project_status??'pre_launch';
        // Store company_id as a JSON array
 
 
@@ -204,6 +207,7 @@ class ProjectController extends Controller
     } catch (Exception $e) {
         // Log the error message if needed
         // Log::error('Failed to create project: ' . $e->getMessage());
+        dd($e->getMessage());
 
         return redirect()->route('projects.index', ['tab' => $request->query('tab', 'newly_added')])->with('error', 'Failed to create project.');
     }
@@ -232,8 +236,8 @@ class ProjectController extends Controller
 
 
         'site_address' => 'required|string',
-        'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
-        'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:2048',
+        'logo' => 'nullable|file|mimes:jpeg,png,jpg|max:512',
+        'master_plan_layout' => 'nullable|file|mimes:jpeg,png,jpg,pdf|max:512',
         'latitude' => 'nullable',
         'longitude' => 'nullable',
         'website_url' => 'nullable|url',
@@ -295,6 +299,7 @@ class ProjectController extends Controller
             $data['master_plan_layout'] = $masterPlanPath;
         }
 
+        $data['project_status'] = $request->project_status;
         // Update the project with the validated data
         $project->update($data);
 
@@ -385,8 +390,13 @@ $groupedConfigurations = $groupedConfigurations->sortKeys();
 
     $pageTitle = Str::title($project->name ?? 'Project') . " at " . Str::title($project->areas->name ?? 'Location') . " - Project details and reviews";
 
+  // Create an instance of the component to access its properties
+  $approvedReviewsComponent = new ApprovedReviews($project->id, 1000);
 
-        return view('frontend.projects.show', compact('project', 'pageTitle','highlightImages','badges','groupedConfigurations','reviews','roundedRating'));
+  // Get the total count of reviews
+  $totalReviewsCount = $approvedReviewsComponent->totalCount??0;
+
+        return view('frontend.projects.show', compact('project', 'pageTitle','highlightImages','badges','groupedConfigurations','reviews','roundedRating','totalReviewsCount'));
 
     } catch (ModelNotFoundException $e) {
         // Optionally, return a custom 404 page or redirect with an error message

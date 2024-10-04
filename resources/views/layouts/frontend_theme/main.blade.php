@@ -6,9 +6,12 @@
 
     @if(isset($favicon) && File::exists($favicon))
 
-<link rel="shortcut icon"  type="image/x-icon" href="{{ URL::to('favicon.ico') }}">
 
-<link rel="shortcut icon"  type="image/png"  sizes="30x30" href="{{ URL::to('favicon.png') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ URL::to('apple-touch-icon.png') }}">
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="{{ URL::to('favicon-32x32.png') }}">
+<link rel="shortcut icon" type="image/png" sizes="16x16" href="{{ URL::to('favicon-16x16.png') }}">
+<link rel="shortcut icon"  type="image/x-icon" href="{{ URL::to('android-chrome-192x192.png') }}">
+
 
 @else
 @endif
@@ -176,17 +179,8 @@
 </script>
 
 
-   
+    @stack('scripts') <!-- Stack for additional scripts -->
 
-
-
-<!-- Bootstrap 5 CSS and JS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
-@stack('scripts') <!-- Stack for additional scripts -->
 
 </body>
 </html>

@@ -34,9 +34,9 @@ class ThemeoptionsController extends Controller
     {
         try {
             $request->validate([
-                'header_logo' => 'required|mimes:png,jpg,jpeg,svg,html',
-                'favicon' => 'sometimes|nullable|mimes:png,jpg,jpeg,svg,html',
-                'footer_logo' => 'sometimes|nullable|mimes:png,jpg,jpeg,svg,html',
+                'header_logo' => 'required|mimes:png,jpg,jpeg|max:512',
+                'favicon' => 'sometimes|nullable|mimes:png,jpg,jpeg|max:512',
+                'footer_logo' => 'sometimes|nullable|mimes:png,jpg,jpeg|max:512',
                 'facebook_url' => 'nullable|url',
                 'twitter_url' => 'nullable|url',
                 'linkedin_url' => 'nullable|url',
@@ -98,9 +98,9 @@ class ThemeoptionsController extends Controller
     {
         try {
             $request->validate([
-                'header_logo' => 'mimes:png,jpg,jpeg',
-                'favicon' => 'sometimes|nullable|mimes:png,jpg,jpeg',
-                'footer_logo' => 'sometimes|nullable|mimes:png,jpg,jpeg',
+                'header_logo' => 'mimes:png,jpg,jpeg|max:512',
+                'favicon' => 'sometimes|nullable|mimes:png,jpg,jpeg|max:512',
+                'footer_logo' => 'sometimes|nullable|mimes:png,jpg,jpeg|max:512',
                 'facebook_url' => 'nullable|url',
                 'twitter_url' => 'nullable|url',
                 'linkedin_url' => 'nullable|url',

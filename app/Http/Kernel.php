@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
 protected $routeMiddleware = [
 // ...
 'project.api.key' => \App\Http\Middleware\ProjectApiKey::class,
+'noindex' => \App\Http\Middleware\NoIndex::class,
 ];
 
 }

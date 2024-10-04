@@ -31,10 +31,10 @@
                     @enderror
 
                     @if(isset($collection->background_image) && File::exists(storage_path('app/public/' . $collection->background_image)))
-                    <img src="{{ URL::to(env('APP_STORAGE').''.$collection->background_image) }}" class="card-img-left mt-2" alt="{{ $collection->name }}" style="height: 80px; object-fit: cover;">
-                @else
+                        <img src="{{ URL::to(env('APP_STORAGE').''.$collection->background_image) }}" class="card-img-left mt-2" alt="{{ $collection->name }}" style="height: 80px; object-fit: cover;">
+                    @else
 
-                @endif
+                    @endif
 
                 </div>
 
@@ -72,7 +72,7 @@
                         return !$('#background_image').val() && !{{ isset($collection) ? 'true' : 'false' }};
                     },
                     extension: "jpg|jpeg|png",
-                    filesize: 1024 // max 1MB
+                    filesize: 524288 // max 512KB
                 },
                 target_link: {
                     required: true,
@@ -87,7 +87,7 @@
                 background_image: {
                     required: "Please upload a background image",
                     extension: "Please upload a valid image (jpg, jpeg, png)",
-                    filesize: "The image size must be less than 1MB"
+                    filesize: "The image size must be less than 512KB"
                 },
                 target_link: {
                     required: "Please enter the target link",
@@ -95,6 +95,11 @@
                 }
             }
         });
+
+        // Custom validator for file size
+        $.validator.addMethod('filesize', function(value, element, param) {
+            return this.optional(element) || (element.files[0].size <= param);
+        }, 'The file size must be less than 512KB');
     });
 </script>
 @endpush

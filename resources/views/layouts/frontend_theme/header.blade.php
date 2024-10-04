@@ -51,7 +51,7 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Popular Locations
+                Popular locations in Hyderabad
                 </a>
                 <ul class="dropdown-menu mega-menu" aria-labelledby="navbarDropdown">
 
@@ -66,7 +66,8 @@
 
               @guest
               <li class="nav-item">
-                  <a class="nav-link text-white" href="{{ URL::to('shortLists') }}"> <i class="fa-regular fa-heart wishlist-icon"></i></a>
+                  {{-- <a class="nav-link text-white" href="{{ URL::to('shortLists') }}" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="fa-regular fa-heart wishlist-icon"></i></a> --}}
+                  <a class="nav-link text-white" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="fa-regular fa-heart wishlist-icon"></i></a>
               </li>
           @else
               @if (Auth::user()->role === 5) <!-- Check if the user is a non-admin -->

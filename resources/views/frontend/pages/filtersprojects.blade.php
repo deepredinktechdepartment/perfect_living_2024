@@ -1,8 +1,7 @@
 <!-- Example view file -->
 @extends('layouts.frontend_theme.main')
-
 @section('mainContent')
-
+@section('pageTitle', $pageTitle)
 
     <div class="container">
         <h1 class="mb-3">{{ $pageTitle??'' }}</h1>
@@ -38,7 +37,8 @@
                     <x-project-card-view2
                         :name="$project->name"
                         :address="$project->areas->name"
-                        :details="$project->project_type . ', ' . $project->unitConfigurations->first()->beds . ' BHK'"
+                        :details="formatBeds($project->unitConfigurations)"
+                        :projecttype="$project->project_type"
                          :price="number_format($project->price_per_sft)"
                         :image="$imageUrl"
                         :url="URL::to('project/'.$project->slug)"
@@ -47,7 +47,7 @@
             </div>
 
             @else
-            <p>No Apartments are listed.</p>
+            <p>No Properties found.</p>
         @endif
     </div>
 
@@ -76,10 +76,10 @@
 
             // Append the property type, budgets, and beds if they are selected
             if (propertyType) {
-                actionUrl += "/" + encodeURIComponent(propertyType);
+                //actionUrl += "/" + encodeURIComponent(propertyType);
             }
             if (budgets) {
-                actionUrl += "/" + encodeURIComponent(budgets);
+                //actionUrl += "/" + encodeURIComponent(budgets);
             }
             if (beds) {
                 actionUrl += "/" + encodeURIComponent(beds);

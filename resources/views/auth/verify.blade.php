@@ -15,7 +15,7 @@
                             {{ session('status') }}
 
                             <p>If you haven't received the verification email, you can manually verify your email:</p>
-                            <a href="{{ url('/verify-email/' . $token) }}">Click here to verify your email</a>
+                            <a href="{{ url('/verify-email/' . $token) }}">Click here to verify your account</a>
                         </div>
 
 
