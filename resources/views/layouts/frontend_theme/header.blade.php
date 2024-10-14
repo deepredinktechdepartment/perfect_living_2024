@@ -74,10 +74,16 @@
 
                   <li class="nav-item">
                     <a class="nav-link text-white pos-relative" href="{{ URL::to('shortLists') }}">
-                        <i class="fa-regular fa-heart wishlist-icon"></i>
-                        @if($wishlistCount > 0)
-                            <p class="wishlist-count">{{ $wishlistCount }}</p>
-                        @endif
+                        {{-- <i class="fa-regular fa-heart wishlist-icon"></i> --}}
+                        <div class="like-button">
+                          <div class="heart-bg">
+                              <div class="heart-icon {{ $wishlistCount > 0 ? 'liked' : '' }}"></div> {{-- Conditionally apply liked class --}}
+                          </div>
+                      </div>
+                      @if($wishlistCount > 0)
+                          <p class="wishlist-count">{{ $wishlistCount }}</p> {{-- Show wishlist count if greater than 0 --}}
+                      @endif
+                      
                     </a>
                 </li>
 
