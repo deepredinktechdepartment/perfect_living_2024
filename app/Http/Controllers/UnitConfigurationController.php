@@ -52,9 +52,9 @@ class UnitConfigurationController extends Controller
         // Validate the request with file rules
         $request->validate([
             'project_id' => 'required|integer',
-            'beds' => 'required|integer|min:1',
-            'baths' => 'required|integer|min:1',
-            'balconies' => 'required|integer|min:0',
+    'beds' => 'required|numeric|min:0',          // Allow integers and floats
+    'baths' => 'required|numeric|min:0',         // Allow integers and floats
+    'balconies' => 'required|numeric|min:0',     // Allow integers and floats
             'facing' => 'required|string|min:2',
             'unit_size' => 'required|numeric|min:0.1',
             'floor_plan' => 'required|file|mimes:jpg,jpeg|max:512', // 1MB
@@ -100,9 +100,9 @@ class UnitConfigurationController extends Controller
         // Validate the request with file rules
         $request->validate([
             'project_id' => 'required|integer',
-            'beds' => 'required|integer|min:1',
-            'baths' => 'required|integer|min:1',
-            'balconies' => 'required|integer|min:0',
+    'beds' => 'required|numeric|min:0',          // Allow integers and floats
+    'baths' => 'required|numeric|min:0',         // Allow integers and floats
+    'balconies' => 'required|numeric|min:0',     // Allow integers and floats
             'facing' => 'required|string|min:2',
             'unit_size' => 'required|numeric|min:0.1',
             'floor_plan' => 'nullable|file|mimes:jpg,jpeg|max:512', // 512KB

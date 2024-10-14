@@ -16,7 +16,7 @@
 
                 <div class="mb-3">
                     <label for="beds" class="form-label">Beds</label>
-                    <input id="beds" type="number" class="form-control @error('beds') is-invalid @enderror" name="beds" value="{{ old('beds', $unit->beds ?? '') }}" required>
+                    <input id="beds" type="text" class="form-control @error('beds') is-invalid @enderror" name="beds" value="{{ old('beds', $unit->beds ?? '') }}" required>
                     @error('beds')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -24,7 +24,7 @@
 
                 <div class="mb-3">
                     <label for="baths" class="form-label">Baths</label>
-                    <input id="baths" type="number" class="form-control @error('baths') is-invalid @enderror" name="baths" value="{{ old('baths', $unit->baths ?? '') }}" required>
+                    <input id="baths" type="text" class="form-control @error('baths') is-invalid @enderror" name="baths" value="{{ old('baths', $unit->baths ?? '') }}" required>
                     @error('baths')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -79,6 +79,7 @@
 @endsection
 
 @push('scripts')
+
 <script>
     $(document).ready(function () {
         // Initialize jQuery validation
@@ -86,13 +87,13 @@
             rules: {
                 beds: {
                     required: true,
-                    number: true,
-                    min: 1
+                    number: true, // Allows integers and floats
+                    min: 0 // Adjust minimum if needed
                 },
                 baths: {
                     required: true,
-                    number: true,
-                    min: 1
+                    number: true, // Allows integers and floats
+                    min: 0 // Adjust minimum if needed
                 },
                 balconies: {
                     required: true,
@@ -119,12 +120,12 @@
                 beds: {
                     required: "Please enter the number of beds.",
                     number: "Please enter a valid number.",
-                    min: "Beds must be at least 1."
+                    min: "Beds cannot be less than 0."
                 },
                 baths: {
                     required: "Please enter the number of baths.",
                     number: "Please enter a valid number.",
-                    min: "Baths must be at least 1."
+                    min: "Baths cannot be less than 0."
                 },
                 balconies: {
                     required: "Please enter the number of balconies.",
