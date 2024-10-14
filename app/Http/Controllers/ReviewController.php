@@ -63,6 +63,7 @@ protected function isProjectIdValid($projectId)
 
 public function store(Request $request)
 {
+    
     try {
         // Validate the request inputs
         $request->validate([
@@ -80,7 +81,7 @@ public function store(Request $request)
             'ip_address' => $request->ip(),
             'fullname'=> $request->name??null,
             'email'=> $request->email??null,
-            'phone'=> $request->phone??null,
+            'phone'=> $request->phone_with_country_code??null,
             'iam_resident_in_project'=> $request->resident??0,
             'tower'=> $request->tower??null,
             'flat'=> $request->flat??null
