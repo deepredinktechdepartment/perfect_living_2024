@@ -1152,8 +1152,8 @@ label.error {
     position: absolute;
     top: 0;
     right: 0;
-    background-color: #e40048;
-    color: white;
+    background-color: #fff;
+    color: #e40048;
     border-radius: 50%;
     font-size: 10px;
     display: flex;
@@ -1161,6 +1161,7 @@ label.error {
     height: 15px;
     align-items: center;
     justify-content: center;
+    font-weight: 600;
 }
 
 .btn-close {
