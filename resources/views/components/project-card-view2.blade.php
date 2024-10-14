@@ -1,6 +1,6 @@
-<div class="col-sm-3">
-    <div class="card_two">
-        <div class="project-card-wrapper">
+<div class="col-sm-3 mb-4">
+    <div class="card_two h-100">
+        <div class="project-card-wrapper h-100">
             <a href="{{ $url }}" class="text-decoration-none">
                 <div class="project-image-wrapper">
                     <img src="{{ $image }}" alt="{{ $name }}" class="img-fluid project-image">

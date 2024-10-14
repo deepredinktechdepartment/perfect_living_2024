@@ -1,7 +1,7 @@
 @extends('layouts.frontend_theme.main')
 
 @section('mainContent')
-<section class="bg-light">
+<section class="bg-light h-100vh">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -21,11 +21,6 @@
 
 
                     </div>
-
-
-
-
-
 
                 </div>
             </div>

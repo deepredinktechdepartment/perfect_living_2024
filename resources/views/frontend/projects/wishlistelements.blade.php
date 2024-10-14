@@ -9,7 +9,11 @@
             @csrf
             @method('DELETE')
             <button type="submit" class="no-button">
-                <i class="fa-solid fa-heart wishlist-icon-hover text-brand"></i>
+                <div class="like-button">
+                    <div class="heart-bg">
+                        <div class="heart-icon liked"></div> {{-- Apply liked class conditionally --}}
+                    </div>
+                </div>
             </button>
         </form>
     @else
@@ -18,7 +22,11 @@
             @csrf
             <input type="hidden" name="project_id" value="{{ $project->id }}">
             <button type="submit" class="no-button">
-                <i class="fa-regular fa-heart wishlist-icon"></i>
+                <div class="like-button">
+                    <div class="heart-bg">
+                        <div class="heart-icon"></div> {{-- No liked class for unliked state --}}
+                    </div>
+                </div>
             </button>
         </form>
     @endif

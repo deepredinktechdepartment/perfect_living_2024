@@ -177,23 +177,23 @@ $('.featured-properties-slider').slick({
     arrows: true,
     infinite: true,
     responsive: [{
-            breakpoint: 1024, // On tablets and smaller
-            settings: {
-                slidesToShow: 1, // Still show 1 group of 4 cards
-                slidesToScroll: 1,
-                dots: true,
-                arrows: true,
-            }
-        },
-        {
-            breakpoint: 768, // On mobile, show 1 group of 2 cards
-            settings: {
-                slidesToShow: 1, // Show 2 cards per slide
-                slidesToScroll: 1,
-                dots: true,
-                arrows: true,
-            }
+        breakpoint: 1024, // On tablets and smaller
+        settings: {
+            slidesToShow: 1, // Still show 1 group of 4 cards
+            slidesToScroll: 1,
+            dots: true,
+            arrows: true,
         }
+    },
+    {
+        breakpoint: 768, // On mobile, show 1 group of 2 cards
+        settings: {
+            slidesToShow: 1, // Show 2 cards per slide
+            slidesToScroll: 1,
+            dots: true,
+            arrows: true,
+        }
+    }
     ]
 });
 
@@ -222,15 +222,15 @@ function initializeSlider(selector) {
 }
 
 // Initialize sliders for all tab panes on load
-$('.projects-slider').each(function() {
+$('.projects-slider').each(function () {
     initializeSlider(this);
 });
 
 // Reinitialize slider when switching tabs
-$('button[data-bs-toggle="pill"]').on('shown.bs.tab', function() {
+$('button[data-bs-toggle="pill"]').on('shown.bs.tab', function () {
     // Destroy and reinitialize the slider when switching tabs
     $('.projects-slider').slick('unslick'); // Destroy existing slider
-    $('.projects-slider').each(function() {
+    $('.projects-slider').each(function () {
         initializeSlider(this); // Reinitialize slider
     });
 });
@@ -283,7 +283,7 @@ $('.floorplans-slider').slick({
     }]
 });
 // Reinitialize slider when switching between tabs
-$('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
+$('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
     $('.tab-pane .floorplans-slider').slick('setPosition');
 });
 
@@ -328,3 +328,24 @@ stars.forEach(star => {
         console.log(`You rated: ${value} stars`);
     });
 });
+
+
+
+// Wishlist Like Button Script Start
+const heartIcon = document.querySelector(".like-button .heart-icon");
+const likesAmountLabel = document.querySelector(".like-button .likes-amount");
+
+let likesAmount = 7;
+
+heartIcon.addEventListener("click", () => {
+    heartIcon.classList.toggle("liked");
+    if (heartIcon.classList.contains("liked")) {
+        likesAmount++;
+    } else {
+        likesAmount--;
+    }
+
+    likesAmountLabel.innerHTML = likesAmount;
+});
+
+// Wishlist Like Button Script End

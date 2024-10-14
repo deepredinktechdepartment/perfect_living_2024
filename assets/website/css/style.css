@@ -114,9 +114,7 @@ a:focus {
     position: relative;
 }
 
-
 /* Common CSS ENDS */
-
 
 /*slider css : BEGIN*/
 
@@ -270,9 +268,7 @@ a:focus {
     margin-left: inherit;
 }
 
-
 /*slider css : END*/
-
 
 /* Header CSS Starts */
 
@@ -309,7 +305,7 @@ header {
     padding: 0.25rem 0.5rem;
     font-size: 12px;
     white-space: break-spaces;
-    color: #fff
+    color: #fff;
 }
 
 .dropdown-menu {
@@ -353,9 +349,7 @@ header {
     }
 }
 
-
 /* Header CSS Ends */
-
 
 /* Footer Css Starts */
 
@@ -457,9 +451,7 @@ footer p {
     }
 }
 
-
 /* Footer CSS Ends */
-
 
 /* Projects CSS Starts */
 
@@ -491,12 +483,12 @@ footer p {
 }
 
 .star:hover,
-.star:hover~.star {
+.star:hover ~ .star {
     color: #e40048;
 }
 
 .star.selected,
-.star.selected~.star {
+.star.selected ~ .star {
     color: #e40048;
 }
 
@@ -504,7 +496,7 @@ footer p {
     font-weight: 500;
 }
 
-@media(max-width: 480px) {
+@media (max-width: 480px) {
     .project-details-main-info,
     .rating-display-wrapper {
         display: initial;
@@ -538,7 +530,7 @@ footer p {
     object-fit: cover;
 }
 
-@media(max-width:480px) {
+@media (max-width: 480px) {
     .project-overview-images-wrapper {
         height: 250px;
     }
@@ -733,7 +725,7 @@ footer p {
 
 .form-control {
     border-width: 1px;
-    padding: 0.50rem 0.75rem;
+    padding: 0.5rem 0.75rem;
     border-radius: 0;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -767,7 +759,7 @@ footer p {
     color: #000;
 }
 
-@media(max-width: 480px) {
+@media (max-width: 480px) {
     .form-select {
         font-size: 12px;
     }
@@ -850,7 +842,6 @@ label.error {
     -o-border-radius: 5px;
 }
 
-
 /* .project-image-wrapper img {
     transform: scale(1);
     transition: 0.3s all ease-in-out;
@@ -890,11 +881,12 @@ label.error {
     text-transform: capitalize;
 }
 
-
 /* Home page Main Banner CSS Start */
 
 .main_bg {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)), url("../img/perfect-living-hyderabad-banner.jpg") no-repeat center center;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)),
+        url("../img/perfect-living-hyderabad-banner.jpg") no-repeat center
+            center;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -928,7 +920,6 @@ label.error {
     border-bottom-left-radius: 0;
 }
 
-
 /* Home page Main Banner CSS End */
 
 .home_tab_sec .nav-pills {
@@ -936,7 +927,7 @@ label.error {
 }
 
 .home_tab_sec .nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
+.nav-pills .show > .nav-link {
     background-color: #000 !important;
     color: #fff !important;
 }
@@ -957,7 +948,6 @@ label.error {
     padding: 15px 40px;
 }
 
-
 /* .home_tab_sec .nav-pills .nav-link:hover{
   background-color: #000;
   color: #fff;
@@ -969,7 +959,6 @@ label.error {
         font-size: 14px;
     }
 }
-
 
 /* sub_menu_footer */
 
@@ -1005,7 +994,7 @@ label.error {
     border-right: 1px solid #cdcdcd;
 }
 
-@media(max-width: 480px) {
+@media (max-width: 480px) {
     .border-end {
         border-right: 0 !important;
     }
@@ -1065,7 +1054,7 @@ label.error {
     color: #000;
 }
 
-@media(max-width: 480px) {
+@media (max-width: 480px) {
     .btn_black {
         font-size: 12px;
     }
@@ -1073,7 +1062,6 @@ label.error {
         font-size: 12px;
     }
 }
-
 
 /* Login Page CSS Begins */
 
@@ -1107,9 +1095,7 @@ label.error {
     cursor: pointer;
 }
 
-
 /* Login Page CSS Ends */
-
 
 /* Amenities CSS Begins */
 
@@ -1160,7 +1146,6 @@ label.error {
     }
 }
 
-
 /* Amenities CSS ENDS */
 
 .wishlist-count {
@@ -1189,7 +1174,6 @@ label.error {
     border-radius: 50%;
 }
 
-
 /* Smooth scaling transition */
 
 .modal.fade .modal-dialog {
@@ -1203,7 +1187,6 @@ label.error {
     /* Expand to full size */
 }
 
-
 /* Control the modal backdrop fade timing if needed */
 
 .modal-backdrop {
@@ -1216,7 +1199,7 @@ label.error {
 }
 
 .img-placeholder-banner {
-    background-image: url('https://i.imgur.com/lqNUZwI.png');
+    background-image: url("https://i.imgur.com/lqNUZwI.png");
     background-size: cover;
     background-position: center;
     min-width: 610px;
@@ -1226,7 +1209,7 @@ label.error {
 }
 
 .img-placeholder-slider {
-    background-image: url('https://i.imgur.com/lqNUZwI.png');
+    background-image: url("https://i.imgur.com/lqNUZwI.png");
     background-size: cover;
     background-position: center;
     min-width: 203px;
@@ -1234,3 +1217,54 @@ label.error {
     min-height: 111px;
     /* Set your desired height */
 }
+
+/* Wishlist Like Icon Animation Start */
+.like-button .heart-icon {
+    height: 60px;
+    width: 60px;
+    background: url("../img/heart.png");
+    background-position: left;
+    cursor: pointer;
+    position: absolute;
+    background-size: cover;
+}
+
+.like-button .heart-icon.liked {
+    animation: like-anim 0.9s steps(28) forwards;
+    -webkit-animation: like-anim 0.9s steps(28) forwards;
+}
+
+@keyframes like-anim {
+    to {
+        background-position: right;
+    }
+}
+
+.like-button .heart-bg {
+    background: rgba(255, 192, 200, 0);
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 100ms ease;
+}
+
+/* .like-button .heart-bg:hover {
+    background: rgba(255, 192, 200, 0.7);
+  } */
+
+.like-button {
+    display: flex;
+    align-items: center;
+}
+
+.like-button .likes-amount {
+    font-size: 20px;
+    font-family: "Roboto", sans-serif;
+    color: #979393;
+    font-weight: 900;
+    margin-left: 6px;
+}
+/* Wishlist Like Icon Animation End */
