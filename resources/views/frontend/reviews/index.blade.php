@@ -318,7 +318,7 @@
         font-size: 14px;
     }
     .left_part span{
-        font-size: 13px;
+        font-size: 12px;
     }
     .left_part .progress-bar{
         background-color: #e40048;
